@@ -1,0 +1,38 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.teamrocket.videohub.repository.MemberMapper">
+
+    <insert id="save">
+        INSERT INTO tbl_member
+        (user_account, user_password, user_display_name, user_email)
+        VALUES
+        (#{userAccount}, #{userPassword}, #{userDisplayName}, #{userEmail})
+    </insert>
+
+    <select id="findMember" resultType="com.teamrocket.videohub.entity.Member">
+        SELECT
+        user_account, user_password, user_display_name,
+        user_auth, user_email, user_reg_date
+        FROM tbl_member
+        WHERE user_account = #{userAccount}
+    </select>
+
+    <select id="isDuplicate" resultType="boolean">
+        SELECT COUNT(*)
+        FROM tbl_member
+        <if test="type == 'account'">
+            WHERE user_account = #{keyword}
+        </if>
+        <if test="type == 'email'">
+            WHERE user_email = #{keyword}
+        </if>
+    </select>
+
+    <select id="isConsistent" resultType="boolean">
+        SELECT COUNT(*)
+        FROM tbl_member
+        WHERE user_account = #{account} AND user_email = #{email}
+    </select>
+</mapper>
