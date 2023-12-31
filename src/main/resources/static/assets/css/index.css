@@ -1,0 +1,42 @@
+header {
+    width: 100%;
+}
+body {
+    width: 100%;
+    /*height: 100vh;*/
+    height: 2000px;
+}
+
+.mainContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    padding: 0;
+    margin: 0;
+}
+.subContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+.leftDiv {
+    width: 100px;
+    height: 100%;
+    background: #eac0c0;
+
+    position: fixed;
+    top: 70px;
+    z-index: 1000;
+}
+.videoListDiv {
+    width: 100%;
+    height: 100%;
+    background: #585aec;
+    padding-top: 120px;
+}

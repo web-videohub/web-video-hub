@@ -1,0 +1,93 @@
+
+.headerDiv {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+
+    width: 100%;
+    height: 70px;
+
+    padding: 5px;
+    text-align: center;
+    background-color: #fae6a5;
+
+    position: fixed;
+    top: 0;
+    z-index: 1000;
+}
+.headerContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-content: center;
+}
+.menu {
+    width: 200px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin: auto 0;
+}
+.dropdownMenu {
+    width: 50px;
+    height: 40px;
+    margin-right: 10px;
+    background-color: white;
+    border: 0;
+}
+.mainLogo {
+    width: 150px;
+    height: 40px;
+    background-color: #0080FF;
+}
+.searchForm {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+}
+.searchInput {
+    width: 90%;
+    height: 40px;
+    border-top-left-radius: 30px;
+    border-bottom-left-radius: 30px;
+    border: 1px #cccaca solid;
+    padding-left: 15px;
+}
+.searchBtn {
+    width: 60px;
+    height: 40px;
+    border: 1px #cccaca solid;
+    border-top-right-radius: 30px;
+    border-bottom-right-radius: 30px;
+    text-align: left;
+    padding-left: 10px;
+}
+/* 검색입력창 반응형 코드 */
+/*@media only screen and (min-width: 1270px) {*/
+/*    .searchInput {*/
+/*        width: 450px;*/
+/*    }*/
+/*}*/
+.btns {
+    width: 20%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+}
+.upload {
+    width: 50px;
+    height: 40px;
+    background-color: white;
+    border: 0;
+}
+.mypage {
+    width: 50px;
+    height: 40px;
+    background-color: white;
+    border: 0;
+    margin-left: 20px;
+}
+
+
