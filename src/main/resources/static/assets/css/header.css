@@ -75,19 +75,58 @@
     display: flex;
     justify-content: right;
     align-items: center;
+    padding-right: 20px;
 }
 .upload {
-    width: 50px;
+    width: 70px;
     height: 40px;
     background-color: white;
     border: 0;
 }
-.mypage {
-    width: 50px;
+.infoDropBtn {
+    width: 70px;
     height: 40px;
     background-color: white;
     border: 0;
     margin-left: 20px;
 }
 
+/* info 드롭다운 메뉴 */
+ .infoDropBtn {
+     background-color: #4CAF50;
+     color: white;
+     padding: 16px;
+     font-size: 16px;
+     border: none;
+     cursor: pointer;
+     text-align: center;
+ }
+.infoDropDown {
+    position: relative;
+    display: inline-block;
+}
+.infoContent {
+    display: none;
+    position: fixed;
+    background-color: #f9f9f9;
+    right: 25px;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1000 !important;
+}
+.infoContent a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+.infoContent a:hover {
+    background-color: #f1f1f1
+}
+.infoDropDown:hover .infoContent {
+    display: block;
+}
+.infoDropDown:hover .infoDropBtn {
+    background-color: #3e8e41;
+}
 

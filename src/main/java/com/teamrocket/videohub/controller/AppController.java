@@ -13,4 +13,11 @@ public class AppController {
 
       return "index";
     }
+
+    @RequestMapping("/setting")
+    public String setting() {
+        log.info("설정페이지");
+
+        return "setting";
+    }
 }
