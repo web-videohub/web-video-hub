@@ -25,7 +25,8 @@
                 <div class="infoDropDown">
                     <button class="infoDropBtn">info</button>
                     <div class="infoContent">
-                        <a>닉네임(account)</a>
+                        <%--<a>${nickName}(${account})</a>--%>
+                        <a>닉네임(계정명)</a>
                         <a href="#">내 채널 보기</a>
                         <a href="/setting">설정</a>
                         <a href="#">로그아웃</a>

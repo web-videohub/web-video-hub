@@ -26,6 +26,21 @@
 
             <%-- 서버에 업로드된 영상들이 연속적으로 나타날 div --%>
             <div class="videoListDiv">
+                <c:forEach var="v" items="${vList}">
+                    <div class="videoDiv">
+                        <div class="video">
+                            ${v.video}
+                        </div>
+                        <div class="profileContainer">
+                            <div class="profile"></div>
+                            <div class="videoInfoDiv">
+                                <span class="title">${v.title}</span>
+                                <span class="uploader">${v.uploader}</span>
+                                <span class="viewcount">${v.viewCount} § ${s.lastTime} 전</span>
+                            </div>
+                        </div>
+                    </div>
+                </c:forEach>
                 <div class="videoDiv">
                     <div class="video">
 
