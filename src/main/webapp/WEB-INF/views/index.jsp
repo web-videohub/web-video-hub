@@ -26,10 +26,84 @@
 
             <%-- 서버에 업로드된 영상들이 연속적으로 나타날 div --%>
             <div class="videoListDiv">
-                동영상리스트 ㅋ동영상리스트 ㅋ동영상리스트 ㅋ동영상리스트 ㅋ
-                동영상리스트 ㅋ동영상리스트 ㅋ동영상리스트 ㅋ동영상리스트 ㅋ
-                동영상리스트 ㅋ동영상리스트 ㅋ동영상리스트 ㅋ동영상리스트 ㅋ
-                동영상리스트 ㅋ동영상리스트 ㅋ동영상리스트 ㅋ동영상리스트 ㅋ
+                <div class="videoDiv">
+                    <div class="video">
+
+                    </div>
+                    <div class="profileContainer">
+                        <div class="profile"></div>
+                        <div class="videoInfoDiv">
+                            <span class="title">1제목을 입력해주세요.</span>
+                            <span class="uploader">업로더</span>
+                            <span class="viewcount">조회수 0회 § 1분 전</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="videoDiv">
+                    <div class="video">
+
+                    </div>
+                    <div class="profileContainer">
+                        <div class="profile"></div>
+                        <div class="videoInfoDiv">
+                            <span class="title">2제목을 입력해주세요.</span>
+                            <span class="uploader">업로더</span>
+                            <span class="viewcount">조회수 0회 § 1분 전</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="videoDiv">
+                    <div class="video">
+
+                    </div>
+                    <div class="profileContainer">
+                        <div class="profile"></div>
+                        <div class="videoInfoDiv">
+                            <span class="title">3제목을 입력해주세요.</span>
+                            <span class="uploader">업로더</span>
+                            <span class="viewcount">조회수 0회 § 1분 전</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="videoDiv">
+                    <div class="video">
+
+                    </div>
+                    <div class="profileContainer">
+                        <div class="profile"></div>
+                        <div class="videoInfoDiv">
+                            <span class="title">4제목을 입력해주세요.</span>
+                            <span class="uploader">업로더</span>
+                            <span class="viewcount">조회수 0회 § 1분 전</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="videoDiv">
+                    <div class="video">
+
+                    </div>
+                    <div class="profileContainer">
+                        <div class="profile"></div>
+                        <div class="videoInfoDiv">
+                            <span class="title">5제목을 입력해주세요.</span>
+                            <span class="uploader">업로더</span>
+                            <span class="viewcount">조회수 0회 § 1분 전</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="videoDiv">
+                    <div class="video">
+
+                    </div>
+                    <div class="profileContainer">
+                        <div class="profile"></div>
+                        <div class="videoInfoDiv">
+                            <span class="title">6제목을 입력해주세요.</span>
+                            <span class="uploader">업로더</span>
+                            <span class="viewcount">조회수 0회 § 1분 전</span>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
