@@ -10,10 +10,11 @@
 
     <!--  entity클래스 별칭 설정하기  -->
     <typeAliases>
-
+        <typeAlias type="com.teamrocket.videohub.entity.Reply" alias="reply" />
     </typeAliases>
 
     <!--  SQL을 적어둔 XML파일의 위치를 설정  -->
     <mappers>
+        <mapper resource="mappers/ReplyMapper.xml" />
     </mappers>
 </configuration>
