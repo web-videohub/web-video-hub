@@ -20,6 +20,7 @@ public class AppController {
         log.info("영상 채널");
 
         return "detail";
+    }
   
     @RequestMapping("/setting")
     public String setting() {
