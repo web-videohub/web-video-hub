@@ -108,7 +108,7 @@ public class MemberController {
     public String findPassword() {
         System.out.println("비밀번호 찾기 화면");
 
-        return "/members/findx-pw";
+        return "/members/find-pw";
     }
     @PostMapping("/find-pw")
     public String findPw() {

@@ -17,7 +17,39 @@
 
     <%-- 기본 왼쪽 상태바 --%>
     <div class="leftDiv">
-        왼쪽 상태바 입니다.
+        <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">
+                        <span class="lnr lnr-home"></span>
+                        홈
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="lnr lnr-book"></span>
+                        구독
+                    </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a class="nav-link" href="/studio">나 ></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/studio">
+                        <span class="lnr lnr-user"></span>
+                        내 채널
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/setting">
+                        <span class="lnr lnr-cog"></span>
+                        설정
+                    </a>
+                </li>
+
+            </ul>
+        </div>
     </div>
     <div class="mainContainer">
         <div class="subContainer">
@@ -28,13 +60,13 @@
             <div class="videoListDiv">
                 <c:forEach var="v" items="${vList}">
                     <div class="videoDiv">
-                        <div class="video">
+                        <a class="video">
                             ${v.video}
-                        </div>
+                        </a>
                         <div class="profileContainer">
                             <div class="profile"></div>
                             <div class="videoInfoDiv">
-                                <span class="title">${v.title}</span>
+                                <a class="titleA" href="#"><span class="title">${v.title}</span></a>
                                 <span class="uploader">${v.uploader}</span>
                                 <span class="viewcount">${v.viewCount} § ${s.lastTime} 전</span>
                             </div>
@@ -42,83 +74,110 @@
                     </div>
                 </c:forEach>
                 <div class="videoDiv">
-                    <div class="video">
+                    <a class="video" href="#">
 
-                    </div>
+                    </a>
                     <div class="profileContainer">
                         <div class="profile"></div>
                         <div class="videoInfoDiv">
-                            <span class="title">1제목을 입력해주세요.</span>
+                            <a class="titleA" href="#"><span class="title">1제목을 입력해주세요.</span></a>
                             <span class="uploader">업로더</span>
                             <span class="viewcount">조회수 0회 § 1분 전</span>
                         </div>
                     </div>
                 </div>
                 <div class="videoDiv">
-                    <div class="video">
+                    <a class="video" href="#">
 
-                    </div>
+                    </a>
                     <div class="profileContainer">
                         <div class="profile"></div>
                         <div class="videoInfoDiv">
-                            <span class="title">2제목을 입력해주세요.</span>
+                            <a class="titleA" href="#"><span class="title">1제목을 입력해주세요.</span></a>
                             <span class="uploader">업로더</span>
                             <span class="viewcount">조회수 0회 § 1분 전</span>
                         </div>
                     </div>
                 </div>
                 <div class="videoDiv">
-                    <div class="video">
+                    <a class="video" href="#">
 
-                    </div>
+                    </a>
                     <div class="profileContainer">
                         <div class="profile"></div>
                         <div class="videoInfoDiv">
-                            <span class="title">3제목을 입력해주세요.</span>
+                            <a class="titleA" href="#"><span class="title">1제목을 입력해주세요.</span></a>
                             <span class="uploader">업로더</span>
                             <span class="viewcount">조회수 0회 § 1분 전</span>
                         </div>
                     </div>
                 </div>
                 <div class="videoDiv">
-                    <div class="video">
+                    <a class="video" href="#">
 
-                    </div>
+                    </a>
                     <div class="profileContainer">
                         <div class="profile"></div>
                         <div class="videoInfoDiv">
-                            <span class="title">4제목을 입력해주세요.</span>
+                            <a class="titleA" href="#"><span class="title">1제목을 입력해주세요.</span></a>
                             <span class="uploader">업로더</span>
                             <span class="viewcount">조회수 0회 § 1분 전</span>
                         </div>
                     </div>
                 </div>
                 <div class="videoDiv">
-                    <div class="video">
+                    <a class="video" href="#">
 
-                    </div>
+                    </a>
                     <div class="profileContainer">
                         <div class="profile"></div>
                         <div class="videoInfoDiv">
-                            <span class="title">5제목을 입력해주세요.</span>
+                            <a class="titleA" href="#"><span class="title">1제목을 입력해주세요.</span></a>
                             <span class="uploader">업로더</span>
                             <span class="viewcount">조회수 0회 § 1분 전</span>
                         </div>
                     </div>
                 </div>
                 <div class="videoDiv">
-                    <div class="video">
+                    <a class="video" href="#">
 
-                    </div>
+                    </a>
                     <div class="profileContainer">
                         <div class="profile"></div>
                         <div class="videoInfoDiv">
-                            <span class="title">6제목을 입력해주세요.</span>
+                            <a class="titleA" href="#"><span class="title">1제목을 입력해주세요.</span></a>
                             <span class="uploader">업로더</span>
                             <span class="viewcount">조회수 0회 § 1분 전</span>
                         </div>
                     </div>
                 </div>
+                <div class="videoDiv">
+                    <a class="video" href="#">
+
+                    </a>
+                    <div class="profileContainer">
+                        <div class="profile"></div>
+                        <div class="videoInfoDiv">
+                            <a class="titleA" href="#"><span class="title">1제목을 입력해주세요.</span></a>
+                            <span class="uploader">업로더</span>
+                            <span class="viewcount">조회수 0회 § 1분 전</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="videoDiv">
+                    <a class="video" href="#">
+
+                    </a>
+                    <div class="profileContainer">
+                        <div class="profile"></div>
+                        <div class="videoInfoDiv">
+                            <a class="titleA" href="#"><span class="title">1제목을 입력해주세요.</span></a>
+                            <span class="uploader">업로더</span>
+                            <span class="viewcount">조회수 0회 § 1분 전</span>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>

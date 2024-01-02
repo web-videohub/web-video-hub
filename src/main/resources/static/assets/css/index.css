@@ -10,14 +10,17 @@ body {
     display: flex;
     flex-direction: column;
 }
+.titleA {
+    text-decoration: none;
+    color: black;
+}
 .leftDiv {
     width: 200px;
     height: 100%;
-    background: #eac0c0;
 
     position: fixed;
     top: 70px;
-    z-index: 1000;
+    z-index: 100;
 }
 @media (max-width: 640px) {
     .leftDiv {
@@ -110,4 +113,8 @@ body {
 .uploader, .viewcount{
     font-size: 15px;
     color: #5c5d5c;
+}
+
+.offcanvas-body {
+    padding-left: 10px !important;
 }

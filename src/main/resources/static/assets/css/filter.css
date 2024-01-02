@@ -7,16 +7,16 @@
     justify-content: left;
     align-content: center;
     text-align: center;
-    padding-left: 20px;
+    padding-left: 80px;
 
     position: fixed;
     top: 10px;
     left: 200px;
     z-index: 10;
 
-    background: #ffb352;
+    background: white;
 }
 
 .filterDiv label {
-    margin: auto 15px auto 0;
+    margin: auto 30px auto 0;
 }

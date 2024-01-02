@@ -70,7 +70,7 @@
         </div>
         <button id="registerBtn"> 회원가입</button>
         <div class="goLogin">
-            <a href="/">로그인 화면으로 돌아가기</a>
+            <a href="/login">로그인 화면으로 돌아가기</a>
         </div>
     </form>
 
