@@ -16,5 +16,6 @@
     <!--  SQL을 적어둔 XML파일의 위치를 설정  -->
     <mappers>
         <mapper resource="mappers/MemberMapper.xml"/>
+        <mapper resource="mappers/VideoMapper.xml"/>
     </mappers>
 </configuration>
