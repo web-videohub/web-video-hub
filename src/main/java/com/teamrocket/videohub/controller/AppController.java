@@ -13,4 +13,11 @@ public class AppController {
 
       return "index";
     }
+
+    @RequestMapping("/showmv")
+    public String showmv() {
+        log.info("영상 채널");
+
+        return "detail";
+    }
 }
