@@ -11,8 +11,8 @@
 
     position: fixed;
     top: 10px;
-    left: 100px;
-    z-index: 1000;
+    left: 200px;
+    z-index: 10;
 
     background: #ffb352;
 }
