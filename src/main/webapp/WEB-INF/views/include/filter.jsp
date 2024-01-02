@@ -22,7 +22,7 @@
 
         /* 체크된 라디오 버튼의 스타일 변경 */
         .filterDiv input[type="radio"]:checked + label {
-            background-color: #4CAF50;
+            background-color: #ff9549;
             color: #fff;
         }
     </style>
