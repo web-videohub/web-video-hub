@@ -10,6 +10,10 @@ body {
     display: flex;
     flex-direction: column;
 }
+.titleA {
+    text-decoration: none;
+    color: black;
+}
 .leftDiv {
     width: 200px;
     height: 100%;
