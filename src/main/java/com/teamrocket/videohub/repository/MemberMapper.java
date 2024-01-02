@@ -13,6 +13,5 @@ public interface MemberMapper {
 
     boolean isDuplicate(@Param("type") String type, @Param("keyword") String keyword);
 
-
     boolean isConsistent(@Param("account") String account, @Param("email") String email);
 }

@@ -4,17 +4,17 @@
 
 <mapper namespace="com.teamrocket.videohub.repository.MemberMapper">
 
-    <insert id="save">
+    <insert id="save" useGeneratedKeys="true" keyProperty="id">
         INSERT INTO tbl_member
-        (user_account, user_password, user_display_name, user_email)
+        (user_account, user_password, user_display_name, user_email, user_profile_image)
         VALUES
-        (#{userAccount}, #{userPassword}, #{userDisplayName}, #{userEmail})
+        (#{userAccount}, #{userPassword}, #{userDisplayName}, #{userEmail}, #{userProfileImage})
     </insert>
 
     <select id="findMember" resultType="com.teamrocket.videohub.entity.Member">
         SELECT
         user_account, user_password, user_display_name,
-        user_auth, user_email, user_reg_date
+        user_auth, user_email, user_reg_date, user_profile_image
         FROM tbl_member
         WHERE user_account = #{userAccount}
     </select>

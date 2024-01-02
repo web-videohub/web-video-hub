@@ -3,8 +3,6 @@
 
 
 <header>
-
-
     <div class="headerDiv">
         <div class="headerContainer">
             <div class="menu">

@@ -6,16 +6,54 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/css/sign-up.css">
     <title>회원가입</title>
+    <style>
+        .upload-box {
+            width: 130px;
+            height: 130px;
+            border: 3px solid black;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: red;
+            font-weight: 700;
+            cursor: pointer;
+
+            overflow: hidden;
+        }
+
+        #uploadBox img {
+            width: 130px;
+            height: 130px;
+        }
+
+        #profile-input {
+            display: none;
+        }
+
+        .profileImgContainer {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: inherit;
+        }
+    </style>
 </head>
 <body>
 <div id="snowfall"></div>
 
 <div class="registerDiv">
     <img id="santa" src="/assets/img/santaHat.png" alt="">
-    <form class="registerForm" action="/register" method="POST">
+
+    <form class="registerForm" action="/register" method="POST" enctype="multipart/form-data">
         <div class="registerTitle">
             <h2>계정 만들기</h2>
         </div>
+        <div class="profileImgContainer">
+            <div class="upload-box" id="uploadBox"><img src="/assets/img/profile.jpeg" alt="profile" style="height: 130px; width: 130px;"> </div>
+                <input type="file" name="thumbnail" id="profile-input" accept="image/*" onchange="setThumbnail(event)">
+        </div>
+
         <div class="inputDiv">
             <span class="inputText">아이디<span class="redStar">&nbsp;*</span></span>
             <span id="idChk"></span>
@@ -38,7 +76,36 @@
 
 </div>
 <script>
-    const checkResultList = [false, false, false, false];
+
+    const checkResultList = [false, false, false, false, false];
+
+    function setThumbnail(event) {
+        let reader = new FileReader();
+
+        reader.onload = function (event) {
+            let img = document.createElement("img");
+            img.setAttribute("src", event.target.result);
+
+            const $uploadBox = document.querySelector("div#uploadBox");
+
+            while ($uploadBox.firstChild) {
+                $uploadBox.removeChild($uploadBox.firstChild);
+            }
+            $uploadBox.innerHTML = '';
+            $uploadBox.appendChild(img);
+            checkResultList[0] = true;
+            console.log(checkResultList);
+        };
+
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    const $box = document.getElementById('uploadBox');
+    const $input = document.getElementById('profile-input');
+
+    $box.onclick = e => {
+        $input.click();
+    };
 
     // 아이디 입력값 검증
     (function () {
@@ -55,11 +122,11 @@
             if (idValue.trim() === '') {
                 $idInput.style.borderColor = 'red';
                 $idChk.innerHTML = '<b style="color: red;">[아이디는 필수값입니다!]</b>';
-                checkResultList[0] = false;
+                checkResultList[1] = false;
             } else if (!accountPattern.test(idValue)) {
                 $idInput.style.borderColor = 'red';
                 $idChk.innerHTML = '<b style="color: red;">[아이디는 4~20글자의 영문, 숫자로 입력하세요.]</b>';
-                checkResultList[0] = false;
+                checkResultList[1] = false;
             } else {
                 fetch('/check?type=account&keyword=' + idValue)
                     .then(res => res.json())
@@ -67,11 +134,11 @@
                         if (flag) {
                             $idInput.style.borderColor = 'red';
                             $idChk.innerHTML = '<b style="color: red;">[아이디가 중복되었습니다.</b>';
-                            checkResultList[0] = false;
+                            checkResultList[1] = false;
                         } else {
                             $idInput.style.borderColor = 'skyblue';
                             $idChk.innerHTML = '';
-                            checkResultList[0] = true;
+                            checkResultList[1] = true;
                             console.log(checkResultList);
 
                         }
@@ -94,15 +161,15 @@
             if (nameValue.trim() === '') {
                 $nameInput.style.borderColor = 'red';
                 $nameChk.innerHTML = '<b style="color: red;">[이름을 입력해주세요]</b>';
-                checkResultList[1] = false;
+                checkResultList[2] = false;
             } else if (!namePattern.test(nameValue)) {
                 $nameInput.style.borderColor = 'red';
                 $nameChk.innerHTML = '<b style="color: red;">[이름은 한글로 입력해주세요]</b>';
-                checkResultList[1] = false;
+                checkResultList[2] = false;
             } else {
                 $nameInput.style.borderColor = 'skyblue'
                 $nameChk.innerHTML = '';
-                checkResultList[1] = true;
+                checkResultList[2] = true;
                 console.log(checkResultList);
 
             }
@@ -126,11 +193,11 @@
             if (emailValue.trim() === '') {
                 $emailInput.style.borderColor = 'red';
                 $emailChk.innerHTML = '<b style="color: red;">[이메일은 필수값입니다.]</b>';
-                checkResultList[2] = false;
+                checkResultList[3] = false;
             } else if (!emailPattern.test(emailValue)) {
                 $emailInput.style.borderColor = 'red';
                 $emailChk.innerHTML = '<b style="color: red;">[이메일 형식을 지켜주세요]</b>';
-                checkResultList[2] = false;
+                checkResultList[3] = false;
             } else {
                 fetch('/check?type=email&keyword=' + emailValue)
                     .then(res => res.json())
@@ -138,11 +205,11 @@
                         if (flag) {
                             $emailInput.style.borderColor = 'red';
                             $emailChk.innerHTML = '<b style="color: red;">[이메일이 중복되었습니다.]</b>';
-                            checkResultList[2] = false;
+                            checkResultList[3] = false;
                         } else {
                             $emailInput.style.borderColor = 'skyblue';
                             $emailChk.innerHTML = '';
-                            checkResultList[2] = true;
+                            checkResultList[3] = true;
                             console.log(checkResultList);
                         }
                     })
@@ -167,16 +234,16 @@
                 $pwInput.style.borderColor = 'red';
                 $pwChk.innerHTML
                     = '<b style="color: red;">[비밀번호는 필수값입니다!]</b>';
-                checkResultList[3] = false;
+                checkResultList[4] = false;
             } else if (!passwordPattern.test(pwValue)) {
                 $pwInput.style.borderColor = 'red';
                 $pwChk.innerHTML
                     = '<b style="color: red;">[특수문자 포함 8자 이상!]</b>';
-                checkResultList[3] = false;
+                checkResultList[4] = false;
             } else {
                 $pwInput.style.borderColor = 'skyblue';
                 $pwChk.innerHTML = '';
-                checkResultList[3] = true;
+                checkResultList[4] = true;
                 console.log(checkResultList);
             }
         };

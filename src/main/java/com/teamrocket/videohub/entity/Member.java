@@ -4,7 +4,7 @@ import lombok.*;
 
 import java.time.LocalDateTime;
 
-@ToString @Getter
+@ToString @Getter @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -17,4 +17,5 @@ public class Member {
     private String userEmail;
     private Auth userAuth;
     private LocalDateTime userRegDate;
+    private String userProfileImage;
 }

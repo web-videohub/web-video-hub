@@ -32,12 +32,16 @@ public class SignUpRequestDTO {
     @Email
     private String userEmail;
 
+    @NotBlank
+    private String userProfileImg;
+
     public Member toEntity(PasswordEncoder encoder) {
         return Member.builder()
                 .userAccount(userAccount)
                 .userPassword(encoder.encode(userPassword))
                 .userDisplayName(userDisplayName)
                 .userEmail(userEmail)
+                .userProfileImage(userProfileImg)
                 .build();
     }
 }

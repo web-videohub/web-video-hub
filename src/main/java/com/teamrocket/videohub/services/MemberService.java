@@ -67,8 +67,10 @@ public class MemberService {
                 .userDisplayName(member.getUserDisplayName())
                 .userEmail(member.getUserEmail())
                 .userAuth(member.getUserAuth().name())
+                .userProfile(member.getUserProfileImage())
                 .build();
 
+        log.info("dto : {}", dto);
         session.setAttribute(LOGIN_KEY, dto);
         session.setMaxInactiveInterval(60 * 60);
     }

@@ -26,7 +26,7 @@ a:hover {
     display: flex;
     margin: 0 auto 20px;
     flex-direction: column;
-    width: 60vh;
+    width: inherit;
     justify-content: center;
     align-content: center;
 }
@@ -49,7 +49,7 @@ a:hover {
     display: flex;
     justify-content: center;
     align-content: center;
-    flex-direction: row;
+    flex-direction: column;
     width: 500px;
     height: 700px;
     max-height: 700px;
