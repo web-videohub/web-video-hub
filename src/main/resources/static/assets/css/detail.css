@@ -1,0 +1,82 @@
+.back_bg {
+    background-color: #FFFFFF;
+}
+a {
+    text-decoration-line: none;
+}
+li {
+    list-style-type: none;
+}
+.container {
+    margin-top: 100px;
+}
+.container_group {
+    display: flex;
+    justify-content: center;
+}
+.box1 {
+    width: 700px;
+    height: 400px;
+    background-color: #011F25;
+    float: left;
+}
+.box2 {
+    background-color: #FFFFFF;
+    width: auto;
+    height: auto;
+    float: left;
+}
+.box2 .video_list_Algorithm li{
+    margin-top: 10px;
+    margin-left: -20px;
+}
+.box2 .video_list_Algorithm li a {
+    text-decoration-line: none;
+    color: #000000;
+}
+.box3 {
+    width: 700px;
+    height: auto;
+}
+.box3 ul li a img {
+    width: 45px;
+    height: 45px;
+}
+.video_sumnail {
+    background-color: #F2F2F2;
+    float: left;
+    width: 168px;
+    height: 94px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+
+.chat_list {
+    background-color: #FFFFFF;
+}
+.chat_list a {
+    text-decoration-line: none;
+    color: #000000;
+}
+
+.input-group #message {
+    width: 600px;
+    height: 50px;
+}
+.input-group img {
+    width: 45px;
+    height: 45px;
+}
+.bbox1 {
+    display: flex;
+    flex-direction: column;
+    float: left;
+}
+.bbox2{
+    display: flex;
+    float: right;
+}
+.bbox_text {
+    margin-bottom: 5px;
+    margin-left: 10px;
+}
