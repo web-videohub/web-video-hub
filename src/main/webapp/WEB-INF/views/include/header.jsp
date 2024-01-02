@@ -21,11 +21,11 @@
                 </button>
                 <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
                     <div class="offcanvas-header">
-                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                        <button class="navbar-toggler2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
                             <span class="lnr lnr-menu"></span>
                         </button>
                         <a href="/" class="logoA">
-                            <img class="mainLogo" src="/assets/img/testLogo.png" alt="">
+                            <img class="mainLogo" src="/assets/img/logo.png" alt="">
                         </a>
                     </div>
                     <div class="offcanvas-body">
@@ -65,18 +65,19 @@
 
 
 
-                <a href="/" class="">
-                    <img class="mainLogo" src="/assets/img/testLogo.png" alt="">
+                <a href="/" class="logoA">
+                    <img class="mainLogo" src="/assets/img/logo.png" alt="">
                 </a>
             </div>
             <form class="searchForm" action="" method="">
                 <input class="searchInput" type="search" placeholder="검색">
-                <button class="searchBtn" type="submit">검색</button>
+                <button class="searchBtn" type="submit"><span class="lnr lnr-magnifier"></span></button>
             </form>
 
             <c:if test="${login == null}">
                 <div class="btns">
                     <a class="login" href="/login">
+                        <span class="lnr lnr-user"></span>
                         로그인
                     </a>
                 </div>
