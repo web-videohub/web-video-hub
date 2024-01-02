@@ -12,6 +12,9 @@
         li {
             list-style-type: none;
         }
+        .container {
+            margin-top: 100px;
+        }
         .container_group {
             display: flex;
             justify-content: center;
@@ -51,7 +54,11 @@
     </style>
 </head>
 <body class="back_bg">
-<%--    header 넣는 부분   --%>
+<%-- css 모음 --%>
+<jsp:include page="include/static-head.jsp"/>
+<%-- 햄버거메뉴와 로고(홈버튼) 검색창, 영상업로드, 마이페이지 --%>
+<jsp:include page="include/header.jsp"/>
+
 <%--    영상 컨테이너       --%>
     <div class="container">
         <div class="container_group">
