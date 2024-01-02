@@ -3,12 +3,68 @@
 
 
 <header>
+    <%
+        String userName = "";
+
+        Cookie[] cookies = request.getCookies();
+        for (Cookie c : cookies) {
+            if(c.getName().equals("login")) {
+                userName = c.getValue();
+            }
+        }
+    %>
     <div class="headerDiv">
         <div class="headerContainer">
             <div class="menu">
-                <button class="dropdownMenu" type="button">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="lnr lnr-menu"></span>
                 </button>
+                <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                            <span class="lnr lnr-menu"></span>
+                        </button>
+                        <a href="/" class="logoA">
+                            <img class="mainLogo" src="/assets/img/testLogo.png" alt="">
+                        </a>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">
+                                <span class="lnr lnr-home"></span>
+                                    홈
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                <span class="lnr lnr-book"></span>
+                                    구독
+                                </a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/studio">나 ></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/studio">
+                                <span class="lnr lnr-user"></span>
+                                    내 채널
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/setting">
+                                <span class="lnr lnr-cog"></span>
+                                    설정
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+
                 <a href="/" class="">
                     <img class="mainLogo" src="/assets/img/testLogo.png" alt="">
                 </a>
@@ -17,22 +73,46 @@
                 <input class="searchInput" type="search" placeholder="검색">
                 <button class="searchBtn" type="submit">검색</button>
             </form>
-            <div class="btns">
-                <button class="upload" href="#">upload</button>
-<%--                <button class="mypage" href="#">info</button>--%>
-                <div class="infoDropDown">
-                    <button class="infoDropBtn">info</button>
-                    <div class="infoContent">
-                        <%--<a>${nickName}(${account})</a>--%>
-                        <a>닉네임(계정명)</a>
-                        <a href="#">내 채널 보기</a>
-                        <a href="/setting">설정</a>
-                        <a href="#">로그아웃</a>
-                    </div>
+
+            <c:if test="${login == null}">
+                <div class="btns">
+                    <a class="login" href="/login">
+                        로그인
+                    </a>
                 </div>
-            </div>
+            </c:if>
+            <c:if test="${login != null}">
+                <div class="dropdown">
+                    <button class="btn btn-secondary" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                        <li><p class="dropdown-item drop-p">${sessionScope.login.userDisplayName}</p></li>
+                        <li><p class="dropdown-item drop-p">${sessionScope.login.userAccount}</p></li>
+                        <hr>
+                        <li><a class="dropdown-item" href="/studio">내 채널 보기</a></li>
+                        <li><a class="dropdown-item" href="/setting">설정</a></li>
+                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                    </ul>
+                </div>
+            </c:if>
         </div>
     </div>
 
 
 </header>
+<body>
+    <script>
+        const profilePath = `${sessionScope.login.userProfile}`;
+        const imageName = profilePath.substr(51);
+        const imageUrl = "api/images/" + imageName;
+        console.log(imageUrl);
+
+        const $image = document.createElement('img');
+        $image.src = imageUrl;
+        $image.alt = "profile image";
+
+        const imageContainer = document.getElementById('dropdownMenuButton1');
+        imageContainer.appendChild($image);
+    </script>
+</body>

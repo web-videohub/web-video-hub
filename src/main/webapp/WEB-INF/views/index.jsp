@@ -17,7 +17,39 @@
 
     <%-- 기본 왼쪽 상태바 --%>
     <div class="leftDiv">
-        왼쪽 상태바 입니다.
+        <div class="offcanvas-body">
+            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">
+                        <span class="lnr lnr-home"></span>
+                        홈
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        <span class="lnr lnr-book"></span>
+                        구독
+                    </a>
+                </li>
+                <hr>
+                <li class="nav-item">
+                    <a class="nav-link" href="/studio">나 ></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/studio">
+                        <span class="lnr lnr-user"></span>
+                        내 채널
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/setting">
+                        <span class="lnr lnr-cog"></span>
+                        설정
+                    </a>
+                </li>
+
+            </ul>
+        </div>
     </div>
     <div class="mainContainer">
         <div class="subContainer">

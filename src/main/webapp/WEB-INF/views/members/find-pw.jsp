@@ -29,7 +29,7 @@
         <input id="findPasswordBtn" type="button" value="아이디, 이메일 검증">
         <input id="modifyBtn" type="button" value="비밀번호 변경" style="display: none">
         <div class="goLogin">
-            <a href="/">로그인 화면으로 돌아가기</a>
+            <a href="/login">로그인 화면으로 돌아가기</a>
         </div>
     </>
 
