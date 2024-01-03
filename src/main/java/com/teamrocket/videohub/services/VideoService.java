@@ -18,8 +18,8 @@ public class VideoService {
 
     private final VideoMapper videoMapper;
 
-    public void insertVideo(VideoUploadRequestDTO dto, HttpSession session, String savePath) {
-        Video video = dto.toEntity(savePath);
+    public void insertVideo(VideoUploadRequestDTO dto, HttpSession session, String videoPath, String thumbnailPath) {
+        Video video = dto.toEntity(videoPath, thumbnailPath);
         video.setVideoUploadUser(LoginUtils.getCurrentLoginMemberAccount(session));
         videoMapper.save(video);
     }

@@ -62,7 +62,7 @@
             <c:forEach var="v" items="${vList}">
                 <div class="videoDiv">
                     <a class="video">
-
+                        <img src="/local${v.thumbnailUrl}" alt="thumbnail"/>
                     </a>
                     <div class="profileContainer">
                         <div class="profile">

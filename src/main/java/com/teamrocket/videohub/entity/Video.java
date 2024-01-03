@@ -31,6 +31,9 @@ public class Video {
     @Setter
     private String videoUrl;
 
+    @Setter
+    private String thumbnailUrl;
+
     private String userProfileImage;
 
     public Video(VideoUploadRequestDTO dto) {

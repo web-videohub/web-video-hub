@@ -23,7 +23,7 @@ public class InterceptorConfig implements WebMvcConfigurer {
 
         registry
                 .addInterceptor(beforeLoginInterceptor)
-                .addPathPatterns("/studio")
+                .addPathPatterns("/studio", "/setting")
                 ;
     }
 }
