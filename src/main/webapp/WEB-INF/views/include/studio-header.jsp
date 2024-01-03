@@ -84,12 +84,9 @@
 </header>
 <script>
     const profilePath = `${sessionScope.login.userProfile}`;
-    const imageName = profilePath.substr(51);
-    const imageUrl = "api/images/" + imageName;
-    console.log(imageUrl);
 
     const $image = document.createElement('img');
-    $image.src = imageUrl;
+    $image.src = "local" + profilePath;
     $image.alt = "profile image";
 
     const imageContainer = document.getElementById('dropdownMenuButton1');

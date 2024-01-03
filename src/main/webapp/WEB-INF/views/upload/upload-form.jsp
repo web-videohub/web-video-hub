@@ -25,6 +25,10 @@
             overflow: hidden;
         }
 
+        .thumbnail-box img {
+
+        }
+
         input[type="text"],
         textarea {
             font-size: 18px;
