@@ -163,6 +163,29 @@
 
     });
 
+    let pageWidth;
+    let $leftDiv = document.querySelector('.leftDiv');
+    let $canvasBody = document.querySelector('.offcanvas-body');
+
+    function checkWidth() {
+        console.log(pageWidth);
+        if (pageWidth < 1000) {
+            // 일반 사이드바 모드 작동
+
+            console.log("가로 길이가 1000 미만입니다.");
+        } else {
+            // 미니바 모드 작동
+            $leftDiv.style.width = '100px';
+            console.log($canvasBody);
+            $canvasBody.style.height = '1000px';
+            console.log("가로 길이가 1000 이상입니다.");
+        }
+    }
+
+    window.addEventListener('resize', function() {
+        pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        checkWidth();
+    });
 </script>
 </body>
 </html>
