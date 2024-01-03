@@ -12,9 +12,21 @@
     </insert>
 
     <select id="findOne" resultType="com.teamrocket.videohub.entity.Video">
+        SELECT
+        V.video_id, V.video_upload_date, V.video_upload_user,
+        V.video_title, V.video_content, V.video_like,
+        V.video_category, V.video_view_count, V.video_url,
+        M.user_display_name, M.user_profile_image AS upload_user_profile_image
+        FROM tbl_video V
+        JOIN tbl_member M
+        ON V.video_upload_user = M.user_account
+        WHERE video_id = #{videoId}
     </select>
 
-    <update id="upviewCount">
+    <update id="upViewCount">
+        UPDATE tbl_video
+        SET video_view_count = video_view_count + 1
+        WHERE video_id = #{videoId}
     </update>
 
     <select id="findAll" resultType="com.teamrocket.videohub.entity.Video">

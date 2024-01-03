@@ -1,6 +1,7 @@
 package com.teamrocket.videohub.services;
 
 import com.teamrocket.videohub.dto.request.VideoUploadRequestDTO;
+import com.teamrocket.videohub.dto.response.VideoDetailResponseDTO;
 import com.teamrocket.videohub.entity.Video;
 import com.teamrocket.videohub.repository.VideoMapper;
 import com.teamrocket.videohub.utils.LoginUtils;
@@ -27,6 +28,17 @@ public class VideoService {
     public List<Video> getVideos(int pageSize, int pageNumber) {
         int offset = (pageNumber - 1) * pageSize;
         return videoMapper.findAll(pageSize, offset);
+    }
+
+    public VideoDetailResponseDTO getDetail(int videoId) {
+        Video video = videoMapper.findOne(videoId);
+
+        // 조회수 상승처리
+        videoMapper.upViewCount(videoId);
+
+        log.info("video에 저장된 값 : {}", video);
+
+        return new VideoDetailResponseDTO(video);
     }
 }
 

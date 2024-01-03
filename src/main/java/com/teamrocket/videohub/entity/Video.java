@@ -33,6 +33,10 @@ public class Video {
 
     private String userProfileImage;
 
+    private String userDisplayName;
+    private String uploadUserProfileImage;
+
+
     public Video(VideoUploadRequestDTO dto) {
         convertInputData(dto);
         timeFormat();

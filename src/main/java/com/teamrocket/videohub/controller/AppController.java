@@ -56,4 +56,11 @@ public class AppController {
         return "setting";
 
     }
+
+    @GetMapping("/detail")
+    public String detail(int videoId, Model model) {
+        log.info("비디오 상세 페이지");
+        model.addAttribute("v", videoService.getDetail(videoId));
+        return "detail";
+    }
 }
