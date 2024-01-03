@@ -58,3 +58,13 @@ body {
     text-align: center;
     text-decoration: none;
 }
+
+.home {
+    background: #dedede;
+}
+.nav-item:hover {
+    background: #ececec;
+}
+.nav-item:active {
+    background: #cccccc !important;
+}
