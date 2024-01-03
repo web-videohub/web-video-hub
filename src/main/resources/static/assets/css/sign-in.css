@@ -66,6 +66,7 @@ a {
     color: aliceblue;
     font-size: 20px;
     font-weight: bold;
+    padding-left: 10px;
 }
 .inputDiv input:hover {
     filter: drop-shadow(0 0 10px #8e8f8c);

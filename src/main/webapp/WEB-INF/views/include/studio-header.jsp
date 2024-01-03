@@ -114,7 +114,7 @@
             </div>
             <form class="searchForm" action="" method="">
                 <input class="searchInput" type="search" placeholder="채널에서 검색">
-                <button class="searchBtn" type="submit"><span class="lnr lnr-magnifier"></button>
+                <%--<button class="searchBtn" type="submit"><span class="lnr lnr-magnifier"></button>--%>
             </form>
             <div class="dropdown">
                 <button class="btn btn-secondary" type="button" id="dropdownMenuButton1"

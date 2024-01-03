@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="mainContainer">
-        <a href="/studio/upload" class="btn btn-primary">동영상 업로드</a>
+        <a href="/studio/upload">동영상 업로드</a>
     </div>
 </div>
 </body>
