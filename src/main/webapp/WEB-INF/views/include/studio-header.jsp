@@ -41,6 +41,7 @@
     </style>
 </head>
 <body>
+
 <%
   String userName = "";
 
@@ -52,23 +53,73 @@
     }
 %>
 <header>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
     <div class="headerDiv">
         <div class="headerContainer">
             <div class="menu">
-                <button class="dropdownMenu" type="button">
-                    <span class="navbar-toggler-icon"></span>
+                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="lnr lnr-menu"></span>
                 </button>
-                <a href="/studio" class="">
+                <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div class="offcanvas-header">
+                        <button class="navbar-toggler2" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                            <span class="lnr lnr-menu"></span>
+                        </button>
+                        <a href="/" class="logoA">
+                            <img class="mainLogo" src="/assets/img/hubTitle.png" alt="">
+                        </a>
+                    </div>
+                    <div class="offcanvas-body">
+                        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" aria-current="page" href="/">
+                                    <span class="lnr lnr-home"></span>
+                                    홈
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="#">
+                                    <span class="lnr lnr-book"></span>
+                                    구독
+                                </a>
+                            </li>
+                            <hr>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/studio">나 ></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/studio">
+                                    <span class="lnr lnr-user"></span>
+                                    내 채널
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/setting">
+                                    <span class="lnr lnr-cog"></span>
+                                    설정
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+
+
+                <a href="/studio" class="logoA">
                     <img class="mainLogo" src="/assets/img/studioTitle.png" alt="">
                 </a>
             </div>
             <form class="searchForm" action="" method="">
                 <input class="searchInput" type="search" placeholder="채널에서 검색">
-                <button class="searchBtn" type="submit">검색</button>
+                <button class="searchBtn" type="submit"><span class="lnr lnr-magnifier"></button>
             </form>
             <div class="dropdown">
                 <button class="btn btn-secondary" type="button" id="dropdownMenuButton1"
                         data-bs-toggle="dropdown" aria-expanded="false">
+                    <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                     <li><p class="dropdown-item drop-p">${sessionScope.login.userDisplayName}</p></li>
@@ -82,15 +133,19 @@
         </div>
     </div>
 </header>
-<script>
-    const profilePath = `${sessionScope.login.userProfile}`;
+<body>
+    <%-- css 모음 --%>
+    <jsp:include page="static-head.jsp"/>
+</body>
+<%--<script>--%>
+<%--    const profilePath = `${sessionScope.login.userProfile}`;--%>
 
-    const $image = document.createElement('img');
-    $image.src = "local" + profilePath;
-    $image.alt = "profile image";
+<%--    const $image = document.createElement('img');--%>
+<%--    $image.src = "local" + profilePath;--%>
+<%--    $image.alt = "profile image";--%>
 
-    const imageContainer = document.getElementById('dropdownMenuButton1');
-    imageContainer.appendChild($image);
-</script>
+<%--    const imageContainer = document.getElementById('dropdownMenuButton1');--%>
+<%--    imageContainer.appendChild($image);--%>
+<%--</script>--%>
 </body>
 </html>
