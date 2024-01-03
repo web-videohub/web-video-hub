@@ -20,12 +20,12 @@
                 <div class="offcanvas-body">
                     <h4>설정</h4>
                     <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                        <li class="nav-item">
+                        <li class="nav-item dd">
                             <a class="nav-link active" aria-current="page" href="/">
                                 계정
                             </a>
                         </li>
-                        <li class="nav-item">
+                        <li class="nav-item dd">
                             <a class="nav-link" href="#">
                                 동영상 설정
                             </a>

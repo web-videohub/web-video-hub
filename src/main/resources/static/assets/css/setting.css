@@ -1,12 +1,17 @@
 
 /* 구글 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+header {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
 body {
     width: 100%;
     height: 100vh;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
 }
+
 .settingDiv {
     width: 100%;
     height: 100%;
@@ -36,9 +41,11 @@ body {
 .offcanvas-body h4 {
     color: #8e8f8c;
     margin-left: 27px;
+    margin-bottom: 20px;
 }
-.nav-item {
+.dd {
     margin-left: 20px;
+    width: 90% !important;
 }
 .mainContainer {
     width: 100%;
