@@ -20,7 +20,7 @@ public interface ReplyMapper {
     boolean delete(long replyNo);
 
     // 댓글 개별 조회
-    Reply findOnte(long replyNo);
+    Reply findOne(long replyNo);
 
     // 댓글 전체 목록 조회
     List<Reply> findAll(@Param("bn") long videoId, @Param("p") Page page);
