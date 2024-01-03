@@ -57,7 +57,7 @@
             height: 45px;
             float: left;
         }
-        .video_user_bbox .subcrice_B {
+        .video_user_bbox .subscribe_B {
             background-color: #000000;
             color: #FFFFFF;
             border-radius: 20px;
@@ -67,9 +67,25 @@
             margin-left: 10px;
             float: left;
         }
-        .video_user_bbox .subcrice_B:hover {
+        .video_user_bbox .subscribe_B:hover {
             background-color: #272727;
             color: #FFFFFF;
+        }
+        .like_B, .hate_B, .share_B{
+            background-color: #F2F2F2;
+            color: #000000;
+            border-radius: 20px;
+            width: 60px;
+            height: 36px;
+            border: none;
+            margin-left: 5px;
+            float: left;
+        }
+        .like_B:hover, .hate_B:hover, .share_B:hover{
+            background-color: #E5E5E5;
+        }
+        .video_review_btn_t {
+            float: right;
         }
 
         /* 영상 설명 칸 video info bbox */
@@ -85,6 +101,9 @@
         }
         .video_info_bbox:hover {
             background-color: #E5E5E5;
+        }
+        .video_info_bbox p{
+            margin: 5px;
         }
 
         /* box 2: 관심(추천)동영상 목록 */
@@ -105,6 +124,7 @@
             color: #000000;
         }
 
+        /* 댓글 리스트 */
         .chat_list {
             background-color: #FFFFFF;
             padding-left: 0px;
@@ -117,10 +137,38 @@
             text-decoration-line: none;
             color: #000000;
         }
+        .chat_list_profile {
+            float: left;
+        }
+        .chat_list_profile_name {
+            margin: 10px;
+            float: left;
+        }
+        .chat_list table {
+            clear: left;
+        }
+
+        .like_bb{
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            background-color: #F2F2F2;
+        }
+        .hate_bb{
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            background-color: #F2F2F2;
+        }
+        .dropbox_bb {
+            border: none;
+            padding: 10px;
+            background-color: #FFFFFF;
+        }
 
         .input-group #message {
             width: 100%;
-            height: 25px;
+            height: 40px;
         }
         .input-group img {
             width: 45px;
@@ -132,9 +180,37 @@
             flex-direction: column;
             float: left;
         }
+        .bbox1_1 {
+            float: left;
+            width: 90%;
+        }
         .bbox2 {
-            display: flex;
+            /*버튼 객체들을 bbox1, bbox1_1이 있는 위치의 다음 줄로 가야함*/
             float: right;
+            margin-bottom: 20px;
+        }
+
+        .cancel_B{
+            padding: 0 16px;
+            height: 36px;
+            font-size: 14px;
+            line-height: 36px;
+            border-radius: 18px;
+            border: none;
+            background-color: #FFFFFF;
+            color: #000000;
+        }
+        .cancel_B:hover{
+            background-color: #E5E5E5;
+        }
+        .review_B {
+            padding: 0 16px;
+            height: 36px;
+            font-size: 14px;
+            line-height: 36px;
+            border-radius: 18px;
+            border: none;
+            color: #8e8f8c;
         }
 
         .clearfix::after {
@@ -144,7 +220,7 @@
         }
 
         .box3 {
-            width: 700px;
+            width: 100%;
             height: auto;
         }
         .box3 ul li a img {
@@ -161,10 +237,11 @@
             margin-right: 10px;
         }
         .bbox_text {
-            margin-bottom: 5px;
-            margin-left: 10px;
-            font-size: 10px;
+            margin: 11px;
+            font-size: 15px;
         }
+
+        /* 창 사이즈에 따른 객체들 사이즈.*/
 
         @media (max-width: 768px) {
             .container_group {
@@ -217,24 +294,27 @@
                    controls width="auto" height="auto">
             </video>
             <div class="video_info">
-                <h1>제목 타이틀 : 제목학원</h1>
+                <h1>제목 타이틀 : ${v.videoTitle}</h1>
                 <div class="video_user_bbox">
                     <a href="#"><img src="/assets/img/japcho.jpg"></a>
                     <div class="video_info_user_bbox">
-                        <a href="#">Test_name</a>
+                        <a href="#">${v.uploadUserDisplayName}Test</a>
                         <p>구독자 0명</p>
                     </div>
-                    <button type="button" class="subcrice_B">구독</button>
-                </div>
-                <div class="video_user_bbox">
-                    <div>
-                        <button type="button" class="like_B">좋아요</button>
-                        <button type="button" class="hate_B">싫어요</button>
+                    <div class="video_review_btn_o">
+                        <button type="button" class="subscribe_B">구독</button>
                     </div>
-                    <button type="button" class="share_B">공유</button>
+                    <div class="video_review_btn_t">
+                        <button type="button" class="like_B">${v.videoLike}좋아요</button>
+                        <button type="button" class="hate_B">싫어요</button>
+                        <button type="button" class="share_B">공유</button>
+                    </div>
                 </div>
+
                 <div class="video_info_bbox">
-                    <p>영상 설명 칸</p>
+                    <p>업로드 일자: ${v.uploadDate}</p>
+                    <p>조회수: ${v.videoViewCount}</p>
+                    <p>영상 설명: ${v.videoContent}</p>
                 </div>
             </div>
             <div class="box3">
@@ -246,44 +326,44 @@
                                 <img src="/assets/img/japcho.jpg">
                                 <p>Test_user</p>
                             </div>
-                            <input type="text" id="message" placeholder="댓글 추가..." autocomplete="off"
-                                   class="form-control"/>
-                            <input type="text" style="display: none">
-                            <div class="bbox2">
-                                <button type="button" class="cancel_B">취소</button>
-                                <button type="button" class="review_B">댓글</button>
+                            <div class="bbox1_1">
+                                <input type="text" id="message" placeholder="댓글 추가..." autocomplete="off"
+                                       class="form-control"/>
+                                <input type="text" style="display: none">
                             </div>
+                        </div>
+                        <div class="bbox2">
+                            <button type="button" class="cancel_B">취소</button>
+                            <button type="button" class="review_B">댓글</button>
                         </div>
                     </div>
                 </form>
                 <ul class="chat_list">
                     <li>
-                        <div>
+                        <div class="chat_list_profile">
                             <a href="#"><img src="/assets/img/japcho.jpg"></a>
                         </div>
-                        <p>Test_name</p>
-                        <p>삭제용 테스트 댓글 :d</p>
-                        <div>
-                            <button type="button" class="like_bb">좋아요</button>
-                            <button type="button" class="hate_bb">싫어요</button>
+                        <div class="chat_list_profile_name">
+                            <a href="#"><p>Test_name</p></a>
                         </div>
-                        <div>
-                            <button type="button" class="hate_bb">...</button>
-                        </div>
-                    </li>
-                    <li>
-                        <div>
-                            <a href="#"><img src="/assets/img/japcho.jpg"></a>
-                        </div>
-                        <p>Test_name</p>
-                        <p>삭제용 테스트 댓글 :d</p>
-                        <div>
-                            <button type="button" class="like_bb">좋아요</button>
-                            <button type="button" class="hate_bb">싫어요</button>
-                        </div>
-                        <div>
-                            <button type="button" class="hate_bb">...</button>
-                        </div>
+                        <table>
+                            <tr>
+                                <td><p>삭제용 테스트 댓글 :d</p></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <div class="review_btns_one">
+                                        <button type="button" class="like_bb">좋아요</button>
+                                        <button type="button" class="hate_bb">싫어요</button>
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="review_btns_two">
+                                        <button type="button" class="dropbox_bb">...</button>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
                     </li>
                 </ul>
             </div>
@@ -293,8 +373,31 @@
                 <li>
                     <a href="#">
                         <div class="video_sumnail">
-                            <img
-                                    src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
+                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
+                        </div>
+                        <div class="video_subinfo">
+                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
+                            <p class="bbox_text">거짓말을밥먹듯이하는인간</p>
+                            <p class="bbox_text">조회수 666만</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="video_sumnail">
+                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
+                        </div>
+                        <div class="video_subinfo">
+                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
+                            <p class="bbox_text">거짓말을밥먹듯이하는인간</p>
+                            <p class="bbox_text">조회수 666만</p>
+                        </div>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <div class="video_sumnail">
+                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
                         </div>
                         <div class="video_subinfo">
                             <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
