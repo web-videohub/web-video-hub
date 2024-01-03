@@ -16,12 +16,28 @@
 
     <div class="settingDiv">
         <%-- 설정 상태바 --%>
-        <div class="LeftDiv">
-            왼쪽 상태바 입니다.
-        </div>
-        <div class="mainContainer">
+            <div class="leftDiv">
+                <div class="offcanvas-body">
+                    <h4>설정</h4>
+                    <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+                        <li class="nav-item dd">
+                            <a class="nav-link active" aria-current="page" href="/">
+                                계정
+                            </a>
+                        </li>
+                        <li class="nav-item dd">
+                            <a class="nav-link" href="#">
+                                동영상 설정
+                            </a>
+                        </li>
 
-        </div>
+
+                    </ul>
+                </div>
+            </div>
+            <div class="mainContainer">
+
+            </div>
     </div>
 </body>
 </html>

@@ -1,5 +1,11 @@
+
+/* 구글 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 header {
     width: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
 }
 body {
     width: 100%;
@@ -9,6 +15,8 @@ body {
 
     display: flex;
     flex-direction: column;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
 }
 .titleA {
     text-decoration: none;
@@ -23,6 +31,10 @@ body {
     position: fixed;
     top: 70px;
     z-index: 100;
+
+    padding-top: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
 }
 @media (max-width: 640px) {
     .leftDiv {
@@ -72,7 +84,7 @@ body {
     width: 330px;
     height: 290px;
     background-color: #f1f1f1;
-
+    font-family: 'Noto Sans KR', sans-serif;
     display: flex;
     justify-content: center;
     align-content: center;
@@ -89,7 +101,7 @@ body {
 .video {
     width: 330px;
     height: 200px;
-    background-color: #ffc4c4;
+    background-color: #F2B950;
     border-radius: 20px;
     margin: 0 auto;
 

@@ -1,18 +1,21 @@
 
 /* 구글 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+html {
+    width: 100%;
+    height: 100%;
+}
 header {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
 }
 body {
     width: 100%;
-    height: 100vh;
+    height: 100%;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
 }
-
-.settingDiv {
+.studioDiv {
     width: 100%;
     height: 100%;
 
@@ -22,35 +25,36 @@ body {
     flex-direction: row;
 }
 .leftDiv {
-    width: 200px !important;
+    width: 200px;
     height: 100%;
 
     position: fixed;
     top: 70px;
     z-index: 100;
-    background: white;
+    padding-left: 10px;
     padding-top: 20px;
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
-}
-.offcanvas-body {
-    height: 100%;
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: bold;
-}
-.offcanvas-body h4 {
-    color: #8e8f8c;
-    margin-left: 27px;
-    margin-bottom: 20px;
-}
-.dd {
-    margin-left: 20px;
-    width: 90% !important;
+
+    border-right: 1px solid #969ba1;
 }
 .mainContainer {
     width: 100%;
     height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
     padding-left: 180px;
     padding-top: 80px;
     /*background: #8e8f8c;*/
+}
+.mainContainer a {
+    width: 200px;
+    height: 40px;
+    background: #5eb2ff;
+    font-size: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
 }
