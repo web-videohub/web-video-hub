@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/css/index.css">
     <link rel="stylesheet" href="/assets/css/filter.css">
-    <title>메인화면</title>
+    <title>VideoHub</title>
 
     <style>
         .loader {
@@ -32,7 +32,6 @@
 <jsp:include page="include/header.jsp"/>
 
 
-<%-- 기본 왼쪽 상태바 --%>
 <div class="leftDiv">
     <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
@@ -70,42 +69,50 @@
 </div>
 <div class="mainContainer">
     <div class="subContainer">
-        <%-- 영상 리스트를 렌더링할때 조건을 건다 (최신영상, 인기많은영상, 최다조회수영상 등)--%>
         <jsp:include page="include/filter.jsp"/>
 
-        <%-- 서버에 업로드된 영상들이 연속적으로 나타날 div --%>
         <div class="videoListDiv">
-<%--            <c:forEach var="v" items="${vList}">--%>
-<%--                <div class="videoDiv">--%>
-<%--                    <a class="video">--%>
-<%--                        <img src="/local${v.thumbnailUrl}" alt="thumbnail"/>--%>
-<%--                    </a>--%>
-<%--                    <div class="profileContainer">--%>
-<%--                        <div class="profile">--%>
-<%--                            <img src="/local${v.userProfileImage}" alt="profile image"/>--%>
-<%--                        </div>--%>
-<%--                        <div class="videoInfoDiv">--%>
-<%--                            <a class="titleA" href="#"><span class="title">${v.videoTitle}</span></a>--%>
-<%--                            <span class="uploader">${v.videoUploadUser}</span>--%>
-<%--                            <span class="viewcount">${v.videoViewCount} § ${v.videoUploadDate}</span>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </c:forEach>--%>
+
         </div>
         <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
     </div>
 </div>
 <script>
+
+    function formatTimeAgo(timestamp) {
+        const currentTime = new Date();
+        const targetTime = new Date(timestamp);
+        const timeDifference = currentTime - targetTime;
+
+        const minutes = Math.floor(timeDifference / (1000 * 60));
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(days / 365);
+
+        if (years > 0) {
+            return `\${years}년 전`;
+        } else if (months > 0) {
+            return `\${months}개월 전`;
+        } else if (days > 0) {
+            return `\${days}일 전`;
+        } else if (hours > 0) {
+            return `\${hours}시간 전`;
+        } else if (minutes > 0) {
+            return `\${minutes}분 전`;
+        } else {
+            return '방금 전';
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         const videoListDiv = document.querySelector('.videoListDiv');
         const loader = document.getElementById('loader');
         let loading = false;
-        let pageNumber = 1; // 페이지 번호 초기값 추가
+        let pageNumber = 1;
 
         const loadData = async () => {
             console.log('loadData function called');
-            // 이미 로딩 중이라면 중복으로 로딩하지 않도록 체크
             if (loading) return;
 
             loading = true;
@@ -123,13 +130,12 @@
                             newItem.innerHTML = `<a class="video"><img src="/local\${video.thumbnailUrl}" alt="thumbnail"/></a>` +
                                 `<div class="profileContainer"><div class="profile"><img src="/local\${video.userProfileImage}" alt="profile image"/></div>` +
                                 `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title">\${video.videoTitle}</span></a>` +
-                                `<span class="uploader">\${video.videoUploadUser}</span><span class="viewcount">\${video.videoViewCount} § \${video.videoUploadDate}</span></div></div>`;
+                                `<span class="uploader">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
                             videoListDiv.appendChild(newItem);
                         });
 
-                        pageNumber++; // 다음 페이지를 위해 페이지 번호를 증가
+                        pageNumber++;
                     } else {
-                        // 데이터가 더 이상 없을 경우, 옵저버 해제
                         observer.unobserve(loader);
                         console.log('Observer unobserved');
                     }
@@ -139,7 +145,7 @@
                     loading = false;
                     loader.style.visibility = "hidden";
                 }
-            }, 2000); // 3초
+            }, 1000);
         };
 
         const options = {
@@ -160,7 +166,6 @@
 
         const observer = new IntersectionObserver(handleIntersection, options);
         observer.observe(loader);
-
     });
 
 </script>
