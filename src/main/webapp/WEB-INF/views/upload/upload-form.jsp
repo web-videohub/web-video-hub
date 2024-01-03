@@ -10,13 +10,37 @@
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
             crossorigin="anonymous"></script>
     <style>
-        .upload-box,
-        .thumbnail-box {
+        .upload-box {
             width: 512px;
             height: 320px;
             border: 3px solid black;
             border-radius: 10px;
-            display: flex;
+            /*display: flex;*/
+            /*justify-content: center;*/
+            /*align-items: center;*/
+            display: inline-block;
+            color: red;
+            font-weight: 700;
+            position: relative;
+            overflow: hidden;
+        }
+
+        video {
+            /*max-width: 100%;*/
+            /*max-height: 100%;*/
+            object-fit: none;
+            width: 512px;
+            height: 320px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .thumbnail-box {
+            border: 3px solid black;
+            border-radius: 10px;
+            display: inline-block;
             justify-content: center;
             align-items: center;
             color: red;
@@ -26,7 +50,8 @@
         }
 
         .thumbnail-box img {
-
+            width: 512px;
+            height: 320px;
         }
 
         input[type="text"],
@@ -77,14 +102,13 @@
             background-color: #dadada;
         }
 
-        video {
-            max-width: 100%;
-            max-height: 100%;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+        .thumbnailContainer {
+            display: flex;
+            gap: 20px;
+            flex-direction: column;
         }
+
+
 
         #upload-btn {
             width: 100%;
@@ -98,7 +122,8 @@
             margin: 20px 0;
         }
 
-        #videoName {
+        #videoName,
+        #thumbnailName {
             font-size: 20px;
             font-weight: 700;
         }
@@ -136,7 +161,7 @@
         <input type="file" name="videoUrl" id="video-input" accept="video/*" onchange="setThumbnail(event)">
         <div class="videoInfo">
             <button type="button" id="search-video" class="btn btn-primary">영상 선택</button>
-            <p id="videoName" style="display: none">선택된 영상 : </p>
+            <p id="videoName" style="display: none"></p>
         </div>
 
         <div id="input-form">
@@ -151,22 +176,25 @@
             </div>
 
             <div class="tag">
+                <span>주제를 선택해주세요</span>
                 <select class="form-select" aria-label="Default select example" name="videoCategory">
-                    <option selected>주제를 선택해주세요.</option>
+                    <option selected>-</option>
                     <option value="game">게임</option>
                     <option value="cook">요리</option>
                     <option value="health">건강</option>
                 </select>
             </div>
 
-            <div class="thumbnail-box" id="thumbnailBox"><img src="/assets/img/imageIcon.png" alt="profile"
-                                                              style="height: 130px; width: 130px;"></div>
-            <input type="file" name="videoUrl" id="thumbnail-input" accept="image/*" onchange="setThumbnail(event)">
-            <div class="videoInfo">
-                <button type="button" id="search-thumbnail" class="btn btn-primary">이미지 선택</button>
-                <p id="thumbnailName" style="display: none">선택된 이미지 : </p>
+            <div class="thumbnailContainer">
+                <span>썸네일 이미지를 지정해주세요.</span>
+                <div class="thumbnail-box" id="thumbnailBox"><img src="/assets/img/imageIcon.png" alt="profile"
+                                                                  style="height: 130px; width: 130px;"></div>
+                <input type="file" name="thumbnailUrl" id="thumbnail-input" accept="image/*" onchange="setThumbnail(event)">
+                <div class="videoInfo">
+                    <button type="button" id="search-thumbnail" class="btn btn-primary">이미지 선택</button>
+                    <p id="thumbnailName" style="display: none">선택된 이미지 : </p>
+                </div>
             </div>
-
             <button onclick="submitForm()" id="upload-btn">동영상 업로드</button>
         </div>
 
@@ -183,6 +211,7 @@
     const $uploadBtn = document.getElementById('upload-btn')
 
     const $videoName = document.getElementById('videoName');
+    const $thumbnailName = document.getElementById('thumbnailName');
 
     const $searchVideo = document.getElementById('search-video');
     const $searchThumbnail = document.getElementById('search-thumbnail');
@@ -202,11 +231,14 @@
         $searchVideo.textContent = "다시선택하기";
         console.log($uploadBtn);
         setThumbnail(e, $uploadBox, 'video');
-        displayFileName(e);
+        displayFileName(e, $videoName);
     };
 
     $thumbnailInput.onchange = e => {
+        $searchThumbnail.textContent = "다시선택하기";
+        $thumbnailName.style.display = 'inline';
         setThumbnail(e, $thumbnailBox, 'img');
+        displayFileName(e, $thumbnailName);
     }
 
     const $uploadBox = document.getElementById('uploadBox');
@@ -239,9 +271,9 @@
         reader.readAsDataURL(event.target.files[0]);
     }
 
-    function displayFileName(event) {
+    function displayFileName(event, tag) {
         const fileName = event.target.files[0].name;
-        $videoName.textContent = fileName;
+        tag.textContent = fileName;
     }
 </script>
 </body>

@@ -6,9 +6,9 @@
 
     <insert id="save">
         insert into tbl_video
-        (video_upload_user, video_title, video_content, video_category, video_url)
+        (video_upload_user, video_title, video_content, video_category, video_url, thumbnail_url)
         VALUES
-        (#{videoUploadUser}, #{videoTitle}, #{videoContent}, #{videoCategory}, #{videoUrl})
+        (#{videoUploadUser}, #{videoTitle}, #{videoContent}, #{videoCategory}, #{videoUrl}, #{thumbnailUrl})
     </insert>
 
     <select id="findOne" resultType="com.teamrocket.videohub.entity.Video">
@@ -21,7 +21,7 @@
         SELECT
         v.video_title, v.video_upload_user,
         v.video_view_count, v.video_upload_date,
-        m.user_profile_image
+        m.user_profile_image, v.thumbnail_url
         FROM tbl_video v
         JOIN tbl_member m ON v.video_upload_user = m.user_account
         ORDER BY video_upload_date desc
