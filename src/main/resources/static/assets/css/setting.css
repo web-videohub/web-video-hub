@@ -11,14 +11,10 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
 }
-p, span, div {
-    font-family: 'Noto Sans KR', sans-serif;
-}
 
 .settingDiv {
     width: 100%;
     height: 100%;
-    margin-top: 20px;
 
     display: flex;
     justify-content: left;
@@ -47,56 +43,14 @@ p, span, div {
     margin-left: 27px;
     margin-bottom: 20px;
 }
-
-.mainContainer {
-    width: 100%;
-    height: 100%;
-    padding-left: 200px;
-    padding-top: 150px;
-    /*background: #8e8f8c;*/
-}
-.profileIMG {
-    width: 60px;
-    height: 60px;
-    border-radius: 50%;
-}
-.channelSetDiv {
-    font-family: 'Noto Sans KR', sans-serif;
-
-    display: flex;
-    justify-content: left;
-    align-content: center;
-    flex-direction: row;
-    text-align: center;
-
-    margin-top: 20px;
-}
-.channelSetDiv span{
-    width: 100px;
-    margin: auto 10px;
-}
-.userName {
-    width: 50%;
-    text-align: left;
-    margin: auto 0;
-}
-.boldTitle {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.home {
-    background: #dedede;
-
-}
 .dd {
     margin-left: 20px;
     width: 90% !important;
 }
-.nav-item:hover {
-    background: #ececec;
-}
-.nav-item:active {
-    background: #cccccc !important;
+.mainContainer {
+    width: 100%;
+    height: 100%;
+    padding-left: 180px;
+    padding-top: 80px;
+    /*background: #8e8f8c;*/
 }
