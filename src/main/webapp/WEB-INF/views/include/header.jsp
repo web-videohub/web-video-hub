@@ -86,6 +86,7 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary" type="button" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
+                        <img src="/local${sessionScope.login.userProfile}" alt="profile image"/>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><p class="dropdown-item drop-p">${sessionScope.login.userDisplayName}</p></li>
@@ -103,17 +104,5 @@
 
 </header>
 <body>
-    <script>
-        const profilePath = `${sessionScope.login.userProfile}`;
-        const imageName = profilePath.substr(51);
-        const imageUrl = "api/images/" + imageName;
-        console.log(imageUrl);
 
-        const $image = document.createElement('img');
-        $image.src = imageUrl;
-        $image.alt = "profile image";
-
-        const imageContainer = document.getElementById('dropdownMenuButton1');
-        imageContainer.appendChild($image);
-    </script>
 </body>

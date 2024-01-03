@@ -13,6 +13,8 @@ body {
 .titleA {
     text-decoration: none;
     color: black;
+    padding: 0;
+    margin: 0;
 }
 .leftDiv {
     width: 200px;
@@ -68,7 +70,7 @@ body {
 }
 .videoDiv {
     width: 330px;
-    height: 300px;
+    height: 290px;
     background-color: #f1f1f1;
 
     display: flex;
@@ -81,6 +83,8 @@ body {
     box-sizing: border-box; /* 여백이 포함된 크기로 계산되도록 설정 */
     border-radius: 20px;
     margin-right: 20px;
+
+    position: relative;
 }
 .video {
     width: 330px;
@@ -88,17 +92,30 @@ body {
     background-color: #ffc4c4;
     border-radius: 20px;
     margin: 0 auto;
+
+    position: absolute;
+    top: 0;
 }
 .profile {
     width: 50px;
     height: 50px;
     background-color: #1e6249;
     border-radius: 30px;
+    overflow: hidden;
 }
+
+.profile img {
+    width: 50px;
+    height: 50px;
+}
+
 .profileContainer {
     display: flex;
     flex-direction: row;
     padding: 10px;
+
+    position: absolute;
+    bottom: 0;
 }
 .videoInfoDiv {
     display: flex;
@@ -109,6 +126,8 @@ body {
 .title{
     font-size: 18px;
     font-weight: bold;
+    margin: 0;
+    padding: 0;
 }
 .uploader, .viewcount{
     font-size: 15px;

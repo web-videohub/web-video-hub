@@ -11,10 +11,17 @@ public class LocalResourceConfig implements WebMvcConfigurer {
     @Value("${file.uploadVideo.root-path}")
     private String rootPath;
 
+    @Value("${file.upload.root-path}")
+    private String imageRootPath;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/local/**")
                 .addResourceLocations("file:" + rootPath);
+
+        registry
+                .addResourceHandler("/local/**")
+                .addResourceLocations("file:" + imageRootPath);
     }
 }

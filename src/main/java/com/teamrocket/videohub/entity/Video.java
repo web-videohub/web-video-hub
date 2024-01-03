@@ -31,6 +31,8 @@ public class Video {
     @Setter
     private String videoUrl;
 
+    private String userProfileImage;
+
     public Video(VideoUploadRequestDTO dto) {
         convertInputData(dto);
         timeFormat();
@@ -49,6 +51,7 @@ public class Video {
         this.videoCategory = rs.getString("video_category");
         this.videoViewCount = rs.getInt("video_view_count");
         this.videoUrl = rs.getString("video_url");
+        this.userProfileImage = rs.getString("user_profile_image");
     }
 
     private void timeFormat() {

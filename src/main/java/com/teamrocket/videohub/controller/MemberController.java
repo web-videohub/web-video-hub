@@ -8,6 +8,7 @@ import com.teamrocket.videohub.services.MemberService;
 import com.teamrocket.videohub.utils.upload.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -28,6 +29,9 @@ import static com.teamrocket.videohub.services.LoginResult.*;
 public class MemberController {
 
     private final MemberService memberService;
+
+    @Value("${file.upload.root-path}")
+    private String rootPath;
 
     @GetMapping("/login")
     public String login() {
@@ -83,24 +87,23 @@ public class MemberController {
     }
 
     @PostMapping("/register")
-    public String register(SignUpRequestDTO dto, @RequestParam("thumbnail")MultipartFile file) {
-        log.info("file-name : {}", file.getOriginalFilename());
-        log.info("file-size : {}KB", file.getSize() / 1024.0);
-        log.info("file-type : {}", file.getContentType());
+    public String register(SignUpRequestDTO dto) {
 
-        String rootPath = "/Users/yongseopkim/Desktop/videoHub/upload/profile";
-        File root = new File(rootPath);
+        //String rootPath = "/Users/yongseopkim/Desktop/videoHub/upload/profile";
+        //File root = new File(rootPath);
+        //
+        //if(!root.exists()) root.mkdirs();
+        //
+        //String uploadedFilePath = FileUtil.uploadFile(file, rootPath);
+        //
+        //dto.setUserProfileImg(uploadedFilePath);
+        //log.info("file path : {}", uploadedFilePath);
+        //log.info("parameter : {}", dto);
 
-        if(!root.exists()) root.mkdirs();
+        String savePath = FileUtil.uploadFile(dto.getProfileImage(), rootPath);
+        log.warn("file : {}", dto.getProfileImage());
 
-        String uploadedFilePath = FileUtil.uploadFile(file, rootPath);
-
-        dto.setUserProfileImg(uploadedFilePath);
-        log.info("file path : {}", uploadedFilePath);
-        log.info("parameter : {}", dto);
-
-
-        boolean flag = memberService.join(dto);
+        boolean flag = memberService.join(dto, savePath);
         return flag ? "redirect:/login" : "redirect:/register";
     }
 

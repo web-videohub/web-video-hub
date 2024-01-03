@@ -24,8 +24,8 @@ public class MemberService {
     private final MemberMapper memberMapper;
     private final PasswordEncoder encoder;
 
-    public boolean join(SignUpRequestDTO dto) {
-        return memberMapper.save(dto.toEntity(encoder));
+    public boolean join(SignUpRequestDTO dto, String savePath) {
+        return memberMapper.save(dto.toEntity(encoder, savePath));
     }
 
     public LoginResult authenticate(

@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Service
 @Slf4j
@@ -22,4 +23,10 @@ public class VideoService {
         video.setVideoUploadUser(LoginUtils.getCurrentLoginMemberAccount(session));
         videoMapper.save(video);
     }
+
+    public List<Video> getVideos(int pageSize, int pageNumber) {
+        int offset = (pageNumber - 1) * pageSize;
+        return videoMapper.findAll(pageSize, offset);
+    }
 }
+

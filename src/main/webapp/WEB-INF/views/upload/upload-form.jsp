@@ -10,7 +10,8 @@
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
             crossorigin="anonymous"></script>
     <style>
-        .upload-box {
+        .upload-box,
+        .thumbnail-box {
             width: 512px;
             height: 320px;
             border: 3px solid black;
@@ -40,7 +41,8 @@
             height: 200px;
         }
 
-        #video-input {
+        #video-input,
+        #thumbnail-input {
             display: none;
         }
 
@@ -48,7 +50,7 @@
             display: none;
             /*margin-top: 20px;*/
             flex-direction: column;
-            gap: 30px;
+            gap: 20px;
         }
 
         body {
@@ -111,6 +113,10 @@
         #upload-btn {
             background-color: #5eb2ff;
         }
+
+        #search-thumbnail {
+            margin: 0;
+        }
     </style>
 
 </head>
@@ -148,6 +154,15 @@
                     <option value="health">건강</option>
                 </select>
             </div>
+
+            <div class="thumbnail-box" id="thumbnailBox"><img src="/assets/img/imageIcon.png" alt="profile"
+                                                              style="height: 130px; width: 130px;"></div>
+            <input type="file" name="videoUrl" id="thumbnail-input" accept="image/*" onchange="setThumbnail(event)">
+            <div class="videoInfo">
+                <button type="button" id="search-thumbnail" class="btn btn-primary">이미지 선택</button>
+                <p id="thumbnailName" style="display: none">선택된 이미지 : </p>
+            </div>
+
             <button onclick="submitForm()" id="upload-btn">동영상 업로드</button>
         </div>
 
@@ -156,57 +171,66 @@
 
 </div>
 
-
-<c:if test="${not empty errorMessage}">
-    <p style="color: red;">${errorMessage}</p>
-</c:if>
-
-<c:if test="${not empty successMessage}">
-    <p style="color: green;">${successMessage}</p>
-</c:if>
-
 <script>
     const $box = document.getElementById('uploadBox');
-    const $input = document.getElementById('video-input');
+    const $videoInput = document.getElementById('video-input');
+    const $thumbnailInput = document.getElementById('thumbnail-input');
     const $form = document.getElementById('input-form');
     const $uploadBtn = document.getElementById('upload-btn')
 
     const $videoName = document.getElementById('videoName');
 
     const $searchVideo = document.getElementById('search-video');
+    const $searchThumbnail = document.getElementById('search-thumbnail');
 
     $searchVideo.onclick = e => {
-        $input.click();
+        $videoInput.click();
     }
 
+    $searchThumbnail.onclick = e => {
+        $thumbnailInput.click();
+    }
 
-    $input.onchange = e => {
+    $videoInput.onchange = e => {
         $form.style.display = 'flex';
         $videoName.style.display = 'inline';
         $uploadBtn.style.display = 'block';
         $searchVideo.textContent = "다시선택하기";
         console.log($uploadBtn);
-        setThumbnail(e);
+        setThumbnail(e, $uploadBox, 'video');
         displayFileName(e);
     };
+
+    $thumbnailInput.onchange = e => {
+        setThumbnail(e, $thumbnailBox, 'img');
+    }
+
+    const $uploadBox = document.getElementById('uploadBox');
+    const $thumbnailBox = document.getElementById('thumbnailBox');
+
 
     function submitForm() {
         document.getElementById('uploadForm').submit();
     }
 
-    function setThumbnail(event) {
+    function setThumbnail(event, box, tag) {
         const reader = new FileReader();
 
         reader.onload = function (event) {
-            const $uploadBox = document.getElementById('uploadBox');
-            $uploadBox.innerHTML = ''; // Clear existing content
+            box.innerHTML = ''; // Clear existing content
 
-            const $video = document.createElement('video');
-            $video.setAttribute('src', event.target.result);
-            $video.setAttribute('controls', 'controls');
 
-            $uploadBox.appendChild($video);
-            $uploadBox.style.border = 'none';
+            const $tag = document.createElement(tag);
+
+
+            $tag.setAttribute('src', event.target.result);
+            if ($tag.tagName.toLowerCase() === "video") {
+                $tag.setAttribute('controls', 'controls');
+            }
+
+
+            box.appendChild($tag);
+            box.style.border = 'none';
         };
         reader.readAsDataURL(event.target.files[0]);
     }

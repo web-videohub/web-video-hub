@@ -23,8 +23,8 @@ public class FileUtil {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        return rootPath + "/" + newFileName;
+        System.out.println("/" + newFileName);
+        return "/" + newFileName;
     }
 
     public static String uploadVideo(MultipartFile file, String rootPath) {
