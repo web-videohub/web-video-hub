@@ -7,11 +7,10 @@ import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -27,20 +26,28 @@ public class AppController {
     public String home(
             Model model,
             @RequestParam(defaultValue = "1") int pageNumber,
-            @RequestParam(defaultValue = "16") int pageSize,
-            HttpSession session
+            @RequestParam(defaultValue = "12") int pageSize
     ) {
       log.info("어서오시고");
 
         List<Video> videos = videoService.getVideos(pageSize, pageNumber);
 
-        Model vList = model.addAttribute("vList", videos);
+        model.addAttribute("vList", videos);
 
-        log.error("vList : {}", vList);
+        log.error("videos : {}", videos);
 
         return "index";
     }
 
+    @GetMapping("/loadMoreVideos")
+    @ResponseBody
+    public ResponseEntity<List<Video>> loadMoreVideos(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize
+    ) {
+        List<Video> videos = videoService.getVideos(pageSize, pageNumber);
+        return ResponseEntity.ok(videos);
+    }
 
     @RequestMapping("/showmv")
     public String showmv() {
@@ -48,7 +55,7 @@ public class AppController {
 
         return "detail";
     }
-  
+
     @RequestMapping("/setting")
     public String setting() {
         log.info("설정페이지");
