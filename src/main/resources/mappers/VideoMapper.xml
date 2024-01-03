@@ -1,0 +1,31 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.teamrocket.videohub.repository.VideoMapper">
+
+    <insert id="save">
+        insert into tbl_video
+        (video_upload_user, video_title, video_content, video_category, video_url)
+        VALUES
+        (#{videoUploadUser}, #{videoTitle}, #{videoContent}, #{videoCategory}, #{videoUrl})
+    </insert>
+
+    <select id="findOne" resultType="com.teamrocket.videohub.entity.Video">
+    </select>
+
+    <update id="upviewCount">
+    </update>
+
+    <select id="findAll" resultType="com.teamrocket.videohub.entity.Video">
+        SELECT
+        v.video_title, v.video_upload_user,
+        v.video_view_count, v.video_upload_date,
+        m.user_profile_image
+        FROM tbl_video v
+        JOIN tbl_member m ON v.video_upload_user = m.user_account
+        ORDER BY video_upload_date desc
+        LIMIT #{pageSize} OFFSET #{offset}
+
+    </select>
+</mapper>
