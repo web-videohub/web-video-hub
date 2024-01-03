@@ -58,8 +58,8 @@
                 <button class="dropdownMenu" type="button">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <a href="/" class="">
-                    <img class="mainLogo" src="/assets/img/testLogo.png" alt="">
+                <a href="/studio" class="">
+                    <img class="mainLogo" src="/assets/img/studioTitle.png" alt="">
                 </a>
             </div>
             <form class="searchForm" action="" method="">

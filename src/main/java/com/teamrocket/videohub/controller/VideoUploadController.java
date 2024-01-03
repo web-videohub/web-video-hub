@@ -44,7 +44,6 @@ public class VideoUploadController {
 
 
         videoService.insertVideo(dto, session, savePath);
-        return "";
-
+        return "studio";
     }
 }

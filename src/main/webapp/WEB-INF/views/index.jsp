@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="/assets/css/index.css">
     <link rel="stylesheet" href="/assets/css/filter.css">
     <title>메인화면</title>
+
 </head>
 <body>
 <%-- css 모음 --%>
