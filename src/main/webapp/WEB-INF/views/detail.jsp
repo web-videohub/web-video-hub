@@ -31,27 +31,27 @@
                        controls width="auto" height="auto">
                 </video>
                 <div class="video_info">
-                    <h1>${video.videoTitle}</h1>
+                    <h1>${v.videoTitle}</h1>
                     <div class="video_user_bbox">
                         <a href="#"><img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/></a>
                         <div class="video_info_user_bbox">
-                            <a href="#">${video.videoUploadUser}</a>
+                            <a href="#">${v.videoUploadUser}</a>
                             <p>구독자 0명</p>
                         </div>
                         <div class="video_review_btn_o">
                             <button type="button" class="subscribe_B">구독</button>
                         </div>
                         <div class="video_review_btn_t">
-                            <button type="button" class="like_B">${video.videoLike}<span class="lnr lnr-thumbs-up"></span>1.5만</button>
+                            <button type="button" class="like_B">${v.videoLike}<span class="lnr lnr-thumbs-up"></span>1.5만</button>
                             <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
                             <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                         </div>
                     </div>
 
                     <div class="video_info_bbox">
-                        <p>업로드 일자: ${video.videoUploadDate}</p>
-                        <p>조회수: $${video.videoViewCount}</p>
-                        <p>영상 설명: ${video.videoContent}</p>
+                        <p>업로드 일자: ${v.videoUploadDate}</p>
+                        <p>조회수: $${v.videoViewCount}</p>
+                        <p>영상 설명: ${v.videoContent}</p>
                     </div>
                 </div>
                 <div class="box3">
