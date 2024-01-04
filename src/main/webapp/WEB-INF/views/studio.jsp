@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Studio</title>
+    <title>내 채널</title>
     <link rel="stylesheet" href="/assets/css/studio-header.css">
     <link rel="stylesheet" href="/assets/css/studio.css">
 </head>
@@ -23,7 +23,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/subs">
                         <span class="lnr lnr-book"></span>
                         구독
                     </a>

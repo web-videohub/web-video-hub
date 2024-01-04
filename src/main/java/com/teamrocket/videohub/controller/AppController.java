@@ -49,8 +49,17 @@ public class AppController {
 
 
     @RequestMapping("/showmv")
-    public String showmv() {
+    public String showmv(
+            Model model
+            , int videoId
+    ) {
         log.info("영상 채널");
+
+        Video video = videoService.getVideo(videoId);
+
+        model.addAttribute("v", video);
+
+        log.error("videos : {}", video);
 
         return "detail";
     }
@@ -61,5 +70,12 @@ public class AppController {
 
         return "setting";
 
+    }
+
+    @GetMapping("/subs")
+    public String subs() {
+        log.info("구독 현황 페이지");
+
+        return "subs";
     }
 }
