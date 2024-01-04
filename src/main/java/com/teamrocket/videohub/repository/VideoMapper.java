@@ -13,7 +13,7 @@ public interface VideoMapper {
 
     Video findOne(int videoId);
 
-    List<Video> findAll(@Param("pageSize") int pageSize, @Param("offset") int offset);
+    List<Video> findAll(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type);
 
     void upviewCount(int videoId);
 

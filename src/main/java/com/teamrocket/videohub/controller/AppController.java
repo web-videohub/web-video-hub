@@ -23,19 +23,14 @@ public class AppController {
     private final VideoService videoService;
 
     @GetMapping("/")
-    public String home(
-            Model model,
-            @RequestParam(defaultValue = "1") int pageNumber,
-            @RequestParam(defaultValue = "12") int pageSize
-    ) {
-      log.info("어서오시고");
-
-        List<Video> videos = videoService.getVideos(pageSize, pageNumber);
-
-        model.addAttribute("vList", videos);
-
-        log.error("videos : {}", videos);
-
+    public String home() {
+      //log.info("어서오시고");
+      //
+      //  List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
+      //
+      //  model.addAttribute("vList", videos);
+      //
+      //  log.error("videos : {}", videos);
         return "index";
     }
 
@@ -43,11 +38,15 @@ public class AppController {
     @ResponseBody
     public ResponseEntity<List<Video>> loadMoreVideos(
             @RequestParam(defaultValue = "1") int pageNumber,
-            @RequestParam(defaultValue = "12") int pageSize
+            @RequestParam(defaultValue = "12") int pageSize,
+            String type
     ) {
-        List<Video> videos = videoService.getVideos(pageSize, pageNumber);
+        log.error("type : {}", type);
+        List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
         return ResponseEntity.ok(videos);
     }
+
+
 
     @RequestMapping("/showmv")
     public String showmv(

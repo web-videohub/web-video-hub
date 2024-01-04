@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/css/index.css">
     <link rel="stylesheet" href="/assets/css/filter.css">
-    <title>메인화면</title>
+    <title>VideoHub</title>
 
     <style>
         .loader {
@@ -36,6 +36,7 @@
 <div class="leftDiv index-left">
     <div class="offcanvas-body index-side">
         <ul class="navbar-nav flex-grow-1 pe-3">
+
             <li class="nav-item home">
                 <a class="nav-link active" aria-current="page" href="/">
                     <span class="lnr lnr-home"></span>
@@ -101,97 +102,135 @@
 </div>
 <div class="mainContainer">
     <div class="subContainer">
-        <%-- 영상 리스트를 렌더링할때 조건을 건다 (최신영상, 인기많은영상, 최다조회수영상 등)--%>
         <jsp:include page="include/filter.jsp"/>
 
-        <%-- 서버에 업로드된 영상들이 연속적으로 나타날 div --%>
         <div class="videoListDiv">
-<%--            <c:forEach var="v" items="${vList}">--%>
-<%--                <div class="videoDiv">--%>
-<%--                    <a class="video">--%>
-<%--                        <img src="/local${v.thumbnailUrl}" alt="thumbnail"/>--%>
-<%--                    </a>--%>
-<%--                    <div class="profileContainer">--%>
-<%--                        <div class="profile">--%>
-<%--                            <img src="/local${v.userProfileImage}" alt="profile image"/>--%>
-<%--                        </div>--%>
-<%--                        <div class="videoInfoDiv">--%>
-<%--                            <a class="titleA" href="#"><span class="title">${v.videoTitle}</span></a>--%>
-<%--                            <span class="uploader">${v.videoUploadUser}</span>--%>
-<%--                            <span class="viewcount">${v.videoViewCount} § ${v.videoUploadDate}</span>--%>
-<%--                        </div>--%>
-<%--                    </div>--%>
-<%--                </div>--%>
-<%--            </c:forEach>--%>
+
         </div>
         <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
     </div>
 </div>
 <script>
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5,
+    };
+
+
+    const handleIntersection = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                console.log("Intersection observed!");
+                loadData(selectedValue);
+            }
+        });
+    };
+
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+
+
+    function formatTimeAgo(timestamp) {
+        const currentTime = new Date();
+        const targetTime = new Date(timestamp);
+        const timeDifference = currentTime - targetTime;
+
+        const minutes = Math.floor(timeDifference / (1000 * 60));
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(days / 365);
+
+        if (years > 0) {
+            return `\${years}년 전`;
+        } else if (months > 0) {
+            return `\${months}개월 전`;
+        } else if (days > 0) {
+            return `\${days}일 전`;
+        } else if (hours > 0) {
+            return `\${hours}시간 전`;
+        } else if (minutes > 0) {
+            return `\${minutes}분 전`;
+        } else {
+            return '방금 전';
+        }
+    }
+
+    const loadData = async (type) => {
+        console.log('loadData function called');
+        if (loading) return;
+
+        loading = true;
+        loader.style.visibility = "visible";
+
+        setTimeout(async () => {
+            try {
+                const response = await fetch(`/loadMoreVideos?pageNumber=\${pageNumber}&pageSize=12&type=` + type);
+                const newVideos = await response.json();
+
+                if (newVideos.length > 0) {
+                    newVideos.forEach(video => {
+                        const newItem = document.createElement('div');
+                        newItem.className = 'videoDiv';
+                        newItem.innerHTML = `<a class="video"><img src="/local\${video.thumbnailUrl}" alt="thumbnail"/></a>` +
+                            `<div class="profileContainer"><div class="profile"><img src="/local\${video.userProfileImage}" alt="profile image"/></div>` +
+                            `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title">\${video.videoTitle}</span></a>` +
+                            `<span class="uploader">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
+                        videoListDiv.appendChild(newItem);
+                    });
+
+                    pageNumber++;
+                } else {
+                    observer.unobserve(loader);
+                    console.log('Observer unobserved');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                loading = false;
+                loader.style.visibility = "hidden";
+            }
+        }, 1000);
+    };
+
+    const loader = document.getElementById('loader');
+    const videoListDiv = document.querySelector('.videoListDiv');
+    let loading = false;
+    let pageNumber = 1;
+
+
+
+
     document.addEventListener("DOMContentLoaded", function () {
-        const videoListDiv = document.querySelector('.videoListDiv');
-        const loader = document.getElementById('loader');
-        let loading = false;
-        let pageNumber = 1; // 페이지 번호 초기값 추가
-
-        const loadData = async () => {
-            console.log('loadData function called');
-            // 이미 로딩 중이라면 중복으로 로딩하지 않도록 체크
-            if (loading) return;
-
-            loading = true;
-            loader.style.visibility = "visible";
-
-            setTimeout(async () => {
-                try {
-                    const response = await fetch(`/loadMoreVideos?pageNumber=\${pageNumber}&pageSize=12`);
-                    const newVideos = await response.json();
-
-                    if (newVideos.length > 0) {
-                        newVideos.forEach(video => {
-                            const newItem = document.createElement('div');
-                            newItem.className = 'videoDiv';
-                            newItem.innerHTML = `<a class="video" href="/showmv"><img src="/local\${video.thumbnailUrl}" alt="thumbnail"/></a>` +
-                                `<div class="profileContainer"><div class="profile"><img src="/local\${video.userProfileImage}" alt="profile image"/></div>` +
-                                `<div class="videoInfoDiv"><a class="titleA" href="/showmv"><span class="title">\${video.videoTitle}</span></a>` +
-                                `<span class="uploader">\${video.videoUploadUser}</span><span class="viewcount">\${video.videoViewCount} § \${video.videoUploadDate}</span></div></div>`;
-                            videoListDiv.appendChild(newItem);
-                        });
-
-                        pageNumber++; // 다음 페이지를 위해 페이지 번호를 증가
-                    } else {
-                        // 데이터가 더 이상 없을 경우, 옵저버 해제
-                        observer.unobserve(loader);
-                        console.log('Observer unobserved');
-                    }
-                } catch (error) {
-                    console.error('Error fetching data:', error);
-                } finally {
-                    loading = false;
-                    loader.style.visibility = "hidden";
-                }
-            }, 2000); // 3초
-        };
-
-        const options = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.5,
-        };
-
-        const handleIntersection = (entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    console.log("Intersection observed!");
-                    loadData();
-                    loader.style.display = 'block';
-                }
-            });
-        };
-
-        const observer = new IntersectionObserver(handleIntersection, options);
         observer.observe(loader);
+    });
 
+    const $radioButtons = document.querySelectorAll('input[type=radio][name=filter]');
+    let selectedRadioButton = null;
+    let selectedValue = null;
+
+    $radioButtons.forEach((radio) => {
+        radio.addEventListener('change', function (radio) {
+            selectedValue = this.value;
+            document.querySelector('.videoListDiv').innerHTML = '';
+            pageNumber = 1;
+            loadData(selectedValue);
+            observer.observe(loader);
+
+            console.log(selectedValue);
+            if (selectedRadioButton) {
+                selectedRadioButton.parentNode.style.background = '';
+                selectedRadioButton.parentNode.style.color = '';
+            }
+
+
+            this.parentNode.style.background = '#F2B950';
+            this.parentNode.style.color = '#fff';
+
+            selectedRadioButton = this;
+        })
     });
 
     let pageWidth;
@@ -259,6 +298,14 @@
         pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         checkWidth();
     });
+
+    const $all = document.getElementById('all');
+
+    (() => {
+        $all.click();
+    })();
+
+
 </script>
 </body>
 </html>
