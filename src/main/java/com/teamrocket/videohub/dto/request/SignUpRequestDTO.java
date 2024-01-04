@@ -3,6 +3,7 @@ package com.teamrocket.videohub.dto.request;
 import com.teamrocket.videohub.entity.Member;
 import lombok.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -33,15 +34,15 @@ public class SignUpRequestDTO {
     private String userEmail;
 
     @NotBlank
-    private String userProfileImg;
+    private MultipartFile profileImage;
 
-    public Member toEntity(PasswordEncoder encoder) {
+    public Member toEntity(PasswordEncoder encoder, String savePath) {
         return Member.builder()
                 .userAccount(userAccount)
                 .userPassword(encoder.encode(userPassword))
                 .userDisplayName(userDisplayName)
                 .userEmail(userEmail)
-                .userProfileImage(userProfileImg)
+                .userProfileImage(savePath)
                 .build();
     }
 }

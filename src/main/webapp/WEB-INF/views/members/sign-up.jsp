@@ -51,7 +51,7 @@
         </div>
         <div class="profileImgContainer">
             <div class="upload-box" id="uploadBox"><img src="/assets/img/profile.jpeg" alt="profile" style="height: 130px; width: 130px;"> </div>
-                <input type="file" name="thumbnail" id="profile-input" accept="image/*" onchange="setThumbnail(event)">
+            <input type="file" name="profileImage" id="profile-input" accept="image/*" onchange="setThumbnail(event)">
         </div>
 
         <div class="inputDiv">

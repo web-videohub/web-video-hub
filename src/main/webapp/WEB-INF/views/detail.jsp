@@ -5,12 +5,17 @@
 <head>
     <meta charset="UTF-8">
     <title>영상 화면</title>
+<%--    <title>${video.videoTitle}</title>--%>
+  
     <link rel="stylesheet" href="/assets/css/detail.css?after">
 
 <%--    icon    --%>
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
+
+
 </head>
 <body class="back_bg">
 <%-- css 모음 --%>
