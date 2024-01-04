@@ -6,6 +6,11 @@
     <meta charset="UTF-8">
     <title>영상 화면</title>
     <link rel="stylesheet" href="/assets/css/detail.css?after">
+
+<%--    icon    --%>
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 </head>
 <body class="back_bg">
 <%-- css 모음 --%>
@@ -32,9 +37,9 @@
                             <button type="button" class="subscribe_B">구독</button>
                         </div>
                         <div class="video_review_btn_t">
-                            <button type="button" class="like_B">${v.videoLike}좋아요</button>
-                            <button type="button" class="hate_B">싫어요</button>
-                            <button type="button" class="share_B">공유</button>
+                            <button type="button" class="like_B">${v.videoLike}<span class="lnr lnr-thumbs-up"></span>1.5만</button>
+                            <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
+                            <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                         </div>
                     </div>
 

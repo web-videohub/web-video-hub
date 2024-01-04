@@ -24,8 +24,8 @@ function addComment() {
             <tr>
                 <td>
                     <div class="review_btns_one">
-                        <button type="button" class="like_bb">좋아요</button>
-                        <button type="button" class="hate_bb">싫어요</button>
+                        <button type="button" class="like_bb"><span class="lnr lnr-thumbs-up"></span></button>
+                        <button type="button" class="hate_bb"><span class="lnr lnr-thumbs-down"></span></button>
                     </div>
                 </td>
                 <td>

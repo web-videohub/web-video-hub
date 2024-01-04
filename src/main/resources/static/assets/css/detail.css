@@ -8,7 +8,7 @@ li {
     list-style-type: none;
 }
 
-/* 전체 객체 그룹 사이즈 조정*/
+/* 전체 객체 그룹 사이즈 조정 */
 .container {
     margin-top: 100px;
 }
@@ -16,6 +16,26 @@ li {
     display: flex;
     justify-content: space-between;
 }
+
+/* 좋아요 */
+.lnr-thumbs-up {
+    color: #000000;
+    font-size: 14px;
+    line-height: 36px;
+}
+/* 싫어요 */
+.lnr-thumbs-down {
+    color: #000000;
+    font-size: 14px;
+    line-height: 36px;
+}
+/* 공유 */
+.lnr-exit-up {
+    color: #000000;
+    font-size: 14px;
+    line-height: 36px;
+}
+
 
 /*box 1: 영상, 영상 설명, 댓글 */
 .box1 {
@@ -30,10 +50,7 @@ li {
     border-radius: 10px;
 }
 
-/*
-    video_info: 영상 정보(All)
-*/
-
+/* video_info: 영상 정보(All) */
 .video_info h1 {
     font-family: "Roboto","Arial",sans-serif;
     font-size: 2rem;
@@ -87,13 +104,40 @@ li {
 /* video_review_btn_t .like_B, .hate_B, .share_B: 좋아요, 싫어요, 공유 버튼 */
 .video_review_btn_t {
     float: right;
+    background-color: #FFFFFF;
 }
-.like_B, .hate_B, .share_B{
+/* border-radius: top-left-x top-right-x bottom-right-x bottom-left-x / top-left-y top-right-y bottom-right-y bottom-left-y */
+.like_B {
+    border-radius: 20px 0 0 20px;
+    padding: 0 16px;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
     border: none;
-    border-radius: 20px;
-    padding: 10px;
+    color: #000000;
     background-color: #F2F2F2;
 }
+.hate_B {
+    border-radius: 0 20px 20px 0;
+    padding: 0 16px;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
+    border: none;
+    color: #000000;
+    background-color: #F2F2F2;
+}
+.share_B{
+    border-radius: 20px;
+    padding: 0 16px;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
+    border: none;
+    color: #000000;
+    background-color: #F2F2F2;
+}
+
 .like_B:hover, .hate_B:hover, .share_B:hover{
     background-color: #E5E5E5;
 }
@@ -212,13 +256,13 @@ li {
     border: none;
     border-radius: 20px;
     padding: 10px;
-    background-color: #F2F2F2;
+    background-color: #FFFFFF;
 }
 .hate_bb{
     border: none;
     border-radius: 20px;
     padding: 10px;
-    background-color: #F2F2F2;
+    background-color: #FFFFFF;
 }
 
 .like_bb:hover, .hate_bb:hover {
