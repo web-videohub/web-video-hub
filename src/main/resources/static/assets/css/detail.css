@@ -157,6 +157,10 @@ li {
     background-color: #F2F2F2;
 }
 
+.like_bb:hover, .hate_bb:hover {
+    background-color: #E5E5E5;
+}
+
 /* 드롭다운 메뉴 */
 .dropbox_bb {
     padding: 10px;
