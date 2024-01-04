@@ -21,14 +21,7 @@ public class LocalResourceConfig implements WebMvcConfigurer {
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/local/**")
-                .addResourceLocations("file:" + rootPath);
+                .addResourceLocations("file:" + rootPath, "file:" + imageRootPath, "file:" + rootThumbnailPath);
 
-        registry
-                .addResourceHandler("/local/**")
-                .addResourceLocations("file:" + imageRootPath, "file:" + rootThumbnailPath);
-
-        //registry
-        //        .addResourceHandler("/local/**")
-        //        .addResourceLocations("file:" + rootThumbnailPath);
     }
 }

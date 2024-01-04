@@ -27,7 +27,7 @@
     <div class="container">
         <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
             <div class="box1">
-                <video src="${video.videoUrl}"
+                <video src="/local${v.videoUrl}"
                        controls width="auto" height="auto">
                 </video>
                 <div class="video_info">

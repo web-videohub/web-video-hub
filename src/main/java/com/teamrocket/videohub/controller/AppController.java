@@ -43,12 +43,13 @@ public class AppController {
     ) {
         log.error("type : {}", type);
         List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
+        log.warn("videos : {}", videos);
         return ResponseEntity.ok(videos);
     }
 
 
 
-    @RequestMapping("/showmv")
+    @GetMapping("/showmv")
     public String showmv(
             Model model
             , int videoId

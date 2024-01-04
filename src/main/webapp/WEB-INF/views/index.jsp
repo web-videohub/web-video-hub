@@ -174,14 +174,24 @@
                     newVideos.forEach(video => {
                         const newItem = document.createElement('div');
                         newItem.className = 'videoDiv';
-                        newItem.innerHTML = `<a class="video"><img src="/local\${video.thumbnailUrl}" alt="thumbnail"/></a>` +
+                        newItem.setAttribute('data-videoId', `\${video.videoId}`);
+                        newItem.innerHTML = `<a class="video" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
                             `<div class="profileContainer"><div class="profile"><img src="/local\${video.userProfileImage}" alt="profile image"/></div>` +
                             `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title">\${video.videoTitle}</span></a>` +
                             `<span class="uploader">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
                         videoListDiv.appendChild(newItem);
+
+                        newItem.addEventListener('click', e => {
+                            if(!e.target) return;
+                            if (e.target.tagName.toLowerCase() === 'img') {
+                                window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
+                            }
+                        });
                     });
 
                     pageNumber++;
+
+
                 } else {
                     observer.unobserve(loader);
                     console.log('Observer unobserved');
@@ -194,7 +204,6 @@
             }
         }, 1000);
     };
-
     const loader = document.getElementById('loader');
     const videoListDiv = document.querySelector('.videoListDiv');
     let loading = false;
@@ -304,6 +313,7 @@
     (() => {
         $all.click();
     })();
+
 
 
 </script>
