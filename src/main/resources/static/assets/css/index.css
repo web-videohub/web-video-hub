@@ -112,6 +112,14 @@ body {
 
     position: relative;
 }
+.videoDiv:hover {
+    /*filter: drop-shadow(0 5px 10px #8e8f8c);*/
+    filter: drop-shadow(0.8rem 0.8rem 10px #8e8f8c);
+}
+.videoDiv .title:hover {
+    color: #020101;
+}
+
 .video {
     width: 100%;
     height: 69%;

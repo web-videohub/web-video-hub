@@ -11,7 +11,7 @@
 <div id="snowfall"></div>
 
 <div class="findPasswordDiv">
-    <img id="santa" src="/assets/img/santaHat.png" alt="">
+    <img id="santa" src="/assets/img/rabbit.png" alt="">
     <div class="findPasswordForm">
         <div class="findPasswordTitle">
             <h2>비밀번호 찾기</h2>
@@ -23,8 +23,8 @@
             <input id="inputDiv2" type="email" name="email">
         </div>
         <div class="modifyPw" style="display: none">
-            <span class="inputText">당신의 비밀번호는</span>
-            <input id="inputDiv3" type="password" placeholder="안보이다가 검증완료하면 나타남">
+            <span class="inputText">변경할 비밀번호</span>
+            <input id="inputDiv3" type="password" placeholder="새로운 비밀번호를 입력해주세요.">
         </div>
         <input id="findPasswordBtn" type="button" value="아이디, 이메일 검증">
         <input id="modifyBtn" type="button" value="비밀번호 변경" style="display: none">
