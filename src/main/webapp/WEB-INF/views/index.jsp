@@ -151,9 +151,9 @@
                         newVideos.forEach(video => {
                             const newItem = document.createElement('div');
                             newItem.className = 'videoDiv';
-                            newItem.innerHTML = `<a class="video"><img src="/local\${video.thumbnailUrl}" alt="thumbnail"/></a>` +
+                            newItem.innerHTML = `<a class="video" href="/showmv"><img src="/local\${video.thumbnailUrl}" alt="thumbnail"/></a>` +
                                 `<div class="profileContainer"><div class="profile"><img src="/local\${video.userProfileImage}" alt="profile image"/></div>` +
-                                `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title">\${video.videoTitle}</span></a>` +
+                                `<div class="videoInfoDiv"><a class="titleA" href="/showmv"><span class="title">\${video.videoTitle}</span></a>` +
                                 `<span class="uploader">\${video.videoUploadUser}</span><span class="viewcount">\${video.videoViewCount} § \${video.videoUploadDate}</span></div></div>`;
                             videoListDiv.appendChild(newItem);
                         });

@@ -416,3 +416,7 @@ li {
         margin-top: 10px; /* box1과의 간격 조절 */
     }
 }
+
+#headerBtn2 {
+    display: none;
+}

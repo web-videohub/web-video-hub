@@ -28,5 +28,9 @@ public class VideoService {
         int offset = (pageNumber - 1) * pageSize;
         return videoMapper.findAll(pageSize, offset);
     }
+
+    public Video getVideo(int videoId) {
+        return videoMapper.findOne(videoId);
+    }
 }
 
