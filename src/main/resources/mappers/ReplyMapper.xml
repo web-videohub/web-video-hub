@@ -33,7 +33,7 @@
         SELECT
         reply_no, reply_text, reply_date, video_id, account
         FROM tbl_reply
-        WHERE video_id = #{bn}
+        WHERE video_id = #{videoId}
         ORDER BY reply_no
         LIMIT #{p.pageStart}, #{p.amount}
     </select>

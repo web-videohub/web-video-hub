@@ -1,4 +1,4 @@
-package com.teamrocket.videohub.util;
+package com.teamrocket.videohub.utils;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

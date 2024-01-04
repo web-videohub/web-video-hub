@@ -42,4 +42,16 @@
         ORDER BY video_upload_date desc
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
+
+    <update id="upLikeCount">
+        UPDATE tbl_video
+        SET video_like = video_like + 1
+        WHERE video_id = #{videoId};
+    </update>
+
+    <update id="downLikeCount">
+        UPDATE tbl_video
+        SET video_like = video_like - 1
+        WHERE video_id = #{videoId};
+    </update>
 </mapper>

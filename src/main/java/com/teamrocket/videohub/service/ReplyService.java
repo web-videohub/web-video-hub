@@ -6,7 +6,9 @@ import com.teamrocket.videohub.dto.request.ReplyModifyRequestDTO;
 import com.teamrocket.videohub.dto.request.ReplyPostRequestDTO;
 import com.teamrocket.videohub.dto.response.ReplyDetailResponseDTO;
 import com.teamrocket.videohub.dto.response.ReplyListResponseDTO;
+import com.teamrocket.videohub.entity.Member;
 import com.teamrocket.videohub.entity.Reply;
+import com.teamrocket.videohub.repository.MemberMapper;
 import com.teamrocket.videohub.repository.ReplyMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -16,12 +18,14 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class ReplyService {
+    private final MemberMapper memberMapper;
     private final ReplyMapper replyMapper;
 
     // 댓글 목록 조회
@@ -32,6 +36,12 @@ public class ReplyService {
                 .stream()
                 .map(ReplyDetailResponseDTO::new)
                 .collect(Collectors.toList());
+
+        for (ReplyDetailResponseDTO reply : replies) {
+            Member member = memberMapper.findMember(reply.getAccount());
+            reply.setAccountUserName(member.getUserDisplayName());
+            reply.setProfile(member.getUserProfileImage());
+        }
 
         // DB에서 총 댓글 수 조회
         int count = replyMapper.count(videoId);

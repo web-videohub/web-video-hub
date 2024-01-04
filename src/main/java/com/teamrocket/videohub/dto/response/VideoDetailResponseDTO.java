@@ -1,7 +1,7 @@
 package com.teamrocket.videohub.dto.response;
 
 import com.teamrocket.videohub.entity.Video;
-import com.teamrocket.videohub.util.DateUtils;
+import com.teamrocket.videohub.utils.DateUtils;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.ToString;

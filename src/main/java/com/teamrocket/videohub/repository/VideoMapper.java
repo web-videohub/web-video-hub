@@ -16,4 +16,8 @@ public interface VideoMapper {
     List<Video> findAll(@Param("pageSize") int pageSize, @Param("offset") int offset);
 
     void upViewCount(int videoId);
+
+    void upLikeCount(int videoId);
+
+    void downLikeCount(int videoId);
 }
