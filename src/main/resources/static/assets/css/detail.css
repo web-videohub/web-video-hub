@@ -1,0 +1,328 @@
+.back_bg {
+    background-color: #FFFFFF;
+}
+a {
+    text-decoration-line: none;
+}
+li {
+    list-style-type: none;
+}
+
+.container {
+    margin-top: 100px;
+}
+.container_group {
+    display: flex;
+    justify-content: space-between;
+}
+
+/*box 1: 영상, 영상 설명, 댓글 */
+.box1 {
+    flex: 1; /* 1부분을 차지하도록 설정 */
+    max-width: 70%; /* 최대 70%까지만 차지하도록 설정 */
+    box-sizing: border-box; /* 내부 패딩과 테두리를 포함한 전체 크기를 지정 */
+    background-color: #FFFFFF;
+}
+.box1 video {
+    width: 100%; /* 부모 요소인 .box1의 100%를 차지하도록 설정 */
+    height: auto; /* 비율을 유지하면서 너비에 따라 높이 조정 */
+    border-radius: 10px;
+}
+
+.video_info h1 {
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 2rem;
+    line-height: 2.8rem;
+    font-weight: 700;
+}
+
+.video_info_user_bbox {
+    float: left;
+    margin-left: 10px;
+}
+.video_info_user_bbox a {
+    text-decoration-line: none;
+    color: #000000;
+}
+.video_info_user_bbox p {
+    color: #383c46;
+}
+
+.video_user_bbox {
+    display: block;
+    margin-right: 10px;
+}
+.video_user_bbox a img {
+    width: 45px;
+    height: 45px;
+    float: left;
+}
+.video_user_bbox .subscribe_B {
+    background-color: #000000;
+    color: #FFFFFF;
+    border-radius: 20px;
+    width: 60px;
+    height: 36px;
+    border: none;
+    margin-left: 10px;
+    float: left;
+}
+.video_user_bbox .subscribe_B:hover {
+    background-color: #272727;
+    color: #FFFFFF;
+}
+.like_B, .hate_B, .share_B{
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #F2F2F2;
+}
+.like_B:hover, .hate_B:hover, .share_B:hover{
+    background-color: #E5E5E5;
+}
+.video_review_btn_t {
+    float: right;
+}
+
+/* 영상 설명 칸 video info bbox */
+
+.video_info_bbox {
+    background-color: #F2F2F2;
+    color: #000000;
+    border-radius: 10px;
+    border: none;
+    clear: left;
+    width: 100%;
+    height: auto;
+}
+.video_info_bbox:hover {
+    background-color: #E5E5E5;
+}
+.video_info_bbox p{
+    margin: 5px;
+}
+
+/* box 2: 관심(추천)동영상 목록 */
+.box2 {
+    flex: 1; /* 1부분을 차지하도록 설정 */
+    max-width: 30%; /* 최대 30%까지만 차지하도록 설정 */
+    box-sizing: border-box; /* 내부 패딩과 테두리를 포함한 전체 크기를 지정 */
+}
+
+.box2 .video_list_Algorithm li {
+    margin-top: 10px;
+    margin-left: -20px;
+    white-space: nowrap; /* 줄바꿈 방지 */
+}
+
+.box2 .video_list_Algorithm li a {
+    text-decoration-line: none;
+    color: #000000;
+}
+
+/* 댓글 리스트 */
+.chat_list {
+    background-color: #FFFFFF;
+    padding-left: 0px;
+    width: 100%;
+}
+.chat_list li {
+    margin-top: 20px;
+}
+.chat_list a {
+    text-decoration-line: none;
+    color: #000000;
+}
+.chat_list_profile {
+    float: left;
+}
+.chat_list_profile_name {
+    margin: 10px;
+    float: left;
+}
+.chat_list table {
+    clear: left;
+}
+
+.like_bb{
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #F2F2F2;
+}
+.hate_bb{
+    border: none;
+    border-radius: 20px;
+    padding: 10px;
+    background-color: #F2F2F2;
+}
+
+.like_bb:hover, .hate_bb:hover {
+    background-color: #E5E5E5;
+}
+
+/* 드롭다운 메뉴 */
+.dropbox_bb {
+    padding: 10px;
+    background-color: #FFFFFF;
+    border: none;
+    cursor: pointer;
+}
+/* 드롭다운 내용 스타일 (숨겨진 상태로 시작) */
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #FFFFFF;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+}
+/* 드롭다운 내용의 각 항목 스타일 */
+.dropdown-content a {
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    color: #000000;
+}
+/* 드롭다운 내용의 각 항목에 마우스를 올렸을 때의 스타일 */
+.dropdown-content a:hover {
+    background-color: #E5E5E5;
+}
+/* 드롭다운 내용이 나타나도록 하는 클래스 */
+.show {
+    display: block;
+}
+
+/* 댓글 입력창 부분 */
+.input-group {
+    margin-top: 50px;
+}
+.input-group #message {
+    width: 100%;
+    height: 40px;
+}
+.input-group img {
+    width: 45px;
+    height: 45px;
+}
+
+.bbox1 {
+    display: flex;
+    flex-direction: column;
+    float: left;
+}
+.bbox1_1 {
+    float: left;
+    width: 90%;
+    height: 50px;
+}
+.bbox2 {
+    float: right;
+    margin-right: 30px;
+    position: relative;
+    top: -40px;
+}
+
+.review_B {
+    padding: 0 16px;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: none;
+    color: #000000;
+    background-color: #F2F2F2;
+}
+.review_B:hover {
+    background-color: #E5E5E5;
+}
+
+.clearfix::after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.box3 {
+    width: 100%;
+    height: auto;
+}
+.box3 ul li a img {
+    width: 45px;
+    height: 45px;
+}
+
+.video_sumnail {
+    background-color: #F2F2F2;
+    float: left;
+    width: 168px;
+    height: 94px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+.bbox_text {
+    margin: 0 0 4px 0;
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    font-weight: 500;
+    overflow: hidden;
+    display: block;
+    max-height: 4rem;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+.bbox_text_sub {
+    font-size: 12px;
+    color: #8e8f8c;
+    margin-bottom: 0;
+}
+
+/* 창 사이즈에 따른 객체들 사이즈.*/
+
+@media (max-width: 768px) {
+    .container_group {
+        flex-direction: column; /* 화면이 작을 때 세로로 배치 */
+        align-items: stretch; /* 세로 배치 시에 요소들을 꽉 채움 */
+    }
+
+    .box1, .box2 {
+        width: 100%; /* 화면이 작을 때 전체 폭을 차지하도록 변경 */
+        min-width: 427px;
+    }
+
+    .box1 video {
+        width: 100%; /* 부모 요소인 .box1의 100%를 차지하도록 설정 */
+        height: auto; /* 비율을 유지하면서 너비에 따라 높이 조정 */
+
+        /* 추가된 부분: 최소한의 너비와 높이를 설정 */
+        min-width: 427px;
+        min-height: 240px;
+    }
+
+    .bbox2 {
+        top: 0;
+    }
+}
+
+@media (max-width: 992px) {
+    .bbox2 {
+        top: 0;
+    }
+}
+
+@media (max-width: 1200px) {
+    .container_group {
+        flex-direction: column; /* 세로로 배치 */
+    }
+
+    .box1, .box2 {
+        width: 100%; /* 전체 폭 차지 */
+    }
+
+    .box2 {
+        margin-top: 10px; /* box1과의 간격 조절 */
+    }
+}

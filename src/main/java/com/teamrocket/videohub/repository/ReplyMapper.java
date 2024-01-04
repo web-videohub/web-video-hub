@@ -23,7 +23,7 @@ public interface ReplyMapper {
     Reply findOne(long replyNo);
 
     // 댓글 전체 목록 조회
-    List<Reply> findAll(@Param("bn") long videoId, @Param("p") Page page);
+    List<Reply> findAll(@Param("vid") long videoId, @Param("p") Page page);
 
     // 댓글 총 개수 조회
     int count(long videoId);

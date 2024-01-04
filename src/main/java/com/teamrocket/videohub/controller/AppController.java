@@ -3,10 +3,7 @@ package com.teamrocket.videohub.controller;
 import com.teamrocket.videohub.entity.Video;
 import com.teamrocket.videohub.services.VideoService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -39,6 +36,11 @@ public class AppController {
         log.error("vList : {}", vList);
 
         return "index";
+    }
+
+    @GetMapping("/{keyword}")
+    public String search(Model model) {
+        return "";
     }
 
 

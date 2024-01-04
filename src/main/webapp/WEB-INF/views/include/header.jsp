@@ -70,7 +70,7 @@
                 </a>
             </div>
             <form class="searchForm" action="" method="">
-                <input class="searchInput" type="search" placeholder="검색">
+                <input class="searchInput" type="search" placeholder="검색" value="${s.keyword}">
                 <button class="searchBtn" type="submit"><span class="lnr lnr-magnifier"></span></button>
             </form>
 

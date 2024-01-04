@@ -35,9 +35,11 @@
         v.video_view_count, v.video_upload_date,
         m.user_profile_image
         FROM tbl_video v
+<!--        <if test="keyword != null">-->
+<!--            WHERE v.video_title LIKE CONCAT('%', #{keyword}, '%')-->
+<!--        </if>-->
         JOIN tbl_member m ON v.video_upload_user = m.user_account
         ORDER BY video_upload_date desc
         LIMIT #{pageSize} OFFSET #{offset}
-
     </select>
 </mapper>

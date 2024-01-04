@@ -26,9 +26,7 @@ public class ReplyApiController {
 
     // 댓글 목록 조회 요청
     @GetMapping("/{videoId}")
-    public ResponseEntity<?> list(@PathVariable long videoId
-            , HttpServletRequest request
-            , HttpSession session) {
+    public ResponseEntity<?> list(@PathVariable long videoId) {
         log.info("/api/v1/replies/{} : GET!", videoId);
 
         Page page = new Page();
