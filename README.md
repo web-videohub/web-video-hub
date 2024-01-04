@@ -1,4 +1,3 @@
-<!-- 마크다운 작성 시 html 코드와 혼합해서 작성해도 되지만 마크다운 코드와 html코드가 붙지 않게 할 것. -->
 <h1 align="center">Video Hub</h1>
 
 >가입된 유저들끼리 동영상을 공유할 수 있는 플랫폼입니다.
@@ -27,7 +26,7 @@ YOUTUBE에서 아이디어를 얻어왔습니다.
         <img src="https://github.com/yongseopK.png?size=45" alt="yongseopK's GitHub" />
       </a>
     </td>
-    <td>이름</td>
+    <td>김용섭</td>
     <td>Project Manager & Backend</td>
     <td>할 일</td>
   </tr>
@@ -37,17 +36,17 @@ YOUTUBE에서 아이디어를 얻어왔습니다.
         <img src="https://github.com/daveen99.png?size=45" alt="daveen99's GitHub" />
       </a>
     </td>
-    <td>이름</td>
+    <td>김다빈</td>
     <td>Front</td>
     <td>할 일</td>
   </tr>
   <tr>
     <td>
       <a href="https://github.com/smg0218" target="_blank">
-        <img src="https://avatars.githubusercontent.com/u/128454773?s=70&amp;v=4" width="45" height="45" alt="smg0218's GitHub" />
+        <img src="https://github.com/smg0218.png?size=45" alt="smg0218's GitHub" />
       </a>
     </td>
-    <td>이름</td>
+    <td>송민건</td>
     <td>Backend</td>
     <td>할 일</td>
   </tr>
@@ -57,7 +56,7 @@ YOUTUBE에서 아이디어를 얻어왔습니다.
         <img src="https://github.com/sarimiro56.png?size=45" alt="sarimiro56's GitHub" />
       </a>
     </td>
-    <td>이름</td>
+    <td>태은선</td>
     <td>Front</td>
     <td>할 일</td>
   </tr>
@@ -65,7 +64,7 @@ YOUTUBE에서 아이디어를 얻어왔습니다.
 
 <h2 align="center">개발 이력</h2>
 <p align="center">
-  개발기간: 2023년 12월 26일 ~ 2024년 01월 08일 (총 2주)
+  개발기간: 2023년 12월 26일 ~ 2024년 01월 09일 (총 15일, 약 2주)
 </p>
 
 <h2 align="center">기술 스택</h2>
@@ -80,6 +79,10 @@ YOUTUBE에서 아이디어를 얻어왔습니다.
 
 - login (로그인)
 - register (회원가입)
+- index (메인화면)
+- detail (영상 시청)
+- setting (설정)
+- studio (스튜디오)
 
 <h2 align="center">프로젝트 구성</h2>
 <!-- ex) 데이터베이스 -->
@@ -88,16 +91,16 @@ YOUTUBE에서 아이디어를 얻어왔습니다.
 <h3> 1. 느낀점 </h3>
 <table>
   <tr>
-    <td>이름</td>
+    <td>김용섭</td>
     <td>느낀점</td>
   </tr><tr>
-    <td>이름</td>
+    <td>김다빈</td>
     <td>느낀점</td>
   </tr><tr>
-    <td>이름</td>
+    <td>송민건</td>
     <td>느낀점</td>
   </tr><tr>
-    <td>이름</td>
+    <td>태은선</td>
     <td>느낀점</td>
   </tr>
 </table>

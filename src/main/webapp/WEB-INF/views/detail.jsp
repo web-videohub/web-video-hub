@@ -45,7 +45,6 @@
                     </div>
                 </div>
                 <div class="box3">
-                    <!-- [댓글 입력창 구역] 댓글 기능 무료 서비스(백엔드 일부 포함): https://velog.io/@ybseo/HTML-%EB%8C%93%EA%B8%80-%EA%B8%B0%EB%8A%A5-%EC%B6%94%EA%B0%80%ED%95%98%EA%B8%B0-Disqus -->
                     <form id="messageForm" name="messageForm">
                         <div class="form-group">
                             <div class="input-group clearfix">
@@ -54,47 +53,16 @@
                                     <p>Test_user</p>
                                 </div>
                                 <div class="bbox1_1">
-                                    <input type="text" id="message" placeholder="댓글 추가..." autocomplete="off"
-                                           class="form-control"/>
-                                    <input type="text" style="display: none">
+                                    <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
                                 </div>
                             </div>
                             <div class="bbox2">
-                                <button type="button" class="review_B">댓글</button>
+                                <button type="button" class="review_B" onclick="addComment()">댓글</button>
                             </div>
                         </div>
                     </form>
                     <ul class="chat_list">
-                        <li>
-                            <div class="chat_list_profile">
-                                <a href="#"><img src="/assets/img/profile.jpeg"></a>
-                            </div>
-                            <div class="chat_list_profile_name">
-                                <a href="#"><p>Test_name</p></a>
-                            </div>
-                            <table>
-                                <tr>
-                                    <td><p>삭제용 테스트 댓글 :d</p></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <div class="review_btns_one">
-                                            <button type="button" class="like_bb">좋아요</button>
-                                            <button type="button" class="hate_bb">싫어요</button>
-                                        </div>
-                                    </td>
-                                    <td>
-                                        <div class="review_btns_two">
-                                            <button type="button" onclick="toggleDropdown()" class="dropbox_bb">...</button>
-                                            <div id="myDropdown" class="dropdown-content">
-                                                <a href="#">수정</a>
-                                                <a href="#">삭제</a>
-                                            </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>
-                        </li>
+                        <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
                     </ul>
                 </div>
             </div>
@@ -117,7 +85,8 @@
         </div>
     </div>
 
-    <!-- 드롭다운 메뉴 테스트 자바스크립트 코드 -->
+    <!-- 드롭다운 메뉴, 댓글 테스트 자바스크립트 코드 -->
     <script src="./assets/js/testDropmenu.js"></script>
+    <script src="./assets/js/testReviewChat.js"></script>
 </body>
 </html>

@@ -8,6 +8,7 @@ li {
     list-style-type: none;
 }
 
+/* 전체 객체 그룹 사이즈 조정*/
 .container {
     margin-top: 100px;
 }
@@ -29,6 +30,10 @@ li {
     border-radius: 10px;
 }
 
+/*
+    video_info: 영상 정보(All)
+*/
+
 .video_info h1 {
     font-family: "Roboto","Arial",sans-serif;
     font-size: 2rem;
@@ -36,6 +41,7 @@ li {
     font-weight: 700;
 }
 
+/* video_info_user_bbox: 유저 이름, 구독자 수 */
 .video_info_user_bbox {
     float: left;
     margin-left: 10px;
@@ -48,6 +54,7 @@ li {
     color: #383c46;
 }
 
+/* video_user_bbox: 프로필 이미지 */
 .video_user_bbox {
     display: block;
     margin-right: 10px;
@@ -55,6 +62,11 @@ li {
 .video_user_bbox a img {
     width: 45px;
     height: 45px;
+    float: left;
+}
+
+/* video_review_btn_o .subscribe_B: 구독 버튼 */
+.video_review_btn_o {
     float: left;
 }
 .video_user_bbox .subscribe_B {
@@ -71,6 +83,11 @@ li {
     background-color: #272727;
     color: #FFFFFF;
 }
+
+/* video_review_btn_t .like_B, .hate_B, .share_B: 좋아요, 싫어요, 공유 버튼 */
+.video_review_btn_t {
+    float: right;
+}
 .like_B, .hate_B, .share_B{
     border: none;
     border-radius: 20px;
@@ -80,12 +97,8 @@ li {
 .like_B:hover, .hate_B:hover, .share_B:hover{
     background-color: #E5E5E5;
 }
-.video_review_btn_t {
-    float: right;
-}
 
-/* 영상 설명 칸 video info bbox */
-
+/* video_info_bbox: 영상 설명 */
 .video_info_bbox {
     background-color: #F2F2F2;
     color: #000000;
@@ -120,6 +133,50 @@ li {
     color: #000000;
 }
 
+/* 썸네일 사이즈 (고정) */
+.video_sumnail {
+    background-color: #F2F2F2;
+    float: left;
+    width: 168px;
+    height: 94px;
+    margin-top: 5px;
+    margin-right: 10px;
+}
+/* 리스트 내용에 들어갈 제목, 유저명, 조회수 및 날짜 텍스트*/
+.bbox_text {
+    margin: 0 0 4px 0;
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    font-weight: 500;
+    overflow: hidden;
+    display: block;
+    max-height: 4rem;
+    -webkit-line-clamp: 2;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+.bbox_text_sub {
+    font-size: 12px;
+    color: #8e8f8c;
+    margin-bottom: 0;
+}
+
+
+
+/* box 3: 댓글 구역 */
+.box3 {
+    width: 100%;
+    height: auto;
+}
+/* 댓글 프로필 사이즈 */
+.box3 ul li a img {
+    width: 45px;
+    height: 45px;
+}
+
 /* 댓글 리스트 */
 .chat_list {
     background-color: #FFFFFF;
@@ -133,17 +190,24 @@ li {
     text-decoration-line: none;
     color: #000000;
 }
+/* 프로필 */
 .chat_list_profile {
     float: left;
 }
+/* 프로필 이름 */
 .chat_list_profile_name {
     margin: 10px;
     float: left;
+}
+/* textarea에서 작성한 내용이 여기로 들어감.*/
+.chat_list_chat_text {
+    clear: left;
 }
 .chat_list table {
     clear: left;
 }
 
+/* 댓글용 좋아요, 싫어요 버튼*/
 .like_bb{
     border: none;
     border-radius: 20px;
@@ -176,14 +240,12 @@ li {
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
     z-index: 1;
 }
-/* 드롭다운 내용의 각 항목 스타일 */
 .dropdown-content a {
     display: block;
     padding: 10px;
     text-decoration: none;
     color: #000000;
 }
-/* 드롭다운 내용의 각 항목에 마우스를 올렸을 때의 스타일 */
 .dropdown-content a:hover {
     background-color: #E5E5E5;
 }
@@ -199,22 +261,29 @@ li {
 .input-group #message {
     width: 100%;
     height: 40px;
+    border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;
+    border-right-color: #FFFFFF;
+    border-bottom-color: #E5E5E5;
 }
 .input-group img {
     width: 45px;
     height: 45px;
 }
 
+/* 유저 프로필 */
 .bbox1 {
     display: flex;
     flex-direction: column;
     float: left;
 }
+/* textarea */
 .bbox1_1 {
     float: left;
     width: 90%;
     height: 50px;
 }
+/* 댓글 전송 버튼 div */
 .bbox2 {
     float: right;
     margin-right: 30px;
@@ -222,6 +291,7 @@ li {
     top: -40px;
 }
 
+/* 댓글 전송 버튼 */
 .review_B {
     padding: 0 16px;
     height: 36px;
@@ -242,43 +312,6 @@ li {
     clear: both;
 }
 
-.box3 {
-    width: 100%;
-    height: auto;
-}
-.box3 ul li a img {
-    width: 45px;
-    height: 45px;
-}
-
-.video_sumnail {
-    background-color: #F2F2F2;
-    float: left;
-    width: 168px;
-    height: 94px;
-    margin-top: 5px;
-    margin-right: 10px;
-}
-.bbox_text {
-    margin: 0 0 4px 0;
-    font-family: "Roboto","Arial",sans-serif;
-    font-size: 1.2rem;
-    line-height: 2rem;
-    font-weight: 500;
-    overflow: hidden;
-    display: block;
-    max-height: 4rem;
-    -webkit-line-clamp: 2;
-    display: -webkit-box;
-    -webkit-box-orient: vertical;
-    text-overflow: ellipsis;
-    white-space: normal;
-}
-.bbox_text_sub {
-    font-size: 12px;
-    color: #8e8f8c;
-    margin-bottom: 0;
-}
 
 /* 창 사이즈에 따른 객체들 사이즈.*/
 
@@ -297,7 +330,7 @@ li {
         width: 100%; /* 부모 요소인 .box1의 100%를 차지하도록 설정 */
         height: auto; /* 비율을 유지하면서 너비에 따라 높이 조정 */
 
-        /* 추가된 부분: 최소한의 너비와 높이를 설정 */
+        /* 최소한의 너비와 높이를 설정 */
         min-width: 427px;
         min-height: 240px;
     }
