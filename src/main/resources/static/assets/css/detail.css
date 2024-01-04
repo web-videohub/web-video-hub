@@ -65,10 +65,14 @@ li {
 }
 .video_info_user_bbox a {
     text-decoration-line: none;
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 16px;
     color: #000000;
 }
 .video_info_user_bbox p {
     color: #383c46;
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 12px;
 }
 
 /* video_user_bbox: 프로필 이미지 */
@@ -106,7 +110,9 @@ li {
     float: right;
     background-color: #FFFFFF;
 }
-/* border-radius: top-left-x top-right-x bottom-right-x bottom-left-x / top-left-y top-right-y bottom-right-y bottom-left-y */
+/* border-radius: top-left-x top-right-x bottom-right-x bottom-left-x
+   / top-left-y top-right-y bottom-right-y bottom-left-y
+*/
 .like_B {
     border-radius: 20px 0 0 20px;
     padding: 0 16px;
@@ -190,7 +196,7 @@ li {
 .bbox_text {
     margin: 0 0 4px 0;
     font-family: "Roboto","Arial",sans-serif;
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     line-height: 2rem;
     font-weight: 500;
     overflow: hidden;
@@ -203,8 +209,9 @@ li {
     white-space: normal;
 }
 .bbox_text_sub {
+    font-family: "Roboto","Arial",sans-serif;
     font-size: 12px;
-    color: #8e8f8c;
+    color: #606060;
     margin-bottom: 0;
 }
 
@@ -240,6 +247,8 @@ li {
 }
 /* 프로필 이름 */
 .chat_list_profile_name {
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 15px;
     margin: 10px;
     float: left;
 }
@@ -320,6 +329,10 @@ li {
     display: flex;
     flex-direction: column;
     float: left;
+}
+.bbox1 p {
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 13px;
 }
 /* textarea */
 .bbox1_1 {

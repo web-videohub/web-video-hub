@@ -80,8 +80,8 @@
                             </div>
                             <div class="video_subinfo">
                                 <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
-                                <p class="bbox_text_sub">거짓말을밥먹듯이하는인간</p>
-                                <p class="bbox_text_sub">조회수 666만 · ${v.uploadDate}</p>
+                                <p class="bbox_text_sub">Test_user</p>
+                                <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
                             </div>
                         </a>
                     </li>
