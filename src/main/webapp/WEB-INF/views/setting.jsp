@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/assets/css/setting.css">
+    <link rel="stylesheet" href="/assets/css/setting.css?after">
     <title>설정</title>
 </head>
 <body>
@@ -36,6 +36,9 @@
                 </div>
             </div>
             <div class="mainContainer" id="page1">
+                <span class="menu_o_txt">계정</span>
+
+                <hr>
                 <span class="boldTitle">내 Video hub 채널</span><br>
                 <span>Video hub에 공개되는 본인의 채널을 설정하세요.</span>
                 <div class="channelSetDiv">
@@ -53,6 +56,26 @@
                 <div class="accountSetDiv">
                     <span>Video hub 계정</span>
                     <a href="#">계정정보 변경하기</a>
+                </div>
+                <div class="user_setting_container">
+                    <div class="user_setting_container_group">
+                        <div class="settings_id">
+                            <span>Id</span>
+                            <input type="text" placeholder="아이디(4자 이상)"/>
+                        </div>
+                        <div class="settings_pw">
+                            <span>Password</span>
+                            <input type="text" placeholder="새 비밀번호(특수문자 포함 8자 이상)"/>
+                        </div>
+                        <div class="settings_em">
+                            <span>Email</span>
+                            <input type="text" placeholder="이메일 예: you@example.com"/>
+                        </div>
+                        <div class="settings_nn">
+                            <span>Nickname</span>
+                            <input type="text" placeholder="닉네임(한글)"/>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="mainContainer" id="page2">

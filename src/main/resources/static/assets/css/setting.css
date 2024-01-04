@@ -95,6 +95,7 @@ p, span, div {
     text-align: left;
     margin: auto 0 auto 10px;
 }
+
 .boldTitle {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
@@ -120,4 +121,51 @@ p, span, div {
 }
 #headerBtn2 {
     display: none;
+}
+
+/* 여기부터 새로 추가한 CSS */
+/* 로그인 : capston, capston!*/
+
+/* 현재 있는 곳 구역 이름*/
+.menu_o_txt {
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 16px;
+    line-height: 2.2rem;
+    font-weight: 500;
+}
+
+/* 계정 정보 수정 div CSS*/
+/* 계정 전체 틀 */
+.user_setting_container {
+    background-color: #FFFFFF;
+    border: 1px solid #E5E5E5;
+    margin: 20px;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-wrap: wrap;
+    flex-direction: column;
+}
+.user_setting_container_group {
+    width: 80%;
+    padding: 5px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+.settings_id {
+    display: flex;
+    flex-direction: column;
+}
+.settings_pw {
+    display: flex;
+    flex-direction: column;
+}
+.settings_em {
+    display: flex;
+    flex-direction: column;
+}
+.settings_nn {
+    display: flex;
+    flex-direction: column;
 }
