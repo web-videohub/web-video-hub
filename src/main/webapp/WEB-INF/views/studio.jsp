@@ -4,7 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>Studio</title>
+    <title>내 채널</title>
     <link rel="stylesheet" href="/assets/css/studio-header.css">
     <link rel="stylesheet" href="/assets/css/studio.css">
 </head>

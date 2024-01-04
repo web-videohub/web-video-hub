@@ -63,4 +63,11 @@ public class AppController {
         return "setting";
 
     }
+
+    @GetMapping("/subs")
+    public String subs() {
+        log.info("구독 현황 페이지");
+
+        return "subs";
+    }
 }

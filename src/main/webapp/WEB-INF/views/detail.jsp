@@ -5,6 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <title>영상 화면</title>
+<%--    <title>${video.videoTitle}</title>--%>
     <style>
         .back_bg {
             background-color: #F2E6E6;
