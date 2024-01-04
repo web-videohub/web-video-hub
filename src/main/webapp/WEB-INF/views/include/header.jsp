@@ -16,7 +16,10 @@
     <div class="headerDiv">
         <div class="headerContainer">
             <div class="menu">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button id="headerBtn" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="lnr lnr-menu"></span>
+                </button>
+                <button id="headerBtn2" type="button"  class="navbar-toggler">
                     <span class="lnr lnr-menu"></span>
                 </button>
                 <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -37,7 +40,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/subs">
                                 <span class="lnr lnr-book"></span>
                                     구독
                                 </a>

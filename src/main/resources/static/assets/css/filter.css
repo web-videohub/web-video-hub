@@ -20,4 +20,5 @@
 .filterDiv label {
     margin: auto 30px auto 0;
     border-radius: 10px !important;
+    min-width: 64px;
 }

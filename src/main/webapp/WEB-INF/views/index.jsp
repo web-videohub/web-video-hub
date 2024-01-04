@@ -33,9 +33,9 @@
 
 
 <%-- 기본 왼쪽 상태바 --%>
-<div class="leftDiv">
-    <div class="offcanvas-body">
-        <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
+<div class="leftDiv index-left">
+    <div class="offcanvas-body index-side">
+        <ul class="navbar-nav flex-grow-1 pe-3">
             <li class="nav-item home">
                 <a class="nav-link active" aria-current="page" href="/">
                     <span class="lnr lnr-home"></span>
@@ -62,6 +62,37 @@
                 <a class="nav-link" href="/setting">
                     <span class="lnr lnr-cog"></span>
                     설정
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="leftDiv2 index-left2">
+    <div class="offcanvas-body index-side2">
+        <ul class="navbar-nav flex-grow-1 pe-3">
+            <li class="nav-item2 home">
+                <a class="nav-link active" aria-current="page" href="/">
+                    <span class="lnr lnr-home"></span><br>
+                    <span class="sideText">홈</span>
+                </a>
+            </li>
+            <li class="nav-item2">
+                <a class="nav-link" href="/subs">
+                    <span class="lnr lnr-book"></span><br>
+                    <span class="sideText">구독</span>
+                </a>
+            </li>
+            <li class="nav-item2">
+                <a class="nav-link" href="/studio">
+                    <span class="lnr lnr-user"></span><br>
+                    <span class="sideText">나</span>
+                </a>
+            </li>
+            <li class="nav-item2">
+                <a class="nav-link" href="/setting">
+                    <span class="lnr lnr-cog"></span><br>
+                    <span class="sideText">설정</span>
                 </a>
             </li>
 
@@ -164,23 +195,65 @@
     });
 
     let pageWidth;
-    let $leftDiv = document.querySelector('.leftDiv');
-    let $canvasBody = document.querySelector('.offcanvas-body');
+    let $canvasBody = document.querySelector('.index-side');
+    let $leftDiv = document.querySelector('.index-left');
+    let $leftDiv2 = document.querySelector('.index-left2');
+    let $headerBtn = document.getElementById("headerBtn");
+    let $headerBtn2 = document.getElementById("headerBtn2");
+    const side1 = 1;
+    const side2 = 2;
+    let isClick = side1;
 
     function checkWidth() {
         console.log(pageWidth);
-        if (pageWidth < 1000) {
-            // 일반 사이드바 모드 작동
-            $leftDiv.style.width = '100px';
-            console.log("가로 길이가 1000 미만입니다.");
-        } else {
-            // 미니바 모드 작동
-            $leftDiv.style.width = '200px';
-            console.log($canvasBody);
-            $canvasBody.style.height = '1000px';
-            console.log("가로 길이가 1000 이상입니다.");
+        if (pageWidth >= 1200) {
+            if (isClick === side1) {
+                $leftDiv2.style.display = 'none';
+                $leftDiv.style.display = 'flex';
+                $headerBtn2.style.display = 'flex';
+                $headerBtn.style.display = 'none';
+            }
+            if (isClick === side2){
+                $leftDiv2.style.display = 'flex';
+                $leftDiv.style.display = 'none';
+                $headerBtn2.style.display = 'flex';
+                $headerBtn.style.display = 'none';
+            }
+
+
+        }
+        else if (pageWidth > 640) {
+            $leftDiv.style.display = 'none';
+            $leftDiv2.style.display = 'flex';
+            $headerBtn2.style.display = 'none';
+            $headerBtn.style.display = 'flex';
+        }
+        else if (pageWidth <= 640){
+            $leftDiv2.style.display = 'none';
+            $leftDiv.style.display = 'none';
+            $headerBtn2.style.display = 'none';
+            $headerBtn.style.display = 'flex';
         }
     }
+    $headerBtn2.addEventListener('click', e => {
+
+        if (isClick === side1) {
+            $leftDiv2.style.display = 'flex';
+            $leftDiv.style.display = 'none';
+            isClick = side2;
+        } else if (isClick === side2){
+            $leftDiv.style.display = 'flex';
+            $leftDiv2.style.display = 'none';
+            isClick = side1;
+        }
+        console.log("현재상태 : " + isClick);
+    })
+
+    // 첫 화면크기 반영
+    window.onload = function () {
+        pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        checkWidth();
+    };
 
     window.addEventListener('resize', function() {
         pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;

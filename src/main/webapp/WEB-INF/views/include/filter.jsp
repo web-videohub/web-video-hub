@@ -9,6 +9,7 @@
             display: none;
         }
 
+
         .filterDiv label {
             display: inline-block;
             padding: 8px 16px;

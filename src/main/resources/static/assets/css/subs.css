@@ -37,8 +37,21 @@ body {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
 }
+.index-left2 {
+    width: 150px;
+    height: 100%;
+
+    position: fixed;
+    top: 70px;
+    z-index: 100;
+
+    padding-top: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
 @media (max-width: 640px) {
-    .leftDiv {
+    .index-left2,
+    .index-side2 {
         display: none;
     }
     .mainContainer {
@@ -158,17 +171,46 @@ body {
 .offcanvas-body {
     padding-left: 10px !important;
 }
+.index-side,
+.index-side2 {
+    height: 100%;
+    display: flex;
+    justify-content: start !important;
+    align-content: center;
+    flex-direction: column;
+}
+.index-side ul,
+.index-side2 ul {
+    height: 100%;
+    display: flex;
+    justify-content: start !important;
+    align-content: center;
+    flex-direction: column;
+}
 
 .home {
     background: #dedede;
 }
-.nav-item:hover {
+.nav-item:hover,
+.nav-item2:hover {
     background: #ececec;
 }
-.nav-item:active {
+.nav-item:active,
+.nav-item2:active {
     background: #cccccc !important;
 }
-
+.nav-item2 {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+}
 .subTitle {
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
@@ -181,4 +223,12 @@ body {
 .subDiv {
     padding-left: 60px;
     margin-bottom: 50px;
+}
+.nav-item2 .lnr {
+    font-weight: bold;
+    font-size: 30px;
+}
+.nav-item2 .sideText {
+    font-weight: normal;
+    font-size: 14px;
 }

@@ -24,7 +24,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">
+                    <a class="nav-link" href="/subs">
                         <span class="lnr lnr-book"></span>
                         구독
                     </a>
