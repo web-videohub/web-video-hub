@@ -9,7 +9,6 @@
             display: none;
         }
 
-        /* 커스텀 스타일 적용 */
         .filterDiv label {
             display: inline-block;
             padding: 8px 16px;
@@ -20,18 +19,58 @@
             cursor: pointer;
         }
 
-        /* 체크된 라디오 버튼의 스타일 변경 */
         .filterDiv input[type="radio"]:checked + label {
             background-color: #F2B950;
             color: #fff;
         }
     </style>
 
-    <div class="filterDiv">
-        <input type="radio" id="game" name="filter" checked><label for="game">게임</label>
-        <input type="radio" id="life" name="filter"><label for="life">일상</label>
-        <input type="radio" id="animal" name="filter"><label for="animal">동물</label>
-        <input type="radio" id="nature" name="filter"><label for="nature">자연</label>
-        <input type="radio" id="dance" name="filter"><label for="dance">댄스</label>
-    </div>
+    <form id="radioForm" class="filterDiv">
+        <label>
+            <input type="radio" name="filter" value="all" id = "all" onclick="handleRadioClick(this)"> 전체
+        </label>
+        <label>
+            <input type="radio" name="filter" value="game" onclick="handleRadioClick(this)"> 게임
+        </label>
+        <label>
+            <input type="radio" name="filter" value="life" onclick="handleRadioClick(this)"> 일상
+        </label>
+        <label>
+            <input type="radio" name="filter" value="animal" onclick="handleRadioClick(this)"> 동물
+        </label>
+        <label>
+            <input type="radio" name="filter" value="nature" onclick="handleRadioClick(this)"> 자연
+        </label>
+        <label>
+            <input type="radio" name="filter" value="dance" onclick="handleRadioClick(this)"> 댄스
+        </label>
+        <label>
+            <input type="radio" name="filter" value="health" onclick="handleRadioClick(this)"> 헬스
+        </label>
+        <label>
+            <input type="radio" name="filter" value="music" onclick="handleRadioClick(this)"> 음악
+        </label>
+    </form>
 </header>
+<body>
+<script>
+    let disableRadioButtons = false;
+
+    function toggleRadioButtons() {
+        const radioButtons = document.querySelectorAll('input[type=radio][name=filter]');
+        radioButtons.forEach(radio => {
+            radio.disabled = disableRadioButtons;
+        });
+    }
+
+    function handleRadioClick(radio) {
+        disableRadioButtons = true;
+        toggleRadioButtons();
+
+        setTimeout(() => {
+            disableRadioButtons = false;
+            toggleRadioButtons();
+        }, 1000);
+    }
+</script>
+</body>

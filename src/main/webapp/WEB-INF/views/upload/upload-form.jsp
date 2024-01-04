@@ -9,7 +9,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
             crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="/assets/css/studio-header.css">
+
     <style>
+
         .upload-box {
             width: 512px;
             height: 320px;
@@ -54,7 +57,7 @@
             height: 320px;
         }
 
-        input[type="text"],
+        .info,
         textarea {
             font-size: 18px;
             width: 100%;
@@ -62,7 +65,6 @@
             box-sizing: border-box;
             border: 2px solid #000000;
             border-radius: 8px;
-            background-color: rgba(255, 255, 255, 0.8);
         }
 
         textarea {
@@ -82,32 +84,11 @@
             gap: 20px;
         }
 
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-color: #fff;
-        }
-
-        .uploadContainer {
-            padding: 50px;
-            width: 50%;
-            border: 2px solid white;
-            border-radius: 50px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            background-color: #dadada;
-        }
-
         .thumbnailContainer {
             display: flex;
             gap: 20px;
             flex-direction: column;
         }
-
 
 
         #upload-btn {
@@ -146,61 +127,116 @@
         #search-thumbnail {
             margin: 0;
         }
+
+        .studioDiv {
+            width: 100%;
+            height: 100%;
+
+            display: flex;
+            justify-content: left;
+            align-content: center;
+            flex-direction: row;
+        }
+
+        .mainContainer {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-content: center;
+            /*padding-left: 180px;*/
+            padding-top: 80px;
+            /*background: #8e8f8c;*/
+        }
+
     </style>
 
 </head>
 <body>
-<h2>Video Upload Form</h2>
+<jsp:include page="../include/studio-header.jsp"/>
+<jsp:include page="../include/static-head.jsp"/>
 
-<div class="uploadContainer">
+<div class="studioDiv">
+    <div class="mainContainer">
+            <div class="mainContainer">
+                <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
+                    <div class="upload-box" id="uploadBox"><img src="/assets/img/videoIcon.png" alt="profile"
+                                                                style="height: 130px; width: 130px;"></div>
+                    <input type="file" name="videoUrl" id="video-input" accept="video/*" onchange="setThumbnail(event)">
+                    <div class="videoInfo">
+                        <button type="button" id="search-video" class="btn btn-primary">영상 선택</button>
+                        <p id="videoName" style="display: none"></p>
+                    </div>
+
+                    <div id="input-form">
+                        <div class="title">
+                            <label for="title">제목</label>
+                            <input type="text" id="title" name="videoTitle" class="info" required>
+                        </div>
+
+                        <div class="description">
+                            <label for="description">간단한 설명</label>
+                            <textarea id="description" name="videoContent" rows="4" class="info" required></textarea>
+                        </div>
+
+                        <div class="tag">
+                            <span>주제를 선택해주세요</span>
+                            <select class="form-select" aria-label="Default select example" name="videoCategory">
+                                <option selected>-</option>
+                                <option value="game">게임</option>
+                                <option value="life">일상</option>
+                                <option value="animal">동물</option>
+                                <option value="nature">자연</option>
+                                <option value="dance">댄스</option>
+                                <option value="health">헬스</option>
+                                <option value="music">음악</option>
+                            </select>
+                        </div>
+
+                        <div class="thumbnailContainer">
+                            <span>썸네일 이미지를 지정해주세요.</span>
+                            <div class="thumbnail-box" id="thumbnailBox"><img src="/assets/img/imageIcon.png" alt="profile"
+                                                                              style="height: 130px; width: 130px;"></div>
+                            <input type="file" name="thumbnailUrl" id="thumbnail-input" accept="image/*"
+                                   onchange="setThumbnail(event)">
+                            <div class="videoInfo">
+                                <button type="button" id="search-thumbnail" class="btn btn-primary">이미지 선택</button>
+                                <p id="thumbnailName" style="display: none">선택된 이미지 : </p>
+                            </div>
+                        </div>
+<%--                        <button onclick="submitForm()" id="upload-btn">동영상 업로드</button>--%>
+                    </div>
+
+                </form>
+            </div>
+    </div>
+</div>
 
 
-    <form action="/upload" method="post" enctype="multipart/form-data" id="uploadForm">
-        <div class="upload-box" id="uploadBox"><img src="/assets/img/videoIcon.png" alt="profile"
-                                                    style="height: 130px; width: 130px;"></div>
-        <input type="file" name="videoUrl" id="video-input" accept="video/*" onchange="setThumbnail(event)">
-        <div class="videoInfo">
-            <button type="button" id="search-video" class="btn btn-primary">영상 선택</button>
-            <p id="videoName" style="display: none"></p>
+<div class="studiv">    <!-- flex-direction: coloum -->
+    <div class="top">   <!-- flex-direction: row -->
+        <h1>동영상 세부 정보</h1>
+        <button id="upload-btn">저장</button>
+    </div>
+    <div class="bottom">        <!-- flex-direction: row -->
+        <div class="left">      <!-- flex-direction: coloum -->
+
         </div>
-
-        <div id="input-form">
-            <div class="title">
-                <label for="title">제목</label>
-                <input type="text" id="title" name="videoTitle" required>
+        <div class="right">     <!-- flex-direction: coloum -->
+            <div class="titleDiv">  <!-- 선 회색, bddr -->
+                <p>제목</p>
+                <label><input type="text"></label>
             </div>
-
-            <div class="description">
-                <label for="description">간단한 설명</label>
-                <textarea id="description" name="videoContent" rows="4" required></textarea>
+            <div class="contentDiv">
+                <p>설명</p>
+                <label><textarea rows="4"></textarea></label>
             </div>
-
-            <div class="tag">
-                <span>주제를 선택해주세요</span>
-                <select class="form-select" aria-label="Default select example" name="videoCategory">
-                    <option selected>-</option>
-                    <option value="game">게임</option>
-                    <option value="cook">요리</option>
-                    <option value="health">건강</option>
-                </select>
+            <div class="thumbnailDiv">
+                <p>미리보기 이미지</p>
+                <p>동영상의 내용을 알려주는 사진을 선택해주세요.</p>
             </div>
-
-            <div class="thumbnailContainer">
-                <span>썸네일 이미지를 지정해주세요.</span>
-                <div class="thumbnail-box" id="thumbnailBox"><img src="/assets/img/imageIcon.png" alt="profile"
-                                                                  style="height: 130px; width: 130px;"></div>
-                <input type="file" name="thumbnailUrl" id="thumbnail-input" accept="image/*" onchange="setThumbnail(event)">
-                <div class="videoInfo">
-                    <button type="button" id="search-thumbnail" class="btn btn-primary">이미지 선택</button>
-                    <p id="thumbnailName" style="display: none">선택된 이미지 : </p>
-                </div>
-            </div>
-            <button onclick="submitForm()" id="upload-btn">동영상 업로드</button>
         </div>
-
-    </form>
-
-
+    </div>
 </div>
 
 <script>
@@ -273,7 +309,15 @@
 
     function displayFileName(event, tag) {
         const fileName = event.target.files[0].name;
-        tag.textContent = fileName;
+
+        tag.textContent = cutString(fileName, 25);
+    }
+
+    function cutString(str, maxLength) {
+        if (str.length > maxLength) {
+            return str.substring(0, maxLength) + "...";
+        }
+        return str;
     }
 </script>
 </body>

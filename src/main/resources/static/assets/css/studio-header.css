@@ -1,4 +1,5 @@
 
+
 .headerDiv {
     display: flex;
     flex-direction: row;
@@ -13,7 +14,7 @@
 
     border-bottom: 1px solid #969ba1;
 
-    /*position: fixed;*/
+    position: fixed;
     /*top: 0;*/
     /*z-index: 1000;*/
 }
@@ -66,7 +67,6 @@
 .searchInput {
     width: 60%;
     height: 40px;
-    border-radius: 10px !important;
     border: 1px #cccaca solid;
     padding-left: 15px;
 }

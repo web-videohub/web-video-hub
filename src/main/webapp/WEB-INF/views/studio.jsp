@@ -10,7 +10,6 @@
 </head>
 <body>
 <jsp:include page="include/studio-header.jsp"/>
-<%-- css 모음 --%>
 <jsp:include page="include/static-head.jsp"/>
 
 <div class="studioDiv">

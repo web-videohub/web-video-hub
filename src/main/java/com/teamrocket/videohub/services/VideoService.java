@@ -24,9 +24,9 @@ public class VideoService {
         videoMapper.save(video);
     }
 
-    public List<Video> getVideos(int pageSize, int pageNumber) {
+    public List<Video> getVideos(int pageSize, int pageNumber, String type) {
         int offset = (pageNumber - 1) * pageSize;
-        return videoMapper.findAll(pageSize, offset);
+        return videoMapper.findAll(pageSize, offset, type);
     }
 }
 
