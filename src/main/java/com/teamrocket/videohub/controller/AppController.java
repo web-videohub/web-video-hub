@@ -3,14 +3,14 @@ package com.teamrocket.videohub.controller;
 import com.teamrocket.videohub.entity.Video;
 import com.teamrocket.videohub.services.VideoService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -64,6 +64,22 @@ public class AppController {
 
         return "detail";
     }
+  
+    @GetMapping("/search")
+    public String search(String keyword, Model model,
+                         @RequestParam(defaultValue = "1") int pageNumber,
+                         @RequestParam(defaultValue = "16") int pageSize,
+                         HttpSession session) {
+        log.info("/search Page: GET! {}", keyword);
+        List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, keyword);
+
+        model.addAttribute("vList", videos);
+        model.addAttribute("keyword", keyword);
+
+        log.error("vList : {}", videos);
+
+        return "/index";
+    }
 
     @RequestMapping("/setting")
     public String setting() {
@@ -72,6 +88,13 @@ public class AppController {
         return "setting";
 
     }
+
+
+//     @GetMapping("/detail")
+//     public String detail(int videoId, Model model) {
+//         log.info("비디오 상세 페이지");
+//         model.addAttribute("v", videoService.getDetail(videoId));
+//         return "detail";
 
     @GetMapping("/subs")
     public String subs() {

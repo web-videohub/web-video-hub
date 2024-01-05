@@ -22,7 +22,10 @@
         WHERE video_id = #{videoId}
     </select>
 
-    <update id="upviewCount">
+    <update id="upViewCount">
+        UPDATE tbl_video
+        SET video_view_count = video_view_count + 1
+        WHERE video_id = #{videoId}
     </update>
 
     <select id="findAll" resultType="com.teamrocket.videohub.entity.Video">
@@ -56,5 +59,30 @@
 
         ORDER BY v.video_upload_date desc
         LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+
+    <update id="upLikeCount">
+        UPDATE tbl_video
+        SET video_like = video_like + 1
+        WHERE video_id = #{videoId};
+    </update>
+
+    <update id="downLikeCount">
+        UPDATE tbl_video
+        SET video_like = video_like - 1
+        WHERE video_id = #{videoId};
+    </update>
+
+    <select id="findSearch" resultType="com.teamrocket.videohub.entity.Video">
+        SELECT
+        v.video_title, v.video_upload_user,
+        v.video_view_count, v.video_upload_date,
+        m.user_profile_image
+        FROM tbl_video v
+        JOIN tbl_member m ON v.video_upload_user = m.user_account
+        <if test="keyword != null">
+            WHERE v.video_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
+        ORDER BY video_upload_date desc
     </select>
 </mapper>
