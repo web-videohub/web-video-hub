@@ -40,5 +40,10 @@ public class VideoService {
 
         return new VideoDetailResponseDTO(video);
     }
+
+    public List<Video> getVideoSearch(int pageSize, int pageNumber, String keyword) {
+        int offset = (pageNumber - 1) * pageSize;
+        return videoMapper.findSearch(pageSize, offset, keyword);
+    }
 }
 

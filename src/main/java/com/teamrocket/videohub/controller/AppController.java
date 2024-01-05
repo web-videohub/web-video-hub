@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -38,9 +39,20 @@ public class AppController {
         return "index";
     }
 
-    @GetMapping("/{keyword}")
-    public String search(Model model) {
-        return "";
+    @GetMapping("/search")
+    public String search(String keyword, Model model,
+                         @RequestParam(defaultValue = "1") int pageNumber,
+                         @RequestParam(defaultValue = "16") int pageSize,
+                         HttpSession session) {
+        log.info("/search Page: GET! {}", keyword);
+        List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, keyword);
+
+        model.addAttribute("vList", videos);
+        model.addAttribute("keyword", keyword);
+
+        log.error("vList : {}", videos);
+
+        return "/index";
     }
 
 

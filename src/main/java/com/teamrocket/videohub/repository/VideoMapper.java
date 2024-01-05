@@ -1,6 +1,5 @@
 package com.teamrocket.videohub.repository;
 
-import com.teamrocket.videohub.common.Search;
 import com.teamrocket.videohub.entity.Video;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +19,6 @@ public interface VideoMapper {
     void upLikeCount(int videoId);
 
     void downLikeCount(int videoId);
+
+    List<Video> findSearch(@Param("pageSize") int pageSize, @Param("offset") int offset, String keyword);
 }

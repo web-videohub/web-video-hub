@@ -69,8 +69,8 @@
                     <img class="mainLogo" src="/assets/img/logo.png" alt="">
                 </a>
             </div>
-            <form class="searchForm" action="" method="">
-                <input class="searchInput" type="search" placeholder="검색" value="${s.keyword}">
+            <form class="searchForm" action="/search" method="get">
+                <input class="searchInput" type="text" placeholder="검색" name="keyword" value="${keyword}">
                 <button class="searchBtn" type="submit"><span class="lnr lnr-magnifier"></span></button>
             </form>
 
