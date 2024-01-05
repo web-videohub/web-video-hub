@@ -37,8 +37,7 @@
             </div>
             <div class="mainContainer" id="page1">
                 <span class="menu_o_txt">계정</span>
-
-                <hr>
+                <br>
                 <span class="boldTitle">내 Video hub 채널</span><br>
                 <span>Video hub에 공개되는 본인의 채널을 설정하세요.</span>
                 <div class="channelSetDiv">
@@ -52,7 +51,7 @@
                 <hr>
 
                 <span class="boldTitle">내 계정</span><br>
-                <span>Video hub 계정의 정보를 설정하세요.</span>
+                <span class="user_text_margin">Video hub 계정의 정보를 설정하세요.</span>
                 <div class="accountSetDiv">
                     <span>Video hub 계정</span>
                     <a href="#">계정정보 변경하기</a>
@@ -61,19 +60,21 @@
                     <div class="user_setting_container_group">
                         <div class="settings_id">
                             <span>Id</span>
-                            <input type="text" placeholder="아이디(4자 이상)"/>
+                            <input type="text" placeholder="아이디(4자 이상)" class="setting_box_user_id"/>
                         </div>
                         <div class="settings_pw">
                             <span>Password</span>
-                            <input type="text" placeholder="새 비밀번호(특수문자 포함 8자 이상)"/>
+                            <span class="password_warming">비밀번호 안전성:</span>
+                            <p class="password_warming">8자 이상 특수문자 포함하여 입력하세요. 다른 사이트에서 쓰는 비밀번호나 애완동물의 이름처럼 추측하기 쉬운 이름은 사용하지 마세요.</p>
+                            <input type="text" placeholder="새 비밀번호" class="setting_box_user_pw"/>
                         </div>
                         <div class="settings_em">
                             <span>Email</span>
-                            <input type="text" placeholder="이메일 예: you@example.com"/>
+                            <input type="text" placeholder="이메일 예: you@example.com" class="setting_box_user_em"/>
                         </div>
                         <div class="settings_nn">
                             <span>Nickname</span>
-                            <input type="text" placeholder="닉네임(한글)"/>
+                            <input type="text" placeholder="닉네임(한글)" class="setting_box_user_nn"/>
                         </div>
                     </div>
                 </div>
