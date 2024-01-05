@@ -132,12 +132,6 @@ p, span, div {
     font-weight: 500;
 }
 
-/* 프로필 사진 사이즈 조정 CSS */
-.profileIMG {
-    width: 45px;
-    height: 45px;
-}
-
 /* margin이 필요한 텍스트용 CSS*/
 .user_text_margin {
     margin-bottom: 5px;
@@ -207,5 +201,15 @@ p, span, div {
     border-radius: 5px;
 }
 
+.accountSetDiv_title {
+    width: 160px;
+    min-width: 160px;
+    margin-right: 56px;
+    color: #000000;
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 14px;
+    line-height: 2rem;
+    font-weight: 500;
+}
 /* 웹사이트 정보 CSS 구간 */
 /* 전체 컨테이너 */

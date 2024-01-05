@@ -53,8 +53,12 @@
                 <span class="boldTitle">내 계정</span><br>
                 <span class="user_text_margin">Video hub 계정의 정보를 설정하세요.</span>
                 <div class="accountSetDiv">
-                    <span>Video hub 계정</span>
-                    <a href="#">계정정보 변경하기</a>
+                    <div>
+                        <span class="accountSetDiv_title">Video hub 계정</span>
+                    </div>
+                    <div>
+                        <a href="#">계정정보 변경하기</a>
+                    </div>
                 </div>
                 <div class="user_setting_container">
                     <div class="user_setting_container_group">
