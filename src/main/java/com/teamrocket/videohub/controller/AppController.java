@@ -74,11 +74,12 @@ public class AppController {
         List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, keyword);
 
         model.addAttribute("vList", videos);
+        log.info("이거보세ㅐㅇ쇼!!!  :" + videos.toString());
         model.addAttribute("keyword", keyword);
 
         log.error("vList : {}", videos);
 
-        return "/index";
+        return "/search";
     }
 
     @RequestMapping("/setting")

@@ -113,6 +113,10 @@
 </header>
 <body>
     <script>
-
+        let $searchBtn = document.querySelector('.searchBtn');
+        let $searchInput = document.querySelector('.searchInput');
+        $searchBtn.addEventListener('click', e=> {
+            console.log($searchInput.value);
+        })
     </script>
 </body>
