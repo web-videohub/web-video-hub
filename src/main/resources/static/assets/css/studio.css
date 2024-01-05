@@ -1,6 +1,7 @@
 
 /* 구글 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 html {
     width: 100%;
     height: 100%;
@@ -67,4 +68,11 @@ body {
 }
 .nav-item:active {
     background: #cccccc !important;
+}
+
+.mini {
+    width: 60px;
+    height: 30px;
+    margin-right: -5px;
+    margin-left: -2px;
 }

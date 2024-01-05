@@ -193,11 +193,21 @@ body {
 }
 .nav-item:hover,
 .nav-item2:hover {
+    transition: 0.2s ease-out;
     background: #ececec;
+}
+.nav-item:not(:hover),
+.nav-item2:not(:hover) {
+    transition: 0.2s ease-out;
 }
 .nav-item:active,
 .nav-item2:active {
+    transition: 0.2s ease-out;
     background: #cccccc !important;
+}
+.nav-item:not(:active),
+.nav-item2:not(:active) {
+    transition: 0.2s ease-out;
 }
 .nav-item2 {
     width: 70px;
@@ -231,4 +241,8 @@ body {
 .nav-item2 .sideText {
     font-weight: normal;
     font-size: 14px;
+}
+.profile:hover,
+.uploader:hover {
+    cursor: pointer;
 }
