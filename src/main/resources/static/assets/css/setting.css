@@ -240,15 +240,32 @@ p, span, div {
     line-height: 2rem;
     font-weight: 500;
 }
-.accountSetDiv_link {
+.accountSetDiv_link a{
     text-decoration-line: none;
 }
 
 /* 웹사이트 정보 CSS 구간 */
 /* 전체 컨테이너 */
 
+.team_user_box {
+    display: flex;
+    flex-wrap: nowrap;
+    justify-content: center;
+}
+.team_user {
+    float: left;
+}
+.team_user img {
+    width: 200px;
+    height: 200px;
+}
 
 /* Team link */
+.mainContainer_team_group {
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
 .rocket_team_github a{
     text-decoration-line: none;
     color: #065FD4;
