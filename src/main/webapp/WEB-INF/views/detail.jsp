@@ -176,7 +176,7 @@
             for(let reply of replies) {
 
                 const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
-                
+
                 // 댓글 번호
                 // 드롭메뉴가 각 댓글에 적용되도록 댓글 구분용 id가 필요합니다. (rno)
                 var commentId = rno;
@@ -190,8 +190,12 @@
         <div class="chat_list_profile_name">
             <a href="#"><p>\${accountUserName}</p></a>
         </div>
-        <div class="chat_list_chat_text">
+        <div class="chat_list_chat_text" id="chat-text-\${rno}">
             <p>\${text}</p>
+        </div>
+        <div class="chat_list_edit_area" id="edit-area-\${rno}" " style="display: none;">
+            <textarea id="chat_message" autocomplete="off" class="form-control" data-id="\${rno}">\${text}</textarea>
+            <button type="button" class="save_bb" onclick="replyEditComment(this)">저장</button>
         </div>
         <table>
             <tr>
@@ -207,7 +211,7 @@
                     tag += `
                         <button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
                         <div id="myDropdown-\${rno}" class="dropdown-content">
-                            <a href="#" id="replyModBtn">수정</a>
+                            <a href="#" id="replyModBtn" onclick="toggleEditComment(this)">수정</a>
                             <a href="#" id="replyDelBtn" onclick="replyRemoveClickEvent(this)">삭제</a> `;
                 }
                 tag += `
@@ -230,9 +234,10 @@
         event.preventDefault();
 
         var test = e.parentNode.parentNode;
-        console.log("test = " + test.innerHTML);
+        // console.log("test = " + test.innerHTML);
         var rno = test.querySelector('.dropbox_bb').getAttribute("data-comment-id");
-        console.log("rno = " + rno);
+        // console.log("rno = " + rno);
+
 
         if(!confirm('댓글을 삭제하시겠습니까?')) return;
 
@@ -251,6 +256,61 @@
             })
             .then(responseResult => {
                 renderReplies(responseResult);
+            });
+    }
+
+    // 댓글 수정 메서드
+    function toggleEditComment(e) {
+        event.preventDefault();
+
+        var parentNodeLine = e.parentNode.parentNode;
+        // console.log("test = " + parentNodeLine.innerHTML);
+        var rno = parentNodeLine.querySelector('.dropbox_bb').getAttribute("data-comment-id");
+        // console.log("rno = " + rno);
+
+        var chatText = document.getElementById('chat-text-' + rno);
+        var editArea = document.getElementById('edit-area-' + rno);
+
+        chatText.style.display = 'none';
+        editArea.style.display = 'block';
+    }
+
+    function replyEditComment(e) {
+        event.preventDefault();
+
+        var parentNodeLine = e.parentNode;
+        console.log("parentNodeList: " + parentNodeLine.innerHTML);
+        var rno = parentNodeLine.querySelector('.form-control').getAttribute("data-id");
+        var text = parentNodeLine.querySelector('.form-control').value;
+        console.log("text: " + text);
+        const payload = {
+            text: text,
+            account: `${login.userAccount}`,
+            videoId: videoId,
+            rno: +rno
+        };
+        console.log(payload);
+
+        const requestInfo = {
+            method: 'PUT',
+            headers: {
+                'content-type' : 'application/json'
+            },
+            body: JSON.stringify(payload)
+        };
+
+        fetch(URL, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    // alert('댓글이 수정되었습니다.');
+                    return res.json();
+                } else {
+                    alert('댓글이 수정에 실패했습니다.');
+                    return;
+                }
+            })
+            .then(result => {
+                renderReplies(result);
             });
     }
 
@@ -273,6 +333,6 @@
         addComment();
     })();
 </script>
-<%--<script src="./assets/js/testDropmenu.js"></script>--%>
+<script src="./assets/js/testDropmenu.js"></script>
 </body>
 </html>
