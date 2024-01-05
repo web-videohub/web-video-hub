@@ -20,8 +20,12 @@
         }
 
         .filterDiv input[type="radio"]:checked + label {
+            transition: 0.2s ease-out;
             background-color: #F2B950;
             color: #fff;
+        }
+        .filterDiv input[type="radio"]:not(:checked) + label {
+            transition: 0.2s ease-out;
         }
     </style>
 

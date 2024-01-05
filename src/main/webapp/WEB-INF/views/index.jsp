@@ -51,10 +51,10 @@
             </li>
             <hr>
             <li class="nav-item">
-                <a class="nav-link" href="/userPage">나 ></a>
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">나 ></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/userPage">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                     <span class="lnr lnr-user"></span>
                     내 채널
                 </a>
@@ -91,7 +91,7 @@
                 </a>
             </li>
             <li class="nav-item2">
-                <a class="nav-link" href="/studio">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                     <span class="lnr lnr-user"></span><br>
                     <span class="sideText">나</span>
                 </a>
@@ -182,17 +182,24 @@
                         newItem.className = 'videoDiv';
                         newItem.setAttribute('data-videoId', `\${video.videoId}`);
                         newItem.innerHTML = `<a class="video" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
-                            `<div class="profileContainer"><div class="profile"><img src="/local\${video.userProfileImage}" alt="profile image"/></div>` +
+                            `<div class="profileContainer"><div class="profile"><img class="profile" src="/local\${video.userProfileImage}" alt="profile image"  data-uploader="\${video.videoUploadUser}"/></div>` +
                             `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
-                            `<span class="uploader">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
+                            `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
                         videoListDiv.appendChild(newItem);
+
 
                         newItem.addEventListener('click', e => {
                             if(!e.target) return;
-                            if (e.target.tagName.toLowerCase() === 'img' || e.target.tagName.toLowerCase() === 'span') {
+                            console.log(e.target.className);
+                            if (e.target.id === 'videoImg' || e.target.className === 'title') {
                                 window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
                             }
+                            if (e.target.className === 'profile' || e.target.className === 'uploader') {
+                                window.location.href = "/userPage?channelName=" + e.target.dataset.uploader;
+                            }
                         });
+
+
                     });
 
                     pageNumber++;

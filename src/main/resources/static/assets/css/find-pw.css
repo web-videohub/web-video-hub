@@ -132,8 +132,15 @@ a:hover {
 }
 .inputDiv input:hover,
 .modifyPw input:hover {
+    transition: 0.2s ease-out;
     filter: drop-shadow(0 0 10px #8e8f8c);
 }
+.inputDiv input:not(:hover),
+.modifyPw input:not(:hover) {
+    transition: 0.2s ease-out;
+
+}
+
 .inputDiv #inputDiv3 {
     margin-bottom: 25px;
 }

@@ -36,7 +36,7 @@
                 </li>
                 <c:if test="${sessionScope.login.userAccount} == ${channelAccount}">
                     <li class="nav-item">
-                        <a class="nav-link home" href="/userPage">
+                        <a class="nav-link home" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                             <span class="lnr lnr-user"></span>
                             내 채널
                         </a>
@@ -44,7 +44,7 @@
                 </c:if>
                 <c:if test="${sessionScope.login.userAccount} != ${channelAccount}">
                     <li class="nav-item">
-                        <a class="nav-link" href="/userPage">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                             <span class="lnr lnr-user"></span>
                             내 채널
                         </a>
@@ -83,7 +83,7 @@
                 </li>
                 <c:if test="${sessionScope.login.userAccount} == ${channelAccount}">
                     <li class="nav-item2">
-                        <a class="nav-link home" href="/studio">
+                        <a class="nav-link home" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                             <span class="lnr lnr-user"></span><br>
                             <span class="sideText">나</span>
                         </a>
@@ -91,7 +91,7 @@
                 </c:if>
                 <c:if test="${sessionScope.login.userAccount} != ${channelAccount}">
                     <li class="nav-item2">
-                        <a class="nav-link" href="/studio">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                             <span class="lnr lnr-user"></span><br>
                             <span class="sideText">나</span>
                         </a>

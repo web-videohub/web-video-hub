@@ -100,7 +100,7 @@
                         <li><p class="dropdown-item drop-p">${sessionScope.login.userDisplayName}</p></li>
                         <li><p class="dropdown-item drop-p">${sessionScope.login.userAccount}</p></li>
                         <hr>
-                        <li><a class="dropdown-item" href="/userPage">내 채널 보기</a></li>
+                        <li><a class="dropdown-item" href="/userPage?channelName=${sessionScope.login.userDisplayName}">내 채널 보기</a></li>
                         <li><a class="dropdown-item" href="/setting">설정</a></li>
                         <li><a class="dropdown-item" href="#">로그아웃</a></li>
                     </ul>

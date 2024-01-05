@@ -117,7 +117,11 @@ a:hover {
     color: black;
 }
 .inputDiv input:hover {
+    transition: 0.2s ease-out;
     filter: drop-shadow(0 0 10px #8e8f8c);
+}
+.inputDiv input:not(:hover) {
+    transition: 0.2s ease-out;
 }
 .inputDiv #inputDiv5 {
     margin-bottom: 25px;
@@ -133,7 +137,7 @@ a:hover {
     width: 200px;
     height: 200px;
     position: absolute;
-    top: -110px;
+    top: -50px;
     right: -70px;
 }
 .profileImgContainer {

@@ -74,7 +74,11 @@ a {
     padding-left: 10px;
 }
 .inputDiv input:hover {
+    transition: 0.2s ease-out;
     filter: drop-shadow(0 0 10px #8e8f8c);
+}
+.inputDiv input:not(:hover) {
+    transition: 0.2s ease-out;
 }
 #inputDiv1 {
     margin-bottom: 10px;
@@ -144,7 +148,11 @@ a {
     font-weight: bold;
 }
 a:hover {
+    transition: 0.2s ease-out;
     text-decoration: 1px #0080FF underline;
+}
+a:not(:hover) {
+    transition: 0.2s ease-out;
 }
 .redStar {
     font-size: 17px;

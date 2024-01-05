@@ -113,11 +113,19 @@ body {
     position: relative;
 }
 .videoDiv:hover {
+    transition: 0.2s ease-out;
     /*filter: drop-shadow(0 5px 10px #8e8f8c);*/
-    filter: drop-shadow(0.8rem 0.8rem 10px #8e8f8c);
+    filter: drop-shadow(0.3rem 0.3rem 10px #8e8f8c);
+}
+.videoDiv:not(:hover) {
+    transition: 0.2s ease-out;
 }
 .videoDiv .title:hover {
+    transition: 0.2s ease-out;
     color: #020101;
+}
+.videoDiv .title:not(:hover) {
+    transition: 0.2s ease-out;
 }
 
 .video {
@@ -200,11 +208,22 @@ body {
 }
 .nav-item:hover,
 .nav-item2:hover {
+    transition: 0.2s ease-out;
     background: #ececec;
 }
+.nav-item:not(:hover),
+.nav-item2:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
 .nav-item:active,
 .nav-item2:active {
+    transition: 0.2s ease-out;
     background: #cccccc !important;
+}
+.nav-item:not(:active),
+.nav-item2:not(:active) {
+    transition: 0.2s ease-out;
 }
 
 .nav-item2 {
@@ -233,4 +252,9 @@ body {
     height: 30px;
     margin-right: -5px;
     margin-left: -2px;
+}
+
+.profile:hover,
+.uploader:hover {
+    cursor: pointer;
 }
