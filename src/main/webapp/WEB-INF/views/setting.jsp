@@ -43,7 +43,7 @@
                 <span class="boldTitle">내 Video hub 채널</span><br>
                 <span>Video hub에 공개되는 본인의 채널을 설정하세요.</span>
                 <div class="channelSetDiv">
-                    <span>내 채널</span>
+                    <span class="setting_box_title">내 채널</span>
                     <a href="/studio">
                         <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
                     </a>
@@ -65,21 +65,21 @@
                 <div class="user_setting_container">
                     <div class="user_setting_container_group">
                         <div class="settings_id">
-                            <span>Id</span>
+                            <span class="setting_box_title">Id</span>
                             <input type="text" id="user_id" placeholder="아이디(4자 이상)" class="setting_box_user_id"/>
                         </div>
                         <div class="settings_pw">
-                            <span>Password</span>
+                            <span class="setting_box_title">Password</span>
                             <span class="password_warming">비밀번호 안전성:</span>
                             <p class="password_warming">8자 이상 특수문자 포함하여 입력하세요. 다른 사이트에서 쓰는 비밀번호나 애완동물의 이름처럼 추측하기 쉬운 이름은 사용하지 마세요.</p>
                             <input type="text" id="user_pw" placeholder="새 비밀번호" class="setting_box_user_pw"/>
                         </div>
                         <div class="settings_em">
-                            <span>Email</span>
+                            <span class="setting_box_title">Email</span>
                             <input type="text" id="user_em" placeholder="이메일 예: you@example.com" class="setting_box_user_em"/>
                         </div>
                         <div class="settings_nn">
-                            <span>Nickname</span>
+                            <span class="setting_box_title">Nickname</span>
                             <input type="text" id="user_nn" placeholder="닉네임(한글)" class="setting_box_user_nn"/>
                         </div>
                         <button type="button" class="change_infobtn">변경하기</button>
@@ -89,11 +89,11 @@
 
             <div class="mainContainer" id="page2">
                 <div class="mainContainer_team_group">
-                    <h1>Rocket</h1>
-                    <span>국비 수업에서 JAVA Spring으로 사이트를 개발하기 위해 만들어졌습니다.</span>
+                    <h1>Team Rocket</h1>
+                    <span></span>
                 </div>
 
-                <div>
+                <div class="rocket_team_github">
                     <a href="https://github.com/web-videohub/web-video-hub"><span class="lnr lnr-earth"></span>Github</a>
                 </div>
             </div>

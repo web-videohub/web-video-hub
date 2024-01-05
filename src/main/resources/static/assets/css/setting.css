@@ -75,13 +75,11 @@ p, span, div {
 }
 .channelSetDiv {
     font-family: 'Noto Sans KR', sans-serif;
-
     display: flex;
     justify-content: left;
     align-content: center;
     flex-direction: row;
     text-align: center;
-
     margin-top: 20px;
 }
 .channelSetDiv span{
@@ -124,6 +122,10 @@ p, span, div {
 /* 여기부터 새로 추가한 CSS */
 /* 로그인 : capston, capston!*/
 
+.channelSetDiv a {
+    text-decoration-line: none;
+}
+
 /* 현재 있는 곳 구역 이름*/
 .menu_o_txt {
     font-family: "Roboto","Arial",sans-serif;
@@ -155,6 +157,10 @@ p, span, div {
     width: 80%;
     padding: 30px;
 }
+.setting_box_title {
+    font-size: 17px;
+    font-weight: 500;
+}
 .settings_id {
     display: flex;
     flex-direction: column;
@@ -166,6 +172,7 @@ p, span, div {
 .settings_pw .password_warming {
     color: #5F6368;
     margin-bottom: 5px;
+    font-size: 14px;
 }
 .settings_em {
     display: flex;
@@ -218,7 +225,7 @@ p, span, div {
     margin-right: 56px;
     color: #000000;
     font-family: "Roboto","Arial",sans-serif;
-    font-size: 14px;
+    font-size: 17px;
     line-height: 2rem;
     font-weight: 500;
 }
@@ -232,12 +239,21 @@ p, span, div {
     font-size: 14px;
     line-height: 2rem;
     font-weight: 500;
+}
+.accountSetDiv_link {
     text-decoration-line: none;
 }
+
 /* 웹사이트 정보 CSS 구간 */
 /* 전체 컨테이너 */
 
 
+/* Team link */
+.rocket_team_github a{
+    text-decoration-line: none;
+    color: #065FD4;
+}
+/* icon */
 .lnr-earth {
     color: #000000;
     font-size: 40px;
