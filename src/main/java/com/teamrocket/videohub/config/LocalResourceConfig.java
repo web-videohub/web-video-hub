@@ -14,14 +14,14 @@ public class LocalResourceConfig implements WebMvcConfigurer {
     @Value("${file.upload.root-path}")
     private String imageRootPath;
 
+    @Value("${file.uploadThumbnail.root-path}")
+    private String rootThumbnailPath;
+
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry
                 .addResourceHandler("/local/**")
-                .addResourceLocations("file:" + rootPath);
+                .addResourceLocations("file:" + rootPath, "file:" + imageRootPath, "file:" + rootThumbnailPath);
 
-        registry
-                .addResourceHandler("/local/**")
-                .addResourceLocations("file:" + imageRootPath);
     }
 }

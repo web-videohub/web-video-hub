@@ -16,7 +16,10 @@
     <div class="headerDiv">
         <div class="headerContainer">
             <div class="menu">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button id="headerBtn" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="lnr lnr-menu"></span>
+                </button>
+                <button id="headerBtn2" type="button"  class="navbar-toggler">
                     <span class="lnr lnr-menu"></span>
                 </button>
                 <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -25,7 +28,7 @@
                             <span class="lnr lnr-menu"></span>
                         </button>
                         <a href="/" class="logoA">
-                            <img class="mainLogo" src="/assets/img/logo.png" alt="">
+                            <img class="mainLogo" src="/assets/img/hubTitle.png" alt="">
                         </a>
                     </div>
                     <div class="offcanvas-body">
@@ -37,7 +40,7 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="#">
+                                <a class="nav-link" href="/subs">
                                 <span class="lnr lnr-book"></span>
                                     구독
                                 </a>
@@ -66,7 +69,7 @@
 
 
                 <a href="/" class="logoA">
-                    <img class="mainLogo" src="/assets/img/logo.png" alt="">
+                    <img class="mainLogo" src="/assets/img/hubTitle.png" alt="">
                 </a>
             </div>
             <form class="searchForm" action="/search" method="get">
@@ -86,7 +89,7 @@
                 <div class="dropdown">
                     <button class="btn btn-secondary" type="button" id="dropdownMenuButton1"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                        <img src="/local${sessionScope.login.userProfile}" alt="profile image"/>
+                        <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <li><p class="dropdown-item drop-p">${sessionScope.login.userDisplayName}</p></li>
@@ -104,5 +107,7 @@
 
 </header>
 <body>
+    <script>
 
+    </script>
 </body>

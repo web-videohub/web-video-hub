@@ -9,11 +9,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpSession;
-import java.io.File;
+import java.util.Map;
 
 @Controller
 @Slf4j
@@ -21,7 +19,10 @@ import java.io.File;
 public class VideoUploadController {
 
     @Value("${file.uploadVideo.root-path}")
-    private String rootPath;
+    private String rootVideoPath;
+
+    @Value("${file.uploadThumbnail.root-path}")
+    private String rootThumbnailPath;
 
     private final VideoService videoService;
 
@@ -38,13 +39,11 @@ public class VideoUploadController {
         log.debug("attached file name : {}", dto.getVideoUrl().getOriginalFilename());
         log.info("parameter : {}", dto);
 
-        String savePath = FileUtil.uploadVideo(dto.getVideoUrl(), rootPath);
-        log.error("save path: {}", savePath);
+        Map<String, String> map = FileUtil.uploadVideo(dto.getVideoUrl(), dto.getThumbnailUrl(), rootVideoPath, rootThumbnailPath);
+        String videoPath = map.get("videoPath");
+        String thumbnailPath = map.get("thumbnailPath");
 
-
-
-        videoService.insertVideo(dto, session, savePath);
-        return "";
-
+        videoService.insertVideo(dto, session, videoPath, thumbnailPath);
+        return "studio";
     }
 }

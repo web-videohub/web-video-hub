@@ -13,12 +13,12 @@
 <div id="snowfall"></div>
 <%--<jsp:include page="include/header.jsp"/>--%>
 <div class="mainDiv">
-    <img id="santa" src="/assets/img/santaHat.png" alt="">
+    <img id="santa" src="/assets/img/rabbit.png" alt="">
 
     <form class="loginForm" action="/login" method="post">
         <div class="mainTitle">
-            <h1>안녕하세요? 반가워요!</h1>
-            <h4>즐거운 크리스마스 보내세요!</h4>
+            <img class="mainLogo" src="/assets/img/hubTitle.png" alt="">
+            <h4>2024 갑진년 행복하게 보내세요!</h4>
         </div>
         <div class="inputDiv">
             <span class="inputText">아이디<span class="redStar">&nbsp;*</span></span>
@@ -34,9 +34,6 @@
             아직 가입하시지 않으셨나요? <a href="/register">계정만들기</a>
         </div>
     </form>
-    <div class="newsDiv">
-
-    </div>
 
 </div>
 <script>
