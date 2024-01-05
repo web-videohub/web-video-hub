@@ -30,12 +30,18 @@
                 </li>
                 <hr>
                 <li class="nav-item">
-                    <a class="nav-link" href="/studio">나 ></a>
+                    <a class="nav-link" href="/userPage">나 ></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userPage">
+                        <span class="lnr lnr-user"></span>
+                        내 채널
+                    </a>
                 </li>
                 <li class="nav-item home">
                     <a class="nav-link" href="/studio">
-                        <span class="lnr lnr-user"></span>
-                        내 채널
+                        <img class="mini" src="/assets/img/miniHub.png" alt="">
+                        스튜디오
                     </a>
                 </li>
                 <li class="nav-item">

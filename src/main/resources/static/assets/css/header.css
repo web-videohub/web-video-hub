@@ -1,3 +1,5 @@
+/* 구글 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .headerDiv {
     display: flex;
@@ -14,6 +16,9 @@
     position: fixed;
     top: 0;
     z-index: 1000;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
 }
 .headerContainer {
     width: 100%;
@@ -210,4 +215,11 @@
 .profileIMG {
     margin-left: -12px;
     margin-top: -7px;
+}
+
+.mini {
+    width: 60px;
+    height: 30px;
+    margin-right: -5px;
+    margin-left: -2px;
 }

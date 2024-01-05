@@ -79,4 +79,21 @@ public class AppController {
 
         return "subs";
     }
+
+    @GetMapping("/userPage")
+    public String userPage(
+            Model model,
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize,
+            String type
+
+    ) {
+        log.info("유저 페이지");
+
+          List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
+
+          model.addAttribute("vList", videos);
+
+        return "userPage";
+    }
 }

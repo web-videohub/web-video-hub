@@ -7,12 +7,18 @@
     <meta charset="UTF-8">
     <title>404 Not Found</title>
     <style>
+        /* 구글 폰트 */
+        @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
         .wrapper {
             display: flex;
             justify-content: center;
             align-items: center;
             background-color: #dcdcdc;
             height: 100vh;
+
+            font-family: 'Noto Sans KR', sans-serif;
+            font-weight: bold;
         }
 
         .content {
@@ -40,6 +46,9 @@
             justify-content: center;
             align-items: center;
             margin-top: 30px;
+        }
+        #headerBtn2 {
+            display: none;
         }
     </style>
 </head>
