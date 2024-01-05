@@ -5,6 +5,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/css/setting.css?after">
+    <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
+
     <title>설정</title>
 </head>
 <body>
@@ -53,10 +55,10 @@
                 <span class="boldTitle">내 계정</span><br>
                 <span class="user_text_margin">Video hub 계정의 정보를 설정하세요.</span>
                 <div class="accountSetDiv">
-                    <div>
-                        <span class="accountSetDiv_title">Video hub 계정</span>
+                    <div class="accountSetDiv_title">
+                        <span>Video hub 계정</span>
                     </div>
-                    <div>
+                    <div class="accountSetDiv_link">
                         <a href="#">계정정보 변경하기</a>
                     </div>
                 </div>
@@ -64,27 +66,36 @@
                     <div class="user_setting_container_group">
                         <div class="settings_id">
                             <span>Id</span>
-                            <input type="text" placeholder="아이디(4자 이상)" class="setting_box_user_id"/>
+                            <input type="text" id="user_id" placeholder="아이디(4자 이상)" class="setting_box_user_id"/>
                         </div>
                         <div class="settings_pw">
                             <span>Password</span>
                             <span class="password_warming">비밀번호 안전성:</span>
                             <p class="password_warming">8자 이상 특수문자 포함하여 입력하세요. 다른 사이트에서 쓰는 비밀번호나 애완동물의 이름처럼 추측하기 쉬운 이름은 사용하지 마세요.</p>
-                            <input type="text" placeholder="새 비밀번호" class="setting_box_user_pw"/>
+                            <input type="text" id="user_pw" placeholder="새 비밀번호" class="setting_box_user_pw"/>
                         </div>
                         <div class="settings_em">
                             <span>Email</span>
-                            <input type="text" placeholder="이메일 예: you@example.com" class="setting_box_user_em"/>
+                            <input type="text" id="user_em" placeholder="이메일 예: you@example.com" class="setting_box_user_em"/>
                         </div>
                         <div class="settings_nn">
                             <span>Nickname</span>
-                            <input type="text" placeholder="닉네임(한글)" class="setting_box_user_nn"/>
+                            <input type="text" id="user_nn" placeholder="닉네임(한글)" class="setting_box_user_nn"/>
                         </div>
+                        <button type="button" class="change_infobtn">변경하기</button>
                     </div>
                 </div>
             </div>
+
             <div class="mainContainer" id="page2">
-                안녕하세요 팀 로켓 입니다.
+                <div class="mainContainer_team_group">
+                    <h1>Rocket</h1>
+                    <span>국비 수업에서 JAVA Spring으로 사이트를 개발하기 위해 만들어졌습니다.</span>
+                </div>
+
+                <div>
+                    <a href="https://github.com/web-videohub/web-video-hub"><span class="lnr lnr-earth"></span>Github</a>
+                </div>
             </div>
     </div>
 <script>

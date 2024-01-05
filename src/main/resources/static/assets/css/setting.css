@@ -200,6 +200,17 @@ p, span, div {
     border: 1px solid #80868B;
     border-radius: 5px;
 }
+.change_infobtn {
+    width: 133px;
+    height: 48px;
+    border-radius: 20px;
+    color: #FFFFFF;
+    background-color: #0b57d0;
+    border: none;
+}
+.change_infobtn:hover {
+    background-color: #0696E3;
+}
 
 .accountSetDiv_title {
     width: 160px;
@@ -211,5 +222,24 @@ p, span, div {
     line-height: 2rem;
     font-weight: 500;
 }
+
+.accountSetDiv_link {
+    width: 160px;
+    min-width: 160px;
+    margin-right: 56px;
+    color: #065FD4;
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 14px;
+    line-height: 2rem;
+    font-weight: 500;
+    text-decoration-line: none;
+}
 /* 웹사이트 정보 CSS 구간 */
 /* 전체 컨테이너 */
+
+
+.lnr-earth {
+    color: #000000;
+    font-size: 40px;
+}
+
