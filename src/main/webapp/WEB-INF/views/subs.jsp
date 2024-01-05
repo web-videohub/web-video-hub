@@ -4,9 +4,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/assets/css/subs.css">
     <link rel="stylesheet" href="/assets/css/filter.css">
-    <title>VideoHub</title>
+    <title>구독채널 최신영상</title>
 
     <style>
         .loader {
@@ -36,14 +36,13 @@
 <div class="leftDiv index-left">
     <div class="offcanvas-body index-side">
         <ul class="navbar-nav flex-grow-1 pe-3">
-
-            <li class="nav-item home">
+            <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">
                     <span class="lnr lnr-home"></span>
                     홈
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item home">
                 <a class="nav-link" href="/subs">
                     <span class="lnr lnr-book"></span>
                     구독
@@ -60,12 +59,6 @@
                 </a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/studio">
-                    <img class="mini" src="/assets/img/miniHub.png" alt="">
-                    스튜디오
-                </a>
-            </li>
-            <li class="nav-item">
                 <a class="nav-link" href="/setting">
                     <span class="lnr lnr-cog"></span>
                     설정
@@ -78,13 +71,13 @@
 <div class="leftDiv2 index-left2">
     <div class="offcanvas-body index-side2">
         <ul class="navbar-nav flex-grow-1 pe-3">
-            <li class="nav-item2 home">
+            <li class="nav-item2">
                 <a class="nav-link active" aria-current="page" href="/">
                     <span class="lnr lnr-home"></span><br>
                     <span class="sideText">홈</span>
                 </a>
             </li>
-            <li class="nav-item2">
+            <li class="nav-item2 home">
                 <a class="nav-link" href="/subs">
                     <span class="lnr lnr-book"></span><br>
                     <span class="sideText">구독</span>
@@ -108,8 +101,10 @@
 </div>
 <div class="mainContainer">
     <div class="subContainer">
-        <jsp:include page="include/filter.jsp"/>
-
+        <div class="subDiv">
+            <span class="subTitle">최신순</span>
+        </div>
+        <%-- 서버에 업로드된 영상들이 연속적으로 나타날 div --%>
         <div class="videoListDiv">
 
         </div>
@@ -187,7 +182,6 @@
                             `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
                         videoListDiv.appendChild(newItem);
 
-
                         newItem.addEventListener('click', e => {
                             if(!e.target) return;
                             console.log(e.target.className);
@@ -198,8 +192,6 @@
                                 window.location.href = "/userPage?channelName=" + e.target.dataset.uploader;
                             }
                         });
-
-
                     });
 
                     pageNumber++;
@@ -320,15 +312,6 @@
         pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         checkWidth();
     });
-
-    const $all = document.getElementById('all');
-
-    (() => {
-        $all.click();
-    })();
-
-
-
 </script>
 </body>
 </html>

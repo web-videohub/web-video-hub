@@ -19,15 +19,19 @@ public class VideoService {
 
     private final VideoMapper videoMapper;
 
-    public void insertVideo(VideoUploadRequestDTO dto, HttpSession session, String savePath) {
-        Video video = dto.toEntity(savePath);
+    public void insertVideo(VideoUploadRequestDTO dto, HttpSession session, String videoPath, String thumbnailPath) {
+        Video video = dto.toEntity(videoPath, thumbnailPath);
         video.setVideoUploadUser(LoginUtils.getCurrentLoginMemberAccount(session));
         videoMapper.save(video);
     }
 
-    public List<Video> getVideos(int pageSize, int pageNumber) {
+    public List<Video> getVideos(int pageSize, int pageNumber, String type) {
         int offset = (pageNumber - 1) * pageSize;
-        return videoMapper.findAll(pageSize, offset);
+        return videoMapper.findAll(pageSize, offset, type);
+    }
+
+    public Video getVideo(int videoId) {
+        return videoMapper.findOne(videoId);
     }
 
     public VideoDetailResponseDTO getDetail(int videoId) {

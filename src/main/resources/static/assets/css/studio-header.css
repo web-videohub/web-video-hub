@@ -1,4 +1,5 @@
 
+
 .headerDiv {
     display: flex;
     flex-direction: row;
@@ -11,7 +12,9 @@
     text-align: center;
     background-color: #fae6a5;
 
-    /*position: fixed;*/
+    border-bottom: 1px solid #969ba1;
+
+    position: fixed;
     /*top: 0;*/
     /*z-index: 1000;*/
 }
@@ -22,11 +25,19 @@
     align-content: center;
 }
 .menu {
-    width: 200px;
+    width: 250px;
     display: flex;
     justify-content: center;
     align-content: center;
     margin: auto 0;
+}
+.navbar-toggler {
+    width: 60px !important;
+    height: 60px ;
+}
+.navbar-toggler span {
+    margin: 0 auto;
+    font-size: 30px !important;
 }
 .dropdownMenu {
     width: 50px;
@@ -35,10 +46,16 @@
     background-color: white;
     border: 0;
 }
+.logoA {
+    margin: auto 0 auto 10px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
 .mainLogo {
     width: 150px;
-    height: 40px;
-    background-color: #0080FF;
+    height: 50px;
+    margin: auto 0 !important;
 }
 .searchForm {
     width: 50%;
@@ -48,10 +65,8 @@
     flex-direction: row;
 }
 .searchInput {
-    width: 90%;
+    width: 60%;
     height: 40px;
-    border-top-left-radius: 10px;
-    border-bottom-left-radius: 10px;
     border: 1px #cccaca solid;
     padding-left: 15px;
 }
@@ -89,5 +104,8 @@
     border: 0;
     margin-left: 20px;
 }
-
+.btn-secondary img {
+    margin-left: -12px;
+    margin-top: -7px;
+}
 

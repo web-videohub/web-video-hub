@@ -3,12 +3,11 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="com.teamrocket.videohub.repository.VideoMapper">
-
     <insert id="save">
         insert into tbl_video
-        (video_upload_user, video_title, video_content, video_category, video_url)
+        (video_upload_user, video_title, video_content, video_category, video_url, thumbnail_url)
         VALUES
-        (#{videoUploadUser}, #{videoTitle}, #{videoContent}, #{videoCategory}, #{videoUrl})
+        (#{videoUploadUser}, #{videoTitle}, #{videoContent}, #{videoCategory}, #{videoUrl}, #{thumbnailUrl})
     </insert>
 
     <select id="findOne" resultType="com.teamrocket.videohub.entity.Video">
@@ -33,10 +32,32 @@
         SELECT
         v.video_title, v.video_upload_user,
         v.video_view_count, v.video_upload_date,
-        m.user_profile_image
+        m.user_profile_image, v.thumbnail_url, v.video_id
         FROM tbl_video v
         JOIN tbl_member m ON v.video_upload_user = m.user_account
-        ORDER BY video_upload_date desc
+        <if test="type == 'game'">
+            WHERE video_category = 'game'
+        </if>
+        <if test="type == 'life'">
+            WHERE video_category = 'life'
+        </if>
+        <if test="type == 'animal'">
+            WHERE video_category = 'animal'
+        </if>
+        <if test="type == 'nature'">
+            WHERE video_category = 'nature'
+        </if>
+        <if test="type == 'dance'">
+            WHERE video_category = 'dance'
+        </if>
+        <if test="type == 'health'">
+            WHERE video_category = 'health'
+        </if>
+        <if test="type == 'music'">
+            WHERE video_category = 'music'
+        </if>
+
+        ORDER BY v.video_upload_date desc
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
 
@@ -63,6 +84,5 @@
             WHERE v.video_title LIKE CONCAT('%', #{keyword}, '%')
         </if>
         ORDER BY video_upload_date desc
-        LIMIT #{pageSize} OFFSET #{offset}
     </select>
 </mapper>

@@ -21,9 +21,9 @@ public class InterceptorConfig implements WebMvcConfigurer {
                 .addPathPatterns("/login", "/register", "/find-pw")
                 ;
 
-        registry
-                .addInterceptor(beforeLoginInterceptor)
-                .addPathPatterns("/studio")
-                ;
+        //registry
+        //        .addInterceptor(beforeLoginInterceptor)
+        //        .addPathPatterns("/studio", "/setting")
+        //        ;
     }
 }

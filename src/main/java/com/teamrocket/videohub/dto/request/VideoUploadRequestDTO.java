@@ -21,13 +21,15 @@ public class VideoUploadRequestDTO {
     @NotBlank
     private String videoCategory;
     private MultipartFile videoUrl;
+    private MultipartFile thumbnailUrl;
 
-    public Video toEntity(String savePath) {
+    public Video toEntity(String videoPath, String thumbnailPath) {
         return Video.builder()
                 .videoTitle(videoTitle)
                 .videoContent(videoContent)
                 .videoCategory(videoCategory)
-                .videoUrl(savePath)
+                .videoUrl(videoPath)
+                .thumbnailUrl(thumbnailPath)
                 .build();
     }
 }
