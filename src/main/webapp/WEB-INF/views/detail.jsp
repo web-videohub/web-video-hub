@@ -60,14 +60,8 @@
                             <div class="input-group clearfix">
                                 <div class="bbox1">
                                     <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
-                                    <p>${sessionScope.login.userDisplayName}<</p>
+                                    <p>${sessionScope.login.userDisplayName}</p>
                                 </div>
-                                <div class="bbox1_1">
-                                    <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
-                                </div>
-                            </div>
-                            <div class="bbox2">
-                                <button type="button" class="review_B" onclick="addComment()">댓글</button>
                             </div>
                             <div class="bbox1_1">
                                 <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
@@ -76,8 +70,7 @@
                         <div class="bbox2">
                             <button type="button" class="review_B" id="addReply">댓글</button>
                         </div>
-                    </div>
-                </form>
+                    </form>
                 <div id="replyData">
                     <ul class="chat_list">
                         <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
@@ -183,11 +176,7 @@
             for(let reply of replies) {
 
                 const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
-
-                tag += `
-
-            `
-
+                
                 // 댓글 번호
                 // 드롭메뉴가 각 댓글에 적용되도록 댓글 구분용 id가 필요합니다. (rno)
                 var commentId = rno;
@@ -284,7 +273,6 @@
         addComment();
     })();
 </script>
-<script src="./assets/js/testDropmenu.js"></script>
-
+<%--<script src="./assets/js/testDropmenu.js"></script>--%>
 </body>
 </html>

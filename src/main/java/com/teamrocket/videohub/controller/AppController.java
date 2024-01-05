@@ -4,13 +4,11 @@ import com.teamrocket.videohub.entity.Video;
 import com.teamrocket.videohub.services.VideoService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -52,15 +50,16 @@ public class AppController {
 
 
     @GetMapping("/showmv")
-    public String showmv(
-            Model model
-            , int videoId
-    ) {
+    public String showmv(Model model, int videoId) {
         log.info("영상 채널");
 
         Video video = videoService.getVideo(videoId);
 
         model.addAttribute("v", video);
+
+        return "/detail";
+    }
+
     @GetMapping("/search")
     public String search(String keyword, Model model,
                          @RequestParam(defaultValue = "1") int pageNumber,
@@ -69,11 +68,9 @@ public class AppController {
         log.info("/search Page: GET! {}", keyword);
         List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, keyword);
 
-        log.error("videos : {}", video);
+        log.error("videos : {}", videos);
         model.addAttribute("vList", videos);
         model.addAttribute("keyword", keyword);
-
-        log.error("vList : {}", videos);
 
         return "/index";
     }
