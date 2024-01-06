@@ -13,12 +13,12 @@ import org.springframework.stereotype.Service;
 public class SubscribeService {
     private final SubscriptionMapper subscriptionMapper;
 
-    public boolean findSubs(Subscription subs) {
+    public Subscription findSubs(Subscription subs) {
         log.debug("구독 조회 서비스 실행!");
 
-        Integer subsId = subscriptionMapper.find(subs);
+        Subscription subss = subscriptionMapper.find(subs);
 
-        return subsId != null;
+        return subss;
     }
 
     public boolean AddSubs(Subscription subs) {

@@ -168,7 +168,7 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/loadMoreVideos?pageNumber=\${pageNumber}&pageSize=12&type=` + type);
+                const response = await fetch(`/loadMoreVideosSub?pageNumber=${pageNumber}&pageSize=12&type=${type}&account=${sessionScope.login.userAccount}`);
                 const newVideos = await response.json();
 
                 if (newVideos.length > 0) {

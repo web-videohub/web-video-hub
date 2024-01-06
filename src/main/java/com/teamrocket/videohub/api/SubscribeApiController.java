@@ -20,13 +20,18 @@ public class SubscribeApiController {
     private final SubscribeService subscribeService;
 
     // 구독 조회 기능
-    @GetMapping("{userAccount}/{receiverAccount}")
+    @GetMapping("/{userAccount}/{receiverAccount}")
     public ResponseEntity<?> getSubs(@PathVariable String userAccount,
                                      @PathVariable String receiverAccount) {
         log.info("/api/v1/subscribe : GET!");
         Subscription subs = new Subscription(userAccount, receiverAccount);
-
-        boolean flag = subscribeService.findSubs(subs);
+        log.info("잘 가져왔니1: {}", subs);
+        Subscription subs2 = subscribeService.findSubs(subs);
+        log.info("잘 가져왔니2: {}", subs2);
+        boolean flag = false;
+        if (subs.equals(subs2)) {
+            flag = true;
+        }
 
         return ResponseEntity.ok().body(flag);
     }

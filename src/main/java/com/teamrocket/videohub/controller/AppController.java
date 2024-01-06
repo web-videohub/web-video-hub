@@ -49,6 +49,17 @@ public class AppController {
         log.warn("videos : {}", videos);
         return ResponseEntity.ok(videos);
     }
+    @GetMapping("/loadMoreVideosSub")
+    @ResponseBody
+    public ResponseEntity<List<Video>> loadMoreVideosSub(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize,
+            String type, String account
+    ) {
+        List<Video> videos = videoService.getVideosSub(pageSize, pageNumber, type, account);
+        log.warn("구독한 채널의 영상들 : {}", videos);
+        return ResponseEntity.ok(videos);
+    }
 
 
 
@@ -103,6 +114,7 @@ public class AppController {
     @GetMapping("/subs")
     public String subs() {
         log.info("구독 현황 페이지");
+
 
         return "subs";
     }

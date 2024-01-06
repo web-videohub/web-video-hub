@@ -23,4 +23,6 @@ public interface VideoMapper {
     List<Video> findSearch(@Param("pageSize") int pageSize, @Param("offset") int offset, String keyword);
 
     List<Video> findAllCh(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String channelName);
+
+    List<Video> findAllSub(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String account);
 }
