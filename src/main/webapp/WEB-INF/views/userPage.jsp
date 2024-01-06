@@ -32,7 +32,7 @@
                 </li>
                 <hr>
                 <li class="nav-item">
-                    <a class="nav-link" href="/studio">나 ></a>
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">나 ></a>
                 </li>
                 <c:if test="${sessionScope.login.userAccount} == ${channelAccount}">
                     <li class="nav-item">
