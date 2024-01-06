@@ -3,14 +3,14 @@ package com.teamrocket.videohub.controller;
 import com.teamrocket.videohub.entity.Video;
 import com.teamrocket.videohub.services.VideoService;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -64,6 +64,23 @@ public class AppController {
 
         return "detail";
     }
+  
+    @GetMapping("/search")
+    public String search(String keyword, Model model,
+                         @RequestParam(defaultValue = "1") int pageNumber,
+                         @RequestParam(defaultValue = "16") int pageSize,
+                         HttpSession session) {
+        log.info("/search Page: GET! {}", keyword);
+        List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, keyword);
+
+        model.addAttribute("vList", videos);
+        log.info("이거보세ㅐㅇ쇼!!!  :" + videos.toString());
+        model.addAttribute("keyword", keyword);
+
+        log.error("vList : {}", videos);
+
+        return "/search";
+    }
 
     @RequestMapping("/setting")
     public String setting() {
@@ -73,10 +90,34 @@ public class AppController {
 
     }
 
+
+//     @GetMapping("/detail")
+//     public String detail(int videoId, Model model) {
+//         log.info("비디오 상세 페이지");
+//         model.addAttribute("v", videoService.getDetail(videoId));
+//         return "detail";
+
     @GetMapping("/subs")
     public String subs() {
         log.info("구독 현황 페이지");
 
         return "subs";
+    }
+
+    @GetMapping("/userPage")
+    public String userPage(
+            Model model,
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize,
+            String type
+
+    ) {
+        log.info("유저 페이지");
+
+          List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
+
+          model.addAttribute("vList", videos);
+
+        return "userPage";
     }
 }

@@ -64,15 +64,17 @@ body {
         left: 0 !important;
     }
 }
-.mainContainer {
+.channelContainer {
     width: 100%;
     height: 100%;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-content: center;
-    flex-direction: row;
-    padding-left: 180px;
+    flex-direction: column;
+    padding-left: 250px;
+    padding-top: 150px;
     /*margin-left:200px;*/
+    font-family: 'Noto Sans KR', sans-serif;
 }
 .subContainer {
     width: 100%;
@@ -107,49 +109,32 @@ body {
     /*width: calc(33.33% - 20px);  여백을 고려하여 3개의 열로 정렬되도록 설정 */
     margin-bottom: 20px; /* 각 videoDiv 간의 여백 설정 */
     box-sizing: border-box; /* 여백이 포함된 크기로 계산되도록 설정 */
-    border-radius: 20px;
+    border-radius: 10px;
     margin-right: 20px;
 
     position: relative;
 }
-
 .videoDiv:hover {
-    transition: 0.2s ease-out;
     /*filter: drop-shadow(0 5px 10px #8e8f8c);*/
-    filter: drop-shadow(0.3rem 0.3rem 10px #8e8f8c);
-}
-.videoDiv:not(:hover) {
-    transition: 0.2s ease-out;
+    filter: drop-shadow(0.8rem 0.8rem 10px #8e8f8c);
 }
 .videoDiv .title:hover {
-    transition: 0.2s ease-out;
     color: #020101;
 }
-.videoDiv .title:not(:hover) {
-    transition: 0.2s ease-out;
-}
 
-
-.video1 {
+.video {
     width: 100%;
     height: 69%;
     background-color: #F2B950;
-    border-radius: 20px;
+    border-radius: 10px;
     margin: 0 auto;
 
     position: absolute;
     top: 0;
     overflow: hidden;
 }
-.video:hover {
-    transition: 0.2s ease-out;
-    border-radius: 0;
-}
-.video:not(:hover) {
-    transition: 0.2s ease-out;
-}
 
-.video1 img{
+.video img{
     width: 100%;
     height: 100%;
     object-fit: revert;
@@ -217,22 +202,11 @@ body {
 }
 .nav-item:hover,
 .nav-item2:hover {
-    transition: 0.2s ease-out;
     background: #ececec;
 }
-.nav-item:not(:hover),
-.nav-item2:not(:hover) {
-    transition: 0.2s ease-out;
-}
-
 .nav-item:active,
 .nav-item2:active {
-    transition: 0.2s ease-out;
     background: #cccccc !important;
-}
-.nav-item:not(:active),
-.nav-item2:not(:active) {
-    transition: 0.2s ease-out;
 }
 
 .nav-item2 {
@@ -263,21 +237,96 @@ body {
     margin-left: -2px;
 }
 
-.profile:hover,
-.uploader:hover {
-    cursor: pointer;
+#headerBtn2 {
+    display: none;
 }
-.uploader:hover {
-    transition: 0.2s ease-out;
-    text-decoration: underline;
+
+.pimg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #5eb2ff;
 }
-.uploader:not(:hover) {
-    transition: 0.2s ease-out;
+.profileBox {
+    display: flex;
+    justify-content: left !important;
+    align-content: center;
+    flex-direction: row;
 }
-.titleA:hover {
-    transition: 0.2s ease-out;
-    text-decoration: underline;
+.channelProfile {
+    display: flex;
+    justify-content: left;
+    align-content: center;
+    flex-direction: column;
+    font-family: 'Noto Sans KR', sans-serif;
+
+    padding-left: 50px;
+    margin-bottom: 100px;
 }
-.titleA:not(:hover) {
-    transition: 0.2s ease-out;
+.channelName {
+    font-size: 30px;
+    font-weight: bold;
+}
+.subscribe_B {
+    width: 80px;
+    height: 40px;
+    background: black;
+    color: white;
+    border-radius: 30px;
+    border: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+hr {
+    width: 90%;
+}
+
+.channelVideoList {
+    width: 250px;
+    height: 240px;
+    background: #f1f1f1;
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+
+    margin-bottom: 15px;
+    border-radius: 10px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+
+#chImg {
+    width: 250px;
+    height: 150px;
+    border-radius: 10px;
+}
+.channelVideo {
+    display: flex;
+    justify-content: left;
+    align-content: center;
+    flex-direction: column;
+
+    margin-top: 0;
+
+}
+.miniTitle {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.chViewcount {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.chVideoDiv {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    padding-left: 70px;
+    margin-top: 30px;
 }

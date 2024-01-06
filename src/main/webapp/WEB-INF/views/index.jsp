@@ -51,12 +51,18 @@
             </li>
             <hr>
             <li class="nav-item">
-                <a class="nav-link" href="/studio">나 ></a>
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">나 ></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                    <span class="lnr lnr-user"></span>
+                    내 채널
+                </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/studio">
-                    <span class="lnr lnr-user"></span>
-                    내 채널
+                    <img class="mini" src="/assets/img/miniHub.png" alt="">
+                    스튜디오
                 </a>
             </li>
             <li class="nav-item">
@@ -85,7 +91,7 @@
                 </a>
             </li>
             <li class="nav-item2">
-                <a class="nav-link" href="/studio">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                     <span class="lnr lnr-user"></span><br>
                     <span class="sideText">나</span>
                 </a>
@@ -173,6 +179,7 @@
                         const newItem = document.createElement('div');
                         newItem.className = 'videoDiv';
                         newItem.setAttribute('data-videoId', `\${video.videoId}`);
+
                         newItem.innerHTML = `<a class="video1" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
                             `<div class="profileContainer"><div class="profile"><img src="/local\${video.userProfileImage}" alt="profile image"/></div>` +
                             `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title">\${video.videoTitle}</span></a>` +
@@ -186,10 +193,16 @@
 
                         newItem.addEventListener('click', e => {
                             if(!e.target) return;
-                            if (e.target.tagName.toLowerCase() === 'img') {
+                            console.log(e.target.className);
+                            if (e.target.id === 'videoImg' || e.target.className === 'title') {
                                 window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
                             }
+                            if (e.target.className === 'profile' || e.target.className === 'uploader') {
+                                window.location.href = "/userPage?channelName=" + e.target.dataset.uploader;
+                            }
                         });
+
+
                     });
 
                     pageNumber++;
