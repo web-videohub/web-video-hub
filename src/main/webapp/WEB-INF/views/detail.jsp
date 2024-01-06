@@ -15,6 +15,22 @@
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
 
+    <style>
+        .loader {
+            border: 8px solid #f3f3f3;
+            border-top: 8px solid #3498db;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
 
 </head>
 <body class="back_bg">
@@ -35,7 +51,7 @@
                     <div class="video_user_bbox">
                         <a href="#"><img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/></a>
                         <div class="video_info_user_bbox">
-                            <a href="#">${v.videoUploadUser}</a>
+                            <a href="/">${v.videoUploadUser}</a>
                             <p>구독자 0명</p>
                         </div>
                         <div class="video_review_btn_o">
@@ -71,6 +87,7 @@
                             <button type="button" class="review_B" id="addReply">댓글</button>
                         </div>
                     </form>
+                </div>
                 <div id="replyData">
                     <ul class="chat_list">
                         <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
@@ -97,13 +114,77 @@
     </div>
 </div>
 
-<!-- 드롭다운 메뉴, 댓글 테스트 자바스크립트 코드 -->
+<!-- 드롭다운 메뉴, 댓글 테스트, 무한 스크롤 자바스크립트 코드 -->
 <script>
+    const replyURL = '/api/v1/replies'; // 댓글과 관련된 기능을 수행하는 링크
+    const emotionURL = '/api/v1/emotion'; // 이모션 체크 링크
     const urlParams = new URLSearchParams(window.location.search);
-    const URL = '/api/v1/replies'; // 댓글과 관련된 기능을 수행하는 링크
     const videoId = urlParams.get('videoId'); //URL의 동영상 번호를 가져와서 저장
     const currentAccount = '${login.userAccount}'; // 로그인한 사람
     const auth = '${login.userAuth}'; //로그인한 사람 권한
+
+    const options = {
+        root: null,
+        rootMargin: '0px',
+        threshold: 0.5,
+    };
+
+
+    const handleIntersection = (entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                console.log("Intersection observed!");
+                loadData(selectedValue);
+            }
+        });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, options);
+
+    const loadData = async (type) => {
+        console.log('loadData function called');
+        if (loading) return;
+
+        loading = true;
+        loader.style.visibility = "visible";
+
+        setTimeout(async () => {
+            try {
+                const response = await fetch(`/api/v1/replies/\${videoId}?pageNumber=\${pageNumber}&pageSize=12)`);
+                const newReply = await response.json();
+
+                if (newReply.length > 0) {
+                    newReply.forEach(reply => {
+                        const newItem = document.createElement('div');
+                        newItem.className = 'videoDiv';
+                        newItem.setAttribute('data-videoId', `\${video.videoId}`);
+                        newItem.innerHTML = `<a class="video" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
+                            `<div class="profileContainer"><div class="profile"><img class="profile" src="/local\${video.userProfileImage}" alt="profile image"  data-uploader="\${video.videoUploadUser}"/></div>` +
+                            `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
+                            `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
+                        videoListDiv.appendChild(newItem);
+
+                    });
+
+                    pageNumber++;
+
+
+                } else {
+                    observer.unobserve(loader);
+                    console.log('Observer unobserved');
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                loading = false;
+                loader.style.visibility = "hidden";
+            }
+        }, 1000);
+    };
+    const loader = document.getElementById('loader');
+    const videoListDiv = document.querySelector('.chat_list');
+    let loading = false;
+    let pageNumber = 1;
 
     /*
         로그인한 유저 정보들 (나중에 이 주석 꼭 지울것!)

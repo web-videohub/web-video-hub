@@ -20,5 +20,6 @@
         <mapper resource="mappers/VideoMapper.xml"/>
         <mapper resource="mappers/ReplyMapper.xml" />
         <mapper resource="mappers/EmotionMapper.xml" />
+        <mapper resource="mappers/SubscriptionMapper.xml" />
     </mappers>
 </configuration>

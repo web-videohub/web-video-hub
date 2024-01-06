@@ -75,14 +75,6 @@ public class AppController {
         return "/index";
     }
 
-
-    @RequestMapping("/showmv")
-    public String showmv() {
-        log.info("영상 채널");
-
-        return "detail";
-    }
-
     @RequestMapping("/setting")
     public String setting() {
         log.info("설정페이지");
@@ -96,12 +88,5 @@ public class AppController {
         log.info("구독 현황 페이지");
 
         return "subs";
-    }
-
-    @GetMapping("/detail")
-    public String detail(int videoId, Model model) {
-        log.info("비디오 상세 페이지");
-        model.addAttribute("v", videoService.getDetail(videoId));
-        return "detail";
     }
 }

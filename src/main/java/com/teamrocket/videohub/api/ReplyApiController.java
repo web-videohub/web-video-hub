@@ -1,10 +1,9 @@
 package com.teamrocket.videohub.api;
 
-import com.teamrocket.videohub.common.Page;
 import com.teamrocket.videohub.dto.request.ReplyModifyRequestDTO;
 import com.teamrocket.videohub.dto.request.ReplyPostRequestDTO;
 import com.teamrocket.videohub.dto.response.ReplyListResponseDTO;
-import com.teamrocket.videohub.service.ReplyService;
+import com.teamrocket.videohub.services.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -12,7 +11,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 
@@ -21,19 +19,20 @@ import java.sql.SQLException;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/replies")
 public class ReplyApiController {
-    private final int PAGE_ROW_COUNT = 20;
     private final ReplyService replyService;
 
     // 댓글 목록 조회 요청
     @GetMapping("/{videoId}")
-    public ResponseEntity<?> list(@PathVariable long videoId) {
+    public ResponseEntity<?> list(
+            @PathVariable long videoId,
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize) {
+
         log.info("/api/v1/replies/{} : GET!", videoId);
 
-        Page page = new Page();
-        page.setPageNo(1);
-        page.setAmount(20);
+        ReplyListResponseDTO replies = replyService.getReplyList(videoId, pageSize, pageNumber);
 
-        ReplyListResponseDTO replies = replyService.getList(videoId, page);
+        log.warn("replies : {}", replies);
 
         return ResponseEntity
                 .ok()
