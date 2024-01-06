@@ -299,8 +299,8 @@ hr {
 }
 
 .channelVideoList {
-    width: 250px;
-    height: 260px;
+    width: 370px;
+    height: 320px;
     background: #f1f1f1;
 
     display: flex;

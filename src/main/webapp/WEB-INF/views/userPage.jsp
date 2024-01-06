@@ -32,11 +32,11 @@
                 </li>
                 <hr>
                 <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">나 ></a>
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
                 </li>
                 <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
                     <li class="nav-item home">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                             <span class="lnr lnr-user"></span>
                             내 채널
                         </a>
@@ -44,7 +44,7 @@
                 </c:if>
                 <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
                     <li class="nav-item">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                             <span class="lnr lnr-user"></span>
                             내 채널
                         </a>
@@ -83,7 +83,7 @@
                 </li>
                 <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
                     <li class="nav-item2 home">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                             <span class="lnr lnr-user"></span><br>
                             <span class="sideText">나</span>
                         </a>
@@ -91,7 +91,7 @@
                 </c:if>
                 <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
                     <li class="nav-item2">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                             <span class="lnr lnr-user"></span><br>
                             <span class="sideText">나</span>
                         </a>
