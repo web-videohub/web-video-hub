@@ -4,13 +4,13 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <%--    <title>영상 화면</title>--%>
+    <title>${v.videoTitle}</title>
 
-<%--    <title>영상 화면</title>--%>
-    <title>${video.videoTitle}</title>
-  
+
     <link rel="stylesheet" href="/assets/css/detail.css">
 
-<%--    icon    --%>
+    <%--    icon    --%>
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
@@ -39,12 +39,13 @@
 <%-- 햄버거메뉴와 로고(홈버튼) 검색창, 영상업로드, 마이페이지 --%>
 <jsp:include page="include/header.jsp"/>
 
-    <%--    영상 컨테이너       --%>
-    <div class="container">
-        <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
-            <div class="box1">
+<%--    영상 컨테이너       --%>
+<div class="container">
+    <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
+        <div class="box1">
+            <div class="videoContainer">
                 <video src="/local${v.videoUrl}"
-                       controls width="auto" height="auto">
+                       controls width="100%" height="100%">
                 </video>
                 <div class="video_info">
                     <h1>${v.videoTitle}</h1>
@@ -54,16 +55,15 @@
                             <a href="/userPage?username=${v.videoUploadUser}">${v.videoUploadUser}</a>
                             <p>구독자 0명</p>
                         </div>
-                        <div class="video_review_btn_o">
-                            <button type="button" class="subscribe_B">구독</button>
-                        </div>
+
+
                         <div class="video_review_btn_t">
                             <button type="button" class="like_B">${v.videoLike}<span class="lnr lnr-thumbs-up"></span>1.5만</button>
+
                             <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
                             <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                         </div>
                     </div>
-
                     <div class="video_info_bbox">
                         <p>업로드 일자: ${v.videoUploadDate}</p>
                         <p>조회수: $${v.videoViewCount}</p>
@@ -94,6 +94,23 @@
                     </ul>
                 </div>
             </div>
+        </div>
+        <div class="box2">
+            <ul class="video_list_Algorithm">
+                <li>
+                    <a href="#">
+                        <div class="video_sumnail">
+                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
+                        </div>
+                        <div class="video_subinfo">
+                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
+                            <p class="bbox_text_sub">Test_user</p>
+                            <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+
         </div>
         <div class="box2">
             <ul class="video_list_Algorithm">
