@@ -51,7 +51,7 @@
                     <div class="video_user_bbox">
                         <a href="#"><img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/></a>
                         <div class="video_info_user_bbox">
-                            <a href="/">${v.videoUploadUser}</a>
+                            <a href="/userPage?username=${v.videoUploadUser}">${v.videoUploadUser}</a>
                             <p>구독자 0명</p>
                         </div>
                         <div class="video_review_btn_o">
@@ -114,6 +114,8 @@
     </div>
 </div>
 
+<div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
+
 <!-- 드롭다운 메뉴, 댓글 테스트, 무한 스크롤 자바스크립트 코드 -->
 <script>
     const replyURL = '/api/v1/replies'; // 댓글과 관련된 기능을 수행하는 링크
@@ -127,13 +129,13 @@
     const replyListDiv = document.querySelector('.chat_list');
     let loading = false;
     let pageNumber = 1;
+    let selectedValue = null;
 
     const options = {
         root: null,
         rootMargin: '0px',
         threshold: 0.5,
     };
-
 
     const handleIntersection = (entries, observer) => {
         entries.forEach(entry => {
@@ -146,7 +148,11 @@
 
     const observer = new IntersectionObserver(handleIntersection, options);
 
-    const loadData = async (type) => {
+    document.addEventListener("DOMContentLoaded", function () {
+        observer.observe(loader);
+    });
+
+    const loadData = async () => {
         console.log('loadData function called');
         if (loading) return;
 
@@ -155,20 +161,55 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/api/v1/replies/\${videoId}?pageNumber=\${pageNumber}&pageSize=12)`);
+                const response = await fetch(`/api/v1/replies/\${videoId}?pageNumber=\${pageNumber}&pageSize=12`);
                 const newReply = await response.json();
 
                 if (newReply.length > 0) {
                     newReply.forEach(reply => {
-                        const newItem = document.createElement('div');
-                        newItem.className = 'videoDiv';
-                        newItem.setAttribute('data-videoId', `\${video.videoId}`);
-                        newItem.innerHTML = `<a class="video" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
-                            `<div class="profileContainer"><div class="profile"><img class="profile" src="/local\${video.userProfileImage}" alt="profile image"  data-uploader="\${video.videoUploadUser}"/></div>` +
-                            `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
-                            `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
-                        replyListDiv.appendChild(newItem);
+                        const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
+                        console.log("reply : " + rno);
 
+                        const newItem = document.createElement('div');
+                        newItem.className = 'replyDiv';
+                        newItem.setAttribute('reply-id', `\${rno}`);
+                        newItem.innerHTML = `<div class="chat_list_profile">
+                                    <a href="#"><img src="${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
+                                </div>
+                                <div class="chat_list_profile_name">
+                                    <a href="#"><p>\${accountUserName}</p></a>
+                                </div>
+                                <div class="chat_list_chat_text" id="chat-text-\${rno}">
+                                    <p>\${text}</p>
+                                </div>
+                                <div class="chat_list_edit_area" id="edit-area-\${rno}" style="display: none;">
+                                    <textarea id="chat_message" autocomplete="off" class="form-control" data-id="\${rno}">\${text}</textarea>
+                                    <button type="button" class="save_bb" onclick="replyEditComment(this)">저장</button>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="review_btns_one">
+                                                <button type="button" class="like_bb"><span class="lnr lnr-thumbs-up"></span></button>
+                                                <button type="button" class="hate_bb"><span class="lnr lnr-thumbs-down"></span></button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="review_btns_two">`;
+
+                        if (auth === 'ADMIN' || currentAccount === account) {
+                            newItem.innerHTML += `<button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
+                                      <div id="myDropdown-\${rno}" class="dropdown-content">
+                                          <a href="#" id="replyModBtn" onclick="toggleEditComment(this)">수정</a>
+                                          <a href="#" id="replyDelBtn" onclick="replyRemoveClickEvent(this)">삭제</a>`;
+                        }
+
+                        newItem.innerHTML += `    </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>`;
+
+                        replyListDiv.appendChild(newItem);
                     });
 
                     pageNumber++;
@@ -229,7 +270,7 @@
             body: JSON.stringify(payload)
         };
 
-        fetch(URL, requestInfo)
+        fetch(replyURL, requestInfo)
             .then(res => {
                 if (res.status === 200) {
                     return res.json();
@@ -238,72 +279,62 @@
                 }
             })
             .then(responseData => {
-                console.log(responseData);
+                console.log("responseData :" + responseData);
 
                 document.getElementById('message').value = '';
-                fetchGetReplies(1);
+                fetchGetReplies(responseData);
             });
         }
     }
 
     // replies : reply_no, reply_text, reply_date, video_id, account
-    // count : 댓글 총 갯수
-    // pageInfo : 나중에 무한스크롤할 때 필요한 페이지 정보
-    function renderReplies({replies}) {
+    function renderReplies(replyList) {
 
-        let tag = '';
-
-        if(replies !== null && replies.length > 0) {
-            for(let reply of replies) {
+        if(replyList !== null && replyList.length > 0) {
+            for(let reply of replyList) {
 
                 const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
+                const newItem = document.createElement('div');
+                newItem.className = 'replyDiv';
+                newItem.setAttribute('reply-id', rno);
+                newItem.innerHTML = `<div class="chat_list_profile">
+                                    <a href="#"><img src="${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
+                                </div>
+                                <div class="chat_list_profile_name">
+                                    <a href="#"><p>\${accountUserName}</p></a>
+                                </div>
+                                <div class="chat_list_chat_text" id="chat-text-\${rno}">
+                                    <p>\${text}</p>
+                                </div>
+                                <div class="chat_list_edit_area" id="edit-area-\${rno}" style="display: none;">
+                                    <textarea id="chat_message" autocomplete="off" class="form-control" data-id="\${rno}">\${text}</textarea>
+                                    <button type="button" class="save_bb" onclick="replyEditComment(this)">저장</button>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="review_btns_one">
+                                                <button type="button" class="like_bb"><span class="lnr lnr-thumbs-up"></span></button>
+                                                <button type="button" class="hate_bb"><span class="lnr lnr-thumbs-down"></span></button>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <div class="review_btns_two">`;
 
-                // 댓글 번호
-                // 드롭메뉴가 각 댓글에 적용되도록 댓글 구분용 id가 필요합니다. (replyNo)
-                var commentId = rno;
-
-                // 새로운 댓글을 생성하고 <ul class="chat_list">에 추가
-                tag += `
-        <div class="chat_list_profile"> `;
-                tag += (profile ? `<a href="#"><img src="/local\${profile}" height="45" width="45" alt="profile image"></a>`
-                    : `<a href="#"><img src="/assets/img/profile.jpeg" height="45" width="45" alt="anonymous"></a>`);
-                tag += ` </div>
-        <div class="chat_list_profile_name">
-            <a href="#"><p>\${accountUserName}</p></a>
-        </div>
-        <div class="chat_list_chat_text" id="chat-text-\${rno}">
-            <p>\${text}</p>
-        </div>
-        <div class="chat_list_edit_area" id="edit-area-\${rno}" " style="display: none;">
-            <textarea id="chat_message" autocomplete="off" class="form-control" data-id="\${replyNo}">\${text}</textarea>
-            <button type="button" class="save_bb" onclick="replyEditComment(this)">저장</button>
-        </div>
-        <table>
-            <tr>
-                <td>
-                    <div class="review_btns_one">
-                        <button type="button" class="like_bb"><span class="lnr lnr-thumbs-up"></span></button>
-                        <button type="button" class="hate_bb"><span class="lnr lnr-thumbs-down"></span></button>
-                    </div>
-                </td>
-                <td>
-                    <div class="review_btns_two"> `;
-                if(auth === 'ADMIN' || currentAccount === account) {
-                    tag += `
-                        <button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
-                        <div id="myDropdown-\${rno}" class="dropdown-content">
-                            <a href="#" id="replyModBtn" onclick="toggleEditComment(this)">수정</a>
-                            <a href="#" id="replyDelBtn" onclick="replyRemoveClickEvent(this)">삭제</a> `;
+                if (auth === 'ADMIN' || currentAccount === account) {
+                    newItem.innerHTML += `<button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
+                                      <div id="myDropdown-\${rno}" class="dropdown-content">
+                                          <a href="#" id="replyModBtn" onclick="toggleEditComment(this)">수정</a>
+                                          <a href="#" id="replyDelBtn" onclick="replyRemoveClickEvent(this)">삭제</a>`;
                 }
-                tag += `
-                        </div>
-                    </div>
-                </td>
-            </tr>
-        </table>
-    `;
 
-                document.querySelector('.chat_list').innerHTML = tag;
+                newItem.innerHTML += `    </div>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </table>`;
+
+                replyListDiv.appendChild(newItem);
             }
         } else {
             // tag += "<div id='replyContent' class='card-body'>아직 댓글이 없습니다.</div>";
@@ -326,7 +357,7 @@
             method: 'DELETE'
         };
         // 서버에 삭제 비동기 요청
-        fetch(`\${URL}/\${rno}`, requestInfo)
+        fetch(`\${replyURL}/\${rno}`, requestInfo)
             .then(res => {
                 if (res.status === 200) {
                     return res.json();
@@ -336,7 +367,7 @@
                 }
             })
             .then(responseResult => {
-                renderReplies(responseResult);
+                fetchGetReplies(responseResult);
             });
     }
 
@@ -380,7 +411,7 @@
             body: JSON.stringify(payload)
         };
 
-        fetch(URL, requestInfo)
+        fetch(replyURL, requestInfo)
             .then(res => {
                 if (res.status === 200) {
                     // alert('댓글이 수정되었습니다.');
@@ -391,7 +422,7 @@
                 }
             })
             .then(result => {
-                renderReplies(result);
+                fetchGetReplies(result)
             });
     }
 
@@ -401,14 +432,14 @@
             .then(res => res.json())
             .then(replyList => {
                 console.log(replyList);
-                renderReplies(replyList);
+                loadData();
             })
         ;
     }
 
     // 서버에서 실시간으로 비동기통신을 해서 구독여부 JSON을 받아오는 함수
     function fetchGetSubscribe() {
-        fetch(`\${SubscribeURL}/${login.userAccount}/${v.videoUploadUser}`)
+        fetch(`\${SubscribeURL}/\${login.userAccount}/\${v.videoUploadUser}`)
             .then(res => res.json())
             .then(replyData => {
                 console.log("가져온 구독정보 : " + replyData);
@@ -428,7 +459,7 @@
 
     (() => {
         // 서버에서 댓글 불러오기
-        fetchGetReplies(videoId);
+        // fetchGetReplies(videoId);
 
         // 댓글 등록 이벤트 핸들러
         addComment();

@@ -64,7 +64,7 @@ public class ReplyService {
         }
 
         // 등록이 성공하면 새롭게 갱신된 1페이지 댓글 내용을 재 조회해서 응답한다.
-        return getReplyList(dto.getVideoId(), 1, 12);
+        return getReplyList(dto.getVideoId(), 12, 1);
     }
 
     // 댓글 삭제
@@ -75,7 +75,7 @@ public class ReplyService {
 
         replyMapper.delete(replyNo);
 
-        return getReplyList(videoId, 1, 12);
+        return getReplyList(videoId, 12, 1);
     }
 
     // 댓글 수정 처리
@@ -83,6 +83,6 @@ public class ReplyService {
 
         replyMapper.modify(dto.toEntity());
 
-        return getReplyList(dto.getVideoId(), 1, 12);
+        return getReplyList(dto.getVideoId(), 12, 1);
     }
 }
