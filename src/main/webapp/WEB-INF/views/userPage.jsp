@@ -149,14 +149,19 @@
         </div>
     </div>
 <script>
-    $thumbnail = document.querySelector('.chVideo');
-    $chTitle = document.querySelector('.chTitle');
-    $thumbnail.addEventListener('click', e => {
+    let $thumbnail = document.querySelectorAll('.chVideo');
+    $thumbnail.forEach(function ($thumbnail) {
+        $thumbnail.addEventListener('click', e => {
             window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
+        });
     });
-    $chTitle.addEventListener('click', e => {
+    let $chTitle = document.querySelectorAll('.chTitle');
+    $chTitle.forEach(function ($chTitle) {
+        $chTitle.addEventListener('click', e => {
             window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
+        });
     });
+
 
 
     function formatTimeAgo(timestamp) {
