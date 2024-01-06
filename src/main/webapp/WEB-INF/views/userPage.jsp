@@ -112,6 +112,7 @@
             <img src="/local${user.channelProfile}" alt="profile image" class="pimg"/>
             <div class="channelProfile">
                 <p class="channelName">${user.channelName}</p>
+                <p class="channelEmail">이메일: ${user.channelEmail}</p>
 <%--                <p class="channelName">김다빈</p>--%>
                 <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
 <%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
