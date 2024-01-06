@@ -149,6 +149,41 @@
         </div>
     </div>
 <script>
+    const URL = '/api/v1/subscribe';
+    const $userAccount = '${sessionScope.login.userAccount}';
+    const $receiverAccount = '${user.channelAccount}';
+    const $subBtn = document.querySelector('.subscribe_B');
+
+    // 서버로 보낼 데이터
+    const payload = {
+        userAccount: $userAccount,
+        receiverAccount: $receiverAccount
+    };
+
+    // GET방식을 제외한 요청의 정보 만들기
+    const requestInfo = {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    };
+    fetch(URL, requestInfo)
+        .then(res => {
+            if (res.status === 200) {
+                alert('구독 완료!');
+                return res.json();
+            } else {
+                alert('구독 실패!');
+                return res.text();
+            }
+        })
+        .then(responseData => {
+            $subBtn.value = '구독 취소';
+
+        });
+
+
 
     let $thumbnail = document.querySelectorAll('.chVideo');
     $thumbnail.forEach(function ($thumbnail) {
