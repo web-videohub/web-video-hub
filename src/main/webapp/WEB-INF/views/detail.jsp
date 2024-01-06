@@ -117,11 +117,16 @@
 <!-- 드롭다운 메뉴, 댓글 테스트, 무한 스크롤 자바스크립트 코드 -->
 <script>
     const replyURL = '/api/v1/replies'; // 댓글과 관련된 기능을 수행하는 링크
-    const emotionURL = '/api/v1/emotion'; // 이모션 체크 링크
+    const emotionURL = '/api/v1/emotion'; // 이모션 링크
+    const subscribeURL = '/api/v1/subscribe'; // 구독 여부 링크
     const urlParams = new URLSearchParams(window.location.search);
     const videoId = urlParams.get('videoId'); //URL의 동영상 번호를 가져와서 저장
     const currentAccount = '${login.userAccount}'; // 로그인한 사람
     const auth = '${login.userAuth}'; //로그인한 사람 권한
+    const loader = document.getElementById('loader');
+    const replyListDiv = document.querySelector('.chat_list');
+    let loading = false;
+    let pageNumber = 1;
 
     const options = {
         root: null,
@@ -162,7 +167,7 @@
                             `<div class="profileContainer"><div class="profile"><img class="profile" src="/local\${video.userProfileImage}" alt="profile image"  data-uploader="\${video.videoUploadUser}"/></div>` +
                             `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
                             `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
-                        videoListDiv.appendChild(newItem);
+                        replyListDiv.appendChild(newItem);
 
                     });
 
@@ -181,10 +186,6 @@
             }
         }, 1000);
     };
-    const loader = document.getElementById('loader');
-    const videoListDiv = document.querySelector('.chat_list');
-    let loading = false;
-    let pageNumber = 1;
 
     /*
         로그인한 유저 정보들 (나중에 이 주석 꼭 지울것!)
@@ -202,11 +203,10 @@
 
         // 사용자가 입력한 댓글 텍스트 가져오기
         var commentText = document.getElementById('message').value;
-        const writer = `${login.userDisplayName}`
 
         // 댓글 번호 (임시로 시간을 사용)
         // 드롭메뉴가 각 댓글에 적용되도록 댓글 구분용 id가 필요합니다.
-        var commentId = new Date().getTime();
+        // var commentId = new Date().getTime();
 
         // 사용자 입력값 검증
         if (commentText.trim() === '') {
@@ -217,7 +217,7 @@
         // 서버로 보낼 데이터
         const payload = {
             text: commentText,
-            account: `${login.userAccount}`,
+            account: currentAccount,
             videoId: videoId
         }
 
@@ -249,7 +249,7 @@
     // replies : reply_no, reply_text, reply_date, video_id, account
     // count : 댓글 총 갯수
     // pageInfo : 나중에 무한스크롤할 때 필요한 페이지 정보
-    function renderReplies({replies, count, pageInfo}) {
+    function renderReplies({replies}) {
 
         let tag = '';
 
@@ -259,7 +259,7 @@
                 const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
 
                 // 댓글 번호
-                // 드롭메뉴가 각 댓글에 적용되도록 댓글 구분용 id가 필요합니다. (rno)
+                // 드롭메뉴가 각 댓글에 적용되도록 댓글 구분용 id가 필요합니다. (replyNo)
                 var commentId = rno;
 
                 // 새로운 댓글을 생성하고 <ul class="chat_list">에 추가
@@ -275,7 +275,7 @@
             <p>\${text}</p>
         </div>
         <div class="chat_list_edit_area" id="edit-area-\${rno}" " style="display: none;">
-            <textarea id="chat_message" autocomplete="off" class="form-control" data-id="\${rno}">\${text}</textarea>
+            <textarea id="chat_message" autocomplete="off" class="form-control" data-id="\${replyNo}">\${text}</textarea>
             <button type="button" class="save_bb" onclick="replyEditComment(this)">저장</button>
         </div>
         <table>
@@ -366,7 +366,7 @@
         console.log("text: " + text);
         const payload = {
             text: text,
-            account: `${login.userAccount}`,
+            account: currentAccount,
             videoId: videoId,
             rno: +rno
         };
@@ -395,15 +395,35 @@
             });
     }
 
-    // 서버에 실시간으로 비동기통신을 해서 JSON을 받아오는 함수
-    function fetchGetReplies(videoId, page = 1) {
-        fetch(`\${URL}/\${videoId}`)
+    // 서버에 실시간으로 비동기통신을 해서 댓글의 JSON을 받아오는 함수
+    function fetchGetReplies() {
+        fetch(`\${replyURL}/\${videoId}?pageNumber=\${pageNumber}&pageSize=12`)
             .then(res => res.json())
             .then(replyList => {
                 console.log(replyList);
                 renderReplies(replyList);
             })
         ;
+    }
+
+    // 서버에서 실시간으로 비동기통신을 해서 구독여부 JSON을 받아오는 함수
+    function fetchGetSubscribe() {
+        fetch(`\${SubscribeURL}/${login.userAccount}/${v.videoUploadUser}`)
+            .then(res => res.json())
+            .then(replyData => {
+                console.log("가져온 구독정보 : " + replyData);
+                renderSubscribes(replyData);
+            })
+    }
+
+    function renderSubscribes(bool) {
+        if (bool === true) {
+            console.log("구독중");
+        } else if (bool === true) {
+            console.log("구독안되있슴");
+        } else {
+            console.log("뭐가온거임? 리턴된 값 : ", bool);
+        }
     }
 
     (() => {
