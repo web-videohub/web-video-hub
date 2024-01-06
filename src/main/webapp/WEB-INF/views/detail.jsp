@@ -4,9 +4,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <%--    <title>영상 화면</title>--%>
-    <title>${v.videoTitle}</title>
 
+    <%--    <title>영상 화면</title>--%>
+    <title>${video.videoTitle}</title>
 
     <link rel="stylesheet" href="/assets/css/detail.css">
 
@@ -43,92 +43,74 @@
 <div class="container">
     <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
         <div class="box1">
-            <div class="videoContainer">
-                <video src="/local${v.videoUrl}"
-                       controls width="100%" height="100%">
-                </video>
-                <div class="video_info">
-                    <h1>${v.videoTitle}</h1>
-                    <div class="video_user_bbox">
-                        <a href="#"><img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/></a>
-                        <div class="video_info_user_bbox">
-                            <a href="/userPage?username=${v.videoUploadUser}">${v.videoUploadUser}</a>
-                            <p>구독자 0명</p>
-                        </div>
-
-
-                        <div class="video_review_btn_t">
-                            <button type="button" class="like_B">${v.videoLike}<span class="lnr lnr-thumbs-up"></span>1.5만</button>
-
-                            <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
-                            <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
-                        </div>
+            <video src="/local${v.videoUrl}"
+                   controls width="auto" height="auto">
+            </video>
+            <div class="video_info">
+                <h1>${v.videoTitle}</h1>
+                <div class="video_user_bbox">
+                    <a href="#"><img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/></a>
+                    <div class="video_info_user_bbox">
+                        <a href="/userPage?channelName=${v.videoUploadUser}">${v.videoUploadUser}</a>
+                        <p>구독자 0명</p>
                     </div>
-                    <div class="video_info_bbox">
-                        <p>업로드 일자: ${v.videoUploadDate}</p>
-                        <p>조회수: $${v.videoViewCount}</p>
-                        <p>영상 설명: ${v.videoContent}</p>
+                    <div class="video_review_btn_o">
+                        <button type="button" class="subscribe_B">구독</button>
+                    </div>
+                    <div class="video_review_btn_t">
+                        <button type="button" class="like_B">${v.videoLike}<span class="lnr lnr-thumbs-up"></span>1.5만</button>
+                        <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
+                        <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                     </div>
                 </div>
-                <div class="box3">
-                    <form id="messageForm" name="messageForm">
-                        <div class="form-group">
-                            <div class="input-group clearfix">
-                                <div class="bbox1">
-                                    <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
-                                    <p>${sessionScope.login.userDisplayName}</p>
-                                </div>
-                            </div>
-                            <div class="bbox1_1">
-                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
-                            </div>
-                        </div>
-                        <div class="bbox2">
-                            <button type="button" class="review_B" id="addReply">댓글</button>
-                        </div>
-                    </form>
-                </div>
-                <div id="replyData">
-                    <ul class="chat_list">
-                        <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
-                    </ul>
+
+                <div class="video_info_bbox">
+                    <p>업로드 일자: ${v.videoUploadDate}</p>
+                    <p>조회수: $${v.videoViewCount}</p>
+                    <p>영상 설명: ${v.videoContent}</p>
                 </div>
             </div>
+            <div class="box3">
+                <form id="messageForm" name="messageForm">
+                    <div class="form-group">
+                        <div class="input-group clearfix">
+                            <div class="bbox1">
+                                <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
+                                <p>${sessionScope.login.userDisplayName}</p>
+                            </div>
+                        </div>
+                        <div class="bbox1_1">
+                            <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
+                        </div>
+                    </div>
+                    <div class="bbox2">
+                        <button type="button" class="review_B" id="addReply">댓글</button>
+                    </div>
+                </form>
+            </div>
+            <div id="replyData">
+                <ul class="chat_list">
+                    <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
+                </ul>
+            </div>
         </div>
-        <div class="box2">
-            <ul class="video_list_Algorithm">
-                <li>
-                    <a href="#">
-                        <div class="video_sumnail">
-                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
-                        </div>
-                        <div class="video_subinfo">
-                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
-                            <p class="bbox_text_sub">Test_user</p>
-                            <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-
-        </div>
-        <div class="box2">
-            <ul class="video_list_Algorithm">
-                <li>
-                    <a href="#">
-                        <div class="video_sumnail">
-                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
-                        </div>
-                        <div class="video_subinfo">
-                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
-                            <p class="bbox_text_sub">Test_user</p>
-                            <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
+    <div class="box2">
+        <ul class="video_list_Algorithm">
+            <li>
+                <a href="#">
+                    <div class="video_sumnail">
+                        <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
+                    </div>
+                    <div class="video_subinfo">
+                        <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
+                        <p class="bbox_text_sub">Test_user</p>
+                        <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
+                    </div>
+                </a>
+            </li>
+        </ul>
     </div>
+</div>
 </div>
 
 <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
@@ -146,6 +128,7 @@
     const replyListDiv = document.querySelector('.chat_list');
     let loading = false;
     let pageNumber = 1;
+    let nowPageNumber = pageNumber;
     let selectedValue = null;
 
     const options = {
@@ -259,99 +242,114 @@
 
         $addBtn.onclick = e => {
 
-        // 사용자가 입력한 댓글 텍스트 가져오기
-        var commentText = document.getElementById('message').value;
+            // 사용자가 입력한 댓글 텍스트 가져오기
+            var commentText = document.getElementById('message').value;
 
-        // 댓글 번호 (임시로 시간을 사용)
-        // 드롭메뉴가 각 댓글에 적용되도록 댓글 구분용 id가 필요합니다.
-        // var commentId = new Date().getTime();
+            // 댓글 번호 (임시로 시간을 사용)
+            // 드롭메뉴가 각 댓글에 적용되도록 댓글 구분용 id가 필요합니다.
+            // var commentId = new Date().getTime();
 
-        // 사용자 입력값 검증
-        if (commentText.trim() === '') {
-            alert('댓글 내용은 필수값입니다!!');
-            return;
-        }
+            // 사용자 입력값 검증
+            if (commentText.trim() === '') {
+                alert('댓글 내용은 필수값입니다!!');
+                return;
+            }
 
-        // 서버로 보낼 데이터
-        const payload = {
-            text: commentText,
-            account: currentAccount,
-            videoId: videoId
-        }
+            // 서버로 보낼 데이터
+            const payload = {
+                text: commentText,
+                account: currentAccount,
+                videoId: videoId
+            }
 
-        const requestInfo = {
-            method: 'POST',
-            headers: {
-                'content-type': 'application/json'
-            },
-            body: JSON.stringify(payload)
-        };
+            const requestInfo = {
+                method: 'POST',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            };
 
-        fetch(replyURL, requestInfo)
-            .then(res => {
-                if (res.status === 200) {
-                    return res.json();
-                } else {
-                    return res.text();
-                }
-            })
-            .then(responseData => {
-                console.log("responseData :" + responseData);
+            fetch(replyURL, requestInfo)
+                .then(res => {
+                    if (res.status === 200) {
+                        return res.json();
+                    } else {
+                        return res.text();
+                    }
+                })
+                .then(responseData => {
+                    console.log("responseData :" + responseData);
 
-                document.getElementById('message').value = '';
-                fetchGetReplies(responseData);
-            });
+                    document.getElementById('message').value = '';
+                    loading = false;
+                    loader.style.visibility = "hidden";
+                    nowPageNumber = pageNumber;
+                    pageNumber = 1;
+                    fetchGetReplies(responseData);
+                    for (i = 2; i<nowPageNumber; i++) {
+                        pageNumber = i;
+                        loadData();
+                    }
+                });
         }
     }
 
-    // replies : reply_no, reply_text, reply_date, video_id, account
     function renderReplies(replyList) {
+
+        let tag = '';
 
         if(replyList !== null && replyList.length > 0) {
             for(let reply of replyList) {
 
                 const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
-                const newItem = document.createElement('div');
-                newItem.className = 'replyDiv';
-                newItem.setAttribute('reply-id', rno);
-                newItem.innerHTML = `<div class="chat_list_profile">
-                                    <a href="#"><img src="${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
-                                </div>
-                                <div class="chat_list_profile_name">
-                                    <a href="#"><p>\${accountUserName}</p></a>
-                                </div>
-                                <div class="chat_list_chat_text" id="chat-text-\${rno}">
-                                    <p>\${text}</p>
-                                </div>
-                                <div class="chat_list_edit_area" id="edit-area-\${rno}" style="display: none;">
-                                    <textarea id="chat_message" autocomplete="off" class="form-control" data-id="\${rno}">\${text}</textarea>
-                                    <button type="button" class="save_bb" onclick="replyEditComment(this)">저장</button>
-                                </div>
-                                <table>
-                                    <tr>
-                                        <td>
-                                            <div class="review_btns_one">
-                                                <button type="button" class="like_bb"><span class="lnr lnr-thumbs-up"></span></button>
-                                                <button type="button" class="hate_bb"><span class="lnr lnr-thumbs-down"></span></button>
-                                            </div>
-                                        </td>
-                                        <td>
-                                            <div class="review_btns_two">`;
 
-                if (auth === 'ADMIN' || currentAccount === account) {
-                    newItem.innerHTML += `<button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
-                                      <div id="myDropdown-\${rno}" class="dropdown-content">
-                                          <a href="#" id="replyModBtn" onclick="toggleEditComment(this)">수정</a>
-                                          <a href="#" id="replyDelBtn" onclick="replyRemoveClickEvent(this)">삭제</a>`;
+                // 댓글 번호
+                // 드롭메뉴가 각 댓글에 적용되도록 댓글 구분용 id가 필요합니다. (rno)
+                var commentId = rno;
+
+                // 새로운 댓글을 생성하고 <ul class="chat_list">에 추가
+                tag += `
+        <div class="chat_list_profile"> `;
+                tag += (profile ? `<a href="#"><img src="/local\${profile}" height="45" width="45" alt="profile image"></a>`
+                    : `<a href="#"><img src="/assets/img/profile.jpeg" height="45" width="45" alt="anonymous"></a>`);
+                tag += ` </div>
+        <div class="chat_list_profile_name">
+            <a href="#"><p>\${accountUserName}</p></a>
+        </div>
+        <div class="chat_list_chat_text" id="chat-text-\${rno}">
+            <p>\${text}</p>
+        </div>
+        <div class="chat_list_edit_area" id="edit-area-\${rno}" " style="display: none;">
+            <textarea id="chat_message" autocomplete="off" class="form-control" data-id="\${rno}">\${text}</textarea>
+            <button type="button" class="save_bb" onclick="replyEditComment(this)">저장</button>
+        </div>
+        <table>
+            <tr>
+                <td>
+                    <div class="review_btns_one">
+                        <button type="button" class="like_bb"><span class="lnr lnr-thumbs-up"></span></button>
+                        <button type="button" class="hate_bb"><span class="lnr lnr-thumbs-down"></span></button>
+                    </div>
+                </td>
+                <td>
+                    <div class="review_btns_two"> `;
+                if(auth === 'ADMIN' || currentAccount === account) {
+                    tag += `
+                        <button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
+                        <div id="myDropdown-\${rno}" class="dropdown-content">
+                            <a href="#" id="replyModBtn" onclick="toggleEditComment(this)">수정</a>
+                            <a href="#" id="replyDelBtn" onclick="replyRemoveClickEvent(this)">삭제</a> `;
                 }
+                tag += `
+                        </div>
+                    </div>
+                </td>
+            </tr>
+        </table>
+    `;
 
-                newItem.innerHTML += `    </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>`;
-
-                replyListDiv.appendChild(newItem);
+                document.querySelector('.chat_list').innerHTML = tag;
             }
         } else {
             // tag += "<div id='replyContent' class='card-body'>아직 댓글이 없습니다.</div>";
@@ -384,7 +382,15 @@
                 }
             })
             .then(responseResult => {
+                loading = false;
+                loader.style.visibility = "hidden";
+                nowPageNumber = pageNumber;
+                pageNumber = 1;
                 fetchGetReplies(responseResult);
+                for (i = 2; i<=nowPageNumber; i++) {
+                    pageNumber = i;
+                    loadData();
+                }
             });
     }
 
@@ -439,7 +445,15 @@
                 }
             })
             .then(result => {
-                fetchGetReplies(result)
+                loading = false;
+                loader.style.visibility = "hidden";
+                nowPageNumber = pageNumber;
+                pageNumber = 1;
+                fetchGetReplies(result);
+                for (i = 2; i<nowPageNumber; i++) {
+                    pageNumber = i;
+                    loadData();
+                }
             });
     }
 
@@ -449,7 +463,7 @@
             .then(res => res.json())
             .then(replyList => {
                 console.log(replyList);
-                loadData();
+                renderReplies(replyList);
             })
         ;
     }
