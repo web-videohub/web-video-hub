@@ -80,10 +80,22 @@ li {
     display: block;
     margin-right: 10px;
 }
-.video_user_bbox a img {
+
+.profile {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile a {
     width: 45px;
     height: 45px;
-    float: left;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profile a .user-profile-image {
+    width: 45px;
+    height: 45px;
 }
 
 /* video_review_btn_o .subscribe_B: 구독 버튼 */
@@ -420,5 +432,23 @@ li {
 
 #headerBtn2 {
     display: none;
+}
+
+.videoContainer {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    overflow: hidden;
+}
+
+.videoContainer video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: revert;
+    background-color: #000;
 }
 

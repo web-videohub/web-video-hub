@@ -113,7 +113,7 @@ body {
 
     position: relative;
 }
-.video {
+.video1 {
     width: 330px;
     height: 200px;
     background-color: #F2B950;
@@ -125,7 +125,7 @@ body {
     overflow: hidden;
 }
 
-.video img{
+.video1 img{
     width: 100%;
     height: 100%;
     object-fit: revert;
