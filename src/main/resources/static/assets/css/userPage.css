@@ -273,6 +273,27 @@ body {
     border: 0;
     font-family: 'Noto Sans KR', sans-serif;
 }
+.studioBtn {
+    width: 170px;
+    height: 40px;
+    background: black;
+    color: white;
+    border-radius: 30px;
+    border: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 6px;
+}
+.chBtn:hover {
+    transition: 0.2s ease-out;
+    background: #444444;
+}
+.chBtn:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
+
 hr {
     width: 90%;
 }

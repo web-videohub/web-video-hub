@@ -34,15 +34,15 @@
                 <li class="nav-item">
                     <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">나 ></a>
                 </li>
-                <c:if test="${sessionScope.login.userAccount} == ${channelAccount}">
-                    <li class="nav-item">
-                        <a class="nav-link home" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                    <li class="nav-item home">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                             <span class="lnr lnr-user"></span>
                             내 채널
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.login.userAccount} != ${channelAccount}">
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
                     <li class="nav-item">
                         <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                             <span class="lnr lnr-user"></span>
@@ -81,15 +81,15 @@
                         <span class="sideText">구독</span>
                     </a>
                 </li>
-                <c:if test="${sessionScope.login.userAccount} == ${channelAccount}">
-                    <li class="nav-item2">
-                        <a class="nav-link home" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                    <li class="nav-item2 home">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                             <span class="lnr lnr-user"></span><br>
                             <span class="sideText">나</span>
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.login.userAccount} != ${channelAccount}">
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
                     <li class="nav-item2">
                         <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                             <span class="lnr lnr-user"></span><br>
@@ -109,18 +109,17 @@
     </div>
     <div class="channelContainer">
         <div class="profileBox">
-<%--            <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="pimg"/>--%>
-            <img src="/assets/img/rabbit.png" alt="profile image" class="pimg"/>
+            <img src="/local${user.channelProfile}" alt="profile image" class="pimg"/>
             <div class="channelProfile">
-                <p class="channelName">${channelName}</p>
+                <p class="channelName">${user.channelName}</p>
 <%--                <p class="channelName">김다빈</p>--%>
-                <p class="channelAccount">@${channelAccount} ＊ 구독자 ${subCount}명 ＊ 동영상 ${videoCount}개</p>
+                <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
 <%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
-                <c:if test="${sessionScope.login.userAccount} != ${channelAccount}">
-                    <button type="button" class="subscribe_B">구독</button>
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
+                    <button type="button" class="subscribe_B chBtn">구독</button>
                 </c:if>
-                <c:if test="${sessionScope.login.userAccount} == ${channelAccount}">
-                    <button type="button" class="subscribe_B">스튜디오</button>
+                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                    <a href="/studio" class="studioBtn chBtn">스튜디오</a>
                 </c:if>
             </div>
         </div>
@@ -149,6 +148,7 @@
         </div>
     </div>
 <script>
+
     let $thumbnail = document.querySelectorAll('.chVideo');
     $thumbnail.forEach(function ($thumbnail) {
         $thumbnail.addEventListener('click', e => {

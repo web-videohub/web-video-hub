@@ -1,6 +1,8 @@
 package com.teamrocket.videohub.controller;
 
+import com.teamrocket.videohub.dto.response.UserInfoResponseDTO;
 import com.teamrocket.videohub.entity.Video;
+import com.teamrocket.videohub.services.MemberService;
 import com.teamrocket.videohub.services.VideoService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -21,6 +23,7 @@ import java.util.List;
 public class AppController {
 
     private final VideoService videoService;
+    private final MemberService memberService;
 
     @GetMapping("/")
     public String home() {
@@ -109,14 +112,17 @@ public class AppController {
             Model model,
             @RequestParam(defaultValue = "1") int pageNumber,
             @RequestParam(defaultValue = "12") int pageSize,
-            String type
-
+            String type,
+            String channelName
     ) {
         log.info("유저 페이지");
+        UserInfoResponseDTO user = memberService.getChannelInfo(channelName);
+        List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
 
-          List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
-
-          model.addAttribute("vList", videos);
+        log.info("이거에용: {}", user);
+//        log.info("이거에용: {}", channelName);
+        model.addAttribute("user", user);
+        model.addAttribute("vList", videos);
 
         return "userPage";
     }
