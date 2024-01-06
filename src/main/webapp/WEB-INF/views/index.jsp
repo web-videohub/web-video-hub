@@ -122,7 +122,6 @@
     const handleIntersection = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log("Intersection observed!");
                 loadData(selectedValue);
             }
         });
@@ -159,7 +158,6 @@
     }
 
     const loadData = async (type) => {
-        console.log('loadData function called');
         if (loading) return;
 
         loading = true;
@@ -175,11 +173,16 @@
                         const newItem = document.createElement('div');
                         newItem.className = 'videoDiv';
                         newItem.setAttribute('data-videoId', `\${video.videoId}`);
-                        newItem.innerHTML = `<a class="video" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
+                        newItem.innerHTML = `<a class="video1" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
                             `<div class="profileContainer"><div class="profile"><img src="/local\${video.userProfileImage}" alt="profile image"/></div>` +
                             `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title">\${video.videoTitle}</span></a>` +
                             `<span class="uploader">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
                         videoListDiv.appendChild(newItem);
+
+                        const $a = newItem.querySelector('.video1');
+                        $a.addEventListener('click', e => {
+                           e.preventDefault();
+                        });
 
                         newItem.addEventListener('click', e => {
                             if(!e.target) return;
@@ -194,7 +197,6 @@
 
                 } else {
                     observer.unobserve(loader);
-                    console.log('Observer unobserved');
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -228,7 +230,6 @@
             loadData(selectedValue);
             observer.observe(loader);
 
-            console.log(selectedValue);
             if (selectedRadioButton) {
                 selectedRadioButton.parentNode.style.background = '';
                 selectedRadioButton.parentNode.style.color = '';
@@ -253,7 +254,6 @@
     let isClick = side1;
 
     function checkWidth() {
-        console.log(pageWidth);
         if (pageWidth >= 1200) {
             if (isClick === side1) {
                 $leftDiv2.style.display = 'none';
