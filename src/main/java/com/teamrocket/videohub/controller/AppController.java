@@ -117,7 +117,7 @@ public class AppController {
     ) {
         log.info("유저 페이지");
         UserInfoResponseDTO user = memberService.getChannelInfo(channelName);
-        List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
+        List<Video> videos = videoService.getChannelVideos(pageSize, pageNumber, type, channelName);
 
         log.info("이거에용: {}", user);
 //        log.info("이거에용: {}", channelName);
