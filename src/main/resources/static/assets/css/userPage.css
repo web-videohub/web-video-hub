@@ -122,7 +122,7 @@ body {
     color: #020101;
 }
 
-.video {
+.chVideo {
     width: 100%;
     height: 69%;
     background-color: #F2B950;
@@ -252,6 +252,7 @@ body {
     justify-content: left !important;
     align-content: center;
     flex-direction: row;
+    margin-bottom: 50px;
 }
 .channelProfile {
     display: flex;
@@ -291,14 +292,29 @@ hr {
     flex-direction: column;
 
     margin-bottom: 15px;
-    border-radius: 10px;
+    border-radius: 20px;
     font-family: 'Noto Sans KR', sans-serif;
 }
+.channelVideoList:hover {
+    transition: 0.2s ease-out;
+    filter: drop-shadow(0.3rem 0.3rem 10px #8e8f8c);
+}
+.channelVideoList:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
 
 #chImg {
     width: 250px;
     height: 150px;
-    border-radius: 10px;
+    border-radius: 20px;
+}
+#chImg:hover {
+    transition: 0.2s ease-out;
+    border-radius: 0;
+}
+#chImg:not(:hover) {
+    transition: 0.2s ease-out;
 }
 .channelVideo {
     display: flex;
@@ -316,6 +332,13 @@ hr {
     margin-top: 10px;
     font-weight: bold;
 }
+.miniTitle:hover {
+    transition: 0.2s ease-out;
+    text-decoration: underline;
+}
+.miniTitle:not(:hover) {
+    transition: 0.2s ease-out;
+}
 .chViewcount {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
@@ -330,3 +353,4 @@ hr {
     padding-left: 70px;
     margin-top: 30px;
 }
+
