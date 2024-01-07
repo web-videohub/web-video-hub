@@ -117,7 +117,7 @@
                 <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
 <%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
                 <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
-                    <button type="button" class="subscribe_B chBtn">구독</button>
+                    <button type="button" class="subscribe_B">구독</button>
                 </c:if>
                 <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
                     <a href="/studio" class="studioBtn chBtn">스튜디오</a>
@@ -149,6 +149,122 @@
         </div>
     </div>
 <script>
+    const URL = '/api/v1/subscribe';
+    const userAccount = '${sessionScope.login.userAccount}';
+    const receiverAccount = '${user.channelAccount}';
+    console.log(userAccount);
+    console.log(receiverAccount);
+    const $subBtn = document.querySelector('.subscribe_B');
+
+    // 서버에 실시간으로 비동기통신을 해서 JSON을 받아오는 함수
+    function fetchGetSub() {
+        fetch(URL + `/${sessionScope.login.userAccount}/${user.channelAccount}`)
+            .then(res => res.json())
+            .then(flag => {
+                if (flag) {
+                    $subBtn.classList.add('chBtn2');
+                    $subBtn.style.display = 'block';
+                    $subBtn.style.width = '110px';
+                    $subBtn.textContent = '구독취소';
+                    $subBtn.style.background = '#EBEBEB';
+                    $subBtn.style.color = 'black';
+                    $subBtn.removeEventListener('click', makeSub);
+                    $subBtn.addEventListener('click', e => {
+                        fetchDeleteSub();
+                    });
+                } else {
+                    $subBtn.classList.add('chBtn');
+                    $subBtn.style.display = 'block';
+                    $subBtn.style.width = '80px';
+                    $subBtn.textContent = '구독';
+                    $subBtn.style.background = 'black';
+                    $subBtn.style.color = 'white';
+                    $subBtn.removeEventListener('click', fetchDeleteSub);
+                    $subBtn.addEventListener('click', e => {
+                        makeSub();
+                    })
+                }
+
+            })
+        ;
+    }
+
+    function fetchDeleteSub() {
+        const requestInfo = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        fetch(URL + `/${sessionScope.login.userAccount}/${user.channelAccount}`, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    $subBtn.classList.add('chBtn');
+                    $subBtn.classList.remove('chBtn2');
+                    $subBtn.style.width = '80px';
+                    $subBtn.textContent = '구독';
+                    $subBtn.style.background = 'black';
+                    $subBtn.style.color = 'white';
+                    $subBtn.removeEventListener('click', fetchDeleteSub);
+                    $subBtn.addEventListener('click', e => {
+                        makeSub();
+                    })
+                    return res.json();
+                } else {
+                    alert('구독취소 실패!');
+                    return res.text();
+                }
+            })
+    }
+
+
+    function makeSub() {
+        // 서버로 보낼 데이터
+        const payload = {
+            subSender: userAccount,
+            subReceiver: receiverAccount
+        };
+
+        // GET방식을 제외한 요청의 정보 만들기
+        const requestInfo = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        };
+        fetch(URL, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    $subBtn.classList.add('chBtn2');
+                    $subBtn.classList.remove('chBtn');
+                    $subBtn.style.width = '110px';
+                    $subBtn.textContent = '구독취소';
+                    $subBtn.style.background = '#EBEBEB';
+                    $subBtn.style.color = 'black';
+                    $subBtn.removeEventListener('click', makeSub);
+                    $subBtn.addEventListener('click', e => {
+                        fetchDeleteSub();
+                    });
+                    return res.json();
+                } else {
+                    return res.text();
+                }
+            })
+    }
+
+    // const $CancelBtn = document.getElementById('cancel');
+    // $CancelBtn.addEventListener('click', e => {
+    //
+    // });
+    // // 구독을 이미 한 사람이라면..
+    // $subBtn.style.width = '110px';
+    // $subBtn.textContent = '구독취소';
+    // $subBtn.setAttribute("id", "cancel");
+    // // 구독을 안 한 사람이라면..
+
+
+
 
     let $thumbnail = document.querySelectorAll('.chVideo');
     $thumbnail.forEach(function ($thumbnail) {
@@ -259,6 +375,11 @@
         pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         checkWidth();
     });
+
+    (() => {
+        // 구독여부 확인하기
+        fetchGetSub();
+    })();
 </script>
 </body>
 </html>
