@@ -40,5 +40,20 @@
         update tbl_member
         set user_password = #{password}
         where user_account = #{account}
+<<<<<<< HEAD
+=======
+    </update>
+      
+    <update id="upSubCount">
+        UPDATE tbl_member
+        SET user_subscribe = user_subscribe + 1
+        WHERE user_account = #{account}
+    </update>
+
+    <update id="downSubCount">
+        UPDATE tbl_member
+        SET user_subscribe = user_subscribe - 1
+        WHERE user_account = #{account}
+>>>>>>> 35beeb2e616085ddd9db59e681d34fea14561ab4
     </update>
 </mapper>

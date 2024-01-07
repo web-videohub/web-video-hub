@@ -53,6 +53,20 @@ public class VideoService {
     public List<Video> findMine(int pageSize, int pageNumber, String type, String account) {
         int offset = (pageNumber - 1) * pageSize;
         return videoMapper.findMyVideo(pageSize, offset, type, account);
+<<<<<<< HEAD
+=======
+    }
+
+    public List<Video> getChannelVideos(int pageSize, int pageNumber, String type, String channelName) {
+        int offset = (pageNumber - 1) * pageSize;
+        return videoMapper.findAllCh(pageSize, offset, type, channelName);
+    }
+
+    public List<Video> getVideosSub(int pageSize, int pageNumber, String type, String account) {
+        int offset = (pageNumber - 1) * pageSize;
+        return videoMapper.findAllSub(pageSize, offset, type, account);
+
+>>>>>>> 35beeb2e616085ddd9db59e681d34fea14561ab4
     }
 }
 
