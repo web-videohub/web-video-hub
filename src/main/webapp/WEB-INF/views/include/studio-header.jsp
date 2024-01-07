@@ -134,7 +134,12 @@
                 </a>
             </div>
             <form class="searchForm" action="/searchStudio" method="get">
-                <input class="searchInput" type="search" placeholder="채널에서 검색" name="keyword">
+                <c:if test="${keyword == 'all'}">
+                    <input class="searchInput" type="search" placeholder="채널에서 검색" name="keyword">
+                </c:if>
+                <c:if test="${keyword != 'all'}">
+                    <input class="searchInput" type="search" placeholder="채널에서 검색" name="keyword" value="${keyword}">
+                </c:if>
                 <button class="searchBtn" type="submit"><span class="lnr lnr-magnifier"></span></button>
             </form>
             <div class="dropdown">
