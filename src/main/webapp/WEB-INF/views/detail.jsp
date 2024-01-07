@@ -66,7 +66,7 @@
 
                 <div class="video_info_bbox">
                     <p>업로드 일자: ${v.uploadDate}</p>
-                    <p>조회수: $${v.videoViewCount}</p>
+                    <p>조회수: ${v.videoViewCount}</p>
                     <p>영상 설명: ${v.videoContent}</p>
                 </div>
             </div>
@@ -595,33 +595,8 @@
                     return res.text();
                 }
             })
+
     }
-    // GET방식을 제외한 요청의 정보 만들기
-    const requestInfo = {
-        method: 'POST',
-        headers: {
-            'content-type': 'application/json'
-        },
-        body: JSON.stringify(payload)
-    };
-    fetch(subscribeURL, requestInfo)
-        .then(res => {
-            if (res.status === 200) {
-                $subBtn.classList.add('chBtn2');
-                $subBtn.classList.remove('chBtn');
-                $subBtn.style.width = '110px';
-                $subBtn.textContent = '구독취소';
-                $subBtn.style.background = '#EBEBEB';
-                $subBtn.style.color = 'black';
-                $subBtn.removeEventListener('click', makeSub);
-                $subBtn.addEventListener('click', e => {
-                    fetchDeleteSub();
-                });
-                return res.json();
-            } else {
-                return res.text();
-            }
-        });
 
     // function fetchGetEmotion() {
     //     fetch(emotionURL + videoId)
