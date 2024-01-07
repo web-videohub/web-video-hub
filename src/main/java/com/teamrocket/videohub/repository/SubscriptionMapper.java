@@ -9,5 +9,4 @@ public interface SubscriptionMapper {
     boolean save(Subscription subscription);
 
     boolean delete(Subscription subscription);
-
 }

@@ -25,7 +25,6 @@ public class SubscribeApiController {
                                      @PathVariable String receiverAccount) {
         log.info("/api/v1/subscribe : GET!");
         Subscription subs = new Subscription(userAccount, receiverAccount);
-
         log.info("잘 가져왔니1: {}", subs);
         Subscription subs2 = subscribeService.findSubs(subs);
         log.info("잘 가져왔니2: {}", subs2);
@@ -69,5 +68,4 @@ public class SubscribeApiController {
 
         return ResponseEntity.ok().body(false);
     }
-
 }
