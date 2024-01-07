@@ -108,7 +108,7 @@
 </div>
 <div class="mainContainer">
     <div class="subContainer">
-        <jsp:include page="include/filter.jsp"/>
+<%--        <jsp:include page="include/filter.jsp"/>--%>
 
         <div class="videoListDiv">
 
@@ -165,7 +165,6 @@
     }
 
     const loadData = async (type) => {
-        console.log('loadData function called');
         if (loading) return;
 
         loading = true;
@@ -173,64 +172,55 @@
 
         setTimeout(async () => {
             try {
-                const loadData = async (type) => {
-                    console.log('loadData function called');
-                    if (loading) return;
+                const response = await fetch(`/loadSearch?pageNumber=\${pageNumber}&pageSize=12&type=` + type + `&keyword=${keyword}`);
+                const newVideos = await response.json();
+                console.log(newVideos);
 
-                    loading = true;
-                    loader.style.visibility = "visible";
+                if (newVideos.length > 0) {
+                    newVideos.forEach(video => {
+                        const newItem = document.createElement('div');
+                        newItem.className = 'videoDiv';
+                        newItem.setAttribute('data-videoId', `\${video.videoId}`);
 
-                    setTimeout(async () => {
-                        try {
-                            const response = await fetch(`/loadSearch?pageNumber=\${pageNumber}&pageSize=12&type=` + type + `&keyword=${keyword}`);
-                            const newVideos = await response.json();
-                            console.log(newVideos);
+                        newItem.innerHTML = `<a class="video1" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
+                            `<div class="profileContainer"><div class="profile"><img class="profileImg" src="/local\${video.userProfileImage}" alt="profile image" data-uploader="\${video.videoUploadUser}"/></div>` +
+                            `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
+                            `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
+                        videoListDiv.appendChild(newItem);
 
-                            if (newVideos.length > 0) {
-                                newVideos.forEach(video => {
-                                    const newItem = document.createElement('div');
-                                    newItem.className = 'videoDiv';
-                                    newItem.setAttribute('data-videoId', `\${video.videoId}`);
+                        const $a = newItem.querySelector('.video1');
+                        $a.addEventListener('click', e => {
+                            e.preventDefault();
+                        });
 
-                                    newItem.innerHTML = `<a class="video1" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
-                                        `<div class="profileContainer"><div class="profile"><img class="profileImg" src="/local\${video.userProfileImage}" alt="profile image" data-uploader="\${video.videoUploadUser}"/></div>` +
-                                        `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
-                                        `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
-                                    videoListDiv.appendChild(newItem);
-
-                                    const $a = newItem.querySelector('.video1');
-                                    $a.addEventListener('click', e => {
-                                        e.preventDefault();
-                                    });
-
-                                    newItem.addEventListener('click', e => {
-                                        if(!e.target) return;
-                                        console.log(e.target.className);
-                                        if (e.target.id === 'videoImg' || e.target.className === 'title') {
-                                            window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
-                                        }
-                                        if (e.target.className === 'profileImg' || e.target.className === 'uploader') {
-                                            window.location.href = "/userPage?channelName=" + e.target.dataset.uploader;
-                                        }
-                                    });
-
-
-                                });
-
-                                pageNumber++;
-
-
-                            } else {
-                                observer.unobserve(loader);
+                        newItem.addEventListener('click', e => {
+                            if(!e.target) return;
+                            console.log(e.target.className);
+                            if (e.target.id === 'videoImg' || e.target.className === 'title') {
+                                window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
                             }
-                        } catch (error) {
-                            console.error('Error fetching data:', error);
-                        } finally {
-                            loading = false;
-                            loader.style.visibility = "hidden";
-                        }
-                    }, 1000);
-                };
+                            if (e.target.className === 'profileImg' || e.target.className === 'uploader') {
+                                window.location.href = "/userPage?channelName=" + e.target.dataset.uploader;
+                            }
+                        });
+
+
+                    });
+
+                    pageNumber++;
+
+
+                } else {
+                    observer.unobserve(loader);
+                }
+            } catch (error) {
+                console.error('Error fetching data:', error);
+            } finally {
+                loading = false;
+                loader.style.visibility = "hidden";
+            }
+        }, 1000);
+    };
     const loader = document.getElementById('loader');
     const videoListDiv = document.querySelector('.videoListDiv');
     let loading = false;

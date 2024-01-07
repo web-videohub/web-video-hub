@@ -98,6 +98,9 @@ public class AppController {
     public String search(String keyword, Model model) {
         log.info("/search Page: GET! {}", keyword);
         model.addAttribute("keyword", keyword);
+        if (keyword.isEmpty()) {
+            return "/index";
+        }
         return "/search";
     }
 
