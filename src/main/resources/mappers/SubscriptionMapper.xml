@@ -15,8 +15,8 @@
         WHERE sub_sender = #{subSender} AND sub_receiver = #{subReceiver}
     </delete>
 
-    <select id="find" resultType="integer">
-        SELECT sub_id FROM tbl_subscription
+    <select id="find" resultType="subscription">
+        SELECT sub_sender, sub_receiver FROM tbl_subscription
         WHERE sub_sender = #{subSender} AND sub_receiver = #{subReceiver}
     </select>
 </mapper>
