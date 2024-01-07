@@ -36,6 +36,8 @@ public class VideoService {
     }
 
     public Video getVideo(int videoId) {
+        videoMapper.upViewCount(videoId);
+
         return videoMapper.findOne(videoId);
     }
 
