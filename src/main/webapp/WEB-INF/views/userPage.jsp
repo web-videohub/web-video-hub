@@ -253,17 +253,6 @@
             })
     }
 
-    // const $CancelBtn = document.getElementById('cancel');
-    // $CancelBtn.addEventListener('click', e => {
-    //
-    // });
-    // // 구독을 이미 한 사람이라면..
-    // $subBtn.style.width = '110px';
-    // $subBtn.textContent = '구독취소';
-    // $subBtn.setAttribute("id", "cancel");
-    // // 구독을 안 한 사람이라면..
-
-
 
 
     let $thumbnail = document.querySelectorAll('.chVideo');
