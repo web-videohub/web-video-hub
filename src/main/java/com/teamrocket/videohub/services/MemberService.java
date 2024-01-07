@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import static com.teamrocket.videohub.services.LoginResult.*;
 import static com.teamrocket.videohub.utils.LoginUtils.LOGIN_KEY;
 
-@Service
+@Service 
 @Slf4j
 @RequiredArgsConstructor
 public class MemberService {
