@@ -59,6 +59,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/studio">
+                    <img class="mini" src="/assets/img/miniHub.png" alt="">
+                    스튜디오
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/setting">
                     <span class="lnr lnr-cog"></span>
                     설정
@@ -123,7 +129,6 @@
     const handleIntersection = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log("Intersection observed!");
                 loadData(selectedValue);
             }
         });
@@ -168,7 +173,7 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/loadMoreVideosSub?pageNumber=${pageNumber}&pageSize=12&type=${type}&account=${sessionScope.login.userAccount}`);
+                const response = await fetch(`/loadMoreVideosSub?pageNumber=\${pageNumber}&pageSize=12&type=` + type + `&account=${sessionScope.login.userAccount}`);
                 const newVideos = await response.json();
 
                 if (newVideos.length > 0) {

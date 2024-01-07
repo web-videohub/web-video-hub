@@ -1,6 +1,7 @@
 /* 구글 폰트 */
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
+
 .headerDiv {
     display: flex;
     flex-direction: row;
@@ -102,7 +103,6 @@
     padding-right: 20px;
     flex-direction: row;
     text-align: center;
-    color: #0080FF;
 }
 .login {
     width: 100px;
@@ -266,4 +266,13 @@
     height: 30px;
     margin-right: -5px;
     margin-left: -2px;
+}
+
+.nickname {
+    font-weight: bold !important;
+    font-size: 17px !important;
+    margin-bottom: 0;
+}
+.accountt {
+    margin-bottom: 0;
 }
