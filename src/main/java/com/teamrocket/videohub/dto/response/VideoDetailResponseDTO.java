@@ -13,6 +13,7 @@ public class VideoDetailResponseDTO {
     private final String uploadUser;
     private final String uploadUserDisplayName;
     private final String uploadUserProfileImage;
+    private final int uploadUserSubscribe;
     private final String videoTitle;
     private final String uploadDate;
     private final String videoContent;
@@ -26,6 +27,7 @@ public class VideoDetailResponseDTO {
         this.uploadUser = video.getVideoUploadUser();
         this.uploadUserDisplayName = video.getUserDisplayName();
         this.uploadUserProfileImage = video.getUploadUserProfileImage();
+        this.uploadUserSubscribe = video.getUserSubscribe();
         this.uploadDate = DateUtils.makePrettierDateString(video.getVideoUploadDate());
         this.videoTitle = video.getVideoTitle();
         this.videoContent = video.getVideoContent();

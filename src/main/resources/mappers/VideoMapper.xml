@@ -15,7 +15,7 @@
         V.video_id, V.video_upload_date, V.video_upload_user,
         V.video_title, V.video_content, V.video_like,
         V.video_category, V.video_view_count, V.video_url,
-        M.user_display_name, M.user_profile_image
+        M.user_display_name, M.user_profile_image, M.user_subscribe
         FROM tbl_video V
         JOIN tbl_member M
         ON V.video_upload_user = M.user_account

@@ -71,6 +71,8 @@ public class AppController {
 
         Video video = videoService.getVideo(videoId);
 
+        log.info("구독자수 : {}", video.getUserSubscribe());
+
         model.addAttribute("v", video);
 
         return "/detail";

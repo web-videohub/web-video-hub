@@ -38,6 +38,7 @@ public class Video {
 
     private String userDisplayName;
     private String uploadUserProfileImage;
+    private int userSubscribe;
 
 
     public Video(VideoUploadRequestDTO dto) {

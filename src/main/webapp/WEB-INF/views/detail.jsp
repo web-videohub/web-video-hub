@@ -52,7 +52,7 @@
                     <a href="/userPage?channelName=${v.videoUploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image" class="profileIMG" height="45" width="45"/></a>
                     <div class="video_info_user_bbox">
                         <a href="/userPage?channelName=${v.videoUploadUser}">${v.videoUploadUser}</a>
-                        <p>구독자 0명</p>
+                        <p>구독자 ${v.userSubscribe}명</p>
                     </div>
                     <div class="video_review_btn_o">
                         <button type="button" class="subscribe_B">구독</button>
