@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/css/userPage.css">
-    <title>${user.channelName}님의 채널</title>
+    <title>${channelName}님의 페이지</title>
 </head>
 <body>
     <%-- css 모음 --%>

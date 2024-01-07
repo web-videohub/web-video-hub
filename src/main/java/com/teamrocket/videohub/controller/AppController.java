@@ -35,7 +35,7 @@ public class AppController {
       //  log.error("videos : {}", videos);
         return "index";
     }
-  
+
     @GetMapping("/loadMoreVideos")
     @ResponseBody
     public ResponseEntity<List<Video>> loadMoreVideos(
@@ -43,20 +43,6 @@ public class AppController {
             @RequestParam(defaultValue = "12") int pageSize,
             String type
     ) {
-        List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
-        log.warn("구독한 채널의 영상들 : {}", videos);
-        return ResponseEntity.ok(videos);
-    }
-
-    @GetMapping("/loadMoreVideosSub")
-    @ResponseBody
-    public ResponseEntity<List<Video>> loadMoreVideosSub(
-            @RequestParam(defaultValue = "1") int pageNumber,
-            @RequestParam(defaultValue = "12") int pageSize,
-            String type, String account
-    ) {
-        List<Video> videos = videoService.getVideosSub(pageSize, pageNumber, type, account);
-        log.warn("구독한 채널의 영상들 : {}", videos);
         log.error("type : {}", type);
         List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
         log.warn("videos : {}", videos);
@@ -71,6 +57,7 @@ public class AppController {
             String type,
             String account
     ) {
+
         List<Video> mine = videoService.findMine(pageSize, pageNumber, type, account);
         log.info("mine : {}", mine);
 
@@ -101,27 +88,20 @@ public class AppController {
     }
   
     @GetMapping("/search")
-    public String search(String keyword, Model model) {
+    public String search(String keyword, Model model,
+                         @RequestParam(defaultValue = "1") int pageNumber,
+                         @RequestParam(defaultValue = "16") int pageSize,
+                         HttpSession session) {
         log.info("/search Page: GET! {}", keyword);
-
         List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, keyword);
 
         model.addAttribute("vList", videos);
         log.info("이거보세ㅐㅇ쇼!!!  :" + videos.toString());
         model.addAttribute("keyword", keyword);
-        return "/search";
-    }
 
-    @GetMapping("/loadSearch")
-    @ResponseBody
-    public ResponseEntity<List<Video>> loadMoreVideosSearch(
-            @RequestParam(defaultValue = "1") int pageNumber,
-            @RequestParam(defaultValue = "12") int pageSize,
-            String type, String keyword
-    ) {
-        List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, type, keyword);
-        log.info("검색된 영상들: {}", videos);
-        return ResponseEntity.ok(videos);
+        log.error("vList : {}", videos);
+
+        return "/search";
     }
 
     @RequestMapping("/setting")

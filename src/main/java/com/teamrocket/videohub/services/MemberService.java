@@ -86,25 +86,4 @@ public class MemberService {
     public boolean modifyPassword(String account, String newPassword) {
         return memberMapper.modifyPassword(account, encoder.encode(newPassword));
     }
-
-    public UserInfoResponseDTO getChannelInfo(String channelName) {
-        Member member = memberMapper.findName(channelName);
-        Member video = memberMapper.countVideo(channelName);
-        Member sub = memberMapper.countSub(channelName);
-
-        UserInfoResponseDTO dto = UserInfoResponseDTO.builder()
-                .channelAccount(member.getUserAccount())
-                .channelName(member.getUserDisplayName())
-                .channelEmail(member.getUserEmail())
-                .channelProfile(member.getUserProfileImage())
-                .videoCount(video.getVideoCount())
-                .subCount(sub.getSubCount())
-                .build();
-
-        log.info("영상수" + video.getVideoCount());
-        log.info("구독자수" + sub.getSubCount());
-
-        return dto;
-//        return memberMapper.findMember();
-    }
 }
