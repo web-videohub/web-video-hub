@@ -37,16 +37,15 @@ public class AppController {
         return "index";
     }
 
-    @GetMapping("/loadMoreVideos")
+    @GetMapping("/loadMoreVideosSub")
     @ResponseBody
-    public ResponseEntity<List<Video>> loadMoreVideos(
+    public ResponseEntity<List<Video>> loadMoreVideosSub(
             @RequestParam(defaultValue = "1") int pageNumber,
             @RequestParam(defaultValue = "12") int pageSize,
-            String type
+            String type, String account
     ) {
-        log.error("type : {}", type);
-        List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
-        log.warn("videos : {}", videos);
+        List<Video> videos = videoService.getVideosSub(pageSize, pageNumber, type, account);
+        log.warn("구독한 채널의 영상들 : {}", videos);
         return ResponseEntity.ok(videos);
     }
 
