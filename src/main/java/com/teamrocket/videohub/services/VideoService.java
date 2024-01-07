@@ -41,17 +41,6 @@ public class VideoService {
         return videoMapper.findOne(videoId);
     }
 
-    public VideoDetailResponseDTO getDetail(int videoId) {
-        Video video = videoMapper.findOne(videoId);
-
-        // 조회수 상승처리
-        videoMapper.upViewCount(videoId);
-
-        log.info("video에 저장된 값 : {}", video);
-
-        return new VideoDetailResponseDTO(video);
-    }
-
     public List<Video> getVideoSearch(int pageSize, int pageNumber, String keyword) {
         int offset = (pageNumber - 1) * pageSize;
         return videoMapper.findSearch(pageSize, offset, keyword);

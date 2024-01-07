@@ -49,7 +49,7 @@
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>
                 <div class="video_user_bbox">
-                    <a href="#"><img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/></a>
+                    <a href="/userPage?channelName=${v.videoUploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image" class="profileIMG" height="45" width="45"/></a>
                     <div class="video_info_user_bbox">
                         <a href="/userPage?channelName=${v.videoUploadUser}">${v.videoUploadUser}</a>
                         <p>구독자 0명</p>
@@ -75,7 +75,7 @@
                     <div class="form-group">
                         <div class="input-group clearfix">
                             <div class="bbox1">
-                                <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
+                                <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG" height="45" width="45"/>
                                 <p>${sessionScope.login.userDisplayName}</p>
                             </div>
                         </div>
@@ -108,9 +108,11 @@
     const replyURL = '/api/v1/replies'; // 댓글과 관련된 기능을 수행하는 링크
     const emotionURL = '/api/v1/emotion'; // 이모션 링크
     const subscribeURL = '/api/v1/subscribe'; // 구독 여부 링크
+    const $subBtn = document.querySelector('.subscribe_B');
     const urlParams = new URLSearchParams(window.location.search);
     const videoId = urlParams.get('videoId'); //URL의 동영상 번호를 가져와서 저장
-    const currentAccount = '${login.userAccount}'; // 로그인한 사람
+    const currentAccount = '${sessionScope.login.userAccount}'; // 로그인한 사람
+    const receiverAccount = '${v.videoUploadUser}'; // 동영상 업로더 어카운트명
     const auth = '${login.userAuth}'; //로그인한 사람 권한
     const loader = document.getElementById('loader');
     const replyListDiv = document.querySelector('.chat_list');
@@ -191,10 +193,10 @@
                         newItem.className = 'replyDiv';
                         newItem.setAttribute('reply-id', `\${rno}`);
                         newItem.innerHTML = `<div class="chat_list_profile">
-                                    <a href="#"><img src="${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
+                                    <a href="/userPage?channelName=${accunt}"><img src="${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
                                 </div>
                                 <div class="chat_list_profile_name">
-                                    <a href="#"><p>\${accountUserName}</p></a>
+                                    <a href="/userPage?channelName=${accunt}"><p>\${accountUserName}</p></a>
                                 </div>
                                 <div class="chat_list_chat_text" id="chat-text-\${rno}">
                                     <p>\${text}</p>
@@ -508,28 +510,108 @@
     }
 
     // 서버에서 실시간으로 비동기통신을 해서 구독여부 JSON을 받아오는 함수
-    function fetchGetSubscribe() {
-        fetch(`\${SubscribeURL}/\${login.userAccount}/\${v.videoUploadUser}`)
+    function fetchGetSub() {
+        fetch(subscribeURL + `/${sessionScope.login.userAccount}/${v.videoUploadUser}`)
             .then(res => res.json())
-            .then(replyData => {
-                console.log("가져온 구독정보 : " + replyData);
-                renderSubscribes(replyData);
+            .then(flag => {
+                if (flag) {
+                    $subBtn.classList.add('chBtn2');
+                    $subBtn.style.display = 'block';
+                    $subBtn.style.width = '110px';
+                    $subBtn.textContent = '구독취소';
+                    $subBtn.style.background = '#EBEBEB';
+                    $subBtn.style.color = 'black';
+                    $subBtn.removeEventListener('click', makeSub);
+                    $subBtn.addEventListener('click', e => {
+                        fetchDeleteSub();
+                    });
+                } else {
+                    $subBtn.classList.add('chBtn');
+                    $subBtn.style.display = 'block';
+                    $subBtn.style.width = '80px';
+                    $subBtn.textContent = '구독';
+                    $subBtn.style.background = 'black';
+                    $subBtn.style.color = 'white';
+                    $subBtn.removeEventListener('click', fetchDeleteSub);
+                    $subBtn.addEventListener('click', e => {
+                        makeSub();
+                    })
+                }
+
+            })
+        ;
+    }
+
+    function fetchDeleteSub() {
+        const requestInfo = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        fetch(subscribeURL + `/${sessionScope.login.userAccount}/${v.videoUploadUser}`, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    $subBtn.classList.add('chBtn');
+                    $subBtn.classList.remove('chBtn2');
+                    $subBtn.style.width = '80px';
+                    $subBtn.textContent = '구독';
+                    $subBtn.style.background = 'black';
+                    $subBtn.style.color = 'white';
+                    $subBtn.removeEventListener('click', fetchDeleteSub);
+                    $subBtn.addEventListener('click', e => {
+                        makeSub();
+                    })
+                    return res.json();
+                } else {
+                    alert('구독취소 실패!');
+                    return res.text();
+                }
             })
     }
 
-    function renderSubscribes(bool) {
-        if (bool === true) {
-            console.log("구독중");
-        } else if (bool === true) {
-            console.log("구독안되있슴");
-        } else {
-            console.log("뭐가온거임? 리턴된 값 : ", bool);
-        }
+
+    function makeSub() {
+        // 서버로 보낼 데이터
+        const payload = {
+            subSender: currentAccount,
+            subReceiver: receiverAccount
+        };
+
+        // GET방식을 제외한 요청의 정보 만들기
+        const requestInfo = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        };
+        fetch(subscribeURL, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    $subBtn.classList.add('chBtn2');
+                    $subBtn.classList.remove('chBtn');
+                    $subBtn.style.width = '110px';
+                    $subBtn.textContent = '구독취소';
+                    $subBtn.style.background = '#EBEBEB';
+                    $subBtn.style.color = 'black';
+                    $subBtn.removeEventListener('click', makeSub);
+                    $subBtn.addEventListener('click', e => {
+                        fetchDeleteSub();
+                    });
+                    return res.json();
+                } else {
+                    return res.text();
+                }
+            })
     }
 
     (() => {
         // 서버에서 댓글 불러오기
         // fetchGetReplies(videoId);
+
+        // 구독여부 확인하기
+        fetchGetSub();
 
         // 댓글 등록 이벤트 핸들러
         addComment();
