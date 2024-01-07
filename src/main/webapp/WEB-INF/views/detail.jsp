@@ -193,10 +193,10 @@
                         newItem.className = 'replyDiv';
                         newItem.setAttribute('reply-id', `\${rno}`);
                         newItem.innerHTML = `<div class="chat_list_profile">
-                                    <a href="/userPage?channelName=${accunt}"><img src="${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
+                                    <a href="/userPage?channelName=\${account}"><img src="\${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
                                 </div>
                                 <div class="chat_list_profile_name">
-                                    <a href="/userPage?channelName=${accunt}"><p>\${accountUserName}</p></a>
+                                    <a href="/userPage?channelName=\${account}"><p>\${accountUserName}</p></a>
                                 </div>
                                 <div class="chat_list_chat_text" id="chat-text-\${rno}">
                                     <p>\${text}</p>
