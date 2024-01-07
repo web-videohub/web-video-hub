@@ -36,7 +36,6 @@ public class SubscribeApiController {
         return ResponseEntity.ok().body(flag);
     }
 
-
     // 구독 추가 기능
     @PostMapping
     public ResponseEntity<?> addSubscribe(

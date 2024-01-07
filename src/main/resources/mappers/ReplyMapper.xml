@@ -35,7 +35,7 @@
         FROM tbl_reply
         WHERE video_id = #{videoId}
         ORDER BY reply_no
-        LIMIT #{p.pageStart}, #{p.amount}
+        LIMIT #{pageSize} OFFSET #{offset}
     </select>
 
     <select id="count" resultType="int">

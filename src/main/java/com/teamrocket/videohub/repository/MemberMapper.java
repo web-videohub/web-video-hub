@@ -21,4 +21,8 @@ public interface MemberMapper {
     Member countVideo(String channelName);
 
     Member countSub(String channelName);
+
+    void upSubCount(String account);
+
+    void downSubCount(String account);
 }

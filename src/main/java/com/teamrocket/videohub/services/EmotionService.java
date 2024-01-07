@@ -1,6 +1,7 @@
-package com.teamrocket.videohub.service;
+package com.teamrocket.videohub.services;
 
 import com.teamrocket.videohub.dto.request.EmotionPostRequestDTO;
+import com.teamrocket.videohub.dto.response.EmotionResponseDTO;
 import com.teamrocket.videohub.entity.Emotion;
 import com.teamrocket.videohub.repository.EmotionMapper;
 import com.teamrocket.videohub.repository.VideoMapper;
@@ -30,18 +31,18 @@ public class EmotionService {
         return emotion;
     }
 
-    public void saveEmotion(Emotion emotion) throws SQLException{
+    public void saveEmotion(EmotionPostRequestDTO dto) throws SQLException{
         log.debug("emotion save service execute!");
 
-        boolean flag = emotionMapper.save(emotion.getVideoId(), emotion.getUserAccount(), emotion.getVideoLike(), emotion.getVideoHate());
+        boolean flag = emotionMapper.save(dto.getVideoId(), dto.getAccount(), dto.getVideoLike(), dto.getVideoHate());
 
         if(!flag) {
             log.warn("emotion save failed!");
             throw new SQLException("이모션 저장 실패!");
         }
 
-        if (emotion.getVideoLike() == 1)
-            videoMapper.upLikeCount(emotion.getVideoId());
+        if (dto.getVideoLike() == 1)
+            videoMapper.upLikeCount(dto.getVideoId());
     }
 
     public void modify(EmotionPostRequestDTO dto) throws Exception{
@@ -50,5 +51,16 @@ public class EmotionService {
         emotionMapper.modify(1, "smg0218", dto.getVideoLike(), dto.getVideoHate());
         if (emotion.getVideoLike() == 1)
             videoMapper.downLikeCount(1);
+    }
+
+    public EmotionResponseDTO delete(int videoId, String userAccount) {
+        Emotion emotion = emotionMapper.findOne(videoId, userAccount);
+        long emotionId = emotion.getEmotionId();
+
+        emotionMapper.delete(emotionId);
+        return EmotionResponseDTO.builder()
+                .videoLike(0)
+                .videoHate(0)
+                .build();
     }
 }
