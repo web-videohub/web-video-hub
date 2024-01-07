@@ -17,80 +17,112 @@
 <jsp:include page="include/studio-header.jsp"/>
 <%--<jsp:include page="include/static-head.jsp"/>--%>
 
-<div class="studioDiv">
-    <div class="leftDiv">
-        <div class="offcanvas-body">
-            <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">
-                        <span class="lnr lnr-home"></span>
-                        홈
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/subs">
-                        <span class="lnr lnr-book"></span>
-                        구독
-                    </a>
-                </li>
-                <hr>
-                <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                        <span class="lnr lnr-user"></span>
-                        내 채널
-                    </a>
-                </li>
-                <li class="nav-item home">
-                    <a class="nav-link" href="/studio">
-                        <img class="mini" src="/assets/img/miniHub.png" alt="">
-                        스튜디오
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/setting">
-                        <span class="lnr lnr-cog"></span>
-                        설정
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div class="mainContainer">
-        <div class="top">
-            <%--            <a href="/studio/upload">동영상 업로드</a>--%>
-            <button class="btn-hover color-9" id="go-upload-form">동영상 업로드</button>
-            <button class="btn-hover color-8" id="deleteBtn" type="button">체크된 동영상 삭제</button>
-        </div>
+<%-- 기본 왼쪽 상태바 --%>
+<div class="leftDiv index-left">
+    <div class="offcanvas-body index-side">
+        <ul class="navbar-nav flex-grow-1 pe-3">
 
-        <div class="video-table">
-            <table>
-                <thead>
-                <tr>
-                    <th><input type="checkbox" class="select-all"/></th>
-                    <th class="video-th">동영상</th>
-                    <th>제목</th>
-                    <th>날짜</th>
-                    <th>조회수</th>
-                    <th>댓글</th>
-                    <th>좋아요</th>
-                    <th>싫어요</th>
-                </tr>
-                </thead>
-                <tbody class="video-tbody">
-                <tr>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">
+                    <span class="lnr lnr-home"></span>
+                    홈
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/subs">
+                    <span class="lnr lnr-book"></span>
+                    구독
+                </a>
+            </li>
+            <hr>
+            <li class="nav-item">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                    <span class="lnr lnr-user"></span>
+                    내 채널
+                </a>
+            </li>
+            <li class="nav-item  home">
+                <a class="nav-link" href="/studio">
+                    <img class="mini" src="/assets/img/miniHub.png" alt="">
+                    스튜디오
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/setting">
+                    <span class="lnr lnr-cog"></span>
+                    설정
+                </a>
+            </li>
 
-                </tr>
-                </tbody>
-                <tfoot>
-                <td colspan="8" class="tablefoot"></td>
-                </tfoot>
-            </table>
-        </div>
-        <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
+        </ul>
     </div>
+</div>
+<div class="leftDiv2 index-left2">
+    <div class="offcanvas-body index-side2">
+        <ul class="navbar-nav flex-grow-1 pe-3">
+            <li class="nav-item2">
+                <a class="nav-link active" aria-current="page" href="/">
+                    <span class="lnr lnr-home"></span><br>
+                    <span class="sideText">홈</span>
+                </a>
+            </li>
+            <li class="nav-item2">
+                <a class="nav-link" href="/subs">
+                    <span class="lnr lnr-book"></span><br>
+                    <span class="sideText">구독</span>
+                </a>
+            </li>
+            <li class="nav-item2 home">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                    <span class="lnr lnr-user"></span><br>
+                    <span class="sideText">나</span>
+                </a>
+            </li>
+            <li class="nav-item2">
+                <a class="nav-link" href="/setting">
+                    <span class="lnr lnr-cog"></span><br>
+                    <span class="sideText">설정</span>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+</div>
+<div class="mainContainer">
+    <div class="top">
+        <%--            <a href="/studio/upload">동영상 업로드</a>--%>
+        <button class="btn-hover color-9" id="go-upload-form">동영상 업로드</button>
+        <button class="btn-hover color-8" id="deleteBtn" type="button">체크된 동영상 삭제</button>
+    </div>
+
+    <div class="video-table">
+        <table>
+            <thead>
+            <tr>
+                <th class="allsel">전체선택<input type="checkbox" class="select-all"/></th>
+                <th class="video-th">동영상</th>
+                <th>제목</th>
+                <th>날짜</th>
+                <th>조회수</th>
+                <th>댓글</th>
+                <th>좋아요</th>
+                <th>싫어요</th>
+            </tr>
+            </thead>
+            <tbody class="video-tbody">
+            <tr>
+
+            </tr>
+            </tbody>
+            <tfoot>
+            <td colspan="8" class="tablefoot"></td>
+            </tfoot>
+        </table>
+    </div>
+    <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
 </div>
 
 <script>
@@ -142,7 +174,7 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/loadMyVideoInfo?pageNumber=\${pageNumber}&pageSize=12&account=${sessionScope.login.userAccount}&type=` + type);
+                const response = await fetch(`/loadMyVideoInfo?pageNumber=\${pageNumber}&pageSize=12&account=${sessionScope.login.userAccount}&type=` + type + `&keyword=${keyword}`);
                 const myVideos = await response.json();
                 console.log(myVideos);
 
@@ -176,7 +208,6 @@
                 $loader.style.visibility = "hidden";
             }
         }, 1000)
-
     }
 
     let loading = false;
@@ -184,7 +215,7 @@
 
 
     document.addEventListener("DOMContentLoaded", function () {
-        observer.observe(loader);
+        observer.observe($loader);
     });
 
     document.querySelector('.select-all').addEventListener('change', e => {
@@ -193,6 +224,7 @@
             checkbox.checked = e.target.checked;
         }
     });
+
 
     document.getElementById('deleteBtn').addEventListener('click', async function() {
         // Collect all checked checkbox values (video Ids)
@@ -221,6 +253,83 @@
             alert('동영상을 선택해주세요');
         }
     });
+
+    let pageWidth;
+    let $canvasBody = document.querySelector('.index-side');
+    let $leftDiv = document.querySelector('.index-left');
+    let $leftDiv2 = document.querySelector('.index-left2');
+    let $headerBtn = document.getElementById("headerBtn");
+    let $headerBtn2 = document.getElementById("headerBtn2");
+    const side1 = 1;
+    const side2 = 2;
+    let isClick = side1;
+
+    function checkWidth() {
+        console.log(pageWidth);
+        if (pageWidth >= 1200) {
+            if (isClick === side1) {
+                $leftDiv2.style.display = 'none';
+                $leftDiv.style.display = 'flex';
+                $headerBtn2.style.display = 'flex';
+                $headerBtn.style.display = 'none';
+            }
+            if (isClick === side2){
+                $leftDiv2.style.display = 'flex';
+                $leftDiv.style.display = 'none';
+                $headerBtn2.style.display = 'flex';
+                $headerBtn.style.display = 'none';
+            }
+
+
+        }
+        else if (pageWidth > 640) {
+            $leftDiv.style.display = 'none';
+            $leftDiv2.style.display = 'flex';
+            $headerBtn2.style.display = 'none';
+            $headerBtn.style.display = 'flex';
+        }
+        else if (pageWidth <= 640){
+            $leftDiv2.style.display = 'none';
+            $leftDiv.style.display = 'none';
+            $headerBtn2.style.display = 'none';
+            $headerBtn.style.display = 'flex';
+        }
+    }
+    $headerBtn2.addEventListener('click', e => {
+
+        if (isClick === side1) {
+            $leftDiv2.style.display = 'flex';
+            $leftDiv.style.display = 'none';
+            isClick = side2;
+        } else if (isClick === side2){
+            $leftDiv.style.display = 'flex';
+            $leftDiv2.style.display = 'none';
+            isClick = side1;
+        }
+        console.log("현재상태 : " + isClick);
+    })
+
+    // 첫 화면크기 반영
+    window.onload = function () {
+        pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        checkWidth();
+    };
+
+    window.addEventListener('resize', function() {
+        pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
+        checkWidth();
+    });
+
+    const $all = document.getElementById('all');
+
+    (() => {
+        $all.click();
+
+    })();
+
+
+
+
 </script>
 </body>
 </html>

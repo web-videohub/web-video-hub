@@ -67,10 +67,10 @@ public class AppController {
     public ResponseEntity<List<Video>> loadMyVideoInfo(
             @RequestParam(defaultValue = "1") int pageNumber,
             @RequestParam(defaultValue = "12") int pageSize,
-            String type,
-            String account
+            String type, String account, String keyword
     ) {
-        List<Video> mine = videoService.findMine(pageSize, pageNumber, type, account);
+        log.info("들어온 스튜디오 검색어는?: {}", keyword);
+        List<Video> mine = videoService.findMine(pageSize, pageNumber, type, account, keyword);
         log.info("mine : {}", mine);
 
         return ResponseEntity.ok(mine);
@@ -102,6 +102,19 @@ public class AppController {
             return "/index";
         }
         return "/search";
+    }
+    @GetMapping("/searchStudio")
+    public String searchStudio(String keyword, Model model) {
+        log.info("스튜디오 검색어: {}", keyword);
+        String re_key = "";
+        if (keyword.isEmpty()) {
+            re_key = "all";
+        } else {
+            re_key = keyword;
+        }
+        model.addAttribute("keyword", re_key);
+
+        return "/studio";
     }
 
     @GetMapping("/loadSearch")

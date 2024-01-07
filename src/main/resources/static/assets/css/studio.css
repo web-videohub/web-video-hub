@@ -91,7 +91,7 @@ body {
 table {
     width: 80%;
     text-align: center;
-    border: 1px solid #fff;
+    border: 1px solid #000;
     border-spacing: 1px;
     font-family: 'Cairo', sans-serif;
     margin: auto;
@@ -183,4 +183,120 @@ img {
 .btn-hover.color-8 {
     background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
     box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+
+.index-side,
+.index-side2 {
+    height: 100%;
+    display: flex;
+    justify-content: start !important;
+    align-content: center;
+    flex-direction: column;
+}
+.index-side ul,
+.index-side2 ul {
+    height: 100%;
+    display: flex;
+    justify-content: start !important;
+    align-content: center;
+    flex-direction: column;
+}
+
+.home {
+    background: #dedede;
+}
+.nav-item:hover,
+.nav-item2:hover {
+    transition: 0.2s ease-out;
+    background: #ececec;
+}
+.nav-item:not(:hover),
+.nav-item2:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
+.nav-item:active,
+.nav-item2:active {
+    transition: 0.2s ease-out;
+    background: #cccccc !important;
+}
+.nav-item:not(:active),
+.nav-item2:not(:active) {
+    transition: 0.2s ease-out;
+}
+
+.nav-item2 {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.nav-item2 .lnr {
+    font-weight: bold;
+    font-size: 30px;
+}
+.nav-item2 .sideText {
+    font-weight: normal;
+    font-size: 14px;
+}
+.index-left2 {
+    width: 150px;
+    height: 100%;
+
+    position: fixed;
+    top: 70px;
+    z-index: 100;
+
+    padding-top: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
+@media (max-width: 640px) {
+    .index-left2,
+    .index-side2 {
+        display: none;
+    }
+    .mainContainer {
+        padding-left: 0 !important;
+    }
+}
+
+.offcanvas-body {
+    padding-left: 10px !important;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* 체크된 상태의 스타일 */
+input[type="checkbox"]:checked {
+    /* 체크된 상태일 때의 스타일 지정 */
+}
+
+.video-table {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
+.allsel {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    flex-direction: column;
+    border-right: 0;
+}
+.allsel input {
+    margin: 0 auto;
+}
+
+#deleteBtn {
+    display: none;
 }
