@@ -2,6 +2,7 @@ package com.teamrocket.videohub.controller;
 
 import com.teamrocket.videohub.dto.response.UserInfoResponseDTO;
 import com.teamrocket.videohub.entity.Video;
+import com.teamrocket.videohub.repository.VideoMapper;
 import com.teamrocket.videohub.services.MemberService;
 import com.teamrocket.videohub.services.VideoService;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ import java.util.List;
 public class AppController {
 
     private final VideoService videoService;
+    private final VideoMapper videoMapper;
     private final MemberService memberService;
 
     @GetMapping("/")
@@ -60,7 +62,27 @@ public class AppController {
         return ResponseEntity.ok(videos);
     }
 
+    @GetMapping("/loadMyVideoInfo")
+    @ResponseBody
+    public ResponseEntity<List<Video>> loadMyVideoInfo(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize,
+            String type,
+            String account
+    ) {
 
+        List<Video> mine = videoService.findMine(pageSize, pageNumber, type, account);
+        log.info("mine : {}", mine);
+
+        return ResponseEntity.ok(mine);
+    }
+
+    @DeleteMapping("/delete-checked-video")
+    public ResponseEntity<?> deleteVideos(@RequestBody List<Integer> videoIds) {
+        log.info("요청 옴?");
+        videoMapper.deleteVideos(videoIds);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/showmv")
     public String showmv(Model model, int videoId) {

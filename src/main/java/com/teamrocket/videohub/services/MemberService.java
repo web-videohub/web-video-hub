@@ -84,6 +84,9 @@ public class MemberService {
         return memberMapper.isConsistent(account, email);
     }
 
+    public boolean modifyPassword(String account, String newPassword) {
+        return memberMapper.modifyPassword(account, encoder.encode(newPassword));
+
     public UserInfoResponseDTO getChannelInfo(String channelName) {
         Member member = memberMapper.findName(channelName);
         Member video = memberMapper.countVideo(channelName);

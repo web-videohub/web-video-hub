@@ -173,6 +173,7 @@
             try {
                 const response = await fetch(`/loadMoreVideos?pageNumber=\${pageNumber}&pageSize=12&type=` + type);
                 const newVideos = await response.json();
+                console.log(newVideos);
 
                 if (newVideos.length > 0) {
                     newVideos.forEach(video => {

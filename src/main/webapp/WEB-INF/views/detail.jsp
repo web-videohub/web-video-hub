@@ -63,6 +63,17 @@
                         <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                     </div>
                 </div>
+                <div class="box3">
+                    <form id="messageForm" name="messageForm">
+                        <div class="form-group">
+                            <div class="input-group clearfix">
+                                <div class="bbox1">
+                                    <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
+                                    <p>${sessionScope.login.userDisplayName}<</p>
+                                </div>
+                            </div>
+                            <div class="bbox1_1">
+                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
 
                 <div class="video_info_bbox">
                     <p>업로드 일자: ${v.videoUploadDate}</p>
@@ -94,21 +105,22 @@
                 </ul>
             </div>
         </div>
-    <div class="box2">
-        <ul class="video_list_Algorithm">
-            <li>
-                <a href="#">
-                    <div class="video_sumnail">
-                        <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
-                    </div>
-                    <div class="video_subinfo">
-                        <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
-                        <p class="bbox_text_sub">Test_user</p>
-                        <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
-                    </div>
-                </a>
-            </li>
-        </ul>
+        <div class="box2">
+            <ul class="video_list_Algorithm">
+                <li>
+                    <a href="#">
+                        <div class="video_sumnail">
+                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
+                        </div>
+                        <div class="video_subinfo">
+                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
+                            <p class="bbox_text_sub">Test_user</p>
+                            <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
 </div>
 </div>

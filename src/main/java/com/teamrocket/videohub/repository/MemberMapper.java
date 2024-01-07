@@ -16,6 +16,8 @@ public interface MemberMapper {
 
     boolean isConsistent(@Param("account") String account, @Param("email") String email);
 
+    boolean modifyPassword(@Param("account") String account, @Param("password") String newPassword);
+
     Member findName(String channelName);
 
     Member countVideo(String channelName);
@@ -25,4 +27,5 @@ public interface MemberMapper {
     void upSubCount(String account);
 
     void downSubCount(String account);
+
 }

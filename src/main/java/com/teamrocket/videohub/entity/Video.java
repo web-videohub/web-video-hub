@@ -40,6 +40,8 @@ public class Video {
     private String userDisplayName;
     private String uploadUserProfileImage;
 
+    private int replyCount;
+
 
     public Video(VideoUploadRequestDTO dto) {
         convertInputData(dto);
@@ -60,6 +62,7 @@ public class Video {
         this.videoViewCount = rs.getInt("video_view_count");
         this.videoUrl = rs.getString("video_url");
         this.userProfileImage = rs.getString("user_profile_image");
+        this.replyCount = rs.getInt("reply_count");
     }
 
     private void timeFormat() {
