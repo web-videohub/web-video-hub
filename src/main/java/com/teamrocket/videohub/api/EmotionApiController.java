@@ -53,7 +53,6 @@ public class EmotionApiController {
 
 //        emotion.setUserAccount(((LoginUserResponseDTO) session.getAttribute(LOGIN_KEY)).getUserAccount());
         log.info("/api/v1/emotion : POST");
-        log.info("request parameter : {}", dto);
         log.debug("request parameter : {}", dto);
 
         try {
@@ -81,11 +80,11 @@ public class EmotionApiController {
         log.info("/api/v1/replies/{}/{} : DELETE", videoId, account);
 
         try {
-            EmotionResponseDTO responseDTO = emotionService.delete(videoId, account);
+            boolean flag = emotionService.delete(videoId, account);
 
             return ResponseEntity
                     .ok()
-                    .body(responseDTO)
+                    .body(flag)
                     ;
         } catch (Exception e) {
             return ResponseEntity

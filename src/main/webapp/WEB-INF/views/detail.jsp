@@ -596,6 +596,63 @@
                 }
             })
     }
+    // GET방식을 제외한 요청의 정보 만들기
+    const requestInfo = {
+        method: 'POST',
+        headers: {
+            'content-type': 'application/json'
+        },
+        body: JSON.stringify(payload)
+    };
+    fetch(subscribeURL, requestInfo)
+        .then(res => {
+            if (res.status === 200) {
+                $subBtn.classList.add('chBtn2');
+                $subBtn.classList.remove('chBtn');
+                $subBtn.style.width = '110px';
+                $subBtn.textContent = '구독취소';
+                $subBtn.style.background = '#EBEBEB';
+                $subBtn.style.color = 'black';
+                $subBtn.removeEventListener('click', makeSub);
+                $subBtn.addEventListener('click', e => {
+                    fetchDeleteSub();
+                });
+                return res.json();
+            } else {
+                return res.text();
+            }
+        });
+
+    // function fetchGetEmotion() {
+    //     fetch(emotionURL + videoId)
+    //         .then(res => res.json())
+    //         .then(emotion => {
+    //             if (emotion === null) {
+    //             } else {
+    //                 if (emotion.videoLike === 1)
+    //                 $subBtn.classList.add('chBtn');
+    //                 $subBtn.style.display = 'block';
+    //                 $subBtn.style.width = '80px';
+    //                 $subBtn.textContent = '구독';
+    //                 $subBtn.style.background = 'black';
+    //                 $subBtn.style.color = 'white';
+    //                 $subBtn.removeEventListener('click', fetchDeleteSub);
+    //                 $subBtn.addEventListener('click', e => {
+    //                     makeEmotion();
+    //                 });
+    //             }
+    //         }
+    // );
+    // }
+
+    // function makeEmotion() {
+    //     // 서버로 보낼 데이터
+    //     const payload = {
+    //         userAccount: currentAccount,
+    //         videoId : videoId,
+    //         videoLike: 1,
+    //         videoHate: 0
+    //     };
 
     (() => {
         // 서버에서 댓글 불러오기

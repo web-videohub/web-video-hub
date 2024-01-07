@@ -46,21 +46,15 @@ public class EmotionService {
     }
 
     public void modify(EmotionPostRequestDTO dto) throws Exception{
-        Emotion emotion = emotionMapper.findOne(1, "smg0218");
+        Emotion emotion = emotionMapper.findOne(dto.getVideoId(), dto.getAccount());
         // POSTMAN 테스트 용으로 임시처리
-        emotionMapper.modify(1, "smg0218", dto.getVideoLike(), dto.getVideoHate());
+        emotionMapper.modify(dto.getVideoId(), dto.getAccount(), dto.getVideoLike(), dto.getVideoHate());
         if (emotion.getVideoLike() == 1)
             videoMapper.downLikeCount(1);
     }
 
-    public EmotionResponseDTO delete(int videoId, String userAccount) {
-        Emotion emotion = emotionMapper.findOne(videoId, userAccount);
-        long emotionId = emotion.getEmotionId();
+    public boolean delete(int videoId, String userAccount) {
 
-        emotionMapper.delete(emotionId);
-        return EmotionResponseDTO.builder()
-                .videoLike(0)
-                .videoHate(0)
-                .build();
+        return emotionMapper.delete(videoId, userAccount);
     }
 }
