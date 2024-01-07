@@ -98,6 +98,11 @@ public class AppController {
         model.addAttribute("vList", videos);
         log.info("이거보세ㅐㅇ쇼!!!  :" + videos.toString());
         model.addAttribute("keyword", keyword);
+        if (keyword.isEmpty()) {
+            return "/index";
+        }
+        return "/search";
+    }
 
         log.error("vList : {}", videos);
 
