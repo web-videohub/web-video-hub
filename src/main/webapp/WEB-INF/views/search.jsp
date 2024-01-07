@@ -108,7 +108,7 @@
 </div>
 <div class="mainContainer">
     <div class="subContainer">
-        <jsp:include page="include/filter.jsp"/>
+<%--        <jsp:include page="include/filter.jsp"/>--%>
 
         <div class="videoListDiv">
 
@@ -165,7 +165,6 @@
     }
 
     const loadData = async (type) => {
-        console.log('loadData function called');
         if (loading) return;
 
         loading = true;
@@ -173,20 +172,26 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/loadMoreVideos?pageNumber=\${pageNumber}&pageSize=12&type=` + type);
+                const response = await fetch(`/loadSearch?pageNumber=\${pageNumber}&pageSize=12&type=` + type + `&keyword=${keyword}`);
                 const newVideos = await response.json();
+                console.log(newVideos);
 
                 if (newVideos.length > 0) {
-                    newVideos.forEach(vList => {
+                    newVideos.forEach(video => {
                         const newItem = document.createElement('div');
                         newItem.className = 'videoDiv';
-                        newItem.setAttribute('data-videoId', `\${vList.videoId}`);
-                        newItem.innerHTML = `<a class="video" href="#"><img id="videoImg" src="/local\${vList.thumbnailUrl}" alt="thumbnail" data-videoId="\${vList.videoId}"/></a>` +
-                            `<div class="profileContainer"><div class="profile"><img class="profile" src="/local\${vList.userProfileImage}" alt="profile image"  data-uploader="\${vList.videoUploadUser}"/></div>` +
-                            `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${vList.videoId}">\${vList.videoTitle}</span></a>` +
-                            `<span class="uploader" data-uploader="\${vList.videoUploadUser}">\${vList.videoUploadUser}</span><span class="viewcount">조회수 \${vList.videoViewCount}회ㆍ\${formatTimeAgo(vList.videoUploadDate)}</span></div></div>`;
+                        newItem.setAttribute('data-videoId', `\${video.videoId}`);
+
+                        newItem.innerHTML = `<a class="video1" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
+                            `<div class="profileContainer"><div class="profile"><img class="profileImg" src="/local\${video.userProfileImage}" alt="profile image" data-uploader="\${video.videoUploadUser}"/></div>` +
+                            `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
+                            `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
                         videoListDiv.appendChild(newItem);
 
+                        const $a = newItem.querySelector('.video1');
+                        $a.addEventListener('click', e => {
+                            e.preventDefault();
+                        });
 
                         newItem.addEventListener('click', e => {
                             if(!e.target) return;
@@ -194,7 +199,7 @@
                             if (e.target.id === 'videoImg' || e.target.className === 'title') {
                                 window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
                             }
-                            if (e.target.className === 'profile' || e.target.className === 'uploader') {
+                            if (e.target.className === 'profileImg' || e.target.className === 'uploader') {
                                 window.location.href = "/userPage?channelName=" + e.target.dataset.uploader;
                             }
                         });
@@ -207,7 +212,6 @@
 
                 } else {
                     observer.unobserve(loader);
-                    console.log('Observer unobserved');
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);

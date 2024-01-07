@@ -117,6 +117,6 @@
         let $searchInput = document.querySelector('.searchInput');
         $searchBtn.addEventListener('click', e=> {
             console.log($searchInput.value);
-        })
+        });
     </script>
 </body>
