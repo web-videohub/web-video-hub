@@ -3,7 +3,6 @@ package com.teamrocket.videohub.services;
 import com.teamrocket.videohub.dto.request.LoginRequestDTO;
 import com.teamrocket.videohub.dto.request.SignUpRequestDTO;
 import com.teamrocket.videohub.dto.response.LoginUserResponseDTO;
-import com.teamrocket.videohub.dto.response.UserInfoResponseDTO;
 import com.teamrocket.videohub.entity.Member;
 import com.teamrocket.videohub.repository.MemberMapper;
 import lombok.RequiredArgsConstructor;

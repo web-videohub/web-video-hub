@@ -122,17 +122,21 @@ body {
     color: #020101;
 }
 
-.chVideo {
+.video {
     width: 100%;
-    height: 65%;
-    border-radius: 20px;
+    height: 69%;
+    background-color: #F2B950;
+    border-radius: 10px;
     margin: 0 auto;
 
+    position: absolute;
+    top: 0;
+    overflow: hidden;
 }
 
-.chVideo img{
+.video img{
     width: 100%;
-    height: 100% ;
+    height: 100%;
     object-fit: revert;
 }
 .profile {
@@ -248,7 +252,6 @@ body {
     justify-content: left !important;
     align-content: center;
     flex-direction: row;
-    margin-bottom: 50px;
 }
 .channelProfile {
     display: flex;
@@ -265,7 +268,6 @@ body {
     font-weight: bold;
 }
 .subscribe_B {
-    display: none;
     width: 80px;
     height: 40px;
     background: black;
@@ -274,41 +276,13 @@ body {
     border: 0;
     font-family: 'Noto Sans KR', sans-serif;
 }
-.studioBtn {
-    width: 170px;
-    height: 40px;
-    background: black;
-    color: white;
-    border-radius: 30px;
-    border: 0;
-    font-family: 'Noto Sans KR', sans-serif;
-    text-decoration: none;
-    text-align: center;
-    padding-top: 6px;
-}
-.chBtn:hover, .chBtn-hover {
-    transition: 0.2s ease-out;
-    background: #444444;
-}
-.chBtn:not(:hover), .chBtn2:not(.chBtn-hover) {
-    transition: 0.2s ease-out;
-}
-.chBtn2:hover, .chBtn2-hover {
-    transition: 0.2s ease-out;
-    background: #444444;
-}
-.chBtn2:not(:hover), .chBtn2:not(.chBtn2-hover) {
-    transition: 0.2s ease-out;
-}
-
-
 hr {
     width: 90%;
 }
 
 .channelVideoList {
-    width: 370px;
-    height: 320px;
+    width: 250px;
+    height: 240px;
     background: #f1f1f1;
 
     display: flex;
@@ -317,27 +291,14 @@ hr {
     flex-direction: column;
 
     margin-bottom: 15px;
-    border-radius: 20px;
+    border-radius: 10px;
     font-family: 'Noto Sans KR', sans-serif;
 }
-.channelVideoList:hover {
-    transition: 0.2s ease-out;
-    filter: drop-shadow(0.3rem 0.3rem 10px #8e8f8c);
-}
-.channelVideoList:not(:hover) {
-    transition: 0.2s ease-out;
-}
-
 
 #chImg {
-    border-radius: 20px;
-}
-#chImg:hover {
-    transition: 0.2s ease-out;
-    border-radius: 0;
-}
-#chImg:not(:hover) {
-    transition: 0.2s ease-out;
+    width: 250px;
+    height: 150px;
+    border-radius: 10px;
 }
 .channelVideo {
     display: flex;
@@ -355,13 +316,6 @@ hr {
     margin-top: 10px;
     font-weight: bold;
 }
-.miniTitle:hover {
-    transition: 0.2s ease-out;
-    text-decoration: underline;
-}
-.miniTitle:not(:hover) {
-    transition: 0.2s ease-out;
-}
 .chViewcount {
     font-family: 'Noto Sans KR', sans-serif;
     font-size: 14px;
@@ -375,12 +329,4 @@ hr {
 
     padding-left: 70px;
     margin-top: 30px;
-}
-.channelEmail {
-    font-family: 'Noto Sans KR', sans-serif;
-    font-size: 17px;
-    margin-bottom: 5px;
-}
-.channelAccount {
-    font-family: 'Noto Sans KR', sans-serif;
 }

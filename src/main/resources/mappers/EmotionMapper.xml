@@ -24,9 +24,4 @@
         WHERE user_account = #{userAccount} AND video_id = #{videoId}
     </update>
 
-    <delete id="delete">
-        DELETE tbl_emotion_check
-        WHERE emotion_id = #{emotionId}
-    </delete>
-
 </mapper>

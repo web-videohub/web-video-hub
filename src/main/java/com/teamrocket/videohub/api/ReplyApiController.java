@@ -1,10 +1,10 @@
 package com.teamrocket.videohub.api;
 
+import com.teamrocket.videohub.common.Page;
 import com.teamrocket.videohub.dto.request.ReplyModifyRequestDTO;
 import com.teamrocket.videohub.dto.request.ReplyPostRequestDTO;
-import com.teamrocket.videohub.dto.response.ReplyDetailResponseDTO;
-import com.teamrocket.videohub.entity.Reply;
-import com.teamrocket.videohub.services.ReplyService;
+import com.teamrocket.videohub.dto.response.ReplyListResponseDTO;
+import com.teamrocket.videohub.service.ReplyService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -12,33 +12,32 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
-import java.util.List;
 
 @RestController
 @Slf4j
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/replies")
 public class ReplyApiController {
+    private final int PAGE_ROW_COUNT = 20;
     private final ReplyService replyService;
 
     // 댓글 목록 조회 요청
     @GetMapping("/{videoId}")
-    public ResponseEntity<?> list(
-            @PathVariable long videoId,
-            @RequestParam(defaultValue = "1") int pageNumber,
-            @RequestParam(defaultValue = "12") int pageSize) {
+    public ResponseEntity<?> list(@PathVariable long videoId) {
+        log.info("/api/v1/replies/{} : GET!", videoId);
 
-        log.info("/api/v1/replies/{}?pageNumber={}&pageSize={} : GET!", videoId, pageSize, pageNumber);
+        Page page = new Page();
+        page.setPageNo(1);
+        page.setAmount(20);
 
-        List<ReplyDetailResponseDTO> replyList = replyService.getReplyList(videoId, pageSize, pageNumber);
-
-        log.warn("replies : {}", replyList);
+        ReplyListResponseDTO replies = replyService.getList(videoId, page);
 
         return ResponseEntity
                 .ok()
-                .body(replyList)
+                .body(replies)
                 ;
     }
 
@@ -57,8 +56,8 @@ public class ReplyApiController {
         log.debug("reuqest parameter : {}", dto);
 
         try {
-            List<ReplyDetailResponseDTO> replyList = replyService.register(dto, session);
-            return ResponseEntity.ok().body(replyList);
+            ReplyListResponseDTO responseDTO = replyService.register(dto, session);
+            return ResponseEntity.ok().body(responseDTO);
         } catch (SQLException e) {
             log.warn("500 status code response!! caused by : {}", e.getMessage());
             return ResponseEntity.internalServerError().body(e.getMessage());
@@ -78,11 +77,11 @@ public class ReplyApiController {
         log.info("/api/v1/replies/{} : DELETE", replyNo);
 
         try {
-            List<ReplyDetailResponseDTO> replyList = replyService.delete(replyNo);
+            ReplyListResponseDTO responseDTO = replyService.delete(replyNo);
 
             return ResponseEntity
                     .ok()
-                    .body(replyList)
+                    .body(responseDTO)
                     ;
         } catch (Exception e) {
             return ResponseEntity
@@ -108,8 +107,8 @@ public class ReplyApiController {
         log.debug("parameter: {}", dto);
 
         try {
-            List<ReplyDetailResponseDTO> replyList = replyService.modify(dto);
-            return ResponseEntity.ok().body(replyList);
+            ReplyListResponseDTO responseDTO = replyService.modify(dto);
+            return ResponseEntity.ok().body(responseDTO);
         } catch (Exception e) {
             log.warn("internal server error! caused by : {}", e.getMessage());
             return ResponseEntity.internalServerError().body(e.getMessage());
