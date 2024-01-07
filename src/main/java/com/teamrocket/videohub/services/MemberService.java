@@ -86,6 +86,7 @@ public class MemberService {
 
     public boolean modifyPassword(String account, String newPassword) {
         return memberMapper.modifyPassword(account, encoder.encode(newPassword));
+    }
 
     public UserInfoResponseDTO getChannelInfo(String channelName) {
         Member member = memberMapper.findName(channelName);
