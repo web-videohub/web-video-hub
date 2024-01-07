@@ -133,6 +133,7 @@ body {
 .video1 {
     width: 100%;
     height: 69%;
+    background-color: #F2B950;
     border-radius: 20px;
     margin: 0 auto;
 
@@ -140,11 +141,11 @@ body {
     top: 0;
     overflow: hidden;
 }
-.video1:hover {
+.video:hover {
     transition: 0.2s ease-out;
     border-radius: 0;
 }
-.video1:not(:hover) {
+.video:not(:hover) {
     transition: 0.2s ease-out;
 }
 

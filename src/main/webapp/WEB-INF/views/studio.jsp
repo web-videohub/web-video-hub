@@ -30,10 +30,10 @@
                 </li>
                 <hr>
                 <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">나 ></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                         <span class="lnr lnr-user"></span>
                         내 채널
                     </a>

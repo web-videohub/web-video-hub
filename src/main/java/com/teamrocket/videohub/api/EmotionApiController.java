@@ -1,10 +1,9 @@
 package com.teamrocket.videohub.api;
 
 import com.teamrocket.videohub.dto.request.EmotionPostRequestDTO;
-import com.teamrocket.videohub.dto.response.EmotionResponseDTO;
 import com.teamrocket.videohub.dto.response.LoginUserResponseDTO;
 import com.teamrocket.videohub.entity.Emotion;
-import com.teamrocket.videohub.services.EmotionService;
+import com.teamrocket.videohub.service.EmotionService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +13,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
+import java.util.concurrent.ExecutionException;
+
+import static com.teamrocket.videohub.utils.LoginUtils.LOGIN_KEY;
 
 @RestController
 @Slf4j
@@ -30,6 +32,9 @@ public class EmotionApiController {
 
         Emotion emotion = emotionService.getEmotion(videoId, dto.getUserAccount());
 
+        if(emotion == null)
+            return null;
+
         return ResponseEntity
                 .ok()
                 .body(emotion)
@@ -37,7 +42,7 @@ public class EmotionApiController {
     }
 
     // 좋아요, 싫어요 등록 요청 처리
-    @PostMapping
+    @PostMapping()
     public ResponseEntity<?> addEmote(
             @Validated @RequestBody EmotionPostRequestDTO dto,
             BindingResult result,
@@ -57,41 +62,11 @@ public class EmotionApiController {
         log.debug("request parameter : {}", dto);
 
         try {
-            emotionService.saveEmotion(dto); // emotion 정보를 집어넣는 부분
+            emotionService.saveEmotion(new Emotion("smg0218", 1, dto.getVideoLike(), dto.getVideoHate())); // emotion 정보를 집어넣는 부분
             return ResponseEntity.ok().body(dto);
         } catch (SQLException e) {
             log.warn("500 status code response!! caused by : {}", e.getMessage());
             return ResponseEntity.internalServerError().body(e.getMessage());
-        }
-    }
-
-    // 좋아요, 싫어요 삭제 요청 처리
-    @DeleteMapping("/{videoId}/{account}")
-    public ResponseEntity<?> deleteEmote(@PathVariable int videoId,
-            @PathVariable String account,
-            BindingResult result,
-            HttpSession session) {
-        if (videoId == 0 || account == null) {
-            return ResponseEntity
-                    .badRequest()
-                    .body("비디오 아이디와 계정명을 보내주세요!")
-                    ;
-        }
-
-        log.info("/api/v1/replies/{}/{} : DELETE", videoId, account);
-
-        try {
-            EmotionResponseDTO responseDTO = emotionService.delete(videoId, account);
-
-            return ResponseEntity
-                    .ok()
-                    .body(responseDTO)
-                    ;
-        } catch (Exception e) {
-            return ResponseEntity
-                    .internalServerError()
-                    .body(e.getMessage())
-                    ;
         }
     }
 

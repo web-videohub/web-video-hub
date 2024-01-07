@@ -10,6 +10,4 @@ public interface EmotionMapper {
     Emotion findOne(int videoId, String userAccount);
 
     boolean modify(int videoId, String userAccount, int videoLike, int videoHate);
-
-    boolean delete(long emotionId);
 }
