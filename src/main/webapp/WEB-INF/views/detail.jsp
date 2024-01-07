@@ -415,13 +415,18 @@
                 }
             })
             .then(responseResult => {
-                loading = false;
-                nowPageNumber = pageNumber;
-                pageNumber = 1;
-                fetchGetReplies(responseResult);
-                for (i = 2; i<=nowPageNumber; i++) {
-                    pageNumber = i;
-                    observer.observe(loader);
+
+                if (responseResult.length === 0)
+                    document.querySelector('.chat_list').innerHTML = '';
+                else {
+                    loading = false;
+                    nowPageNumber = pageNumber;
+                    pageNumber = 1;
+                    fetchGetReplies(responseResult);
+                    for (i = 2; i <= nowPageNumber; i++) {
+                        pageNumber = i;
+                        observer.observe(loader);
+                    }
                 }
             });
     }
@@ -494,6 +499,9 @@
             .then(res => res.json())
             .then(replyList => {
                 console.log(replyList);
+                if(replyList.length === 0) {
+
+                }
                 renderReplies(replyList);
             })
         ;
