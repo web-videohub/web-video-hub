@@ -49,6 +49,20 @@ public class AppController {
         return ResponseEntity.ok(videos);
     }
 
+    @GetMapping("/loadMoreVideosDetail")
+    @ResponseBody
+    public ResponseEntity<List<Video>> loadMoreVideosDetail(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize,
+            String type
+    ) {
+        List<Video> videos = videoService.getVideosDetail(pageSize, pageNumber, type);
+
+        log.warn("videos : {}", videos);
+
+        return ResponseEntity.ok(videos);
+    }
+
 
 
     @GetMapping("/showmv")

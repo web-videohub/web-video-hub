@@ -1,6 +1,5 @@
 package com.teamrocket.videohub.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.teamrocket.videohub.dto.request.VideoUploadRequestDTO;
 import lombok.*;
 

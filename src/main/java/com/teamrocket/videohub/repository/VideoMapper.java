@@ -14,6 +14,8 @@ public interface VideoMapper {
 
     List<Video> findAll(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type);
 
+    List<Video> findAllDetail(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type);
+
     void upViewCount(int videoId);
 
     void upLikeCount(int videoId);
@@ -25,4 +27,5 @@ public interface VideoMapper {
     List<Video> findAllCh(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String channelName);
 
     List<Video> findAllSub(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String account);
+
 }

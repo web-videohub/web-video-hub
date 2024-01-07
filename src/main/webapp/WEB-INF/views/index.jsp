@@ -188,7 +188,7 @@
 
                         const $a = newItem.querySelector('.video1');
                         $a.addEventListener('click', e => {
-                           e.preventDefault();
+                            e.preventDefault();
                         });
 
                         newItem.addEventListener('click', e => {

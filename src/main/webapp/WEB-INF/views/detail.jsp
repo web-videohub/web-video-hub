@@ -96,18 +96,6 @@
         </div>
     <div class="box2">
         <ul class="video_list_Algorithm">
-            <li>
-                <a href="#">
-                    <div class="video_sumnail">
-                        <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
-                    </div>
-                    <div class="video_subinfo">
-                        <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
-                        <p class="bbox_text_sub">Test_user</p>
-                        <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
-                    </div>
-                </a>
-            </li>
         </ul>
     </div>
 </div>
@@ -126,6 +114,8 @@
     const auth = '${login.userAuth}'; //로그인한 사람 권한
     const loader = document.getElementById('loader');
     const replyListDiv = document.querySelector('.chat_list');
+    const videoListDiv = document.querySelector('.video_list_Algorithm');
+    const type = '${v.videoCategory}';
     let loading = false;
     let pageNumber = 1;
     let nowPageNumber = pageNumber;
@@ -148,6 +138,32 @@
 
     const observer = new IntersectionObserver(handleIntersection, options);
 
+    function formatTimeAgo(timestamp) {
+        const currentTime = new Date();
+        const targetTime = new Date(timestamp);
+        const timeDifference = currentTime - targetTime;
+
+        const minutes = Math.floor(timeDifference / (1000 * 60));
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(days / 365);
+
+        if (years > 0) {
+            return `\${years}년 전`;
+        } else if (months > 0) {
+            return `\${months}개월 전`;
+        } else if (days > 0) {
+            return `\${days}일 전`;
+        } else if (hours > 0) {
+            return `\${hours}시간 전`;
+        } else if (minutes > 0) {
+            return `\${minutes}분 전`;
+        } else {
+            return '방금 전';
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         observer.observe(loader);
     });
@@ -161,10 +177,12 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/api/v1/replies/\${videoId}?pageNumber=\${pageNumber}&pageSize=12`);
-                const newReply = await response.json();
+                const responseReply = await fetch(`/api/v1/replies/\${videoId}?pageNumber=\${pageNumber}&pageSize=12`);
+                const responseVideo = await fetch(`/loadMoreVideosDetail?pageNumber=\${pageNumber}&pageSize=12&type=` + type);
+                const newReply = await responseReply.json();
+                const newVideo = await responseVideo.json();
 
-                if (newReply.length > 0) {
+                if (newReply.length > 0 || newVideo.length > 0) {
                     newReply.forEach(reply => {
                         const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
                         console.log("reply : " + rno);
@@ -210,6 +228,22 @@
                             </table>`;
 
                         replyListDiv.appendChild(newItem);
+                    });
+                    newVideo.forEach(video => {
+                        const newItem = document.createElement('li');
+
+                        newItem.innerHTML = `<a href="showmv?videoId=\${video.videoId}">
+                        <div class="video_sumnail-\${video.videoId}">
+                            <img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/>
+                        </div>
+                        <div class="video_subinfo">
+                            <p class="bbox_text">\${video.videoTitle}</p>
+                            <p class="bbox_text_sub">\${video.videoUploadUser}</p>
+                            <p class="bbox_text_sub">조회수 \${video.videoViewCount} · 업로드 : \${formatTimeAgo(video.videoUploadDate)}</p>
+                        </div>
+                    </a>`;
+
+                        videoListDiv.appendChild(newItem);
                     });
 
                     pageNumber++;
@@ -283,13 +317,12 @@
 
                     document.getElementById('message').value = '';
                     loading = false;
-                    loader.style.visibility = "hidden";
                     nowPageNumber = pageNumber;
                     pageNumber = 1;
                     fetchGetReplies(responseData);
                     for (i = 2; i<nowPageNumber; i++) {
                         pageNumber = i;
-                        loadData();
+                        observer.observe(loader);
                     }
                 });
         }
@@ -383,13 +416,12 @@
             })
             .then(responseResult => {
                 loading = false;
-                loader.style.visibility = "hidden";
                 nowPageNumber = pageNumber;
                 pageNumber = 1;
                 fetchGetReplies(responseResult);
                 for (i = 2; i<=nowPageNumber; i++) {
                     pageNumber = i;
-                    loadData();
+                    observer.observe(loader);
                 }
             });
     }
@@ -446,13 +478,12 @@
             })
             .then(result => {
                 loading = false;
-                loader.style.visibility = "hidden";
                 nowPageNumber = pageNumber;
                 pageNumber = 1;
                 fetchGetReplies(result);
                 for (i = 2; i<nowPageNumber; i++) {
                     pageNumber = i;
-                    loadData();
+                    observer.observe(loader);
                 }
             });
     }

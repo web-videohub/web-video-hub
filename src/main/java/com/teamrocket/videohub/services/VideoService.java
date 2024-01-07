@@ -30,6 +30,11 @@ public class VideoService {
         return videoMapper.findAll(pageSize, offset, type);
     }
 
+    public List<Video> getVideosDetail(int pageSize, int pageNumber, String type) {
+        int offset = (pageNumber - 1) * pageSize;
+        return videoMapper.findAllDetail(pageSize, offset, type);
+    }
+
     public Video getVideo(int videoId) {
         return videoMapper.findOne(videoId);
     }
