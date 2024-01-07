@@ -12,7 +12,6 @@
     <typeAliases>
         <typeAlias type="com.teamrocket.videohub.entity.Reply" alias="reply" />
         <typeAlias type="com.teamrocket.videohub.entity.Emotion" alias="emotion" />
-        <typeAlias type="com.teamrocket.videohub.entity.Subscription" alias="subscription" />
     </typeAliases>
 
     <!--  SQL을 적어둔 XML파일의 위치를 설정  -->
@@ -21,6 +20,5 @@
         <mapper resource="mappers/VideoMapper.xml"/>
         <mapper resource="mappers/ReplyMapper.xml" />
         <mapper resource="mappers/EmotionMapper.xml" />
-        <mapper resource="mappers/SubscriptionMapper.xml" />
     </mappers>
 </configuration>

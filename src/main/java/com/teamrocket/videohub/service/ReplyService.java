@@ -1,8 +1,11 @@
-package com.teamrocket.videohub.services;
+package com.teamrocket.videohub.service;
 
+import com.teamrocket.videohub.common.Page;
+import com.teamrocket.videohub.common.PageMaker;
 import com.teamrocket.videohub.dto.request.ReplyModifyRequestDTO;
 import com.teamrocket.videohub.dto.request.ReplyPostRequestDTO;
 import com.teamrocket.videohub.dto.response.ReplyDetailResponseDTO;
+import com.teamrocket.videohub.dto.response.ReplyListResponseDTO;
 import com.teamrocket.videohub.entity.Member;
 import com.teamrocket.videohub.entity.Reply;
 import com.teamrocket.videohub.repository.MemberMapper;
@@ -15,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.stream.Collectors;
 
 @Service
@@ -25,19 +29,13 @@ public class ReplyService {
     private final ReplyMapper replyMapper;
 
     // 댓글 목록 조회
-    public List<ReplyDetailResponseDTO> getReplyList(long videoId, int pageSize, int pageNumber) {
-        int offset = (pageNumber - 1) * pageSize;
+    public ReplyListResponseDTO getList(long videoId, Page page) {
 
-        List<Reply> testList = replyMapper.findAll(videoId, pageSize, offset);
-
-        log.info("testList : " + testList.toString());
-
-        List<ReplyDetailResponseDTO> replies = replyMapper.findAll(videoId, pageSize, offset)
+        // DB에서 댓글 정보 조회
+        List<ReplyDetailResponseDTO> replies = replyMapper.findAll(videoId, page)
                 .stream()
                 .map(ReplyDetailResponseDTO::new)
                 .collect(Collectors.toList());
-
-        log.info("replies : {}", replies);
 
         for (ReplyDetailResponseDTO reply : replies) {
             Member member = memberMapper.findMember(reply.getAccount());
@@ -45,11 +43,18 @@ public class ReplyService {
             reply.setProfile(member.getUserProfileImage());
         }
 
-        return replies;
+        // DB에서 총 댓글 수 조회
+        int count = replyMapper.count(videoId);
+
+        return ReplyListResponseDTO.builder()
+                .replies(replies)
+                .count(count)
+                .pageInfo(new PageMaker(page, count))
+                .build();
     }
 
     // 댓글 등록 서비스
-    public List<ReplyDetailResponseDTO> register(ReplyPostRequestDTO dto, HttpSession session) throws SQLException {
+    public ReplyListResponseDTO register(ReplyPostRequestDTO dto, HttpSession session) throws SQLException {
         log.debug("댓글 등록 서비스 실행!");
 
         // dto를 entity로 변환
@@ -64,25 +69,25 @@ public class ReplyService {
         }
 
         // 등록이 성공하면 새롭게 갱신된 1페이지 댓글 내용을 재 조회해서 응답한다.
-        return getReplyList(dto.getVideoId(), 12, 1);
+        return getList(dto.getVideoId(), new Page(1, 5));
     }
 
     // 댓글 삭제
     @Transactional // 트랜잭션(예외처리) 자동화
-    public List<ReplyDetailResponseDTO> delete(long replyNo) throws Exception {
+    public ReplyListResponseDTO delete(long replyNo) throws Exception {
         Reply reply = replyMapper.findOne(replyNo);
         long videoId = reply.getVideoId();
 
         replyMapper.delete(replyNo);
 
-        return getReplyList(videoId, 12, 1);
+        return getList(videoId, new Page(1, 20));
     }
 
     // 댓글 수정 처리
-    public List<ReplyDetailResponseDTO> modify(ReplyModifyRequestDTO dto) throws Exception {
+    public ReplyListResponseDTO modify(ReplyModifyRequestDTO dto) throws Exception {
 
         replyMapper.modify(dto.toEntity());
 
-        return getReplyList(dto.getVideoId(), 12, 1);
+        return getList(dto.getVideoId(), new Page(1, 20));
     }
 }

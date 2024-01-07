@@ -63,6 +63,7 @@ public class VideoService {
     public List<Video> getVideosSub(int pageSize, int pageNumber, String type, String account) {
         int offset = (pageNumber - 1) * pageSize;
         return videoMapper.findAllSub(pageSize, offset, type, account);
+
     }
 }
 

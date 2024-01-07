@@ -30,10 +30,10 @@
                 </li>
                 <hr>
                 <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">나 ></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
                         <span class="lnr lnr-user"></span>
                         내 채널
                     </a>
@@ -148,7 +148,7 @@
 
                         newItem.innerHTML = `
                             <td><input type="checkbox" data-videoId="\${video.videoId}"></td>
-                            <td><img src="/local\${video.thumbnailUrl}" alt="동영상 사진" /></td>
+                            <td><img src="/local\${video.thumbnailUrl}" alt="동영상 사진" />여기 변함</td>
                             <td>\${video.videoTitle}</td>
                             <td>\${formatDate(video.videoUploadDate)}</td>
                             <td>\${video.videoViewCount}회</td>
