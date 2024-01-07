@@ -148,7 +148,11 @@
 
                         newItem.innerHTML = `
                             <td><input type="checkbox" data-videoId="\${video.videoId}"></td>
+<<<<<<< HEAD
                             <td><img src="/local\${video.thumbnailUrl}" alt="동영상 사진" />여기 변함</td>
+=======
+                            <td><img src="/local\${video.thumbnailUrl}" alt="동영상 사진" />11</td>
+>>>>>>> 6ee9eb791b8187fd22661b3fca20eaed09814f4d
                             <td>\${video.videoTitle}</td>
                             <td>\${formatDate(video.videoUploadDate)}</td>
                             <td>\${video.videoViewCount}회</td>
