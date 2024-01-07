@@ -95,21 +95,22 @@ public class AppController {
     }
 
     @GetMapping("/search")
-    public String search(String keyword, Model model,
-                         @RequestParam(defaultValue = "1") int pageNumber,
-                         @RequestParam(defaultValue = "16") int pageSize,
-                         HttpSession session) {
+    public String search(String keyword, Model model) {
         log.info("/search Page: GET! {}", keyword);
-        List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, keyword);
-
-        log.error("videos : {}", videos);
-        model.addAttribute("vList", videos);
-        log.info("이거보세ㅐㅇ쇼!!!  :" + videos.toString());
         model.addAttribute("keyword", keyword);
-
-        log.error("vList : {}", videos);
-
         return "/search";
+    }
+
+    @GetMapping("/loadSearch")
+    @ResponseBody
+    public ResponseEntity<List<Video>> loadMoreVideosSearch(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize,
+            String type, String keyword
+    ) {
+        List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, type, keyword);
+        log.info("검색된 영상들: {}", videos);
+        return ResponseEntity.ok(videos);
     }
 
     @RequestMapping("/setting")
