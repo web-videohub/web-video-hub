@@ -1,5 +1,6 @@
 package com.teamrocket.videohub.repository;
 
+import com.teamrocket.videohub.dto.response.VideoDetailResponseDTO;
 import com.teamrocket.videohub.entity.Video;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -28,4 +29,5 @@ public interface VideoMapper {
 
     List<Video> findAllSub(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String account);
 
+    Video findOneDetail(int videoId);
 }

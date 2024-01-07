@@ -1,6 +1,7 @@
 package com.teamrocket.videohub.controller;
 
 import com.teamrocket.videohub.dto.response.UserInfoResponseDTO;
+import com.teamrocket.videohub.dto.response.VideoDetailResponseDTO;
 import com.teamrocket.videohub.entity.Video;
 import com.teamrocket.videohub.services.MemberService;
 import com.teamrocket.videohub.services.VideoService;
@@ -69,11 +70,11 @@ public class AppController {
     public String showmv(Model model, int videoId) {
         log.info("영상 채널");
 
-        Video video = videoService.getVideo(videoId);
+        VideoDetailResponseDTO dto = videoService.getVideoDetailInfo(videoId);
 
-        log.info("구독자수 : {}", video.getUserSubscribe());
+        log.warn("VideoDetailResponseDTO : {}", dto);
 
-        model.addAttribute("v", video);
+        model.addAttribute("v", dto);
 
         return "/detail";
     }

@@ -49,23 +49,23 @@
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>
                 <div class="video_user_bbox">
-                    <a href="/userPage?channelName=${v.videoUploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image" class="profileIMG" height="45" width="45"/></a>
+                    <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image" class="profileIMG" height="45" width="45"/></a>
                     <div class="video_info_user_bbox">
-                        <a href="/userPage?channelName=${v.videoUploadUser}">${v.videoUploadUser}</a>
-                        <p>구독자 ${v.userSubscribe}명</p>
+                        <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
+                        <p>구독자 ${v.uploadUserSubscribe}명</p>
                     </div>
                     <div class="video_review_btn_o">
                         <button type="button" class="subscribe_B">구독</button>
                     </div>
                     <div class="video_review_btn_t">
-                        <button type="button" class="like_B">${v.videoLike}<span class="lnr lnr-thumbs-up"></span>1.5만</button>
+                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}</button>
                         <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
                         <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                     </div>
                 </div>
 
                 <div class="video_info_bbox">
-                    <p>업로드 일자: ${v.videoUploadDate}</p>
+                    <p>업로드 일자: ${v.uploadDate}</p>
                     <p>조회수: $${v.videoViewCount}</p>
                     <p>영상 설명: ${v.videoContent}</p>
                 </div>
@@ -112,7 +112,7 @@
     const urlParams = new URLSearchParams(window.location.search);
     const videoId = urlParams.get('videoId'); //URL의 동영상 번호를 가져와서 저장
     const currentAccount = '${sessionScope.login.userAccount}'; // 로그인한 사람
-    const receiverAccount = '${v.videoUploadUser}'; // 동영상 업로더 어카운트명
+    const receiverAccount = '${v.uploadUser}'; // 동영상 업로더 어카운트명
     const auth = '${login.userAuth}'; //로그인한 사람 권한
     const loader = document.getElementById('loader');
     const replyListDiv = document.querySelector('.chat_list');
@@ -263,15 +263,6 @@
             }
         }, 1000);
     };
-
-    /*
-        로그인한 유저 정보들 (나중에 이 주석 꼭 지울것!)
-                login.userAccount : 유저 아이디
-                login.userDisplayName : 유저닉네임
-                login.userEmail : 유저이메일
-                login.userAuth : 유저 권한
-                login.userProfile : 유저 프사
-     */
 
     function addComment() {
         const $addBtn = document.getElementById('addReply');
@@ -511,7 +502,7 @@
 
     // 서버에서 실시간으로 비동기통신을 해서 구독여부 JSON을 받아오는 함수
     function fetchGetSub() {
-        fetch(subscribeURL + `/${sessionScope.login.userAccount}/${v.videoUploadUser}`)
+        fetch(subscribeURL + `/${sessionScope.login.userAccount}/${v.uploadUser}`)
             .then(res => res.json())
             .then(flag => {
                 if (flag) {
@@ -549,7 +540,7 @@
                 'Content-Type': 'application/json',
             }
         };
-        fetch(subscribeURL + `/${sessionScope.login.userAccount}/${v.videoUploadUser}`, requestInfo)
+        fetch(subscribeURL + `/${sessionScope.login.userAccount}/${v.uploadUser}`, requestInfo)
             .then(res => {
                 if (res.status === 200) {
                     $subBtn.classList.add('chBtn');

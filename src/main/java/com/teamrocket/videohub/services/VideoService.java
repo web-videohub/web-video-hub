@@ -55,5 +55,13 @@ public class VideoService {
         int offset = (pageNumber - 1) * pageSize;
         return videoMapper.findAllSub(pageSize, offset, type, account);
     }
+
+    public VideoDetailResponseDTO getVideoDetailInfo(int videoId) {
+        videoMapper.upViewCount(videoId);
+
+        Video video = videoMapper.findOneDetail(videoId);
+
+        return new VideoDetailResponseDTO(video);
+    }
 }
 
