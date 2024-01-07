@@ -86,4 +86,25 @@
         ORDER BY v.video_upload_date desc
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
+
+    <select id="findMyVideo" resultType="com.teamrocket.videohub.entity.Video">
+        select v.video_title, v.video_view_count, v.video_upload_date,
+        v.thumbnail_url, v.video_id, count(r.reply_no) as reply_count
+        from tbl_video v
+        left join tbl_reply r
+        on v.video_id = r.video_id
+        where v.video_upload_user = #{account}
+        group by v.video_id
+        order by v.video_upload_date desc
+        limit #{pageSize} offset #{offset}
+    </select>
+
+    <delete id="deleteVideos" parameterType="java.util.List">
+        DELETE FROM tbl_video
+        where video_id IN
+        <foreach collection="list" item="item" open="("
+                 separator="," close=")">
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

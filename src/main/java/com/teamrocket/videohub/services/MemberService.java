@@ -82,4 +82,8 @@ public class MemberService {
     public boolean checkConsistentValue(String account, String email) {
         return memberMapper.isConsistent(account, email);
     }
+
+    public boolean modifyPassword(String account, String newPassword) {
+        return memberMapper.modifyPassword(account, encoder.encode(newPassword));
+    }
 }

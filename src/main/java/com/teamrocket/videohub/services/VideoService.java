@@ -49,5 +49,10 @@ public class VideoService {
         int offset = (pageNumber - 1) * pageSize;
         return videoMapper.findSearch(pageSize, offset, keyword);
     }
+
+    public List<Video> findMine(int pageSize, int pageNumber, String type, String account) {
+        int offset = (pageNumber - 1) * pageSize;
+        return videoMapper.findMyVideo(pageSize, offset, type, account);
+    }
 }
 

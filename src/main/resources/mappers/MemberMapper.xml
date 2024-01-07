@@ -35,4 +35,10 @@
         FROM tbl_member
         WHERE user_account = #{account} AND user_email = #{email}
     </select>
+
+    <update id="modifyPassword">
+        update tbl_member
+        set user_password = #{password}
+        where user_account = #{account}
+    </update>
 </mapper>
