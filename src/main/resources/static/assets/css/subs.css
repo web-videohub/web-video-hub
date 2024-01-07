@@ -96,8 +96,8 @@ body {
     gap: 20px;
 }
 .videoDiv {
-    width: 330px;
-    height: 290px;
+    width: 370px;
+    height: 320px;
     background-color: #f1f1f1;
     font-family: 'Noto Sans KR', sans-serif;
     display: flex;
@@ -108,24 +108,45 @@ body {
     /*width: calc(33.33% - 20px);  여백을 고려하여 3개의 열로 정렬되도록 설정 */
     margin-bottom: 20px; /* 각 videoDiv 간의 여백 설정 */
     box-sizing: border-box; /* 여백이 포함된 크기로 계산되도록 설정 */
-    border-radius: 10px;
+    border-radius: 20px;
     margin-right: 20px;
 
     position: relative;
 }
-.video1 {
-    width: 330px;
-    height: 200px;
-    background-color: #F2B950;
-    border-radius: 10px;
+
+.videoDiv:hover {
+    transition: 0.2s ease-out;
+    /*filter: drop-shadow(0 5px 10px #8e8f8c);*/
+    filter: drop-shadow(0.3rem 0.3rem 10px #8e8f8c);
+}
+.videoDiv:not(:hover) {
+    transition: 0.2s ease-out;
+}
+.videoDiv .title:hover {
+    transition: 0.2s ease-out;
+    color: #020101;
+}
+.videoDiv .title:not(:hover) {
+    transition: 0.2s ease-out;
+}
+.video {
+    width: 100%;
+    height: 69%;
+    border-radius: 20px;
     margin: 0 auto;
 
     position: absolute;
     top: 0;
     overflow: hidden;
 }
-
-.video1 img{
+.video:hover {
+    transition: 0.2s ease-out;
+    border-radius: 0;
+}
+.video:not(:hover) {
+    transition: 0.2s ease-out;
+}
+.video img{
     width: 100%;
     height: 100%;
     object-fit: revert;
@@ -245,4 +266,22 @@ body {
 .profile:hover,
 .uploader:hover {
     cursor: pointer;
+}
+.profile:hover,
+.uploader:hover {
+    cursor: pointer;
+}
+.uploader:hover {
+    transition: 0.2s ease-out;
+    text-decoration: underline;
+}
+.uploader:not(:hover) {
+    transition: 0.2s ease-out;
+}
+.titleA:hover {
+    transition: 0.2s ease-out;
+    text-decoration: underline;
+}
+.titleA:not(:hover) {
+    transition: 0.2s ease-out;
 }

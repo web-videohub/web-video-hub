@@ -32,19 +32,19 @@
                 </li>
                 <hr>
                 <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">나 ></a>
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
                 </li>
-                <c:if test="${sessionScope.login.userAccount} == ${channelAccount}">
-                    <li class="nav-item">
-                        <a class="nav-link home" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                    <li class="nav-item home">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                             <span class="lnr lnr-user"></span>
                             내 채널
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.login.userAccount} != ${channelAccount}">
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
                     <li class="nav-item">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                             <span class="lnr lnr-user"></span>
                             내 채널
                         </a>
@@ -81,17 +81,17 @@
                         <span class="sideText">구독</span>
                     </a>
                 </li>
-                <c:if test="${sessionScope.login.userAccount} == ${channelAccount}">
-                    <li class="nav-item2">
-                        <a class="nav-link home" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                    <li class="nav-item2 home">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                             <span class="lnr lnr-user"></span><br>
                             <span class="sideText">나</span>
                         </a>
                     </li>
                 </c:if>
-                <c:if test="${sessionScope.login.userAccount} != ${channelAccount}">
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
                     <li class="nav-item2">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                             <span class="lnr lnr-user"></span><br>
                             <span class="sideText">나</span>
                         </a>
@@ -109,18 +109,18 @@
     </div>
     <div class="channelContainer">
         <div class="profileBox">
-<%--            <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="pimg"/>--%>
-            <img src="/assets/img/rabbit.png" alt="profile image" class="pimg"/>
+            <img src="/local${user.channelProfile}" alt="profile image" class="pimg"/>
             <div class="channelProfile">
-                <p class="channelName">${channelName}</p>
+                <p class="channelName">${user.channelName}</p>
+                <p class="channelEmail">이메일: ${user.channelEmail}</p>
 <%--                <p class="channelName">김다빈</p>--%>
-                <p class="channelAccount">@${channelAccount} ＊ 구독자 ${subCount}명 ＊ 동영상 ${videoCount}개</p>
+                <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
 <%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
-                <c:if test="${sessionScope.login.userAccount} != ${channelAccount}">
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
                     <button type="button" class="subscribe_B">구독</button>
                 </c:if>
-                <c:if test="${sessionScope.login.userAccount} == ${channelAccount}">
-                    <button type="button" class="subscribe_B">스튜디오</button>
+                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                    <a href="/studio" class="studioBtn chBtn">스튜디오</a>
                 </c:if>
             </div>
         </div>
@@ -149,14 +149,125 @@
         </div>
     </div>
 <script>
-    $thumbnail = document.querySelector('.chVideo');
-    $chTitle = document.querySelector('.chTitle');
-    $thumbnail.addEventListener('click', e => {
+    const URL = '/api/v1/subscribe';
+    const userAccount = '${sessionScope.login.userAccount}';
+    const receiverAccount = '${user.channelAccount}';
+    console.log(userAccount);
+    console.log(receiverAccount);
+    const $subBtn = document.querySelector('.subscribe_B');
+
+    // 서버에 실시간으로 비동기통신을 해서 JSON을 받아오는 함수
+    function fetchGetSub() {
+        fetch(URL + `/${sessionScope.login.userAccount}/${user.channelAccount}`)
+            .then(res => res.json())
+            .then(flag => {
+                if (flag) {
+                    $subBtn.classList.add('chBtn2');
+                    $subBtn.style.display = 'block';
+                    $subBtn.style.width = '110px';
+                    $subBtn.textContent = '구독취소';
+                    $subBtn.style.background = '#EBEBEB';
+                    $subBtn.style.color = 'black';
+                    $subBtn.removeEventListener('click', makeSub);
+                    $subBtn.addEventListener('click', e => {
+                        fetchDeleteSub();
+                    });
+                } else {
+                    $subBtn.classList.add('chBtn');
+                    $subBtn.style.display = 'block';
+                    $subBtn.style.width = '80px';
+                    $subBtn.textContent = '구독';
+                    $subBtn.style.background = 'black';
+                    $subBtn.style.color = 'white';
+                    $subBtn.removeEventListener('click', fetchDeleteSub);
+                    $subBtn.addEventListener('click', e => {
+                        makeSub();
+                    })
+                }
+
+            })
+        ;
+    }
+
+    function fetchDeleteSub() {
+        const requestInfo = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        fetch(URL + `/${sessionScope.login.userAccount}/${user.channelAccount}`, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    $subBtn.classList.add('chBtn');
+                    $subBtn.classList.remove('chBtn2');
+                    $subBtn.style.width = '80px';
+                    $subBtn.textContent = '구독';
+                    $subBtn.style.background = 'black';
+                    $subBtn.style.color = 'white';
+                    $subBtn.removeEventListener('click', fetchDeleteSub);
+                    $subBtn.addEventListener('click', e => {
+                        makeSub();
+                    })
+                    return res.json();
+                } else {
+                    alert('구독취소 실패!');
+                    return res.text();
+                }
+            })
+    }
+
+
+    function makeSub() {
+        // 서버로 보낼 데이터
+        const payload = {
+            subSender: userAccount,
+            subReceiver: receiverAccount
+        };
+
+        // GET방식을 제외한 요청의 정보 만들기
+        const requestInfo = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        };
+        fetch(URL, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    $subBtn.classList.add('chBtn2');
+                    $subBtn.classList.remove('chBtn');
+                    $subBtn.style.width = '110px';
+                    $subBtn.textContent = '구독취소';
+                    $subBtn.style.background = '#EBEBEB';
+                    $subBtn.style.color = 'black';
+                    $subBtn.removeEventListener('click', makeSub);
+                    $subBtn.addEventListener('click', e => {
+                        fetchDeleteSub();
+                    });
+                    return res.json();
+                } else {
+                    return res.text();
+                }
+            })
+    }
+
+
+
+    let $thumbnail = document.querySelectorAll('.chVideo');
+    $thumbnail.forEach(function ($thumbnail) {
+        $thumbnail.addEventListener('click', e => {
             window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
+        });
     });
-    $chTitle.addEventListener('click', e => {
+    let $chTitle = document.querySelectorAll('.chTitle');
+    $chTitle.forEach(function ($chTitle) {
+        $chTitle.addEventListener('click', e => {
             window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
+        });
     });
+
 
 
     function formatTimeAgo(timestamp) {
@@ -253,6 +364,11 @@
         pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         checkWidth();
     });
+
+    (() => {
+        // 구독여부 확인하기
+        fetchGetSub();
+    })();
 </script>
 </body>
 </html>

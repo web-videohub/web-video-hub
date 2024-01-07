@@ -60,6 +60,29 @@
         ORDER BY v.video_upload_date desc
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
+    <select id="findAllCh" resultType="com.teamrocket.videohub.entity.Video">
+        SELECT
+        v.video_title, v.video_upload_user,
+        v.video_view_count, v.video_upload_date,
+        m.user_profile_image, v.thumbnail_url, v.video_id
+        FROM tbl_video v
+        JOIN tbl_member m ON v.video_upload_user = m.user_account
+        WHERE v.video_upload_user = #{channelName}
+        ORDER BY v.video_upload_date desc
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
+    <select id="findAllSub" resultType="com.teamrocket.videohub.entity.Video">
+        SELECT
+        v.video_title, v.video_upload_user,
+        v.video_view_count, v.video_upload_date,
+        m.user_profile_image, v.thumbnail_url, v.video_id
+        FROM tbl_video v
+        JOIN tbl_member m ON v.video_upload_user = m.user_account
+        JOIN tbl_subscription s ON v.video_upload_user = s.sub_receiver
+        WHERE s.sub_sender = #{account}
+        ORDER BY v.video_upload_date DESC
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
 
     <update id="upLikeCount">
         UPDATE tbl_video
@@ -107,4 +130,17 @@
             #{item}
         </foreach>
     </delete>
+
+    <select id="findAllSub" resultType="com.teamrocket.videohub.entity.Video">
+        SELECT
+        v.video_title, v.video_upload_user,
+        v.video_view_count, v.video_upload_date,
+        m.user_profile_image, v.thumbnail_url, v.video_id
+        FROM tbl_video v
+        JOIN tbl_member m ON v.video_upload_user = m.user_account
+        JOIN tbl_subscription s ON v.video_upload_user = s.sub_receiver
+        WHERE s.sub_sender = #{account}
+        ORDER BY v.video_upload_date DESC
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
 </mapper>

@@ -50,10 +50,10 @@
             </li>
             <hr>
             <li class="nav-item">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">나 ></a>
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                     <span class="lnr lnr-user"></span>
                     내 채널
                 </a>
@@ -84,7 +84,7 @@
                 </a>
             </li>
             <li class="nav-item2">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userDisplayName}">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                     <span class="lnr lnr-user"></span><br>
                     <span class="sideText">나</span>
                 </a>
@@ -168,7 +168,7 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/loadMoreVideos?pageNumber=\${pageNumber}&pageSize=12&type=` + type);
+                const response = await fetch(`/loadMoreVideosSub?pageNumber=${pageNumber}&pageSize=12&type=${type}&account=${sessionScope.login.userAccount}`);
                 const newVideos = await response.json();
 
                 if (newVideos.length > 0) {

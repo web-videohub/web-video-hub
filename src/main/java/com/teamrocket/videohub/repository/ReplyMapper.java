@@ -1,6 +1,6 @@
 package com.teamrocket.videohub.repository;
 
-import com.teamrocket.videohub.common.Page;
+import com.teamrocket.videohub.dto.response.ReplyDetailResponseDTO;
 import com.teamrocket.videohub.entity.Reply;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,7 +23,7 @@ public interface ReplyMapper {
     Reply findOne(long replyNo);
 
     // 댓글 전체 목록 조회
-    List<Reply> findAll(long videoId, @Param("p") Page page);
+    List<Reply> findAll(@Param("videoId") long videoId, @Param("pageSize") int pageSize, @Param("offset") int offset);
 
     // 댓글 총 개수 조회
     int count(long videoId);

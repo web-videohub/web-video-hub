@@ -85,12 +85,18 @@
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="nav-link" href="/studio">나 ></a>
+                                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                                    <span class="lnr lnr-user"></span>
+                                    내 채널
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/studio">
-                                    <span class="lnr lnr-user"></span>
-                                    내 채널
+                                    <img class="mini" src="/assets/img/miniHub.png" alt="">
+                                    스튜디오
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -122,7 +128,7 @@
                     <li><p class="dropdown-item drop-p">${sessionScope.login.userDisplayName}</p></li>
                     <li><p class="dropdown-item drop-p">${sessionScope.login.userAccount}</p></li>
                     <hr>
-                    <li><a class="dropdown-item" href="/studio">내 채널 보기</a></li>
+                    <li><a class="dropdown-item" href="/userPage?channelName=${sessionScope.login.userAccount}">내 채널 보기</a></li>
                     <li><a class="dropdown-item" href="/setting">설정</a></li>
                     <li><a class="dropdown-item" href="/log-out">로그아웃</a></li>
                 </ul>

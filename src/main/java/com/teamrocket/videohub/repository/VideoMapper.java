@@ -27,4 +27,7 @@ public interface VideoMapper {
 
     void deleteVideos(List<Integer> videoIds);
 
+    List<Video> findAllCh(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String channelName);
+
+    List<Video> findAllSub(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String account);
 }

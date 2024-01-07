@@ -18,4 +18,6 @@ public class Member {
     private Auth userAuth;
     private LocalDateTime userRegDate;
     private String userProfileImage;
+    private int videoCount;
+    private int subCount;
 }
