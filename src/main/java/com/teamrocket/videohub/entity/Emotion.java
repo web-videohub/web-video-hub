@@ -13,6 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @Builder
 public class Emotion {
+    private int emotionId;
     private String userAccount;
     private int videoId;
     private int videoLike;

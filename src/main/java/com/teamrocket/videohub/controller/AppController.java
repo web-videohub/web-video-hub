@@ -6,13 +6,13 @@ import com.teamrocket.videohub.services.MemberService;
 import com.teamrocket.videohub.services.VideoService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
@@ -37,16 +37,15 @@ public class AppController {
         return "index";
     }
 
-    @GetMapping("/loadMoreVideos")
+    @GetMapping("/loadMoreVideosSub")
     @ResponseBody
-    public ResponseEntity<List<Video>> loadMoreVideos(
+    public ResponseEntity<List<Video>> loadMoreVideosSub(
             @RequestParam(defaultValue = "1") int pageNumber,
             @RequestParam(defaultValue = "12") int pageSize,
-            String type
+            String type, String account
     ) {
-        log.error("type : {}", type);
-        List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
-        log.warn("videos : {}", videos);
+        List<Video> videos = videoService.getVideosSub(pageSize, pageNumber, type, account);
+        log.warn("구독한 채널의 영상들 : {}", videos);
         return ResponseEntity.ok(videos);
     }
     @GetMapping("/loadMoreVideosSub")
@@ -64,21 +63,16 @@ public class AppController {
 
 
     @GetMapping("/showmv")
-    public String showmv(
-            Model model
-            , int videoId
-    ) {
+    public String showmv(Model model, int videoId) {
         log.info("영상 채널");
 
         Video video = videoService.getVideo(videoId);
 
         model.addAttribute("v", video);
 
-        log.error("videos : {}", video);
-
-        return "detail";
+        return "/detail";
     }
-  
+
     @GetMapping("/search")
     public String search(String keyword, Model model,
                          @RequestParam(defaultValue = "1") int pageNumber,
@@ -87,6 +81,7 @@ public class AppController {
         log.info("/search Page: GET! {}", keyword);
         List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, keyword);
 
+        log.error("videos : {}", videos);
         model.addAttribute("vList", videos);
         log.info("이거보세ㅐㅇ쇼!!!  :" + videos.toString());
         model.addAttribute("keyword", keyword);
@@ -103,13 +98,6 @@ public class AppController {
         return "setting";
 
     }
-
-
-//     @GetMapping("/detail")
-//     public String detail(int videoId, Model model) {
-//         log.info("비디오 상세 페이지");
-//         model.addAttribute("v", videoService.getDetail(videoId));
-//         return "detail";
 
     @GetMapping("/subs")
     public String subs() {

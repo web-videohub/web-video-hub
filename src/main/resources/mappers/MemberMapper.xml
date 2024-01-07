@@ -58,4 +58,16 @@
         FROM tbl_member
         WHERE user_account = #{account} AND user_email = #{email}
     </select>
+
+    <update id="upSubCount">
+        UPDATE tbl_member
+        SET user_subscribe = user_subscribe + 1
+        WHERE user_account = #{account}
+    </update>
+
+    <update id="downSubCount">
+        UPDATE tbl_member
+        SET user_subscribe = user_subscribe - 1
+        WHERE user_account = #{account}
+    </update>
 </mapper>

@@ -16,7 +16,7 @@
     </delete>
 
     <select id="find" resultType="subscription">
-        SELECT * FROM tbl_subscription
+        SELECT sub_sender, sub_receiver FROM tbl_subscription
         WHERE sub_sender = #{subSender} AND sub_receiver = #{subReceiver}
     </select>
 </mapper>
