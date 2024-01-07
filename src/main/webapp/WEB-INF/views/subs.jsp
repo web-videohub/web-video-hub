@@ -179,7 +179,7 @@
                         newItem.innerHTML = `<a class="video" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
                             `<div class="profileContainer"><div class="profile"><img class="profile" src="/local\${video.userProfileImage}" alt="profile image"  data-uploader="\${video.videoUploadUser}"/></div>` +
                             `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
-                            `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
+                            `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.userDisplayName}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
                         videoListDiv.appendChild(newItem);
 
                         newItem.addEventListener('click', e => {
