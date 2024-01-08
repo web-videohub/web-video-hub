@@ -25,5 +25,5 @@ public class CustomAuthSuccessHandler extends SimpleUrlAuthenticationSuccessHand
 
     }
 
-    protected void clearSession(HttpSession request)
+//    protected void clearSession(HttpSession request)
 }
