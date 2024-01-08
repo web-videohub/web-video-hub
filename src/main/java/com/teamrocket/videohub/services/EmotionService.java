@@ -68,14 +68,14 @@ public class EmotionService {
         }
     }
 
-    public boolean delete(int videoId, String userAccount) {
+    public boolean delete(int videoId, String account) {
 
-        Emotion emotion = emotionMapper.findOne(videoId, userAccount);
+        Emotion emotion = emotionMapper.findOne(videoId, account);
         if (emotion.getVideoLike() == 1)
             videoMapper.downLikeCount(emotion.getVideoId());
         else if(emotion.getVideoHate() == 1)
             videoMapper.downHateCount(emotion.getVideoId());
 
-        return emotionMapper.delete(videoId, userAccount);
+        return emotionMapper.delete(videoId, account);
     }
 }

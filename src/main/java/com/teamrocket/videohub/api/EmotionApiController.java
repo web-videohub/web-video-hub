@@ -69,9 +69,7 @@ public class EmotionApiController {
     // 좋아요, 싫어요 삭제 요청 처리
     @DeleteMapping("/{videoId}/{account}")
     public ResponseEntity<?> deleteEmote(@PathVariable int videoId,
-            @PathVariable String account,
-            BindingResult result,
-            HttpSession session) {
+            @PathVariable String account) {
         if (videoId == 0 || account == null) {
             return ResponseEntity
                     .badRequest()
