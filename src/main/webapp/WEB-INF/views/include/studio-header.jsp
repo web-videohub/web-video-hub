@@ -58,7 +58,7 @@
 <body>
 
 <%
-  String userName = "";
+    String userName = "";
 
     Cookie[] cookies = request.getCookies();
     for (Cookie c : cookies) {
