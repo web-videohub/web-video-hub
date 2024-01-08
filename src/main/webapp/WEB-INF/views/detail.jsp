@@ -90,24 +90,11 @@
                             <button type="button" class="review_B" id="addReply">댓글</button>
                         </div>
                     </div>
-
                 </form>
             </div>
-            <div class="box2">
-                <ul class="video_list_Algorithm">
-                    <li>
-                        <a href="#">
-                            <!-- 여기에 img를 대체할 수 있는 데이터 값을 넣어주세요! -->
-                            <div class="video_sumnail">
-                                <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
-                            </div>
-                            <div class="video_subinfo">
-                                <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
-                                <p class="bbox_text_sub">Test_user</p>
-                                <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
-                            </div>
-                        </a>
-                    </li>
+            <div id="replyData">
+                <ul class="chat_list">
+                    <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
                 </ul>
             </div>
         </div>
@@ -277,11 +264,11 @@
                     newVideo
                         .filter(video => video.videoId.toString() !== videoId) // 현재 보고있는 동영상은 추천동영상에서 예외처리
                         .forEach(video => {
-                        if(video.videoId === videoId)
-                            return;
-                        const newItem = document.createElement('li');
+                            if(video.videoId === videoId)
+                                return;
+                            const newItem = document.createElement('li');
 
-                        newItem.innerHTML = `<a href="showmv?videoId=\${video.videoId}">
+                            newItem.innerHTML = `<a href="showmv?videoId=\${video.videoId}">
                         <div class="video_sumnail">
                             <img src="/local\${video.thumbnailUrl}" alt="thumbnail" style="float: left; width: 168px; height: 94px;"/>
                         </div>
@@ -292,8 +279,8 @@
                         </div>
                     </a>`;
 
-                        videoListDiv.appendChild(newItem);
-                    });
+                            videoListDiv.appendChild(newItem);
+                        });
 
                     pageNumber++;
 
@@ -645,28 +632,28 @@
 
     // 좋아요 / 싫어요 상태를 서버에서 가져오는 부분
     function fetchGetEmotion() {
-        fetch(emotionURL + `/${sessionScope.login.userAccount}?userAccount=${v.uploadUser}`)
+        fetch(emotionURL + `/${v.videoId}?userAccount=${sessionScope.login.userAccount}`)
             .then(res => res.json())
             .then(emotion => {
-                /*
-                emotion에 담기는 정보들
-                    private String userAccount;
-                    private int videoId;
-                    private int videoLike;
-                    private int videoHate;
-                 */
+                    /*
+                    emotion에 담기는 정보들
+                        private String userAccount;
+                        private int videoId;
+                        private int videoLike;
+                        private int videoHate;
+                     */
 
-                if (emotion === null) {
-                    console.log("좋아요 / 싫어요 정보가 없습니다.");
-                } else {
-                    if (emotion.videoLike === 1) {
-                        // 좋아요 버튼 눌러져 있는 상태로 변경
-                    } else if (emotion.videoHate === 1) {
-                        // 싫어요 버튼 눌러져 있는 상태로 변경
+                    if (emotion === null) {
+                        console.log("좋아요 / 싫어요 정보가 없습니다.");
+                    } else {
+                        if (emotion.videoLike === 1) {
+                            // 좋아요 버튼 눌러져 있는 상태로 변경
+                        } else if (emotion.videoHate === 1) {
+                            // 싫어요 버튼 눌러져 있는 상태로 변경
+                        }
                     }
                 }
-            }
-    );
+            );
     }
 
     // 좋아요 / 싫어요 만들기 요청 보내기
@@ -793,6 +780,14 @@
         });
     }
 
+    <%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
+    const $replyTextarea = document.getElementById('message');
+
+    if(`${sessionScope.login == null}`) {
+        $replyTextarea.disabled = true;
+        $replyTextarea.placeholder = "로그인 후 댓글작성이 가능합니다.";
+    }
+
     (() => {
         // 서버에서 댓글 불러오기
         // fetchGetReplies(videoId);
@@ -810,18 +805,7 @@
     })();
 </script>
 
-<%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
-<script>
-    const $replyTextarea = document.getElementById('message');
-
-    if(`${sessionScope.login == null}`) {
-        $replyTextarea.disabled = true;
-        $replyTextarea.placeholder = "로그인 후 댓글작성이 가능합니다.";
-    }
-
-    <!-- 드롭다운 메뉴, 댓글 테스트 자바스크립트 코드 -->
-    <script src="./assets/js/testDropmenu.js"></script>
-    <script src="./assets/js/testReviewChat.js"></script>
-    <script src="./assets/js/testUpdateChat.js"></script>
+<!-- 드롭다운 메뉴, 댓글 테스트 자바스크립트 코드 -->
+<script src="./assets/js/testDropmenu.js"></script>
 </body>
 </html>
