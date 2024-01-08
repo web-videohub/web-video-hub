@@ -97,6 +97,7 @@
         <button class="btn-hover color-9" id="go-upload-form">동영상 업로드</button>
         <button class="btn-hover color-8" id="deleteBtn" type="button">체크된 동영상 삭제</button>
     </div>
+
     <div class="video-table">
         <table>
             <thead>
@@ -120,7 +121,6 @@
             <td colspan="8" class="tablefoot"></td>
             </tfoot>
         </table>
-
     </div>
     <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
 </div>
@@ -179,6 +179,7 @@
                 console.log(myVideos);
 
                 if (myVideos.length > 0) {
+                    console.log("데이터 불러와짐");
                     myVideos.forEach(video => {
                         const newItem = document.createElement('tr');
 
@@ -192,17 +193,6 @@
                             <td>\${video.videoLike}개</td>
                             <td>\${video.videoHate}개</td>
                         `;
-
-                        newItem.addEventListener('mouseover', e => {
-                            Array.from(e.currentTarget.children).forEach((child) => {
-                                child.style.backgroundColor = "#acacac";
-                            });
-                        });
-                        newItem.addEventListener('mouseout', e => {
-                            Array.from(e.currentTarget.children).forEach((child) => {
-                                child.style.backgroundColor = "#eee";
-                            });
-                        });
 
                         $videoTbody.appendChild(newItem);
                     });
