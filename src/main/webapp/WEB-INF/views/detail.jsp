@@ -743,16 +743,13 @@
                 body: JSON.stringify(payload)
             };
 
-            fetch(URL, requestInfo)
+            fetch(emotionURL, requestInfo)
                 .then(res => {
                     if (res.status === 200) {
-                        alert('댓글이 수정되었습니다.');
-                        // modal창 닫기
-                        document.getElementById('modal-close').click();
+                        // 좋아요 상태 변경 처리
                         return res.json();
                     } else {
-                        alert('댓글이 수정에 실패했습니다.');
-                        document.getElementById('modal-close').click();
+                        alert('좋아요 상태 수정 실패');
                         return;
                     }
                 })
@@ -779,16 +776,13 @@
                 body: JSON.stringify(payload)
             };
 
-            fetch(URL, requestInfo)
+            fetch(emotionURL, requestInfo)
                 .then(res => {
                     if (res.status === 200) {
-                        alert('댓글이 수정되었습니다.');
-                        // modal창 닫기
-                        document.getElementById('modal-close').click();
+                        // 싫어요 상태 변경 처리
                         return res.json();
                     } else {
-                        alert('댓글이 수정에 실패했습니다.');
-                        document.getElementById('modal-close').click();
+                        alert('싫어요 상태 수정 실패');
                         return;
                     }
                 })
