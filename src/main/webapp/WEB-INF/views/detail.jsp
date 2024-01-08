@@ -62,12 +62,14 @@
                                                                              alt="profile image" class="profileIMG"
                                                                              height="45" width="45"/></a>
                         <div class="video_info_user_bbox">
-                            <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
+                            <a class="detailName" href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
                             <p>구독자 ${v.uploadUserSubscribe}명</p>
                         </div>
-                        <div class="video_review_btn_o">
-                            <button type="button" class="subscribe_B">구독</button>
-                        </div>
+                        <c:if test="${sessionScope.login != null}">
+                            <c:if test="${sessionScope.login.userAccount ne v.uploadUser}">
+                                <button type="button" class="subscribe_B">구독</button>
+                            </c:if>
+                        </c:if>
                     </div>
                     <div class="video_review_btn_t">
                         <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}
@@ -78,7 +80,7 @@
                 </div>
                 <div class="video_info_bbox">
                     <p id="video_upload_day">업로드 일자: ${v.uploadDate}</p>
-                    <p>조회수: ${v.videoViewCount}</p>
+                    <p>조회수  ${v.videoViewCount}회</p>
                     <p>영상 설명: ${v.videoContent}</p>
                 </div>
             </div>
@@ -559,16 +561,18 @@
                         fetchDeleteSub();
                     });
                 } else {
-                    $subBtn.classList.add('chBtn');
-                    $subBtn.style.display = 'block';
-                    $subBtn.style.width = '80px';
-                    $subBtn.textContent = '구독';
-                    $subBtn.style.background = 'black';
-                    $subBtn.style.color = 'white';
-                    $subBtn.removeEventListener('click', fetchDeleteSub);
-                    $subBtn.addEventListener('click', e => {
-                        makeSub();
-                    })
+                    if (${sessionScope.login.userAccount ne v.uploadUser}) {
+                        $subBtn.classList.add('chBtn');
+                        $subBtn.style.display = 'block';
+                        $subBtn.style.width = '80px';
+                        $subBtn.textContent = '구독';
+                        $subBtn.style.background = 'black';
+                        $subBtn.style.color = 'white';
+                        $subBtn.removeEventListener('click', fetchDeleteSub);
+                        $subBtn.addEventListener('click', e => {
+                            makeSub();
+                        })
+                    }
                 }
 
             })

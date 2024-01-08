@@ -27,6 +27,7 @@ li {
     color: #000000;
     font-size: 14px;
     line-height: 36px;
+    margin-right: 15px;
 }
 /* 싫어요 */
 .lnr-thumbs-down {
@@ -48,6 +49,7 @@ li {
     max-width: 70%; /* 최대 70%까지만 차지하도록 설정 */
     box-sizing: border-box; /* 내부 패딩과 테두리를 포함한 전체 크기를 지정 */
     background-color: #FFFFFF;
+    font-family: 'Noto Sans KR', sans-serif;
 
     /*display: flex;*/
     /*flex-direction: column;*/
@@ -98,11 +100,19 @@ li {
 
 
 /* video_info: 영상 정보(All) */
+.video_info {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.detailName {
+    font-size: 20px;
+    font-weight: bold;
+}
 .video_info h1 {
-    font-family: "Roboto","Arial",sans-serif;
     font-size: 2rem;
     line-height: 2.8rem;
     font-weight: 700;
+    margin-top: 20px;
+    margin-bottom: 10px;
 }
 
 /* video_info_user_bbox: 유저 이름, 구독자 수 */
@@ -112,14 +122,15 @@ li {
 }
 .video_info_user_bbox a {
     text-decoration-line: none;
-    font-family: "Roboto","Arial",sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 16px;
     color: #000000;
 }
 .video_info_user_bbox p {
     color: #383c46;
-    font-family: "Roboto","Arial",sans-serif;
+    font-family: 'Noto Sans KR', sans-serif;
     font-size: 12px;
+    margin: 0;
 }
 
 /* video_user_bbox: 프로필 이미지 */
@@ -129,6 +140,7 @@ li {
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 15px;
 }
 .video_user_bbox .leftReview {
     display: block;
@@ -174,6 +186,9 @@ li {
     margin-left: 10px;
     float: left;
 }
+.subscribe_B {
+    display: none;
+}
 .chBtn:hover, .chBtn-hover {
     transition: 0.2s ease-out;
     background: #444444;
@@ -193,11 +208,14 @@ li {
 .video_review_btn_t {
     float: right;
     background-color: #FFFFFF;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
 }
 /* border-radius: top-left-x top-right-x bottom-right-x bottom-left-x
    / top-left-y top-right-y bottom-right-y bottom-left-y
 */
 .like_B {
+    width: 70px;
     border-radius: 20px 0 0 20px;
     padding: 0 16px;
     height: 36px;
@@ -241,6 +259,7 @@ li {
     clear: left;
     width: 100%;
     height: auto;
+    padding: 10px;
 }
 .video_info_bbox:hover {
     background-color: #E5E5E5;
@@ -451,6 +470,7 @@ li {
     border: none;
     color: #000000;
     background-color: #F2F2F2;
+    margin-right: 40px;
 }
 .review_B:hover {
     background-color: #E5E5E5;
@@ -576,4 +596,8 @@ li {
     height: 100%;
     margin: 0;
     object-fit: cover ;
+}
+
+.profileIMG {
+    margin: 0 !important;
 }
