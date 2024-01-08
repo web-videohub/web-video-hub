@@ -108,4 +108,9 @@ public class MemberService {
         return dto;
 //        return memberMapper.findMember();
     }
+
+    public boolean updateNickname(String account, String nickname) {
+        return memberMapper.updateNickname(account, nickname);
+    }
+
 }

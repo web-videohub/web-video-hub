@@ -2,6 +2,8 @@ package com.teamrocket.videohub.controller;
 
 import com.teamrocket.videohub.dto.request.LoginRequestDTO;
 import com.teamrocket.videohub.dto.request.SignUpRequestDTO;
+import com.teamrocket.videohub.dto.response.LoginUserResponseDTO;
+import com.teamrocket.videohub.entity.Member;
 import com.teamrocket.videohub.repository.MemberMapper;
 import com.teamrocket.videohub.services.LoginResult;
 import com.teamrocket.videohub.services.MemberService;
@@ -157,6 +159,27 @@ public class MemberController {
         }
 
         return "redirect:/members/login";
+    }
+
+    @GetMapping("/update")
+    public String updateNickname(String account, String nickname, HttpSession session, LoginUserResponseDTO dto) {
+        log.error("account : {}, nickname : {}", account, nickname);
+        memberService.updateNickname(account, nickname);
+        log.warn("session: {}", session.getAttribute(LOGIN_KEY));
+        Member member = memberService.getMember(account);
+        log.info("member: {}", member);
+
+        LoginUserResponseDTO build = LoginUserResponseDTO.builder()
+                .userAccount(member.getUserAccount())
+                .userAuth(member.getUserAuth().name())
+                .userEmail(member.getUserEmail())
+                .userDisplayName(member.getUserDisplayName())
+                .userProfile(member.getUserProfileImage())
+                .build();
+
+        session.setAttribute(LOGIN_KEY, build);
+
+        return "redirect:/setting";
     }
 
 }
