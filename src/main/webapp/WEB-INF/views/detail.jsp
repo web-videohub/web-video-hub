@@ -231,7 +231,13 @@
 
                         replyListDiv.appendChild(newItem);
                     });
-                    newVideo.forEach(video => {
+                    newVideo
+                        .filter(video => video.videoId.toString() === videoId) // 현재 보고있는 동영상은 추천동영상에서 예외처리
+                        .forEach(video => {
+                            console.log("video.videoId type : " + typeof(video.videoId));
+                            console.log("videoId type : " + typeof(videoId));
+                        if(video.videoId === videoId)
+                            return;
                         const newItem = document.createElement('li');
 
                         newItem.innerHTML = `<a href="showmv?videoId=\${video.videoId}">
