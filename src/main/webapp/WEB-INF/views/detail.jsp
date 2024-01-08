@@ -232,7 +232,7 @@
                         replyListDiv.appendChild(newItem);
                     });
                     newVideo
-                        .filter(video => video.videoId.toString() === videoId) // 현재 보고있는 동영상은 추천동영상에서 예외처리
+                        .filter(video => video.videoId.toString() !== videoId) // 현재 보고있는 동영상은 추천동영상에서 예외처리
                         .forEach(video => {
                             console.log("video.videoId type : " + typeof(video.videoId));
                             console.log("videoId type : " + typeof(videoId));
@@ -241,8 +241,8 @@
                         const newItem = document.createElement('li');
 
                         newItem.innerHTML = `<a href="showmv?videoId=\${video.videoId}">
-                        <div class="video_sumnail-\${video.videoId}">
-                            <img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/>
+                        <div class="video_sumnail">
+                            <img src="/local\${video.thumbnailUrl}" alt="thumbnail"/>
                         </div>
                         <div class="video_subinfo">
                             <p class="bbox_text">\${video.videoTitle}</p>
