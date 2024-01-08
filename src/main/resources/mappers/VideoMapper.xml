@@ -153,4 +153,33 @@
         ORDER BY v.video_upload_date desc
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
+
+    <update id="upHateCount">
+        UPDATE tbl_video
+        SET video_hate = video_hate + 1
+        WHERE video_id = #{videoId};
+    </update>
+
+    <update id="downHateCount">
+        UPDATE tbl_video
+        SET video_hate = video_hate - 1
+        WHERE video_id = #{videoId};
+    </update>
+
+
+    <select id="findAllDetail" resultType="com.teamrocket.videohub.entity.Video">
+        SELECT
+        v.video_title, v.video_upload_user,
+        v.video_view_count, v.video_upload_date,
+        m.user_profile_image, v.thumbnail_url, v.video_id
+        FROM tbl_video v
+        JOIN tbl_member m ON v.video_upload_user = m.user_account
+        ORDER BY
+        CASE
+        WHEN v.video_category = #{type} THEN 1
+        else 2
+        END,
+        v.video_upload_date desc
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
 </mapper>

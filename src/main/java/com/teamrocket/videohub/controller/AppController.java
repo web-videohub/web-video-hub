@@ -59,7 +59,7 @@ public class AppController {
             @RequestParam(defaultValue = "12") int pageSize,
             String type, String account
     ) {
-        List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
+        List<Video> videos = videoService.getVideosSub(pageSize, pageNumber, type, account);
         log.warn("구독한 채널의 영상들 : {}", videos);
         return ResponseEntity.ok(videos);
     }
