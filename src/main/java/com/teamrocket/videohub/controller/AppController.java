@@ -175,10 +175,9 @@ public class AppController {
         List<Video> videos = videoService.getChannelVideos(pageSize, pageNumber, type, channelName);
 
         log.info("이거에용: {}", user);
-//        log.info("이거에용: {}", channelName);
+        log.info("이거에용: {}", videos);
         model.addAttribute("user", user);
         model.addAttribute("vList", videos);
-
         return "userPage";
     }
 }

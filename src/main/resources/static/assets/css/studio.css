@@ -103,14 +103,12 @@ table td {
     border: 1px solid black;
 }
 
-
 table th {
     background-color: #333;
     color: #fff;
     padding: 10px;
     border: 1px solid black;
 }
-
 
 img {
     width: 200px;
@@ -250,6 +248,7 @@ img {
 .index-left2 {
     width: 150px;
     height: 100%;
+    display: none;
 
     position: fixed;
     top: 70px;
@@ -299,6 +298,10 @@ input[type="checkbox"]:checked {
     margin: 0 auto;
 }
 
-#deleteBtn {
+/*#deleteBtn {*/
+/*    display: none;*/
+/*}*/
+
+#headerBtn2 {
     display: none;
 }

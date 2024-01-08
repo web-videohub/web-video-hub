@@ -387,3 +387,10 @@ hr {
     justify-content: left;
     align-content: center;
 }
+
+#headerBtn2 {
+    display: none;
+}
+.index-left2 {
+    display: none;
+}

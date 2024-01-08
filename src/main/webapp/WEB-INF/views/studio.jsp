@@ -95,8 +95,9 @@
     <div class="top">
         <%--            <a href="/studio/upload">동영상 업로드</a>--%>
         <button class="btn-hover color-9" id="go-upload-form">동영상 업로드</button>
-        <button class="btn-hover color-8" id="deleteBtn" type="button">체크된 동영상 삭제</button>
+        <button class="btn-hover color-8" id="deleteBtn" type="button" style="display: none;">체크된 동영상 삭제</button>
     </div>
+
     <div class="video-table">
         <table>
             <thead>
@@ -120,7 +121,6 @@
             <td colspan="8" class="tablefoot"></td>
             </tfoot>
         </table>
-
     </div>
     <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
 </div>
@@ -128,6 +128,7 @@
 <script>
 
     const $goUploadForm = document.getElementById('go-upload-form');
+    const $mainContainer = document.querySelector('.mainContainer');
 
     $goUploadForm.onclick = e => {
         window.location.href = "/studio/upload";
@@ -179,6 +180,7 @@
                 console.log(myVideos);
 
                 if (myVideos.length > 0) {
+                    console.log("데이터 불러와짐");
                     myVideos.forEach(video => {
                         const newItem = document.createElement('tr');
 
@@ -193,23 +195,17 @@
                             <td>\${video.videoHate}개</td>
                         `;
 
-                        newItem.addEventListener('mouseover', e => {
-                            Array.from(e.currentTarget.children).forEach((child) => {
-                                child.style.backgroundColor = "#acacac";
-                            });
-                        });
-                        newItem.addEventListener('mouseout', e => {
-                            Array.from(e.currentTarget.children).forEach((child) => {
-                                child.style.backgroundColor = "#eee";
-                            });
-                        });
-
                         $videoTbody.appendChild(newItem);
                     });
-
+                    addCheckboxListeners();
                     pageNumber++;
                 } else {
                     observer.unobserve($loader);
+                    if(myVideos.length === 0) {
+                        const nullVideo = document.createElement("span");
+                        nullVideo.innerHTML = `<p>로드 할 영상이 없습니다.</p>`;
+                        $mainContainer.appendChild(nullVideo);
+                    }
                 }
             } catch (e) {
                 console.error(e);
@@ -217,10 +213,7 @@
                 loading = false;
                 $loader.style.visibility = "hidden";
             }
-        }, 5
-
-
-        00)
+        }, 500)
     }
 
     let loading = false;
@@ -229,6 +222,7 @@
 
     document.addEventListener("DOMContentLoaded", function () {
         observer.observe($loader);
+        addCheckboxListeners();
     });
 
     document.querySelector('.select-all').addEventListener('change', e => {
@@ -240,7 +234,6 @@
 
 
     document.getElementById('deleteBtn').addEventListener('click', async function() {
-        // Collect all checked checkbox values (video Ids)
         let checkedVideos = Array.from(document.querySelectorAll('.video-tbody input[type="checkbox"]:checked')).map(chk => chk.getAttribute('data-videoId'));
 
         // Check if there are checked videos
@@ -333,15 +326,25 @@
         checkWidth();
     });
 
-    const $all = document.getElementById('all');
+    // 체크박스 이벤트
+    function addCheckboxListeners() {
+        let checkboxes = document.querySelectorAll('.video-tbody input[type="checkbox"]');
+        for (let checkbox of checkboxes) {
+            checkbox.addEventListener('change', function() {
+                let anyChecked = Array.from(checkboxes).some(chk => chk.checked);  // 하나라도 체크된 체크박스가 있는지 확인
+                document.getElementById('deleteBtn').style.display = anyChecked ? 'block' : 'none';  // anyChecked 값에 따라 버튼 표시 여부 결정
+            });
+        }
+    }
 
-    (() => {
-        $all.click();
-
-    })();
-
-
-
+    document.querySelector('.select-all').addEventListener('change', function(e) {
+        let checkboxes = document.querySelectorAll('.video-tbody input[type="checkbox"]');
+        for (let checkbox of checkboxes) {
+            checkbox.checked = e.target.checked;
+        }
+        // 전체 선택 체크박스의 상태 변화에 따라 버튼 표시 상태 변경
+        document.getElementById('deleteBtn').style.display = e.target.checked ? 'block' : 'none';
+    });
 
 </script>
 </body>
