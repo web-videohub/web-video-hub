@@ -8,7 +8,7 @@
     <%--    <title>영상 화면</title>--%>
     <title>${video.videoTitle}</title>
 
-    <link rel="stylesheet" href="/assets/css/detail.css">
+    <link rel="stylesheet" href="/assets/css/detail.css?after">
 
     <%--    icon    --%>
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
@@ -38,90 +38,66 @@
 <jsp:include page="include/static-head.jsp"/>
 <%-- 햄버거메뉴와 로고(홈버튼) 검색창, 영상업로드, 마이페이지 --%>
 <jsp:include page="include/header.jsp"/>
-<%--private final int videoId;--%>
-<%--private final String uploadUser;--%>
-<%--private final String uploadUserDisplayName;--%>
-<%--private final String uploadUserProfileImage;--%>
-<%--private final int uploadUserSubscribe;--%>
-<%--private final String videoTitle;--%>
-<%--private final String uploadDate;--%>
-<%--private final String videoContent;--%>
-<%--private final String videoCategory;--%>
-<%--private final String videoUrl;--%>
-<%--private final int videoLike;--%>
-<%--private final int videoViewCount;--%>
+
 <%--    영상 컨테이너       --%>
 <div class="container">
     <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
         <div class="box1">
-            <div class="vvvv">
-                <video src="/local${v.videoUrl}"
-                       controls width="auto" height="auto">
-                </video>
-            </div>
+            <video src="/local${v.videoUrl}"
+                   controls width="auto" height="auto">
+            </video>
+            <!-- video_info, video_info_bbox는 box1 안에 위치 해 있어야 한다.-->
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>
                 <div class="video_user_bbox">
-                    <div class="leftReview">
-                        <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image"/></a>
-                        <div class="video_info_user_bbox">
-                            <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
-                            <p>구독자 ${v.uploadUserSubscribe}명</p>
-                        </div>
-                        <div class="video_review_btn_o">
-                            <button type="button" class="subscribe_B">구독</button>
-                        </div>
+                    <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image" class="profileIMG" height="45" width="45"/></a>
+                    <div class="video_info_user_bbox">
+                        <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
+                        <p>구독자 ${v.uploadUserSubscribe}명</p>
                     </div>
-                    <div class="rightReview">
-                        <div class="video_review_btn_t">
-                            <button type="button" class="like_B"><span class="lnr lnr-thumbs-up">${v.videoLike}</span>
-                            </button>
-                            <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
-                            <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
-                        </div>
+                    <div class="video_review_btn_o">
+                        <button type="button" class="subscribe_B">구독</button>
+                    </div>
+                    <div class="video_review_btn_t">
+                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}</button>
+                        <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
+                        <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                     </div>
                 </div>
-                <div class="box3">
-                    <div class="video_info_bbox">
-                        <p>업로드 일자: ${v.uploadDate}</p>
-                        <p>조회수: ${v.videoViewCount}</p>
-                        <p>영상 설명: ${v.videoContent}</p>
-                    </div>
-                </div>
-                <div class="box3">
-                    <form id="messageForm" name="messageForm">
-                        <div class="form-group">
-                            <div class="input-group clearfix">
-                                <div class="bbox1">
-                                    <c:if test="${sessionScope.login != null}">
-                                        <img src="/local${sessionScope.login.userProfile}" alt="profile image"/>
-                                        <p>${sessionScope.login.userDisplayName}</p>
-                                    </c:if>
-                                    <c:if test="${sessionScope.login == null}">
-                                        <img src="/assets/img/profile.jpeg" alt="비로그인">
-                                    </c:if>
-                                </div>
-                                <div class="bbox1_1">
-                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off"
-                                          class="form-control"></textarea>
-                                </div>
-                                <div class="bbox2">
-                                    <button type="button" class="review_B" id="addReply">댓글</button>
-                                </div>
-                            </div>
-                        </div>
-                    </form>
-                </div>
-                <div id="replyData">
-                    <ul class="chat_list">
-                        <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
-                    </ul>
+                <div class="video_info_bbox">
+                    <p>업로드 일자: ${v.uploadDate}</p>
+                    <p>조회수: ${v.videoViewCount}</p>
+                    <p>영상 설명: ${v.videoContent}</p>
                 </div>
             </div>
+            <div class="box3">
+                <form id="messageForm" name="messageForm">
+                    <div class="form-group">
+                        <div class="input-group clearfix">
+                            <div class="bbox1">
+                                <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG" height="45" width="45"/>
+                                <p>${sessionScope.login.userDisplayName}</p>
+                            </div>
+                            <div class="bbox1_1">
+                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="bbox2">
+                            <button type="button" class="review_B" id="addReply">댓글</button>
+                        </div>
+                    </div>
+
+                </form>
+            </div>
+            <div id="replyData">
+                <ul class="chat_list">
+                    <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
+                </ul>
+            </div>
         </div>
-        <!-- 절대 box1 안에 넣지 말것. -->
         <div class="box2">
             <ul class="video_list_Algorithm">
+                <!-- 추천 영상 리스트가 생성되는 부분이오니 어떠한 첨가도 금함.-->
             </ul>
         </div>
     </div>
