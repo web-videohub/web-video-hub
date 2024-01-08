@@ -115,7 +115,7 @@
             <%--                <p class="channelName">김다빈</p>--%>
             <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
             <%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
-            <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
+            <c:if test="${sessionScope.login != null}">
                 <button type="button" class="subscribe_B">구독</button>
             </c:if>
             <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">

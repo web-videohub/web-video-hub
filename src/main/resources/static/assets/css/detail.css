@@ -557,3 +557,23 @@ li {
     width: 168px;
     height: 94px;
 }
+
+.rightContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.rightContainer a {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.rightContainer a img {
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    object-fit: cover ;
+}

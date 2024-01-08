@@ -56,15 +56,18 @@
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>
                 <div class="video_user_bbox">
-                    <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}"
-                                                                         alt="profile image" class="profileIMG"
-                                                                         height="45" width="45"/></a>
-                    <div class="video_info_user_bbox">
-                        <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
-                        <p>구독자 ${v.uploadUserSubscribe}명</p>
-                    </div>
-                    <div class="video_review_btn_o">
-                        <button type="button" class="subscribe_B">구독</button>
+
+                    <div class="rightContainer">
+                        <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}"
+                                                                             alt="profile image" class="profileIMG"
+                                                                             height="45" width="45"/></a>
+                        <div class="video_info_user_bbox">
+                            <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
+                            <p>구독자 ${v.uploadUserSubscribe}명</p>
+                        </div>
+                        <div class="video_review_btn_o">
+                            <button type="button" class="subscribe_B">구독</button>
+                        </div>
                     </div>
                     <div class="video_review_btn_t">
                         <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}
@@ -89,7 +92,8 @@
                                 <p>${sessionScope.login.userDisplayName}</p>
                             </div>
                             <div class="bbox1_1">
-                                <textarea id="message" placeholder="로그인 후 댓글작성이 가능합니다." autocomplete="off" class="form-control" disabled></textarea>
+                                <textarea id="message" placeholder="로그인 후 댓글작성이 가능합니다." autocomplete="off"
+                                          class="form-control" disabled></textarea>
                             </div>
                         </div>
                         <div class="bbox2">
@@ -787,10 +791,11 @@
     }
 
     <%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
+
     function checkLogin() {
         const $replyTextarea = document.getElementById('message');
 
-        if(currentAccount !== "") {
+        if (currentAccount !== "") {
             $replyTextarea.disabled = false;
             $replyTextarea.placeholder = "댓글 추가...";
         }
