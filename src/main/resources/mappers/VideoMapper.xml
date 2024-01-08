@@ -31,8 +31,13 @@
     <select id="findAll" resultType="com.teamrocket.videohub.entity.Video">
         SELECT
         v.video_title, v.video_upload_user,
+<<<<<<< Updated upstream
         v.video_view_count, v.video_upload_date, m.user_display_name,
         m.user_profile_image, v.thumbnail_url, v.video_id
+=======
+        v.video_view_count, v.video_upload_date,
+        m.user_profile_image, v.thumbnail_url, v.video_id, m.user_display_name
+>>>>>>> Stashed changes
         FROM tbl_video v
         JOIN tbl_member m ON v.video_upload_user = m.user_account
         <if test="type == 'game'">
@@ -137,5 +142,15 @@
         </foreach>
     </delete>
 
+    <select id="findAllSub" resultType="com.teamrocket.videohub.entity.Video">
+        SELECT
+        v.video_title, v.video_upload_user,
+        v.video_view_count, v.video_upload_date,
+        m.user_profile_image, v.thumbnail_url, v.video_id, m.user_display_name
+        FROM tbl_video v
+        JOIN tbl_member m ON v.video_upload_user = m.user_account
 
+        ORDER BY v.video_upload_date desc
+        LIMIT #{pageSize} OFFSET #{offset}
+    </select>
 </mapper>
