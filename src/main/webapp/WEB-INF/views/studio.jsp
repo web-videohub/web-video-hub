@@ -217,10 +217,7 @@
                 loading = false;
                 $loader.style.visibility = "hidden";
             }
-        }, 5
-
-
-        00)
+        }, 500)
     }
 
     let loading = false;
@@ -339,10 +336,6 @@
         $all.click();
 
     })();
-
-
-
-
 </script>
 </body>
 </html>
