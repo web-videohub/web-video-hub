@@ -1,0 +1,290 @@
+.upload-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 80px;
+}
+
+.studiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    /*background-color: yellow;*/
+
+    width: 60%;
+
+    padding: 40px;
+}
+
+.top {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bottom {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    gap: 20px;
+}
+
+.bottom .left {
+    width: 60%;
+    display: flex;
+    gap: 20px;
+    flex-direction: column;
+}
+
+.bottom .left .titleDiv {
+    border: 2px grey solid;
+    border-radius: 5px;
+
+    padding: 5px 10px;
+}
+
+.bottom .left .contentDiv {
+    border: 2px grey solid;
+    border-radius: 5px;
+
+    padding: 5px 10px;
+}
+
+.bottom .left .titleDiv .title-validate .text,
+.bottom .left .contentDiv .title-validate .text {
+    margin: 0;
+}
+
+.bottom .left .titleDiv .title-validate,
+.bottom .left .contentDiv .content-validate {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.bottom .left .titleDiv .title-validate .check-value,
+.bottom .left .contentDiv .content-validate .check-value {
+    color: red;
+}
+
+.bottom .left .titleDiv input,
+.bottom .left .contentDiv textarea,
+.bottom .left .titleDiv label,
+.bottom .left .contentDiv label{
+    width: 100%;
+}
+
+.bottom .left .titleDiv input,
+.bottom .left .contentDiv textarea {
+    background: none;
+    border: none;
+}
+
+.bottom .left .titleDiv input:focus,
+.bottom .left .contentDiv textarea:focus {</div>
+    outline: none;
+    box-shadow: none;
+}
+
+
+.bottom .left .contentDiv textarea {
+    resize: none;
+}
+
+.bottom .right {
+    width: 40%;
+    /*background-color: #a4a4a4;*/
+}
+
+.bottom .left .thumbnailDiv .thumbnail-box,
+.bottom .left .videoDiv .video-box {
+    border: 2px solid grey;
+    width: 100%;
+    height: 352px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.thumbnail-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+.video-box {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+}
+
+.video-box img {
+    margin-top: 56.25%;
+}
+
+.video-box video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #000;
+}
+
+
+.slide-in {
+    animation: slideIn 1s forwards;
+    display: block !important;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateX(-20%);
+        opacity: 0;
+    }
+    100% {
+        transform: translateX(0);
+        opacity: 1;
+    }
+}
+
+/* 버튼 디자인 */
+.buttons {
+    margin: 10%;
+    text-align: center;
+}
+
+.btn-hover {
+    width: 100px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin-top: 10px;
+    height: 40px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 20px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.color-9 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+.upload-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f2f2f2;
+    border-radius: 5px;
+    padding: 10px;
+    margin-bottom: 20px;
+
+}
+.upload-button:hover {
+    background-color: #e6e6e6;
+}
+
+
+
+
+/* 버튼 디자인 */
+
+.form-select {
+    border: 2px solid grey !important;
+}
+
+.form-select:focus {
+    outline: none;
+}
+
+
+
+
+/* 미리보기 컴포넌트 스타일 */
+.preview {
+    border-radius: 10px;
+    overflow: hidden;
+}
+.video1 {
+    width: 100%;
+    height: 40%;
+    background-color: #F2B950;
+    border-radius: 10px;
+    margin: 0 auto;
+
+    overflow: hidden;
+}
+
+.video1 img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border: none !important;
+}
+
+.profileContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+
+    background-color: #f1f1f1;
+
+    /*position: absolute;*/
+    /*bottom: 0;*/
+}
+
+.profile {
+    width: 50px;
+    height: 50px;
+    background-color: #1e6249;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+}
+
+.videoInfoDiv {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    padding-left: 20px;
+}
+
+.videoInfo {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.uploader, .viewcount{
+    font-size: 15px;
+    color: #5c5d5c;
+}
+

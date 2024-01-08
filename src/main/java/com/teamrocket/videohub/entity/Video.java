@@ -1,5 +1,6 @@
 package com.teamrocket.videohub.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.teamrocket.videohub.dto.request.VideoUploadRequestDTO;
 import lombok.*;
 
@@ -36,6 +37,12 @@ public class Video {
 
     private String userProfileImage;
 
+    private String userDisplayName;
+    private String uploadUserProfileImage;
+
+    private int replyCount;
+
+
     public Video(VideoUploadRequestDTO dto) {
         convertInputData(dto);
         timeFormat();
@@ -55,6 +62,7 @@ public class Video {
         this.videoViewCount = rs.getInt("video_view_count");
         this.videoUrl = rs.getString("video_url");
         this.userProfileImage = rs.getString("user_profile_image");
+        this.replyCount = rs.getInt("reply_count");
     }
 
     private void timeFormat() {

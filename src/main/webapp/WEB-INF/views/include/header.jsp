@@ -47,12 +47,18 @@
                             </li>
                             <hr>
                             <li class="nav-item">
-                                <a class="nav-link" href="/studio">나 ></a>
+                                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                                <span class="lnr lnr-user"></span>
+                                    내 채널
+                                </a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/studio">
-                                <span class="lnr lnr-user"></span>
-                                    내 채널
+                                    <img class="mini" src="/assets/img/miniHub.png" alt="">
+                                    스튜디오
                                 </a>
                             </li>
                             <li class="nav-item">
@@ -61,7 +67,6 @@
                                     설정
                                 </a>
                             </li>
-
                         </ul>
                     </div>
                 </div>
@@ -72,8 +77,8 @@
                     <img class="mainLogo" src="/assets/img/hubTitle.png" alt="">
                 </a>
             </div>
-            <form class="searchForm" action="" method="">
-                <input class="searchInput" type="search" placeholder="검색">
+            <form class="searchForm" action="/search" method="get">
+                <input class="searchInput" type="text" placeholder="검색" name="keyword" value="${keyword}">
                 <button class="searchBtn" type="submit"><span class="lnr lnr-magnifier"></span></button>
             </form>
 
@@ -95,9 +100,9 @@
                         <li><p class="dropdown-item drop-p">${sessionScope.login.userDisplayName}</p></li>
                         <li><p class="dropdown-item drop-p">${sessionScope.login.userAccount}</p></li>
                         <hr>
-                        <li><a class="dropdown-item" href="/studio">내 채널 보기</a></li>
+                        <li><a class="dropdown-item" href="/userPage?channelName=${sessionScope.login.userAccount}">내 채널 보기</a></li>
                         <li><a class="dropdown-item" href="/setting">설정</a></li>
-                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="/log-out">로그아웃</a></li>
                     </ul>
                 </div>
             </c:if>
@@ -108,6 +113,10 @@
 </header>
 <body>
     <script>
-
+        let $searchBtn = document.querySelector('.searchBtn');
+        let $searchInput = document.querySelector('.searchInput');
+        $searchBtn.addEventListener('click', e=> {
+            console.log($searchInput.value);
+        });
     </script>
 </body>

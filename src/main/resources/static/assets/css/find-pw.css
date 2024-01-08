@@ -1,3 +1,5 @@
+/* 구글 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 body {
     height: 100vh;
@@ -13,6 +15,8 @@ body {
 
     overflow: hidden;
 
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
 }
 a {
     text-decoration-line: none;
@@ -41,13 +45,16 @@ a:hover {
 .modifyPw input {
     width: 400px;
     height: 40px;
-    background-color: #1e2026;
+    background-color: #d3d0cc;
     border-radius: 10px;
     color: aliceblue;
     font-size: 20px;
     font-weight: bold;
+    padding-left: 10px;
 }
-
+#inputDiv3 {
+    font-size: 20px;
+}
 .modifyPw {
     padding-bottom: 10px;
 }
@@ -65,8 +72,8 @@ a:hover {
     /*
     background-color: #496d8c;
      */
-    background-color: #383c46;
-    border: 4px solid #04bf68;
+    background-color: aliceblue;
+    border: 4px solid #fdba51;
     border-radius: 30px;
     /*
     background-image: linear-gradient(#323640, #4e5463),
@@ -86,19 +93,20 @@ a:hover {
     color: aliceblue;
     font-size: 20px;
     font-weight: bold;
-    margin: 0 auto;
+    margin: 20px auto;
 }
 #findPasswordBtn:hover,
 #modifyBtn:hover {
     transition: 0.2s ease-out;
     background-color: #1e6249;
+    cursor: pointer;
 }
 #findPasswordBtn:not(:hover),
 #modifyBtn:not(:hover){
     transition: 0.2s ease-out;
 }
 .inputText {
-    color: #a6acb1;
+    color: black;
     font-size: 17px;
     font-weight: bold;
     margin-bottom: 5px;
@@ -109,7 +117,7 @@ a:hover {
     color: red;
 }
 .findPasswordTitle {
-    color: aliceblue;
+    color: black;
     font-size: 20px;
     font-weight: bold;
     margin-top: 0;
@@ -118,10 +126,21 @@ a:hover {
 }
 .inputDiv input {
     margin-bottom: 10px;
+    background-color: #d3d0cc;
+    border-radius: 10px;
+    color: black;
 }
-.inputDiv input:hover {
+.inputDiv input:hover,
+.modifyPw input:hover {
+    transition: 0.2s ease-out;
     filter: drop-shadow(0 0 10px #8e8f8c);
 }
+.inputDiv input:not(:hover),
+.modifyPw input:not(:hover) {
+    transition: 0.2s ease-out;
+
+}
+
 .inputDiv #inputDiv3 {
     margin-bottom: 25px;
 }
@@ -136,7 +155,7 @@ a:hover {
     width: 200px;
     height: 200px;
     position: absolute;
-    top: -110px;
+    top: -60px;
     right: -70px;
 }
 
@@ -177,4 +196,9 @@ a:hover {
     to {
         transform: translateY(100vh);
     }
+}
+
+#modify-password-form {
+    display: flex;
+    flex-direction: column;
 }

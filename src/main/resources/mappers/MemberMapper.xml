@@ -18,6 +18,29 @@
         FROM tbl_member
         WHERE user_account = #{userAccount}
     </select>
+    <select id="findName" resultType="com.teamrocket.videohub.entity.Member">
+        SELECT
+        user_account,
+        user_display_name,
+        user_email,
+        user_profile_image
+        FROM tbl_member
+        WHERE user_account = #{channelName}
+    </select>
+    <select id="countVideo" resultType="com.teamrocket.videohub.entity.Member">
+        SELECT
+        COUNT(*) as video_count
+        FROM tbl_video
+        WHERE video_upload_user = #{channelName}
+    </select>
+    <select id="countSub" resultType="com.teamrocket.videohub.entity.Member">
+        SELECT
+        COUNT(s.sub_sender) as sub_count
+        FROM tbl_member AS m
+        LEFT JOIN tbl_subscription AS s ON m.user_account = s.sub_receiver
+        WHERE m.user_account = #{channelName}
+        GROUP BY m.user_account, m.user_display_name, m.user_email, m.user_profile_image;
+    </select>
 
     <select id="isDuplicate" resultType="boolean">
         SELECT COUNT(*)
@@ -35,4 +58,23 @@
         FROM tbl_member
         WHERE user_account = #{account} AND user_email = #{email}
     </select>
+
+
+    <update id="modifyPassword">
+        update tbl_member
+        set user_password = #{password}
+        where user_account = #{account}
+    </update>
+      
+    <update id="upSubCount">
+        UPDATE tbl_member
+        SET user_subscribe = user_subscribe + 1
+        WHERE user_account = #{account}
+    </update>
+
+    <update id="downSubCount">
+        UPDATE tbl_member
+        SET user_subscribe = user_subscribe - 1
+        WHERE user_account = #{account}
+    </update>
 </mapper>

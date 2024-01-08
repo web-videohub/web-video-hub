@@ -11,27 +11,31 @@
 <div id="snowfall"></div>
 
 <div class="findPasswordDiv">
-    <img id="santa" src="/assets/img/santaHat.png" alt="">
+    <img id="santa" src="/assets/img/rabbit.png" alt="">
     <div class="findPasswordForm">
         <div class="findPasswordTitle">
             <h2>비밀번호 찾기</h2>
         </div>
         <div class="inputDiv">
+            <form action="/find-pw" method="post" id="modify-password-form">
+
             <span class="inputText">당신의 아이디<span class="redStar">&nbsp;*</span></span>
             <input id="inputDiv1" type="text" name="account">
             <span class="inputText">당신의 이메일<span class="redStar">&nbsp;*</span></span>
             <input id="inputDiv2" type="email" name="email">
+                <div class="modifyPw" style="display: none">
+                    <span class="inputText">변경할 비밀번호</span>
+                    <input name="newPassword" id="inputDiv3" type="password" placeholder="새로운 비밀번호를 입력해주세요.">
+                </div>
+            </form>
         </div>
-        <div class="modifyPw" style="display: none">
-            <span class="inputText">당신의 비밀번호는</span>
-            <input id="inputDiv3" type="password" placeholder="안보이다가 검증완료하면 나타남">
-        </div>
+
         <input id="findPasswordBtn" type="button" value="아이디, 이메일 검증">
         <input id="modifyBtn" type="button" value="비밀번호 변경" style="display: none">
         <div class="goLogin">
             <a href="/login">로그인 화면으로 돌아가기</a>
         </div>
-    </>
+    </div>
 
 </div>
 <script>
@@ -41,6 +45,8 @@
     const $findBtn = document.getElementById('findPasswordBtn');
     const $modifyBtn = document.getElementById('modifyBtn');
 
+    const $modifyForm = document.getElementById('modify-password-form');
+
     let idValue = "";
 
     (function () {
@@ -49,7 +55,7 @@
 
 
         $idInput.onkeyup = e => {
-             idValue = $idInput.value;
+            idValue = $idInput.value;
 
             console.log(idValue);
 
@@ -74,7 +80,7 @@
         };
 
         $findBtn.onclick = e => {
-            if(!checkResultList.includes(false)) {
+            if (!checkResultList.includes(false)) {
                 $findBtn.style.display = 'none';
                 $modifyBtn.style.display = 'block';
                 $idInput.setAttribute("readonly", "true");
@@ -86,13 +92,11 @@
 
         }
         $modifyBtn.onclick = e => {
-            console.log("ㅋㅋ 여까지 왔누");
+            $modifyForm.submit();
+            alert("비밀번호 변경에 성공했습니다.");
         }
 
     })();
-
-
-
 
 
     document.addEventListener("DOMContentLoaded", function () {

@@ -18,10 +18,13 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import java.io.File;
 
 import static com.teamrocket.videohub.services.LoginResult.*;
+import static com.teamrocket.videohub.utils.LoginUtils.LOGIN_KEY;
+import static com.teamrocket.videohub.utils.LoginUtils.isLogin;
 
 @Controller
 @Slf4j
@@ -33,9 +36,19 @@ public class MemberController {
     @Value("${file.upload.root-path}")
     private String rootPath;
 
+    private String uri;
+
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpServletRequest request,
+                        Model model) {
         log.info("/login GET");
+
+        uri = request.getHeader("Referer");
+        if (uri != null && !uri.contains("/login")) {
+            request.getSession().setAttribute("prevPage", uri);
+        }
+
+        log.info("uri : {}", uri);
 
         return "members/sign-in";
     }
@@ -56,10 +69,16 @@ public class MemberController {
 
         ra.addFlashAttribute("msg", result);
 
+
         if(result == SUCCESS) {
             memberService.maintainLoginState(request.getSession(), dto.getUserAccount());
 
-            return "redirect:/";
+            String prevPage = (String) request.getSession().getAttribute("prevPage");
+            if(prevPage != null && !prevPage.isEmpty()) {
+                return "redirect:" + prevPage;
+            } else {
+                return "redirect:/";
+            }
         }
         return "redirect:/login";
     }
@@ -114,10 +133,30 @@ public class MemberController {
         return "/members/find-pw";
     }
     @PostMapping("/find-pw")
-    public String findPw() {
+    public String findPw(String newPassword, String account) {
         System.out.println("비밀번호 찾기 처리");
 
-        return "";
+        log.info("new password : {}", newPassword);
+        log.info("modify by account : {}", account);
+
+        memberService.modifyPassword(account, newPassword);
+
+        return "redirect:/login";
+    }
+
+    @GetMapping("/log-out")
+    public String logOut(HttpServletRequest request, HttpServletResponse response) {
+
+        HttpSession session = request.getSession();
+
+        if(isLogin(session)) {
+            session.removeAttribute(LOGIN_KEY);
+
+            session.invalidate();
+            return "redirect:/";
+        }
+
+        return "redirect:/members/login";
     }
 
 }

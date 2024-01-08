@@ -1,3 +1,5 @@
+/* 구글 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 .headerDiv {
     display: flex;
@@ -14,6 +16,9 @@
     position: fixed;
     top: 0;
     z-index: 1000;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
 }
 .headerContainer {
     width: 100%;
@@ -67,14 +72,26 @@
     font-size: 18px;
 }
 .searchBtn:hover {
+    transition: 0.2s ease-out;
     border: 1px #b6b4b4 solid;
     background: #eaeaea;
 }
+.searchBtn:not(:hover) {
+    transition: 0.2s ease-out;
+}
 .searchBtn:active {
+    transition: 0.2s ease-out;
     background: #e0e0e0;
 }
+.searchBtn:not(:active) {
+    transition: 0.2s ease-out;
+}
 .searchInput:hover {
+    transition: 0.2s ease-out;
     border: 1px #b6b4b4 solid;
+}
+.searchInput:not(:hover) {
+    transition: 0.2s ease-out;
 }
 
 .btns {
@@ -103,12 +120,20 @@
     font-weight: bold;
 }
 .login:hover {
+    transition: 0.2s ease-out;
     background: #e1f1fc;
     border: 1px solid #e1f1fc;
 }
+.login:not(:hover) {
+    transition: 0.2s ease-out;
+}
 .login:active {
+    transition: 0.2s ease-out;
     background: #c1cfd9;
     border: 1px solid #c1cfd9;
+}
+.login:not(:active) {
+    transition: 0.2s ease-out;
 }
 
 
@@ -140,11 +165,19 @@
     margin: 5px;
 }
 .drop-p:hover {
+    transition: 0.2s ease-out;
     background-color: #fff;
 }
+.drop-p:not(:hover) {
+    transition: 0.2s ease-out;
+}
 .drop-p:active {
+    transition: 0.2s ease-out;
     background-color: #fff;
     color: #000;
+}
+.drop-p:not(:active) {
+    transition: 0.2s ease-out;
 }
 
 
@@ -171,16 +204,26 @@
 }
 
 .navbar-toggler:hover {
+    transition: 0.2s ease-out;
     background: #e5e5e5;
 }
+.navbar-toggler:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
 .navbar-toggler span,
 .navbar-toggler2 span {
     margin: auto 0;
     font-size: 30px;
 }
 .navbar-toggler2:active {
+    transition: 0.2s ease-out;
     background: #e5e5e5;
 }
+.navbar-toggler2:not(:active) {
+    transition: 0.2s ease-out;
+}
+
 .navbar-nav {
     display: flex;
     justify-content: center;
@@ -205,9 +248,22 @@
     margin: auto 0;
 }
 .nav-item:hover {
+    transition: 0.2s ease-out;
     background: #eaeaea;
 }
+.nav-item:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
 .profileIMG {
     margin-left: -12px;
     margin-top: -7px;
+    border: 0;
+}
+
+.mini {
+    width: 60px;
+    height: 30px;
+    margin-right: -5px;
+    margin-left: -2px;
 }

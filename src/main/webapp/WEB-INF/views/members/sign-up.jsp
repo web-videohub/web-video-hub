@@ -43,7 +43,7 @@
 <div id="snowfall"></div>
 
 <div class="registerDiv">
-    <img id="santa" src="/assets/img/santaHat.png" alt="">
+    <img id="santa" src="/assets/img/rabbit.png" alt="">
 
     <form class="registerForm" action="/register" method="POST" enctype="multipart/form-data">
         <div class="registerTitle">
@@ -52,6 +52,7 @@
         <div class="profileImgContainer">
             <div class="upload-box" id="uploadBox"><img src="/assets/img/profile.jpeg" alt="profile" style="height: 130px; width: 130px;"> </div>
             <input type="file" name="profileImage" id="profile-input" accept="image/*" onchange="setThumbnail(event)">
+            <span>프로필 업로드</span>
         </div>
 
         <div class="inputDiv">
