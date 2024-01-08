@@ -27,17 +27,23 @@
         SET video_view_count = video_view_count + 1
         WHERE video_id = #{videoId}
     </update>
+    <select id="findOneDetail" resultType="com.teamrocket.videohub.entity.Video">
+        SELECT
+        V.video_id, V.video_upload_date, V.video_upload_user,
+        V.video_title, V.video_content, V.video_like,
+        V.video_category, V.video_view_count, V.video_url,
+        M.user_display_name, M.user_profile_image, M.user_subscribe
+        FROM tbl_video V
+        JOIN tbl_member M
+        ON V.video_upload_user = M.user_account
+        WHERE video_id = #{videoId}
+    </select>
 
     <select id="findAll" resultType="com.teamrocket.videohub.entity.Video">
         SELECT
         v.video_title, v.video_upload_user,
-<<<<<<< Updated upstream
         v.video_view_count, v.video_upload_date, m.user_display_name,
         m.user_profile_image, v.thumbnail_url, v.video_id
-=======
-        v.video_view_count, v.video_upload_date,
-        m.user_profile_image, v.thumbnail_url, v.video_id, m.user_display_name
->>>>>>> Stashed changes
         FROM tbl_video v
         JOIN tbl_member m ON v.video_upload_user = m.user_account
         <if test="type == 'game'">
@@ -76,18 +82,7 @@
         ORDER BY v.video_upload_date desc
         LIMIT #{pageSize} OFFSET #{offset}
     </select>
-    <select id="findAllSub" resultType="com.teamrocket.videohub.entity.Video">
-        SELECT
-        v.video_title, v.video_upload_user,
-        v.video_view_count, v.video_upload_date, m.user_display_name,
-        m.user_profile_image, v.thumbnail_url, v.video_id
-        FROM tbl_video v
-        JOIN tbl_member m ON v.video_upload_user = m.user_account
-        JOIN tbl_subscription s ON v.video_upload_user = s.sub_receiver
-        WHERE s.sub_sender = #{account}
-        ORDER BY v.video_upload_date DESC
-        LIMIT #{pageSize} OFFSET #{offset}
-    </select>
+
 
     <update id="upLikeCount">
         UPDATE tbl_video

@@ -20,6 +20,7 @@ import java.sql.SQLException;
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/emotion")
 public class EmotionApiController {
+
     private final EmotionService emotionService;
 
     // 좋아요, 싫어요 상태 조회 요청

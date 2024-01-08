@@ -5,8 +5,10 @@ import com.teamrocket.videohub.dto.response.EmotionResponseDTO;
 import com.teamrocket.videohub.entity.Emotion;
 import com.teamrocket.videohub.repository.EmotionMapper;
 import com.teamrocket.videohub.repository.VideoMapper;
+import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.SQLException;
@@ -15,6 +17,7 @@ import java.sql.SQLException;
 @RequiredArgsConstructor
 @Slf4j
 public class EmotionService {
+
     private final VideoMapper videoMapper;
     private final EmotionMapper emotionMapper;
 
