@@ -122,18 +122,6 @@
         <!-- 절대 box1 안에 넣지 말것. -->
         <div class="box2">
             <ul class="video_list_Algorithm">
-                <li>
-                    <a href="#">
-                        <div class="video_sumnail">
-                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
-                        </div>
-                        <div class="video_subinfo">
-                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
-                            <p class="bbox_text_sub">Test_user</p>
-                            <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
-                        </div>
-                    </a>
-                </li>
             </ul>
         </div>
     </div>
@@ -230,7 +218,8 @@
                         const newItem = document.createElement('div');
                         newItem.className = 'replyDiv';
                         newItem.setAttribute('reply-id', `\${rno}`);
-                        newItem.innerHTML = `<div class="chat_list_profile">
+                        if (auth === 'ADMIN' || currentAccount === account) {
+                            newItem.innerHTML = `<div class="chat_list_profile">
                                     <a href="/userPage?channelName=\${account}"><img src="\${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
                                 </div>
                                 <div class="chat_list_profile_name">
@@ -252,22 +241,45 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="review_btns_two">`;
-
-                        if (auth === 'ADMIN' || currentAccount === account) {
-                            newItem.innerHTML += `<button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
-                                      <div id="myDropdown-\${rno}" class="dropdown-content">
-                                          <a href="#" id="replyModBtn" onclick="toggleEditComment(this)">수정</a>
-                                          <a href="#" id="replyDelBtn" onclick="replyRemoveClickEvent(this)">삭제</a>`;
+                                            <div class="review_btns_two">
+                                            <button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
+                                            <div id="myDropdown-\${rno}" class="dropdown-content">
+                                                <a href="#" id="replyModBtn" onclick="toggleEditComment(this)">수정</a>
+                                                <a href="#" id="replyDelBtn" onclick="replyRemoveClickEvent(this)">삭제</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>`;
+                        } else {
+                            newItem.innerHTML = `<div class="chat_list_profile">
+                                    <a href="/userPage?channelName=\${account}"><img src="\${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
+                                </div>
+                                <div class="chat_list_profile_name">
+                                    <a href="/userPage?channelName=\${account}"><p>\${accountUserName}</p></a>
+                                </div>
+                                <div class="chat_list_chat_text" id="chat-text-\${rno}">
+                                    <p>\${text}</p>
+                                </div>
+                                <div class="chat_list_edit_area" id="edit-area-\${rno}" style="display: none;">
+                                    <textarea id="chat_message" autocomplete="off" class="form-control" data-id="\${rno}">\${text}</textarea>
+                                    <button type="button" class="save_bb" onclick="replyEditComment(this)">저장</button>
+                                </div>
+                                <table>
+                                    <tr>
+                                        <td>
+                                            <div class="review_btns_one">
+                                                <button type="button" class="like_bb"><span class="lnr lnr-thumbs-up"></span></button>
+                                                <button type="button" class="hate_bb"><span class="lnr lnr-thumbs-down"></span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </table>
+                            </div>`;
                         }
 
-                        newItem.innerHTML += `    </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </table>`;
-
                         replyListDiv.appendChild(newItem);
+
                     });
                     newVideo
                         .filter(video => video.videoId.toString() !== videoId) // 현재 보고있는 동영상은 추천동영상에서 예외처리
@@ -293,7 +305,6 @@
                     });
 
                     pageNumber++;
-
 
                 } else {
                     observer.unobserve(loader);
