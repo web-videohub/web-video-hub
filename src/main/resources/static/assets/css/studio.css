@@ -248,6 +248,7 @@ img {
 .index-left2 {
     width: 150px;
     height: 100%;
+    display: none;
 
     position: fixed;
     top: 70px;
@@ -297,9 +298,9 @@ input[type="checkbox"]:checked {
     margin: 0 auto;
 }
 
-#deleteBtn {
-    display: none;
-}
+/*#deleteBtn {*/
+/*    display: none;*/
+/*}*/
 
 #headerBtn2 {
     display: none;
