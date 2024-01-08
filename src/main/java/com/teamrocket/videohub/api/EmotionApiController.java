@@ -25,10 +25,10 @@ public class EmotionApiController {
     // 좋아요, 싫어요 상태 조회 요청
     @GetMapping("/{videoId}")
     public ResponseEntity<?> emote(@PathVariable int videoId,
-                                  @Validated @RequestParam LoginUserResponseDTO dto) {
-        log.info("/api/v1/emotion/{} : GET!", videoId);
+                                  @Validated @RequestParam String userAccount) {
+        log.info("/api/v1/emotion/{}?userAccount={} : GET!", videoId, userAccount);
 
-        Emotion emotion = emotionService.getEmotion(videoId, dto.getUserAccount());
+        Emotion emotion = emotionService.getEmotion(videoId, userAccount);
 
         return ResponseEntity
                 .ok()
@@ -53,7 +53,6 @@ public class EmotionApiController {
 
 //        emotion.setUserAccount(((LoginUserResponseDTO) session.getAttribute(LOGIN_KEY)).getUserAccount());
         log.info("/api/v1/emotion : POST");
-        log.info("request parameter : {}", dto);
         log.debug("request parameter : {}", dto);
 
         try {
@@ -81,11 +80,11 @@ public class EmotionApiController {
         log.info("/api/v1/replies/{}/{} : DELETE", videoId, account);
 
         try {
-            EmotionResponseDTO responseDTO = emotionService.delete(videoId, account);
+            boolean flag = emotionService.delete(videoId, account);
 
             return ResponseEntity
                     .ok()
-                    .body(responseDTO)
+                    .body(flag)
                     ;
         } catch (Exception e) {
             return ResponseEntity

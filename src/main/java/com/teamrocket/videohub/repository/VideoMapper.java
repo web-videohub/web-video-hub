@@ -1,5 +1,6 @@
 package com.teamrocket.videohub.repository;
 
+import com.teamrocket.videohub.dto.response.VideoDetailResponseDTO;
 import com.teamrocket.videohub.entity.Video;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -15,11 +16,17 @@ public interface VideoMapper {
 
     List<Video> findAll(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type);
 
+    List<Video> findAllDetail(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type);
+
     void upViewCount(int videoId);
 
     void upLikeCount(int videoId);
 
     void downLikeCount(int videoId);
+
+    void upHateCount(int videoId);
+
+    void downHateCount(int videoId);
 
     List<Video> findSearch(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String keyword);
 
@@ -30,4 +37,6 @@ public interface VideoMapper {
     List<Video> findAllCh(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String channelName);
 
     List<Video> findAllSub(@Param("pageSize") int pageSize, @Param("offset") int offset, @Param("type") String type, String account);
+
+    Video findOneDetail(int videoId);
 }

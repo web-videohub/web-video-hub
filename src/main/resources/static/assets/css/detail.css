@@ -130,6 +130,12 @@ li {
     margin-right: 10px;
 }
 
+.video_user_bbox a img {
+    float: left;
+    text-decoration-line: none;
+    color: #000000;
+}
+
 .video_user_bbox .leftReview {
     display: flex;
     flex-direction: row;
@@ -149,7 +155,7 @@ li {
     object-position: center;
 }
 
-/* video_review_btn_o .subscribe_B: 구독 버튼 */
+/* video_review_btn_o .chBtn: 구독 버튼 */
 .video_review_btn_o {
     float: left;
 }
@@ -163,9 +169,19 @@ li {
     margin-left: 10px;
     float: left;
 }
-.video_user_bbox .subscribe_B:hover {
-    background-color: #272727;
-    color: #FFFFFF;
+.chBtn:hover, .chBtn-hover {
+    transition: 0.2s ease-out;
+    background: #444444;
+}
+.chBtn:not(:hover), .chBtn2:not(.chBtn-hover) {
+    transition: 0.2s ease-out;
+}
+.chBtn2:hover, .chBtn2-hover {
+    transition: 0.2s ease-out;
+    background: #444444;
+}
+.chBtn2:not(:hover), .chBtn2:not(.chBtn2-hover) {
+    transition: 0.2s ease-out;
 }
 
 /* video_review_btn_t .like_B, .hate_B, .share_B: 좋아요, 싫어요, 공유 버튼 */
@@ -296,6 +312,7 @@ li {
     background-color: #FFFFFF;
     padding-left: 0px;
     width: 100%;
+    margin-top: 40px;
 }
 .chat_list li {
     margin-top: 20px;
@@ -415,9 +432,8 @@ li {
     font-family: "Roboto","Arial",sans-serif;
     font-size: 14px;
     float: right;
-    margin-right: 30px;
     position: relative;
-    top: -40px;
+    top: -15px;
 }
 
 /* 댓글 전송 버튼 */
@@ -521,3 +537,18 @@ li {
 }
 
 
+/* 새로 추가할 CSS */
+.replyDiv {
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+}
+
+.video_subinfo {
+    margin-bottom: 30px;
+}
+
+.video_sumnail img{
+    width: 168px;
+    height: 94px;
+}
