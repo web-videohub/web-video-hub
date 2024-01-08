@@ -26,7 +26,7 @@ public class VideoDetailResponseDTO {
         this.videoId = video.getVideoId();
         this.uploadUser = video.getVideoUploadUser();
         this.uploadUserDisplayName = video.getUserDisplayName();
-        this.uploadUserProfileImage = video.getUploadUserProfileImage();
+        this.uploadUserProfileImage = video.getUserProfileImage();
         this.uploadUserSubscribe = video.getUserSubscribe();
         this.uploadDate = DateUtils.makePrettierDateString(video.getVideoUploadDate());
         this.videoTitle = video.getVideoTitle();
