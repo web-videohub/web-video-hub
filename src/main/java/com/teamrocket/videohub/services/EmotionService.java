@@ -43,17 +43,27 @@ public class EmotionService {
 
         if (dto.getVideoLike() == 1)
             videoMapper.upLikeCount(dto.getVideoId());
+        else if (dto.getVideoHate() == 1)
+            videoMapper.upHateCount(dto.getVideoId());
     }
 
     public void modify(EmotionPostRequestDTO dto) throws Exception{
         Emotion emotion = emotionMapper.findOne(dto.getVideoId(), dto.getAccount());
-        // POSTMAN 테스트 용으로 임시처리
+
         emotionMapper.modify(dto.getVideoId(), dto.getAccount(), dto.getVideoLike(), dto.getVideoHate());
         if (emotion.getVideoLike() == 1)
-            videoMapper.downLikeCount(1);
+            videoMapper.downLikeCount(emotion.getVideoId());
+        else if (emotion.getVideoHate() == 1)
+            videoMapper.downHateCount(dto.getVideoId());
     }
 
     public boolean delete(int videoId, String userAccount) {
+
+        Emotion emotion = emotionMapper.findOne(videoId, userAccount);
+        if (emotion.getVideoLike() == 1)
+            videoMapper.downLikeCount(emotion.getVideoId());
+        else if(emotion.getVideoHate() == 1)
+            videoMapper.downHateCount(emotion.getVideoId());
 
         return emotionMapper.delete(videoId, userAccount);
     }

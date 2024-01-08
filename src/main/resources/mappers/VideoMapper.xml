@@ -113,6 +113,18 @@
         WHERE video_id = #{videoId};
     </update>
 
+    <update id="upHateCount">
+        UPDATE tbl_video
+        SET video_hate = video_hate + 1
+        WHERE video_id = #{videoId};
+    </update>
+
+    <update id="downHateCount">
+        UPDATE tbl_video
+        SET video_hate = video_hate - 1
+        WHERE video_id = #{videoId};
+    </update>
+
     <select id="findSearch" resultType="com.teamrocket.videohub.entity.Video">
         SELECT
         v.video_title, v.video_upload_user,
