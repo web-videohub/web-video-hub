@@ -83,7 +83,7 @@
                                 <p>${sessionScope.login.userDisplayName}</p>
                             </div>
                             <div class="bbox1_1">
-                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
+                                <textarea id="message" placeholder="로그인 후 댓글작성이 가능합니다." autocomplete="off" class="form-control" disabled></textarea>
                             </div>
                         </div>
                         <div class="bbox2">
@@ -119,7 +119,7 @@
     const videoId = urlParams.get('videoId'); //URL의 동영상 번호를 가져와서 저장
     const currentAccount = '${sessionScope.login.userAccount}'; // 로그인한 사람
     const receiverAccount = '${v.uploadUser}'; // 동영상 업로더 어카운트명
-    const auth = '${login.userAuth}'; //로그인한 사람 권한
+    const auth = '${sessionScope.login.userAuth}'; //로그인한 사람 권한
     const loader = document.getElementById('loader');
     const replyListDiv = document.querySelector('.chat_list');
     const videoListDiv = document.querySelector('.video_list_Algorithm');
@@ -781,14 +781,19 @@
     }
 
     <%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
-    const $replyTextarea = document.getElementById('message');
+    function checkLogin() {
+        const $replyTextarea = document.getElementById('message');
 
-    if(`${sessionScope.login == null}`) {
-        $replyTextarea.disabled = true;
-        $replyTextarea.placeholder = "로그인 후 댓글작성이 가능합니다.";
+        if(currentAccount !== "") {
+            $replyTextarea.disabled = false;
+            $replyTextarea.placeholder = "댓글 추가...";
+        }
     }
 
+
     (() => {
+        checkLogin();
+
         // 서버에서 댓글 불러오기
         // fetchGetReplies(videoId);
 
