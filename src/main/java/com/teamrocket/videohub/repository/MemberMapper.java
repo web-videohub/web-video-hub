@@ -18,6 +18,8 @@ public interface MemberMapper {
 
     boolean modifyPassword(@Param("account") String account, @Param("password") String newPassword);
 
+    boolean updateNickname(@Param("account") String account, @Param("nickname") String nickname);
+
     Member findName(String channelName);
 
     Member countVideo(String channelName);

@@ -50,7 +50,8 @@
             <h2>계정 만들기</h2>
         </div>
         <div class="profileImgContainer">
-            <div class="upload-box" id="uploadBox"><img src="/assets/img/profile.jpeg" alt="profile" style="height: 130px; width: 130px;"> </div>
+            <div class="upload-box" id="uploadBox"><img src="/assets/img/profile.jpeg" alt="profile"
+                                                        style="height: 130px; width: 130px;"></div>
             <input type="file" name="profileImage" id="profile-input" accept="image/*" onchange="setThumbnail(event)">
             <span>프로필 업로드</span>
         </div>
@@ -59,7 +60,7 @@
             <span class="inputText">아이디<span class="redStar">&nbsp;*</span></span>
             <span id="idChk"></span>
             <input id="inputDiv1" type="text" name="userAccount">
-            <span class="inputText">이름<span class="redStar">&nbsp;*</span></span>
+            <span class="inputText">닉네임<span class="redStar">&nbsp;*</span></span>
             <span id="nameChk"></span>
             <input id="inputDiv2" type="text" name="userDisplayName">
             <span class="inputText">이메일<span class="redStar">&nbsp;*</span></span>
@@ -146,7 +147,7 @@
     })();
 
     (function () {
-        // 이름 입력값 검증
+        // 닉넴 입력값 검증
         const namePattern = /^[가-힣]+$/;
 
         const $nameInput = document.getElementById('inputDiv2');
@@ -165,11 +166,19 @@
                 $nameChk.innerHTML = '<b style="color: red;">[이름은 한글로 입력해주세요]</b>';
                 checkResultList[2] = false;
             } else {
-                $nameInput.style.borderColor = 'skyblue'
-                $nameChk.innerHTML = '';
-                checkResultList[2] = true;
-                console.log(checkResultList);
-
+                fetch('/check?type=displayName&keyword=' + nameValue)
+                    .then(res => res.json())
+                    .then(flag => {
+                        if (flag) {
+                            $nameInput.style.borderColor = 'red';
+                            $nameChk.innerHTML = '<b style="color: red;">[닉네임이 중복되었습니다.</b>';
+                            checkResultList[2] = false;
+                        } else {
+                            $nameInput.style.borderColor = 'skyblue';
+                            $nameChk.innerHTML = '';
+                            checkResultList[2] = true;
+                        }
+                    });
             }
         };
     })();
@@ -218,7 +227,7 @@
     (function () {
         // 비밀번호 입력값 검증
 
-        const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/
+        const passwordPattern = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,15}$/;
 
         const $pwInput = document.getElementById('inputDiv4');
 

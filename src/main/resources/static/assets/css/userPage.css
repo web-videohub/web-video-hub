@@ -264,7 +264,6 @@ body {
     font-weight: bold;
 }
 .subscribe_B {
-    display: none;
     width: 80px;
     height: 40px;
     background: black;
@@ -285,18 +284,11 @@ body {
     text-align: center;
     padding-top: 6px;
 }
-.chBtn:hover, .chBtn-hover {
+.chBtn:hover {
     transition: 0.2s ease-out;
     background: #444444;
 }
-.chBtn:not(:hover), .chBtn2:not(.chBtn-hover) {
-    transition: 0.2s ease-out;
-}
-.chBtn2:hover, .chBtn2-hover {
-    transition: 0.2s ease-out;
-    background: #444444;
-}
-.chBtn2:not(:hover), .chBtn2:not(.chBtn2-hover) {
+.chBtn:not(:hover) {
     transition: 0.2s ease-out;
 }
 

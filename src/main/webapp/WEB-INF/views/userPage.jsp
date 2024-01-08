@@ -8,104 +8,103 @@
     <title>${user.channelName}님의 채널</title>
 </head>
 <body>
-    <%-- css 모음 --%>
-    <jsp:include page="include/static-head.jsp"/>
-    <%-- 햄버거메뉴와 로고(홈버튼) 검색창, 영상업로드, 마이페이지 --%>
-    <jsp:include page="include/header.jsp"/>
+<%-- css 모음 --%>
+<jsp:include page="include/static-head.jsp"/>
+<%-- 햄버거메뉴와 로고(홈버튼) 검색창, 영상업로드, 마이페이지 --%>
+<jsp:include page="include/header.jsp"/>
 
-    <%-- 기본 왼쪽 상태바 --%>
-    <div class="leftDiv index-left">
-        <div class="offcanvas-body index-side">
-            <ul class="navbar-nav flex-grow-1 pe-3">
+<%-- 기본 왼쪽 상태바 --%>
+<div class="leftDiv index-left">
+    <div class="offcanvas-body index-side">
+        <ul class="navbar-nav flex-grow-1 pe-3">
 
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="/">
-                        <span class="lnr lnr-home"></span>
-                        홈
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/">
+                    <span class="lnr lnr-home"></span>
+                    홈
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/subs">
+                    <span class="lnr lnr-book"></span>
+                    구독
+                </a>
+            </li>
+            <hr>
+            <li class="nav-item">
+                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+            </li>
+            <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                <li class="nav-item home">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                        <span class="lnr lnr-user"></span>
+                        내 채널
                     </a>
                 </li>
+            </c:if>
+            <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
                 <li class="nav-item">
-                    <a class="nav-link" href="/subs">
-                        <span class="lnr lnr-book"></span>
-                        구독
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                        <span class="lnr lnr-user"></span>
+                        내 채널
                     </a>
                 </li>
-                <hr>
-                <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
-                </li>
-                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
-                    <li class="nav-item home">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                            <span class="lnr lnr-user"></span>
-                            내 채널
-                        </a>
-                    </li>
-                </c:if>
-                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
-                    <li class="nav-item">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                            <span class="lnr lnr-user"></span>
-                            내 채널
-                        </a>
-                    </li>
-                </c:if>
-                <li class="nav-item">
-                    <a class="nav-link" href="/studio">
-                        <img class="mini" src="/assets/img/miniHub.png" alt="">
-                        스튜디오
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="/setting">
-                        <span class="lnr lnr-cog"></span>
-                        설정
-                    </a>
-                </li>
+            </c:if>
+            <li class="nav-item">
+                <a class="nav-link" href="/studio">
+                    <img class="mini" src="/assets/img/miniHub.png" alt="">
+                    스튜디오
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/setting">
+                    <span class="lnr lnr-cog"></span>
+                    설정
+                </a>
+            </li>
 
-            </ul>
-        </div>
+        </ul>
     </div>
-    <div class="leftDiv2 index-left2">
-        <div class="offcanvas-body index-side2">
-            <ul class="navbar-nav flex-grow-1 pe-3">
-                <li class="nav-item2">
-                    <a class="nav-link active" aria-current="page" href="/">
-                        <span class="lnr lnr-home"></span><br>
-                        <span class="sideText">홈</span>
+</div>
+<div class="leftDiv2 index-left2">
+    <div class="offcanvas-body index-side2">
+        <ul class="navbar-nav flex-grow-1 pe-3">
+            <li class="nav-item2">
+                <a class="nav-link active" aria-current="page" href="/">
+                    <span class="lnr lnr-home"></span><br>
+                    <span class="sideText">홈</span>
+                </a>
+            </li>
+            <li class="nav-item2">
+                <a class="nav-link" href="/subs">
+                    <span class="lnr lnr-book"></span><br>
+                    <span class="sideText">구독</span>
+                </a>
+            </li>
+            <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                <li class="nav-item2 home">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                        <span class="lnr lnr-user"></span><br>
+                        <span class="sideText">나</span>
                     </a>
                 </li>
+            </c:if>
+            <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
                 <li class="nav-item2">
-                    <a class="nav-link" href="/subs">
-                        <span class="lnr lnr-book"></span><br>
-                        <span class="sideText">구독</span>
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                        <span class="lnr lnr-user"></span><br>
+                        <span class="sideText">나</span>
                     </a>
                 </li>
-                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
-                    <li class="nav-item2 home">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                            <span class="lnr lnr-user"></span><br>
-                            <span class="sideText">나</span>
-                        </a>
-                    </li>
-                </c:if>
-                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
-                    <li class="nav-item2">
-                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                            <span class="lnr lnr-user"></span><br>
-                            <span class="sideText">나</span>
-                        </a>
-                    </li>
-                </c:if>
-                <li class="nav-item2">
-                    <a class="nav-link" href="/setting">
-                        <span class="lnr lnr-cog"></span><br>
-                        <span class="sideText">설정</span>
-                    </a>
-                </li>
+            </c:if>
+            <li class="nav-item2">
+                <a class="nav-link" href="/setting">
+                    <span class="lnr lnr-cog"></span><br>
+                    <span class="sideText">설정</span>
+                </a>
+            </li>
 
-            </ul>
-        </div>
+        </ul>
     </div>
     <div class="channelContainer">
         <div class="profileBox">
@@ -123,30 +122,31 @@
                 </c:if>
             </div>
         </div>
-        <span>채널 최신 동영상</span>
-        <hr>
-        <div class="chVideoDiv">
-            <c:forEach var="v" items="${vList}">
-                <div class="channelVideoList">
-                    <a class="chVideo" href="#">
-                        <img id="chImg" src="/local${v.thumbnailUrl}" alt="thumbnail" data-videoId="${v.videoId}"/>
-                    </a>
-                    <div class="chContainer">
-                        <div class="channelVideo">
-                            <a class="miniTitle" href="#">
+    </div>
+    <span>채널 최신 동영상</span>
+    <hr>
+    <div class="chVideoDiv">
+        <c:forEach var="v" items="${vList}">
+            <div class="channelVideoList">
+                <a class="chVideo" href="#">
+                    <img id="chImg" src="/local${v.thumbnailUrl}" alt="thumbnail" data-videoId="${v.videoId}"/>
+                </a>
+                <div class="chContainer">
+                    <div class="channelVideo">
+                        <a class="miniTitle" href="#">
                                 <span class="chTitle" data-videoId="${v.videoId}">
-                                    ${v.videoTitle}
+                                        ${v.videoTitle}
                                 </span>
                             </a>
                             <span class="chViewcount">
                                     조회수 ${v.videoViewCount}회ㆍ<span>${v.videoUploadDate}</span>
                             </span>
-                        </div>
                     </div>
                 </div>
-            </c:forEach>
-        </div>
+            </div>
+        </c:forEach>
     </div>
+</div>
 <script>
     const URL = '/api/v1/subscribe';
     const userAccount = '${sessionScope.login.userAccount}';

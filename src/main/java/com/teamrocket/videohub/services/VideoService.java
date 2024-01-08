@@ -32,19 +32,15 @@ public class VideoService {
         return lengthLimit(videos);
     }
 
-    public Video getVideo(int videoId) {
-        return videoMapper.findOne(videoId);
+    public List<Video> getVideosDetail(int pageSize, int pageNumber, String type) {
+        int offset = (pageNumber - 1) * pageSize;
+        return videoMapper.findAllDetail(pageSize, offset, type);
     }
 
-    public VideoDetailResponseDTO getDetail(int videoId) {
-        Video video = videoMapper.findOne(videoId);
-
-        // 조회수 상승처리
+    public Video getVideo(int videoId) {
         videoMapper.upViewCount(videoId);
 
-        log.info("video에 저장된 값 : {}", video);
-
-        return new VideoDetailResponseDTO(video);
+        return videoMapper.findOne(videoId);
     }
 
     public List<Video> getVideoSearch(int pageSize, int pageNumber, String type, String keyword) {
@@ -89,6 +85,14 @@ public class VideoService {
             }
         });
         return videos;
+    }
+
+    public VideoDetailResponseDTO getVideoDetailInfo(int videoId) {
+        videoMapper.upViewCount(videoId);
+
+        Video video = videoMapper.findOneDetail(videoId);
+
+        return new VideoDetailResponseDTO(video);
     }
 }
 

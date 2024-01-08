@@ -1,6 +1,7 @@
 package com.teamrocket.videohub.controller;
 
 import com.teamrocket.videohub.dto.response.UserInfoResponseDTO;
+import com.teamrocket.videohub.dto.response.VideoDetailResponseDTO;
 import com.teamrocket.videohub.entity.Video;
 import com.teamrocket.videohub.repository.VideoMapper;
 import com.teamrocket.videohub.services.MemberService;
@@ -50,15 +51,17 @@ public class AppController {
         return ResponseEntity.ok(videos);
     }
 
-    @GetMapping("/loadMoreVideosSub")
+    @GetMapping("/loadMoreVideosDetail")
     @ResponseBody
-    public ResponseEntity<List<Video>> loadMoreVideosSub(
+    public ResponseEntity<List<Video>> loadMoreVideosDetail(
             @RequestParam(defaultValue = "1") int pageNumber,
             @RequestParam(defaultValue = "12") int pageSize,
-            String type, String account
+            String type
     ) {
-        List<Video> videos = videoService.getVideosSub(pageSize, pageNumber, type, account);
-        log.warn("구독한 채널의 영상들 : {}", videos);
+        List<Video> videos = videoService.getVideosDetail(pageSize, pageNumber, type);
+
+        log.warn("videos : {}", videos);
+
         return ResponseEntity.ok(videos);
     }
 
@@ -87,9 +90,11 @@ public class AppController {
     public String showmv(Model model, int videoId) {
         log.info("영상 채널");
 
-        Video video = videoService.getVideo(videoId);
+        VideoDetailResponseDTO dto = videoService.getVideoDetailInfo(videoId);
 
-        model.addAttribute("v", video);
+        log.warn("VideoDetailResponseDTO : {}", dto);
+
+        model.addAttribute("v", dto);
 
         return "/detail";
     }
@@ -140,7 +145,6 @@ public class AppController {
     @GetMapping("/subs")
     public String subs() {
         log.info("구독 현황 페이지");
-
 
         return "subs";
     }

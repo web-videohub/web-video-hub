@@ -43,12 +43,54 @@ li {
     max-width: 70%; /* 최대 70%까지만 차지하도록 설정 */
     box-sizing: border-box; /* 내부 패딩과 테두리를 포함한 전체 크기를 지정 */
     background-color: #FFFFFF;
+
+    /*display: flex;*/
+    /*flex-direction: column;*/
 }
-.box1 video {
-    width: 100%; /* 부모 요소인 .box1의 100%를 차지하도록 설정 */
-    height: auto; /* 비율을 유지하면서 너비에 따라 높이 조정 */
-    border-radius: 10px;
+/*.box1 video {*/
+/*    width: 100%; !* 부모 요소인 .box1의 100%를 차지하도록 설정 *!*/
+/*    height: auto; !* 비율을 유지하면서 너비에 따라 높이 조정 *!*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*.box1 {*/
+/*    position: relative;*/
+/*    padding-bottom: 56.25%; !* 16:9 aspect ratio *!*/
+/*}*/
+
+/*.box1 video {*/
+/*    position: absolute;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 30%;*/
+/*    object-fit: contain;*/
+/*    background-color: #000;*/
+/*}*/
+
+.vvvv {
+    width: 100%;
+    height: 352px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 5px;
+    overflow: hidden;
+
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 aspect ratio */
 }
+
+.vvvv video {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    background-color: #000;
+}
+
 
 /* video_info: 영상 정보(All) */
 .video_info h1 {
@@ -76,29 +118,44 @@ li {
 }
 
 /* video_user_bbox: 프로필 이미지 */
+
 .video_user_bbox {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+.video_user_bbox .leftReview {
     display: block;
     margin-right: 10px;
 }
 
-.profile {
+.video_user_bbox a img {
+    float: left;
+    text-decoration-line: none;
+    color: #000000;
+}
+
+.video_user_bbox .leftReview {
     display: flex;
     flex-direction: row;
 }
 
-.profile a {
+.leftReview a {
     width: 45px;
     height: 45px;
     border-radius: 50%;
     overflow: hidden;
 }
 
-.profile a .user-profile-image {
-    width: 45px;
-    height: 45px;
+.leftReview a img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
 }
 
-/* video_review_btn_o .subscribe_B: 구독 버튼 */
+/* video_review_btn_o .chBtn: 구독 버튼 */
 .video_review_btn_o {
     float: left;
 }
@@ -112,9 +169,19 @@ li {
     margin-left: 10px;
     float: left;
 }
-.video_user_bbox .subscribe_B:hover {
-    background-color: #272727;
-    color: #FFFFFF;
+.chBtn:hover, .chBtn-hover {
+    transition: 0.2s ease-out;
+    background: #444444;
+}
+.chBtn:not(:hover), .chBtn2:not(.chBtn-hover) {
+    transition: 0.2s ease-out;
+}
+.chBtn2:hover, .chBtn2-hover {
+    transition: 0.2s ease-out;
+    background: #444444;
+}
+.chBtn2:not(:hover), .chBtn2:not(.chBtn2-hover) {
+    transition: 0.2s ease-out;
 }
 
 /* video_review_btn_t .like_B, .hate_B, .share_B: 좋아요, 싫어요, 공유 버튼 */
@@ -245,6 +312,7 @@ li {
     background-color: #FFFFFF;
     padding-left: 0px;
     width: 100%;
+    margin-top: 40px;
 }
 .chat_list li {
     margin-top: 20px;
@@ -322,6 +390,10 @@ li {
 /* 댓글 입력창 부분 */
 .input-group {
     margin-top: 50px;
+
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
 }
 .input-group #message {
     width: 100%;
@@ -330,10 +402,13 @@ li {
     border-left-color: #FFFFFF;
     border-right-color: #FFFFFF;
     border-bottom-color: #E5E5E5;
+    resize: none;
 }
 .input-group img {
     width: 45px;
     height: 45px;
+    border-radius: 50%;
+    border: 1px solid black;
 }
 
 /* 유저 프로필 */
@@ -349,15 +424,16 @@ li {
 /* textarea */
 .bbox1_1 {
     float: left;
-    width: 90%;
+    width: 85%;
     height: 50px;
 }
 /* 댓글 전송 버튼 div */
 .bbox2 {
+    font-family: "Roboto","Arial",sans-serif;
+    font-size: 14px;
     float: right;
-    margin-right: 30px;
     position: relative;
-    top: -40px;
+    top: -15px;
 }
 
 /* 댓글 전송 버튼 */
@@ -381,6 +457,31 @@ li {
     clear: both;
 }
 
+/* 댓글 추가 CSS : JS와 연동됨 */
+/* 수정용 textarea */
+.input-group #chat_message {
+    width: 100%;
+    height: 40px;
+    border-top-color: #FFFFFF;
+    border-left-color: #FFFFFF;
+    border-right-color: #FFFFFF;
+    border-bottom-color: #E5E5E5;
+}
+
+/* 수정 댓글 저장 버튼 */
+.save_bb{
+    padding: 0 16px;
+    height: 36px;
+    font-size: 14px;
+    line-height: 36px;
+    border-radius: 18px;
+    border: none;
+    color: #000000;
+    background-color: #FFFFFF;
+}
+.save_bb:hover {
+    background-color: #E5E5E5;
+}
 
 /* 창 사이즈에 따른 객체들 사이즈.*/
 
@@ -427,28 +528,27 @@ li {
     .box2 {
         margin-top: 10px; /* box1과의 간격 조절 */
     }
-
 }
+
+
 
 #headerBtn2 {
     display: none;
 }
 
-.videoContainer {
-    position: relative;
+
+/* 새로 추가할 CSS */
+.replyDiv {
     width: 100%;
-    height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
-    overflow: hidden;
+    height: auto;
+    margin-top: 30px;
 }
 
-.videoContainer video {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: revert;
-    background-color: #000;
+.video_subinfo {
+    margin-bottom: 30px;
 }
 
+.video_sumnail img{
+    width: 168px;
+    height: 94px;
+}

@@ -83,7 +83,7 @@
 }
 
 .bottom .left .titleDiv input:focus,
-.bottom .left .contentDiv textarea:focus {
+.bottom .left .contentDiv textarea:focus {</div>
     outline: none;
     box-shadow: none;
 }

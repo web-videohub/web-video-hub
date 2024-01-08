@@ -1,6 +1,5 @@
 package com.teamrocket.videohub.entity;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import com.teamrocket.videohub.dto.request.VideoUploadRequestDTO;
 import lombok.*;
 
@@ -39,6 +38,7 @@ public class Video {
 
     private String userDisplayName;
     private String uploadUserProfileImage;
+    private int userSubscribe;
 
     private int replyCount;
 
