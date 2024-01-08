@@ -27,8 +27,12 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 
@@ -43,24 +47,38 @@
 <div class="container">
     <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
         <div class="box1">
-            <video src="/local${v.videoUrl}"
-                   controls width="auto" height="auto">
-            </video>
+            <div class="vvvv">
+                <video src="/local${v.videoUrl}"
+                       controls width="auto" height="auto">
+                </video>
+            </div>
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>
                 <div class="video_user_bbox">
-                    <a href="#"><img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/></a>
-                    <div class="video_info_user_bbox">
-                        <a href="/userPage?channelName=${v.videoUploadUser}">${v.videoUploadUser}</a>
-                        <p>구독자 0명</p>
+                    <div class="leftReview">
+                        <a href="#"><img src="/local${v.userProfileImage}" alt="profile image"/></a>
+                        <div class="video_info_user_bbox">
+                            <a href="/userPage?channelName=${v.videoUploadUser}">${v.videoUploadUser}</a>
+                            <p>구독자 0명</p>
+                        </div>
+                        <div class="video_review_btn_o">
+                            <button type="button" class="subscribe_B">구독</button>
+                        </div>
                     </div>
-                    <div class="video_review_btn_o">
-                        <button type="button" class="subscribe_B">구독</button>
+                    <div class="rightReview">
+                        <div class="video_review_btn_t">
+                            <button type="button" class="like_B"><span class="lnr lnr-thumbs-up">${v.videoLike}</span>
+                            </button>
+                            <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
+                            <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
+                        </div>
                     </div>
-                    <div class="video_review_btn_t">
-                        <button type="button" class="like_B">${v.videoLike}<span class="lnr lnr-thumbs-up"></span>1.5만</button>
-                        <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
-                        <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
+                </div>
+                <div class="box3">
+                    <div class="video_info_bbox">
+                        <p>업로드 일자: ${v.videoUploadDate}</p>
+                        <p>조회수: ${v.videoViewCount}</p>
+                        <p>영상 설명: ${v.videoContent}</p>
                     </div>
                 </div>
                 <div class="box3">
@@ -68,64 +86,53 @@
                         <div class="form-group">
                             <div class="input-group clearfix">
                                 <div class="bbox1">
-                                    <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
-                                    <p>${sessionScope.login.userDisplayName}<</p>
+                                    <c:if test="${sessionScope.login != null}">
+                                        <img src="/local${sessionScope.login.userProfile}" alt="profile image"/>
+                                        <p>${sessionScope.login.userDisplayName}</p>
+                                    </c:if>
+                                    <c:if test="${sessionScope.login == null}">
+                                        <img src="/assets/img/profile.jpeg" alt="비로그인">
+                                    </c:if>
+                                </div>
+                                <div class="bbox1_1">
+                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off"
+                                          class="form-control"></textarea>
+                                </div>
+                                <div class="bbox2">
+                                    <button type="button" class="review_B" id="addReply">댓글</button>
                                 </div>
                             </div>
-                            <div class="bbox1_1">
-                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
-
-                <div class="video_info_bbox">
-                    <p>업로드 일자: ${v.videoUploadDate}</p>
-                    <p>조회수: $${v.videoViewCount}</p>
-                    <p>영상 설명: ${v.videoContent}</p>
+                        </div>
+                    </form>
+                </div>
+                <div id="replyData">
+                    <ul class="chat_list">
+                        <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
+                    </ul>
                 </div>
             </div>
-            <div class="box3">
-                <form id="messageForm" name="messageForm">
-                    <div class="form-group">
-                        <div class="input-group clearfix">
-                            <div class="bbox1">
-                                <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
-                                <p>${sessionScope.login.userDisplayName}</p>
+            <div class="box2">
+                <ul class="video_list_Algorithm">
+                    <li>
+                        <a href="#">
+                            <div class="video_sumnail">
+                                <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
                             </div>
-                        </div>
-                        <div class="bbox1_1">
-                            <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="bbox2">
-                        <button type="button" class="review_B" id="addReply">댓글</button>
-                    </div>
-                </form>
-            </div>
-            <div id="replyData">
-                <ul class="chat_list">
-                    <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
+                            <div class="video_subinfo">
+                                <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
+                                <p class="bbox_text_sub">Test_user</p>
+                                <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
-        <div class="box2">
-            <ul class="video_list_Algorithm">
-                <li>
-                    <a href="#">
-                        <div class="video_sumnail">
-                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
-                        </div>
-                        <div class="video_subinfo">
-                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
-                            <p class="bbox_text_sub">Test_user</p>
-                            <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
     </div>
-</div>
 </div>
 
 <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
+
 
 <!-- 드롭다운 메뉴, 댓글 테스트, 무한 스크롤 자바스크립트 코드 -->
 <script>
@@ -299,7 +306,7 @@
                     nowPageNumber = pageNumber;
                     pageNumber = 1;
                     fetchGetReplies(responseData);
-                    for (i = 2; i<nowPageNumber; i++) {
+                    for (i = 2; i < nowPageNumber; i++) {
                         pageNumber = i;
                         loadData();
                     }
@@ -311,8 +318,8 @@
 
         let tag = '';
 
-        if(replyList !== null && replyList.length > 0) {
-            for(let reply of replyList) {
+        if (replyList !== null && replyList.length > 0) {
+            for (let reply of replyList) {
 
                 const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
 
@@ -346,7 +353,7 @@
                 </td>
                 <td>
                     <div class="review_btns_two"> `;
-                if(auth === 'ADMIN' || currentAccount === account) {
+                if (auth === 'ADMIN' || currentAccount === account) {
                     tag += `
                         <button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
                         <div id="myDropdown-\${rno}" class="dropdown-content">
@@ -378,7 +385,7 @@
         // console.log("rno = " + rno);
 
 
-        if(!confirm('댓글을 삭제하시겠습니까?')) return;
+        if (!confirm('댓글을 삭제하시겠습니까?')) return;
 
         const requestInfo = {
             method: 'DELETE'
@@ -399,7 +406,7 @@
                 nowPageNumber = pageNumber;
                 pageNumber = 1;
                 fetchGetReplies(responseResult);
-                for (i = 2; i<=nowPageNumber; i++) {
+                for (i = 2; i <= nowPageNumber; i++) {
                     pageNumber = i;
                     loadData();
                 }
@@ -441,7 +448,7 @@
         const requestInfo = {
             method: 'PUT',
             headers: {
-                'content-type' : 'application/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify(payload)
         };
@@ -462,7 +469,7 @@
                 nowPageNumber = pageNumber;
                 pageNumber = 1;
                 fetchGetReplies(result);
-                for (i = 2; i<nowPageNumber; i++) {
+                for (i = 2; i < nowPageNumber; i++) {
                     pageNumber = i;
                     loadData();
                 }
@@ -507,6 +514,17 @@
         // 댓글 등록 이벤트 핸들러
         addComment();
     })();
+</script>
+
+<%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
+<script>
+    const $replyTextarea = document.getElementById('message');
+
+    if(`${sessionScope.login == null}`) {
+        $replyTextarea.disabled = true;
+        $replyTextarea.placeholder = "로그인 후 댓글작성이 가능합니다.";
+    }
+
 </script>
 <script src="./assets/js/testDropmenu.js"></script>
 </body>

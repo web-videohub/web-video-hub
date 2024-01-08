@@ -37,8 +37,16 @@ public class MemberController {
     private String rootPath;
 
     @GetMapping("/login")
-    public String login() {
+    public String login(HttpServletRequest request,
+                        Model model) {
         log.info("/login GET");
+
+        String uri = request.getHeader("Referer");
+        if (uri != null && !uri.contains("/login")) {
+            request.getSession().setAttribute("prevPage", uri);
+        }
+
+        log.info("uri : {}", uri);
 
         return "members/sign-in";
     }
@@ -58,6 +66,7 @@ public class MemberController {
         log.info("parameter: {}", dto);
 
         ra.addFlashAttribute("msg", result);
+
 
         if(result == SUCCESS) {
             memberService.maintainLoginState(request.getSession(), dto.getUserAccount());
