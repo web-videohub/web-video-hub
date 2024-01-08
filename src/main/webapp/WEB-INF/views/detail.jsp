@@ -56,7 +56,7 @@
                         <p>구독자 ${v.uploadUserSubscribe}명</p>
                     </div>
                     <div class="video_review_btn_o">
-                        <button type="button" class="chBtn">구독</button>
+                        <button type="button" class="subscribe_B">구독</button>
                     </div>
                     <div class="video_review_btn_t">
                         <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}</button>
@@ -110,7 +110,7 @@
     const replyURL = '/api/v1/replies'; // 댓글과 관련된 기능을 수행하는 링크
     const emotionURL = '/api/v1/emotion'; // 이모션 링크
     const subscribeURL = '/api/v1/subscribe'; // 구독 여부 링크
-    const $subBtn = document.querySelector('.chBtn');
+    const $subBtn = document.querySelector('.subscribe_B');
     const urlParams = new URLSearchParams(window.location.search);
     const videoId = urlParams.get('videoId'); //URL의 동영상 번호를 가져와서 저장
     const currentAccount = '${sessionScope.login.userAccount}'; // 로그인한 사람

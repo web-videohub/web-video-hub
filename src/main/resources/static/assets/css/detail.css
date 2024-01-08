@@ -108,7 +108,7 @@ li {
 .video_review_btn_o {
     float: left;
 }
-.chBtn {
+.video_user_bbox .subscribe_B {
     background-color: #000000;
     color: #FFFFFF;
     border-radius: 20px;
