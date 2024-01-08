@@ -65,7 +65,7 @@
                     </div>
                 </div>
                 <div class="video_info_bbox">
-                    <p>업로드 일자: ${v.uploadDate}</p>
+                    <p id="video_upload_day">업로드 일자: ${v.uploadDate}</p>
                     <p>조회수: ${v.videoViewCount}</p>
                     <p>영상 설명: ${v.videoContent}</p>
                 </div>
@@ -629,7 +629,7 @@
 
     // 좋아요 / 싫어요 상태를 서버에서 가져오는 부분
     function fetchGetEmotion() {
-        fetch(emotionURL + `/${sessionScope.login.userAccount}?userAccount=/${v.uploadUser}`)
+        fetch(emotionURL + `/${sessionScope.login.userAccount}?userAccount=${v.uploadUser}`)
             .then(res => res.json())
             .then(emotion => {
                 /*
@@ -691,7 +691,7 @@
                 'Content-Type': 'application/json',
             }
         };
-        fetch(emotionURL + "/" + videoId + "/" + currentAccount, requestInfo)
+        fetch(emotionURL + `/${v.videoId}?userAccount=${sessionScope.login.userAccount}`, requestInfo)
             .then(res => {
                 if (res.status === 200) {
                     // 좋아요 / 싫어요 상태 초기화
