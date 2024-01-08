@@ -48,9 +48,7 @@
     <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
         <div class="box1">
             <div class="vvvv">
-                <video src="/local${v.videoUrl}"
-                       controls width="auto" height="auto">
-                </video>
+                <video src="/local${v.videoUrl}" controls width="auto" height="auto" autoplay> </video>
             </div>
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>

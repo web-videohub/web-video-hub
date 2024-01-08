@@ -36,12 +36,14 @@ public class MemberController {
     @Value("${file.upload.root-path}")
     private String rootPath;
 
+    private String uri;
+
     @GetMapping("/login")
     public String login(HttpServletRequest request,
                         Model model) {
         log.info("/login GET");
 
-        String uri = request.getHeader("Referer");
+        uri = request.getHeader("Referer");
         if (uri != null && !uri.contains("/login")) {
             request.getSession().setAttribute("prevPage", uri);
         }
@@ -71,7 +73,12 @@ public class MemberController {
         if(result == SUCCESS) {
             memberService.maintainLoginState(request.getSession(), dto.getUserAccount());
 
-            return "redirect:/";
+            String prevPage = (String) request.getSession().getAttribute("prevPage");
+            if(prevPage != null && !prevPage.isEmpty()) {
+                return "redirect:" + prevPage;
+            } else {
+                return "redirect:/";
+            }
         }
         return "redirect:/login";
     }

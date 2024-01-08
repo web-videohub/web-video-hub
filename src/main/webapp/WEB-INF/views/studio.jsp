@@ -75,9 +75,6 @@
                 </tr>
                 </thead>
                 <tbody class="video-tbody">
-                <tr>
-
-                </tr>
                 </tbody>
                 <tfoot>
                 <td colspan="8" class="tablefoot"></td>
@@ -142,7 +139,6 @@
                 console.log(myVideos);
 
                 if (myVideos.length > 0) {
-                    console.log("데이터 불러와짐");
                     myVideos.forEach(video => {
                         const newItem = document.createElement('tr');
 
@@ -156,6 +152,17 @@
                             <td>\${video.videoLike}개</td>
                             <td>\${video.videoHate}개</td>
                         `;
+
+                        newItem.addEventListener('mouseover', e => {
+                            Array.from(e.currentTarget.children).forEach((child) => {
+                                child.style.backgroundColor = "#acacac";
+                            });
+                        });
+                        newItem.addEventListener('mouseout', e => {
+                            Array.from(e.currentTarget.children).forEach((child) => {
+                                child.style.backgroundColor = "#eee";
+                            });
+                        });
 
                         $videoTbody.appendChild(newItem);
                     });
