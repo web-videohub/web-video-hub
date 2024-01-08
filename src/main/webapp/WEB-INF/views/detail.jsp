@@ -38,67 +38,105 @@
 <jsp:include page="include/static-head.jsp"/>
 <%-- 햄버거메뉴와 로고(홈버튼) 검색창, 영상업로드, 마이페이지 --%>
 <jsp:include page="include/header.jsp"/>
-
+<%--private final int videoId;--%>
+<%--private final String uploadUser;--%>
+<%--private final String uploadUserDisplayName;--%>
+<%--private final String uploadUserProfileImage;--%>
+<%--private final int uploadUserSubscribe;--%>
+<%--private final String videoTitle;--%>
+<%--private final String uploadDate;--%>
+<%--private final String videoContent;--%>
+<%--private final String videoCategory;--%>
+<%--private final String videoUrl;--%>
+<%--private final int videoLike;--%>
+<%--private final int videoViewCount;--%>
 <%--    영상 컨테이너       --%>
 <div class="container">
     <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
         <div class="box1">
-            <video src="/local${v.videoUrl}"
-                   controls width="auto" height="auto">
-            </video>
+            <div class="vvvv">
+                <video src="/local${v.videoUrl}"
+                       controls width="auto" height="auto">
+                </video>
+            </div>
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>
                 <div class="video_user_bbox">
-                    <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image" class="profileIMG" height="45" width="45"/></a>
-                    <div class="video_info_user_bbox">
-                        <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
-                        <p>구독자 ${v.uploadUserSubscribe}명</p>
+                    <div class="leftReview">
+                        <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image"/></a>
+                        <div class="video_info_user_bbox">
+                            <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
+                            <p>구독자 ${v.uploadUserSubscribe}명</p>
+                        </div>
+                        <div class="video_review_btn_o">
+                            <button type="button" class="subscribe_B">구독</button>
+                        </div>
                     </div>
-                    <div class="video_review_btn_o">
-                        <button type="button" class="subscribe_B">구독</button>
-                    </div>
-                    <div class="video_review_btn_t">
-                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}</button>
-                        <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
-                        <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
+                    <div class="rightReview">
+                        <div class="video_review_btn_t">
+                            <button type="button" class="like_B"><span class="lnr lnr-thumbs-up">${v.videoLike}</span>
+                            </button>
+                            <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
+                            <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
+                        </div>
                     </div>
                 </div>
-
-                <div class="video_info_bbox">
-                    <p>업로드 일자: ${v.uploadDate}</p>
-                    <p>조회수: ${v.videoViewCount}</p>
-                    <p>영상 설명: ${v.videoContent}</p>
+                <div class="box3">
+                    <div class="video_info_bbox">
+                        <p>업로드 일자: ${v.uploadDate}</p>
+                        <p>조회수: ${v.videoViewCount}</p>
+                        <p>영상 설명: ${v.videoContent}</p>
+                    </div>
                 </div>
-            </div>
-            <div class="box3">
-                <form id="messageForm" name="messageForm">
-                    <div class="form-group">
-                        <div class="input-group clearfix">
-                            <div class="bbox1">
-                                <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG" height="45" width="45"/>
-                                <p>${sessionScope.login.userDisplayName}</p>
+                <div class="box3">
+                    <form id="messageForm" name="messageForm">
+                        <div class="form-group">
+                            <div class="input-group clearfix">
+                                <div class="bbox1">
+                                    <c:if test="${sessionScope.login != null}">
+                                        <img src="/local${sessionScope.login.userProfile}" alt="profile image"/>
+                                        <p>${sessionScope.login.userDisplayName}</p>
+                                    </c:if>
+                                    <c:if test="${sessionScope.login == null}">
+                                        <img src="/assets/img/profile.jpeg" alt="비로그인">
+                                    </c:if>
+                                </div>
+                                <div class="bbox1_1">
+                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off"
+                                          class="form-control"></textarea>
+                                </div>
+                                <div class="bbox2">
+                                    <button type="button" class="review_B" id="addReply">댓글</button>
+                                </div>
                             </div>
                         </div>
-                        <div class="bbox1_1">
-                            <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
-                        </div>
-                    </div>
-                    <div class="bbox2">
-                        <button type="button" class="review_B" id="addReply">댓글</button>
-                    </div>
-                </form>
-            </div>
-            <div id="replyData">
-                <ul class="chat_list">
-                    <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
-                </ul>
+                    </form>
+                </div>
+                <div id="replyData">
+                    <ul class="chat_list">
+                        <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
+                    </ul>
+                </div>
             </div>
         </div>
-    <div class="box2">
-        <ul class="video_list_Algorithm">
-        </ul>
+        <!-- 절대 box1 안에 넣지 말것. -->
+        <div class="box2">
+            <ul class="video_list_Algorithm">
+                <li>
+                    <a href="#">
+                        <div class="video_sumnail">
+                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
+                        </div>
+                        <div class="video_subinfo">
+                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
+                            <p class="bbox_text_sub">Test_user</p>
+                            <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
+                        </div>
+                    </a>
+                </li>
+            </ul>
+        </div>
     </div>
-</div>
 </div>
 
 <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
@@ -242,12 +280,12 @@
 
                         newItem.innerHTML = `<a href="showmv?videoId=\${video.videoId}">
                         <div class="video_sumnail">
-                            <img src="/local\${video.thumbnailUrl}" alt="thumbnail"/>
+                            <img src="/local\${video.thumbnailUrl}" alt="thumbnail" style="float: left; width: 168px; height: 94px;"/>
                         </div>
                         <div class="video_subinfo">
                             <p class="bbox_text">\${video.videoTitle}</p>
                             <p class="bbox_text_sub">\${video.videoUploadUser}</p>
-                            <p class="bbox_text_sub">조회수 \${video.videoViewCount} · 업로드 : \${formatTimeAgo(video.videoUploadDate)}</p>
+                            <p class="bbox_text_sub">조회수 \${video.videoViewCount} · 업로드 : \${formatTimeAgo(video.uploadDate)}</p>
                         </div>
                     </a>`;
 
@@ -604,36 +642,161 @@
 
     }
 
-    // function fetchGetEmotion() {
-    //     fetch(emotionURL + videoId)
-    //         .then(res => res.json())
-    //         .then(emotion => {
-    //             if (emotion === null) {
-    //             } else {
-    //                 if (emotion.videoLike === 1)
-    //                 $subBtn.classList.add('chBtn');
-    //                 $subBtn.style.display = 'block';
-    //                 $subBtn.style.width = '80px';
-    //                 $subBtn.textContent = '구독';
-    //                 $subBtn.style.background = 'black';
-    //                 $subBtn.style.color = 'white';
-    //                 $subBtn.removeEventListener('click', fetchDeleteSub);
-    //                 $subBtn.addEventListener('click', e => {
-    //                     makeEmotion();
-    //                 });
-    //             }
-    //         }
-    // );
-    // }
+    // 좋아요 / 싫어요 상태를 서버에서 가져오는 부분
+    function fetchGetEmotion() {
+        fetch(emotionURL + "/" + videoId + "?userAccount=" + currentAccount)
+            .then(res => res.json())
+            .then(emotion => {
+                /*
+                emotion에 담기는 정보들
+                    private String userAccount;
+                    private int videoId;
+                    private int videoLike;
+                    private int videoHate;
+                 */
 
-    // function makeEmotion() {
-    //     // 서버로 보낼 데이터
-    //     const payload = {
-    //         userAccount: currentAccount,
-    //         videoId : videoId,
-    //         videoLike: 1,
-    //         videoHate: 0
-    //     };
+                if (emotion === null) {
+                    console.log("좋아요 / 싫어요 정보가 없습니다.");
+                } else {
+                    if (emotion.videoLike === 1) {
+                        // 좋아요 버튼 눌러져 있는 상태로 변경
+                    } else if (emotion.videoHate === 1) {
+                        // 싫어요 버튼 눌러져 있는 상태로 변경
+                    }
+                }
+            }
+    );
+    }
+
+    // 좋아요 / 싫어요 만들기 요청 보내기
+    function makeEmotion() {
+        // 서버로 보낼 데이터
+        const payload = {
+            userAccount: currentAccount,
+            videoId : videoId,
+            videoLike: videoLike,
+            videoHate: videoHate
+        };
+
+        // GET방식을 제외한 요청의 정보 만들기
+        const requestInfo = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        };
+        fetch(emotionURL, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    // 좋아요 / 싫어요 상태 변경(누른걸로)
+                    return res.json();
+                } else {
+                    return res.text();
+                }
+            })
+
+    }
+
+    // 좋아요/ 싫어요 삭제
+    function fetchDeleteEmotion() {
+        const requestInfo = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        fetch(emotionURL + "/" + videoId + "/" + currentAccount, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    // 좋아요 / 싫어요 상태 초기화
+                    return res.json();
+                } else {
+                    alert('좋아요/ 싫어요 상태 변경 실패!');
+                    return res.text();
+                }
+            })
+    }
+
+    // 좋아요 / 싫어요 수정
+    function fetchModifyEmotionLike() {
+        // like_B, hate_B
+
+        const $likeBtn = document.querySelector('.like_B');
+        const $hateBtn = document.querySelector('.hate_B');
+
+        $likeBtn.addEventListener('click', e => {
+            // 좋아요를 눌렀을 때 이벤트
+            const payload = {
+                userAccount: currentAccount,
+                videoId : videoId,
+                videoLike: videoLike,
+                videoHate: videoHate
+            };
+            console.log(payload);
+
+            const requestInfo = {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            };
+
+            fetch(URL, requestInfo)
+                .then(res => {
+                    if (res.status === 200) {
+                        alert('댓글이 수정되었습니다.');
+                        // modal창 닫기
+                        document.getElementById('modal-close').click();
+                        return res.json();
+                    } else {
+                        alert('댓글이 수정에 실패했습니다.');
+                        document.getElementById('modal-close').click();
+                        return;
+                    }
+                })
+                .then(result => {
+                    renderReplies(result);
+                });
+        });
+
+        $hateBtn.addEventListener('click', e => {
+            // 싫어요를 눌렀을 때 이벤트
+            const payload = {
+                userAccount: currentAccount,
+                videoId : videoId,
+                videoLike: videoLike,
+                videoHate: videoHate
+            };
+            console.log(payload);
+
+            const requestInfo = {
+                method: 'PUT',
+                headers: {
+                    'content-type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            };
+
+            fetch(URL, requestInfo)
+                .then(res => {
+                    if (res.status === 200) {
+                        alert('댓글이 수정되었습니다.');
+                        // modal창 닫기
+                        document.getElementById('modal-close').click();
+                        return res.json();
+                    } else {
+                        alert('댓글이 수정에 실패했습니다.');
+                        document.getElementById('modal-close').click();
+                        return;
+                    }
+                })
+                .then(result => {
+                    renderReplies(result);
+                });
+        });
+    }
 
     (() => {
         // 서버에서 댓글 불러오기
@@ -641,6 +804,9 @@
 
         // 구독여부 확인하기
         fetchGetSub();
+
+        // 좋아요 / 싫어요 상태 불러오기
+        fetchGetEmotion();
 
         // 댓글 등록 이벤트 핸들러
         addComment();

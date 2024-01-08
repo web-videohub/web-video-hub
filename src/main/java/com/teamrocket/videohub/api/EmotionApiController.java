@@ -25,10 +25,10 @@ public class EmotionApiController {
     // 좋아요, 싫어요 상태 조회 요청
     @GetMapping("/{videoId}")
     public ResponseEntity<?> emote(@PathVariable int videoId,
-                                  @Validated @RequestParam LoginUserResponseDTO dto) {
-        log.info("/api/v1/emotion/{} : GET!", videoId);
+                                  @Validated @RequestParam String userAccount) {
+        log.info("/api/v1/emotion/{}?userAccount={} : GET!", videoId, userAccount);
 
-        Emotion emotion = emotionService.getEmotion(videoId, dto.getUserAccount());
+        Emotion emotion = emotionService.getEmotion(videoId, userAccount);
 
         return ResponseEntity
                 .ok()
