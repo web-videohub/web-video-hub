@@ -85,38 +85,33 @@
     <div class="mainContainer" id="page2">
         <div class="mainContainer_team_group">
             <h1>Team Rocket</h1>
-            <span>안녕하십니까. 사이트를 개발한 Rocket 팀입니다.</span>
-            <span>저희는 YouTube를 모티브하여 회원 간 영상 공유할 수 있는 사이트를 개발하였습니다.</span><br>
+            <span>안녕하세요! 사이트를 개발한 Rocket 팀입니다.</span>
+            <span>저희는 YouTube를 모티브로 회원 간 영상 공유할 수 있는 사이트를 제작했습니다.</span><br>
 
             <h2>Team 소개</h2>
+            <a class="org" href="https://github.com/web-videohub/web-video-hub">프로젝트 깃허브 링크</a>
             <div class="team_user_box">
                 <div class="team_user">
-                    <img src="/assets/img/profile.jpeg">
-                    <span>Name/Front</span>
-                    <p>한줄소개 텍스트</p>
+                    <img src="/assets/img/team1.png">
+                    <span>팀장_김용섭/Back</span>
+                    <a href="https://github.com/yongseopK">깃허브 링크</a>
                 </div>
                 <div class="team_user">
-                    <img src="/assets/img/profile.jpeg">
-                    <span>Name/Front</span>
-                    <p>한줄소개 텍스트</p>
+                    <img src="/assets/img/team2.jpg">
+                    <span>김다빈/Front</span>
+                    <a href="https://github.com/daveen99">깃허브 링크</a>
                 </div>
                 <div class="team_user">
-                    <img src="/assets/img/profile.jpeg">
-                    <span>Name/Front</span>
-                    <p>한줄소개 텍스트</p>
+                    <img src="/assets/img/team3.jpg">
+                    <span>태은선/Front</span>
+                    <a href="https://github.com/sarimiro56">깃허브 링크</a>
                 </div>
                 <div class="team_user">
-                    <img src="/assets/img/profile.jpeg">
-                    <span>Name/Front</span>
-                    <p>한줄소개 텍스트</p>
+                    <img src="/assets/img/team4.png">
+                    <span>송민건/Back</span>
+                    <a href="https://github.com/smg0218">깃허브 링크</a>
                 </div>
             </div>
-            <h3>프로젝트 소개</h3>
-        </div>
-
-        <hr>
-        <div class="rocket_team_github">
-            <a href="https://github.com/web-videohub/web-video-hub"><span class="lnr lnr-earth"></span>Github</a>
         </div>
     </div>
 </div>

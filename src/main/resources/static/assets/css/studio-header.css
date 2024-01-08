@@ -19,6 +19,7 @@
 
     font-family: 'Noto Sans KR', sans-serif;
     font-weight: bold;
+    border-bottom: 1px solid black;
 }
 .headerContainer {
     width: 100%;

@@ -289,3 +289,37 @@ body {
 .titleA:not(:hover) {
     transition: 0.2s ease-out;
 }
+
+#headerBtn2 {
+    display: none;
+}
+.index-left2 {
+    display: none;
+}
+
+.nonLogin {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    padding-top: 300px;
+}
+
+.nonLogin a {
+    margin-top: 20px;
+}
+
+.left-login-btn {
+    width: 84%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding-left: 5px;
+}
+
+.left-login-btn p {
+    text-align: left;
+}

@@ -24,6 +24,8 @@ p, span, div {
     justify-content: left;
     align-content: center;
     flex-direction: row;
+    font-family: 'Noto Sans KR', sans-serif;
+    /*font-weight: bold;*/
 }
 .leftDiv {
     width: 200px !important;
@@ -294,4 +296,48 @@ p, span, div {
 .btnContainer {
     display: flex;
     justify-content: end;
+}
+
+.team_user {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    margin: 0 20px;
+}
+
+.team_user img {
+    border-radius: 50%;
+    border: 3px solid black;
+}
+.team_user span {
+    font-weight: bold;
+}
+
+.showContainer {
+    font-weight: bold;
+}
+
+.mainContainer_team_group h2 {
+    margin-top: 100px;
+}
+
+.mainContainer_team_group a {
+    text-decoration: none;
+}
+
+.mainContainer_team_group span {
+    font-size: 20px;
+}
+.org {
+    font-size: 30px;
+    margin-bottom: 50px;
+}
+#page2 {
+    display: none;
+    justify-content: start;
+    align-content: center;
+    text-align: center;
+}
+hr {
 }

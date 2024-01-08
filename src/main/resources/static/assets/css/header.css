@@ -272,7 +272,14 @@
     font-weight: bold !important;
     font-size: 17px !important;
     margin-bottom: 0;
+    user-select: none;
 }
 .accountt {
     margin-bottom: 0;
+    font-weight: normal;
+    user-select: none;
+}
+
+.noTouch {
+   margin-left: 15px;
 }

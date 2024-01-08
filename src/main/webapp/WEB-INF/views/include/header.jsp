@@ -46,27 +46,29 @@
                                 </a>
                             </li>
                             <hr>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                                <span class="lnr lnr-user"></span>
-                                    내 채널
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/studio">
-                                    <img class="mini" src="/assets/img/miniHub.png" alt="">
-                                    스튜디오
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/setting">
-                                <span class="lnr lnr-cog"></span>
-                                    설정
-                                </a>
-                            </li>
+                            <c:if test="${sessionScope.login != null}">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                                    <span class="lnr lnr-user"></span>
+                                        내 채널
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/studio">
+                                        <img class="mini" src="/assets/img/miniHub.png" alt="">
+                                        스튜디오
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/setting">
+                                    <span class="lnr lnr-cog"></span>
+                                        설정
+                                    </a>
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>
@@ -97,8 +99,8 @@
                         <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><p class="dropdown-item nickname">${sessionScope.login.userDisplayName}</p></li>
-                        <li><p class="dropdown-item accountt">@${sessionScope.login.userAccount}</p></li>
+                        <li class="noTouch"><p class="nickname">${sessionScope.login.userDisplayName}</p></li>
+                        <li class="noTouch"><p class="accountt">@${sessionScope.login.userAccount}</p></li>
                         <hr>
                         <li><a class="dropdown-item" href="/userPage?channelName=${sessionScope.login.userAccount}">내 채널 보기</a></li>
                         <li><a class="dropdown-item" href="/setting">설정</a></li>

@@ -241,6 +241,7 @@ body {
     height: 150px;
     border-radius: 50%;
     background: #5eb2ff;
+    object-fit: cover;
 }
 .profileBox {
     display: flex;
@@ -387,3 +388,11 @@ hr {
     justify-content: left;
     align-content: center;
 }
+
+#headerBtn2 {
+    display: none;
+}
+.index-left2 {
+    display: none;
+}
+

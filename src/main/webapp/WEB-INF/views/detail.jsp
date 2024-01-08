@@ -47,30 +47,40 @@
 <div class="container">
     <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
         <div class="box1">
-            <video src="/local${v.videoUrl}"
-                   controls width="100%" height="70%">
-            </video>
+            <div class="vvvv">
+                <video src="/local${v.videoUrl}"
+                       controls width="auto" height="auto">
+                </video>
+            </div>
             <!-- video_info, video_info_bbox는 box1 안에 위치 해 있어야 한다.-->
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>
                 <div class="video_user_bbox">
-                    <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image" class="profileIMG" height="45" width="45"/></a>
-                    <div class="video_info_user_bbox">
-                        <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
-                        <p>구독자 ${v.uploadUserSubscribe}명</p>
-                    </div>
-                    <div class="video_review_btn_o">
-                        <button type="button" class="subscribe_B">구독</button>
+
+                    <div class="rightContainer">
+                        <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}"
+                                                                             alt="profile image" class="profileIMG"
+                                                                             height="45" width="45"/></a>
+                        <div class="video_info_user_bbox">
+                            <a class="detailName" href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
+                            <p>구독자 ${v.uploadUserSubscribe}명</p>
+                        </div>
+                        <c:if test="${sessionScope.login != null}">
+                            <c:if test="${sessionScope.login.userAccount ne v.uploadUser}">
+                                <button type="button" class="subscribe_B">구독</button>
+                            </c:if>
+                        </c:if>
                     </div>
                     <div class="video_review_btn_t">
-                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}</button>
+                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}
+                        </button>
                         <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
                         <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                     </div>
                 </div>
                 <div class="video_info_bbox">
                     <p id="video_upload_day">업로드 일자: ${v.uploadDate}</p>
-                    <p>조회수: ${v.videoViewCount}</p>
+                    <p>조회수  ${v.videoViewCount}회</p>
                     <p>영상 설명: ${v.videoContent}</p>
                 </div>
             </div>
@@ -79,11 +89,13 @@
                     <div class="form-group">
                         <div class="input-group clearfix">
                             <div class="bbox1">
-                                <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG" height="45" width="45"/>
+                                <img src="/local${sessionScope.login.userProfile}" alt="profile image"
+                                     class="profileIMG" height="45" width="45"/>
                                 <p>${sessionScope.login.userDisplayName}</p>
                             </div>
                             <div class="bbox1_1">
-                                <textarea id="message" placeholder="로그인 후 댓글작성이 가능합니다." autocomplete="off" class="form-control" disabled></textarea>
+                                <textarea id="message" placeholder="로그인 후 댓글작성이 가능합니다." autocomplete="off"
+                                          class="form-control" disabled></textarea>
                             </div>
                         </div>
                         <div class="bbox2">
@@ -268,7 +280,7 @@
                     newVideo
                         .filter(video => video.videoId.toString() !== videoId) // 현재 보고있는 동영상은 추천동영상에서 예외처리
                         .forEach(video => {
-                            if(video.videoId === videoId)
+                            if (video.videoId === videoId)
                                 return;
                             const newItem = document.createElement('li');
 
@@ -528,7 +540,7 @@
             .then(res => res.json())
             .then(replyList => {
                 console.log(replyList);
-                if(replyList.length === 0) {
+                if (replyList.length === 0) {
 
                 }
                 renderReplies(replyList);
@@ -553,16 +565,18 @@
                         fetchDeleteSub();
                     });
                 } else {
-                    $subBtn.classList.add('chBtn');
-                    $subBtn.style.display = 'block';
-                    $subBtn.style.width = '80px';
-                    $subBtn.textContent = '구독';
-                    $subBtn.style.background = 'black';
-                    $subBtn.style.color = 'white';
-                    $subBtn.removeEventListener('click', fetchDeleteSub);
-                    $subBtn.addEventListener('click', e => {
-                        makeSub();
-                    })
+                    if (${sessionScope.login.userAccount ne v.uploadUser}) {
+                        $subBtn.classList.add('chBtn');
+                        $subBtn.style.display = 'block';
+                        $subBtn.style.width = '80px';
+                        $subBtn.textContent = '구독';
+                        $subBtn.style.background = 'black';
+                        $subBtn.style.color = 'white';
+                        $subBtn.removeEventListener('click', fetchDeleteSub);
+                        $subBtn.addEventListener('click', e => {
+                            makeSub();
+                        })
+                    }
                 }
 
             })
@@ -821,13 +835,15 @@
     }
 
     <%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
+
     function checkLogin() {
         const $replyTextarea = document.getElementById('message');
 
-        if(currentAccount !== "") {
+        if (currentAccount !== "") {
             $replyTextarea.disabled = false;
             $replyTextarea.placeholder = "댓글 추가...";
         }
+
     }
 
 
@@ -839,11 +855,11 @@
         // fetchGetReplies(videoId);
 
         // 구독여부 확인하기
-        if(currentAccount)
+        if (currentAccount)
             fetchGetSub();
 
         // 좋아요 / 싫어요 상태 불러오기
-        if(currentAccount)
+        if (currentAccount)
             fetchGetEmotion();
 
         // 댓글 등록 이벤트 핸들러

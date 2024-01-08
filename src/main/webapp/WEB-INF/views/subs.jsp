@@ -20,8 +20,12 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 </head>
@@ -49,28 +53,38 @@
                 </a>
             </li>
             <hr>
-            <li class="nav-item">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                    <span class="lnr lnr-user"></span>
-                    내 채널
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/studio">
-                    <img class="mini" src="/assets/img/miniHub.png" alt="">
-                    스튜디오
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/setting">
-                    <span class="lnr lnr-cog"></span>
-                    설정
-                </a>
-            </li>
-
+            <c:if test="${sessionScope.login != null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                        <span class="lnr lnr-user"></span>
+                        내 채널
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/studio">
+                        <img class="mini" src="/assets/img/miniHub.png" alt="">
+                        스튜디오
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/setting">
+                        <span class="lnr lnr-cog"></span>
+                        설정
+                    </a>
+                </li>
+            </c:if>
+            <c:if test="${sessionScope.login == null}">
+                <div class="left-login-btn">
+                    <p>로그인하면 동영상에 좋아요를 표시하고 댓글을 달거나 구독할 수 있습니다.</p>
+                    <a class="login" href="/login">
+                        <span class="lnr lnr-user"></span>
+                        로그인
+                    </a>
+                </div>
+            </c:if>
         </ul>
     </div>
 </div>
@@ -89,34 +103,47 @@
                     <span class="sideText">구독</span>
                 </a>
             </li>
-            <li class="nav-item2">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                    <span class="lnr lnr-user"></span><br>
-                    <span class="sideText">나</span>
-                </a>
-            </li>
-            <li class="nav-item2">
-                <a class="nav-link" href="/setting">
-                    <span class="lnr lnr-cog"></span><br>
-                    <span class="sideText">설정</span>
-                </a>
-            </li>
-
+            <c:if test="${sessionScope.login != null}">
+                <li class="nav-item2">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                        <span class="lnr lnr-user"></span><br>
+                        <span class="sideText">나</span>
+                    </a>
+                </li>
+                <li class="nav-item2">
+                    <a class="nav-link" href="/setting">
+                        <span class="lnr lnr-cog"></span><br>
+                        <span class="sideText">설정</span>
+                    </a>
+                </li>
+            </c:if>
         </ul>
     </div>
 </div>
-<div class="mainContainer">
-    <div class="subContainer">
-        <div class="subDiv">
-            <span class="subTitle">최신순</span>
-        </div>
-        <%-- 서버에 업로드된 영상들이 연속적으로 나타날 div --%>
-        <div class="videoListDiv">
+<c:if test="${sessionScope.login != null}">
+    <div class="mainContainer">
+        <div class="subContainer">
+            <div class="subDiv">
+                <span class="subTitle">최신순</span>
+            </div>
+                <%-- 서버에 업로드된 영상들이 연속적으로 나타날 div --%>
+            <div class="videoListDiv">
 
+            </div>
+            <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
         </div>
-        <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
     </div>
-</div>
+</c:if>
+<c:if test="${sessionScope.login == null}">
+    <div class="nonLogin">
+        <h2>새로운 동영상을 놓치지 마세요.</h2>
+        <span>즐겨찾는 Video hub 채널의 업데이트를 확인하려면 로그인하세요.</span>
+        <a class="login" href="/login">
+            <span class="lnr lnr-user"></span>
+            로그인
+        </a>
+    </div>
+</c:if>
 <script>
 
     const options = {
@@ -188,7 +215,7 @@
                         videoListDiv.appendChild(newItem);
 
                         newItem.addEventListener('click', e => {
-                            if(!e.target) return;
+                            if (!e.target) return;
                             console.log(e.target.className);
                             if (e.target.id === 'videoImg' || e.target.className === 'title') {
                                 window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
@@ -218,8 +245,6 @@
     const videoListDiv = document.querySelector('.videoListDiv');
     let loading = false;
     let pageNumber = 1;
-
-
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -271,7 +296,7 @@
                 $headerBtn2.style.display = 'flex';
                 $headerBtn.style.display = 'none';
             }
-            if (isClick === side2){
+            if (isClick === side2) {
                 $leftDiv2.style.display = 'flex';
                 $leftDiv.style.display = 'none';
                 $headerBtn2.style.display = 'flex';
@@ -279,27 +304,26 @@
             }
 
 
-        }
-        else if (pageWidth > 640) {
+        } else if (pageWidth > 640) {
             $leftDiv.style.display = 'none';
             $leftDiv2.style.display = 'flex';
             $headerBtn2.style.display = 'none';
             $headerBtn.style.display = 'flex';
-        }
-        else if (pageWidth <= 640){
+        } else if (pageWidth <= 640) {
             $leftDiv2.style.display = 'none';
             $leftDiv.style.display = 'none';
             $headerBtn2.style.display = 'none';
             $headerBtn.style.display = 'flex';
         }
     }
+
     $headerBtn2.addEventListener('click', e => {
 
         if (isClick === side1) {
             $leftDiv2.style.display = 'flex';
             $leftDiv.style.display = 'none';
             isClick = side2;
-        } else if (isClick === side2){
+        } else if (isClick === side2) {
             $leftDiv.style.display = 'flex';
             $leftDiv2.style.display = 'none';
             isClick = side1;
@@ -313,7 +337,7 @@
         checkWidth();
     };
 
-    window.addEventListener('resize', function() {
+    window.addEventListener('resize', function () {
         pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         checkWidth();
     });
