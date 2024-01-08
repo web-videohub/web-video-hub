@@ -219,7 +219,7 @@
     <div class="studiv">    <!-- flex-direction: coloum -->
         <div class="top">   <!-- flex-direction: row -->
             <h1>동영상 업로드</h1>
-            <button class="upload-button" disabled>저장</button>
+<%--            <button class="upload-button" disabled>저장</button>--%>
         </div>
 
         <div class="bottom">        <!-- flex-direction: row -->
@@ -307,8 +307,11 @@
                             </a>
                             <span class="uploader">${sessionScope.login.userDisplayName}</span><span class="preview-viewcount"></span>
                         </div>
-
                     </div>
+
+                </div>
+                <div class="uploadBtn">
+                    <button class="upload-button btn-hover color-9 video-btn" disabled>업로드</button>
                 </div>
             </div>
         </div>
@@ -357,7 +360,7 @@
         // console.log(titleValue);
 
         $previewTitle.textContent = titleValue;
-        $previewViewCount.textContent = `조회수 0ㆍ방금 전`;
+        $previewViewCount.textContent = `조회수 0회ㆍ방금 전`;
 
         if (titleValue.trim() === '') {
             $titleDiv.style.borderColor = 'red';

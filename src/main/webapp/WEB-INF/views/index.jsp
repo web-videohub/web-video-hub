@@ -104,18 +104,20 @@
                     <span class="sideText">구독</span>
                 </a>
             </li>
-            <li class="nav-item2">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                    <span class="lnr lnr-user"></span><br>
-                    <span class="sideText">나</span>
-                </a>
-            </li>
-            <li class="nav-item2">
-                <a class="nav-link" href="/setting">
-                    <span class="lnr lnr-cog"></span><br>
-                    <span class="sideText">설정</span>
-                </a>
-            </li>
+            <c:if test="${sessionScope.login != null}">
+                <li class="nav-item2">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                        <span class="lnr lnr-user"></span><br>
+                        <span class="sideText">나</span>
+                    </a>
+                </li>
+                <li class="nav-item2">
+                    <a class="nav-link" href="/setting">
+                        <span class="lnr lnr-cog"></span><br>
+                        <span class="sideText">설정</span>
+                    </a>
+                </li>
+            </c:if>
 
         </ul>
     </div>

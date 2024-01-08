@@ -305,3 +305,12 @@ input[type="checkbox"]:checked {
 #headerBtn2 {
     display: none;
 }
+
+.emptyLoad {
+    text-align: center;
+    width: 500px;
+    margin: 0 auto;
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 30px;
+}

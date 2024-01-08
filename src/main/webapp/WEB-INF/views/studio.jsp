@@ -203,7 +203,7 @@
                     observer.unobserve($loader);
                     if(myVideos.length === 0) {
                         const nullVideo = document.createElement("span");
-                        nullVideo.innerHTML = `<p>로드 할 영상이 없습니다.</p>`;
+                        nullVideo.innerHTML = `<p class="emptyLoad">로드 할 영상이 없습니다.</p>`;
                         $mainContainer.appendChild(nullVideo);
                     }
                 }

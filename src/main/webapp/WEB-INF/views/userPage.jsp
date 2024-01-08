@@ -31,38 +31,39 @@
                 </a>
             </li>
             <hr>
-            <li class="nav-item">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
-            </li>
-            <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
-                <li class="nav-item home">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                        <span class="lnr lnr-user"></span>
-                        내 채널
-                    </a>
-                </li>
-            </c:if>
-            <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
+            <c:if test="${sessionScope.login != null}">
                 <li class="nav-item">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                        <span class="lnr lnr-user"></span>
-                        내 채널
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                </li>
+                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                    <li class="nav-item home">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                            <span class="lnr lnr-user"></span>
+                            내 채널
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                            <span class="lnr lnr-user"></span>
+                            내 채널
+                        </a>
+                    </li>
+                </c:if>
+                <li class="nav-item">
+                    <a class="nav-link" href="/studio">
+                        <img class="mini" src="/assets/img/miniHub.png" alt="">
+                        스튜디오
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/setting">
+                        <span class="lnr lnr-cog"></span>
+                        설정
                     </a>
                 </li>
             </c:if>
-            <li class="nav-item">
-                <a class="nav-link" href="/studio">
-                    <img class="mini" src="/assets/img/miniHub.png" alt="">
-                    스튜디오
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/setting">
-                    <span class="lnr lnr-cog"></span>
-                    설정
-                </a>
-            </li>
-
         </ul>
     </div>
 </div>
@@ -81,29 +82,30 @@
                     <span class="sideText">구독</span>
                 </a>
             </li>
-            <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
-                <li class="nav-item2 home">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                        <span class="lnr lnr-user"></span><br>
-                        <span class="sideText">나</span>
-                    </a>
-                </li>
-            </c:if>
-            <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
+            <c:if test="${sessionScope.login != null}">
+                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                    <li class="nav-item2 home">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                            <span class="lnr lnr-user"></span><br>
+                            <span class="sideText">나</span>
+                        </a>
+                    </li>
+                </c:if>
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
+                    <li class="nav-item2">
+                        <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                            <span class="lnr lnr-user"></span><br>
+                            <span class="sideText">나</span>
+                        </a>
+                    </li>
+                </c:if>
                 <li class="nav-item2">
-                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                        <span class="lnr lnr-user"></span><br>
-                        <span class="sideText">나</span>
+                    <a class="nav-link" href="/setting">
+                        <span class="lnr lnr-cog"></span><br>
+                        <span class="sideText">설정</span>
                     </a>
                 </li>
             </c:if>
-            <li class="nav-item2">
-                <a class="nav-link" href="/setting">
-                    <span class="lnr lnr-cog"></span><br>
-                    <span class="sideText">설정</span>
-                </a>
-            </li>
-
         </ul>
     </div>
 </div>
@@ -116,7 +118,9 @@
             <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
             <%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
             <c:if test="${sessionScope.login != null}">
-                <button type="button" class="subscribe_B">구독</button>
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
+                    <button type="button" class="subscribe_B">구독</button>
+                </c:if>
             </c:if>
             <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
                 <a href="/studio" class="studioBtn chBtn">스튜디오</a>
@@ -180,16 +184,18 @@
                         fetchDeleteSub();
                     });
                 } else {
-                    $subBtn.classList.add('chBtn');
-                    $subBtn.style.display = 'block';
-                    $subBtn.style.width = '80px';
-                    $subBtn.textContent = '구독';
-                    $subBtn.style.background = 'black';
-                    $subBtn.style.color = 'white';
-                    $subBtn.removeEventListener('click', fetchDeleteSub);
-                    $subBtn.addEventListener('click', e => {
-                        makeSub();
-                    })
+                    if (${sessionScope.login.userAccount ne user.channelAccount}) {
+                        $subBtn.classList.add('chBtn');
+                        $subBtn.style.display = 'block';
+                        $subBtn.style.width = '80px';
+                        $subBtn.textContent = '구독';
+                        $subBtn.style.background = 'black';
+                        $subBtn.style.color = 'white';
+                        $subBtn.removeEventListener('click', fetchDeleteSub);
+                        $subBtn.addEventListener('click', e => {
+                            makeSub();
+                        })
+                    }
                 }
 
             })

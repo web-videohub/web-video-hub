@@ -46,27 +46,29 @@
                                 </a>
                             </li>
                             <hr>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                                <span class="lnr lnr-user"></span>
-                                    내 채널
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/studio">
-                                    <img class="mini" src="/assets/img/miniHub.png" alt="">
-                                    스튜디오
-                                </a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link" href="/setting">
-                                <span class="lnr lnr-cog"></span>
-                                    설정
-                                </a>
-                            </li>
+                            <c:if test="${sessionScope.login != null}">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                                    <span class="lnr lnr-user"></span>
+                                        내 채널
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/studio">
+                                        <img class="mini" src="/assets/img/miniHub.png" alt="">
+                                        스튜디오
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link" href="/setting">
+                                    <span class="lnr lnr-cog"></span>
+                                        설정
+                                    </a>
+                                </li>
+                            </c:if>
                         </ul>
                     </div>
                 </div>

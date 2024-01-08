@@ -309,3 +309,17 @@ body {
 .nonLogin a {
     margin-top: 20px;
 }
+
+.left-login-btn {
+    width: 84%;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    flex-direction: column;
+    text-align: center;
+    padding-left: 5px;
+}
+
+.left-login-btn p {
+    text-align: left;
+}
