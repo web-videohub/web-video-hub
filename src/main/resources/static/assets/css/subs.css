@@ -289,3 +289,10 @@ body {
 .titleA:not(:hover) {
     transition: 0.2s ease-out;
 }
+
+#headerBtn2 {
+    display: none;
+}
+.index-left2 {
+    display: none;
+}
