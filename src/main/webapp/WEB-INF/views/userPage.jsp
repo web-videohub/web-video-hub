@@ -106,22 +106,21 @@
 
         </ul>
     </div>
-</div>
-<div class="channelContainer">
-    <div class="profileBox">
-        <img src="/local${user.channelProfile}" alt="profile image" class="pimg"/>
-        <div class="channelProfile">
-            <p class="channelName">${user.channelName}</p>
-            <p class="channelEmail">이메일: ${user.channelEmail}</p>
-            <%--                <p class="channelName">김다빈</p>--%>
-            <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
-            <%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
-            <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
-                <button type="button" class="subscribe_B">구독</button>
-            </c:if>
-            <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
-                <a href="/studio" class="studioBtn chBtn">스튜디오</a>
-            </c:if>
+    <div class="channelContainer">
+        <div class="profileBox">
+            <img src="/local${user.channelProfile}" alt="profile image" class="pimg"/>
+            <div class="channelProfile">
+                <p class="channelName">${user.channelName}</p>
+<%--                <p class="channelName">김다빈</p>--%>
+                <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
+<%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
+                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
+                    <button type="button" class="subscribe_B">구독</button>
+                </c:if>
+                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                    <a href="/studio" class="studioBtn chBtn">스튜디오</a>
+                </c:if>
+            </div>
         </div>
     </div>
     <span>채널 최신 동영상</span>
@@ -138,9 +137,9 @@
                                 <span class="chTitle" data-videoId="${v.videoId}">
                                         ${v.videoTitle}
                                 </span>
-                        </a>
-                        <span class="chViewcount">
-                                    조회수 ${v.videoViewCount}회ㆍ${v.videoUploadDate}
+                            </a>
+                            <span class="chViewcount">
+                                    조회수 ${v.videoViewCount}회ㆍ<span>${v.videoUploadDate}</span>
                             </span>
                     </div>
                 </div>
@@ -155,6 +154,14 @@
     console.log(userAccount);
     console.log(receiverAccount);
     const $subBtn = document.querySelector('.subscribe_B');
+
+    let $datediv = document.querySelectorAll('.channelVideoList');
+    $datediv.forEach(function (div) {
+        let date = div.querySelector('.chViewcount span');
+        let timestampString = date.textContent;
+        let timestamp = new Date(timestampString).getTime();
+        date.textContent = formatTimeAgo(timestamp);
+    });
 
     // 서버에 실시간으로 비동기통신을 해서 JSON을 받아오는 함수
     function fetchGetSub() {

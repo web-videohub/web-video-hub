@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
@@ -35,7 +36,7 @@ public class VideoUploadController {
     }
 
     @PostMapping("/upload")
-    public String uploadVideo(VideoUploadRequestDTO dto, HttpSession session) {
+    public String uploadVideo(VideoUploadRequestDTO dto, HttpSession session, Model model) {
         log.debug("attached file name : {}", dto.getVideoUrl().getOriginalFilename());
         log.info("parameter : {}", dto);
 
@@ -44,6 +45,9 @@ public class VideoUploadController {
         String thumbnailPath = map.get("thumbnailPath");
 
         videoService.insertVideo(dto, session, videoPath, thumbnailPath);
-        return "studio";
+
+        String keyword = "all";
+        model.addAttribute("keyword", keyword);
+        return "/studio";
     }
 }

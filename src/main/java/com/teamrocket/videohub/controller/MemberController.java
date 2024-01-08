@@ -11,6 +11,7 @@ import com.teamrocket.videohub.utils.upload.FileUtil;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import static com.teamrocket.videohub.services.LoginResult.*;
 import static com.teamrocket.videohub.utils.LoginUtils.LOGIN_KEY;
@@ -109,18 +112,6 @@ public class MemberController {
 
     @PostMapping("/register")
     public String register(SignUpRequestDTO dto) {
-
-        //String rootPath = "/Users/yongseopkim/Desktop/videoHub/upload/profile";
-        //File root = new File(rootPath);
-        //
-        //if(!root.exists()) root.mkdirs();
-        //
-        //String uploadedFilePath = FileUtil.uploadFile(file, rootPath);
-        //
-        //dto.setUserProfileImg(uploadedFilePath);
-        //log.info("file path : {}", uploadedFilePath);
-        //log.info("parameter : {}", dto);
-
         String savePath = FileUtil.uploadFile(dto.getProfileImage(), rootPath);
         log.warn("file : {}", dto.getProfileImage());
 

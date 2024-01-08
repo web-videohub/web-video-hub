@@ -5,6 +5,21 @@
 <head>
     <meta charset="UTF-8">
     <style>
+        body::-webkit-scrollbar {
+            width: 10px;
+
+        }
+        body::-webkit-scrollbar-thumb {
+            height: 15%;
+            background: #5c5d5c;
+            border-radius: 10px;
+
+            min-height: 10%;
+            max-height: 15%;
+        }
+        body::-webkit-scrollbar-track {
+        }
+
         .dropdown {
             display: flex;
             justify-content: center;
@@ -57,7 +72,10 @@
     <div class="headerDiv">
         <div class="headerContainer">
             <div class="menu">
-                <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                <button id="headerBtn" class="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span class="lnr lnr-menu"></span>
+                </button>
+                <button id="headerBtn2" type="button"  class="navbar-toggler">
                     <span class="lnr lnr-menu"></span>
                 </button>
                 <div class="offcanvas offcanvas-start" tabindex="1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
@@ -115,8 +133,13 @@
                     <img class="mainLogo" src="/assets/img/studioTitle.png" alt="">
                 </a>
             </div>
-            <form class="searchForm" action="" method="">
-                <input class="searchInput" type="search" placeholder="채널에서 검색">
+            <form class="searchForm" action="/searchStudio" method="get">
+                <c:if test="${keyword == 'all'}">
+                    <input class="searchInput" type="search" placeholder="채널에서 검색" name="keyword">
+                </c:if>
+                <c:if test="${keyword != 'all'}">
+                    <input class="searchInput" type="search" placeholder="채널에서 검색" name="keyword" value="${keyword}">
+                </c:if>
                 <button class="searchBtn" type="submit"><span class="lnr lnr-magnifier"></span></button>
             </form>
             <div class="dropdown">
@@ -125,8 +148,8 @@
                     <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
                 </button>
                 <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    <li><p class="dropdown-item drop-p">${sessionScope.login.userDisplayName}</p></li>
-                    <li><p class="dropdown-item drop-p">${sessionScope.login.userAccount}</p></li>
+                    <li><p class="dropdown-item nickname">${sessionScope.login.userDisplayName}</p></li>
+                    <li><p class="dropdown-item accountt">@${sessionScope.login.userAccount}</p></li>
                     <hr>
                     <li><a class="dropdown-item" href="/userPage?channelName=${sessionScope.login.userAccount}">내 채널 보기</a></li>
                     <li><a class="dropdown-item" href="/setting">설정</a></li>

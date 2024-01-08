@@ -97,8 +97,8 @@
                         <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
                     </button>
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                        <li><p class="dropdown-item drop-p">${sessionScope.login.userDisplayName}</p></li>
-                        <li><p class="dropdown-item drop-p">${sessionScope.login.userAccount}</p></li>
+                        <li><p class="dropdown-item nickname">${sessionScope.login.userDisplayName}</p></li>
+                        <li><p class="dropdown-item accountt">@${sessionScope.login.userAccount}</p></li>
                         <hr>
                         <li><a class="dropdown-item" href="/userPage?channelName=${sessionScope.login.userAccount}">내 채널 보기</a></li>
                         <li><a class="dropdown-item" href="/setting">설정</a></li>

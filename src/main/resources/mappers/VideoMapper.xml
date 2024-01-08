@@ -43,7 +43,7 @@
     <select id="findAll" resultType="com.teamrocket.videohub.entity.Video">
         SELECT
         v.video_title, v.video_upload_user,
-        v.video_view_count, v.video_upload_date,
+        v.video_view_count, v.video_upload_date, m.user_display_name,
         m.user_profile_image, v.thumbnail_url, v.video_id
         FROM tbl_video v
         JOIN tbl_member m ON v.video_upload_user = m.user_account
@@ -76,7 +76,7 @@
     <select id="findAllDetail" resultType="com.teamrocket.videohub.entity.Video">
         SELECT
         v.video_title, v.video_upload_user,
-        v.video_view_count, v.video_upload_date,
+        v.video_view_count, v.video_upload_date, m.user_display_name,
         m.user_profile_image, v.thumbnail_url, v.video_id
         FROM tbl_video v
         JOIN tbl_member m ON v.video_upload_user = m.user_account
@@ -92,7 +92,7 @@
     <select id="findAllCh" resultType="com.teamrocket.videohub.entity.Video">
         SELECT
         v.video_title, v.video_upload_user,
-        v.video_view_count, v.video_upload_date,
+        v.video_view_count, v.video_upload_date, m.user_display_name,
         m.user_profile_image, v.thumbnail_url, v.video_id
         FROM tbl_video v
         JOIN tbl_member m ON v.video_upload_user = m.user_account
@@ -128,7 +128,7 @@
     <select id="findSearch" resultType="com.teamrocket.videohub.entity.Video">
         SELECT
         v.video_title, v.video_upload_user,
-        v.video_view_count, v.video_upload_date,
+        v.video_view_count, v.video_upload_date, m.user_display_name,
         m.user_profile_image, v.thumbnail_url, v.video_id
         FROM tbl_video v
         JOIN tbl_member m ON v.video_upload_user = m.user_account
@@ -145,7 +145,13 @@
         from tbl_video v
         left join tbl_reply r
         on v.video_id = r.video_id
-        where v.video_upload_user = #{account}
+        <if test="keyword == 'all'">
+            where v.video_upload_user = #{account}
+        </if>
+        <if test="keyword != 'all'">
+            where v.video_upload_user = #{account}
+            AND v.video_title LIKE CONCAT('%', #{keyword}, '%')
+        </if>
         group by v.video_id
         order by v.video_upload_date desc
         limit #{pageSize} offset #{offset}

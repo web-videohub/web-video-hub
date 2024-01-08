@@ -59,6 +59,12 @@
                 </a>
             </li>
             <li class="nav-item">
+                <a class="nav-link" href="/studio">
+                    <img class="mini" src="/assets/img/miniHub.png" alt="">
+                    스튜디오
+                </a>
+            </li>
+            <li class="nav-item">
                 <a class="nav-link" href="/setting">
                     <span class="lnr lnr-cog"></span>
                     설정
@@ -123,7 +129,6 @@
     const handleIntersection = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                console.log("Intersection observed!");
                 loadData(selectedValue);
             }
         });
@@ -168,7 +173,7 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/loadMoreVideosSub?pageNumber=${pageNumber}&pageSize=12&type=${type}&account=${sessionScope.login.userAccount}`);
+                const response = await fetch(`/loadMoreVideosSub?pageNumber=\${pageNumber}&pageSize=12&type=` + type + `&account=${sessionScope.login.userAccount}`);
                 const newVideos = await response.json();
 
                 if (newVideos.length > 0) {
@@ -179,7 +184,7 @@
                         newItem.innerHTML = `<a class="video" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
                             `<div class="profileContainer"><div class="profile"><img class="profile" src="/local\${video.userProfileImage}" alt="profile image"  data-uploader="\${video.videoUploadUser}"/></div>` +
                             `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
-                            `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.videoUploadUser}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
+                            `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.userDisplayName}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
                         videoListDiv.appendChild(newItem);
 
                         newItem.addEventListener('click', e => {
@@ -207,7 +212,7 @@
                 loading = false;
                 loader.style.visibility = "hidden";
             }
-        }, 1000);
+        }, 500);
     };
     const loader = document.getElementById('loader');
     const videoListDiv = document.querySelector('.videoListDiv');
