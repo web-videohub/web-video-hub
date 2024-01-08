@@ -43,18 +43,21 @@
 <%-- 햄버거메뉴와 로고(홈버튼) 검색창, 영상업로드, 마이페이지 --%>
 <jsp:include page="include/header.jsp"/>
 
-<%--    영상 컨테이너       --%>
-<div class="container">
-    <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
-        <div class="box1">
-            <div class="vvvv">
-                <video src="/local${v.videoUrl}" controls width="auto" height="auto" autoplay> </video>
-            </div>
-            <div class="video_info">
-                <h1>${v.videoTitle}</h1>
-                <div class="video_user_bbox">
-                    <div class="leftReview">
-                        <a href="#"><img src="/local${v.userProfileImage}" alt="profile image"/></a>
+    <div class="modal">
+        <div class="modal_body">Modal</div>
+    </div>
+    <%--    영상 컨테이너       --%>
+    <div class="container">
+        <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
+            <div class="box1">
+                <video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                       controls width="auto" height="auto">
+                </video>
+                <div class="video_info">
+                    <h1>제목: ${v.videoTitle}</h1>
+                    <div class="video_user_bbox">
+                        <a href="#"><img src="/assets/img/profile.jpeg"></a>
+
                         <div class="video_info_user_bbox">
                             <a href="/userPage?channelName=${v.videoUploadUser}">${v.videoUploadUser}</a>
                             <p>구독자 0명</p>
@@ -65,8 +68,8 @@
                     </div>
                     <div class="rightReview">
                         <div class="video_review_btn_t">
-                            <button type="button" class="like_B"><span class="lnr lnr-thumbs-up">${v.videoLike}</span>
-                            </button>
+                            <button type="button" class="like_B">${v.videoLike}<span class="lnr lnr-thumbs-up"></span></button>
+
                             <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
                             <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                         </div>
@@ -113,6 +116,7 @@
                 <ul class="video_list_Algorithm">
                     <li>
                         <a href="#">
+                            <!-- 여기에 img를 대체할 수 있는 데이터 값을 넣어주세요! -->
                             <div class="video_sumnail">
                                 <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
                             </div>
@@ -523,7 +527,9 @@
         $replyTextarea.placeholder = "로그인 후 댓글작성이 가능합니다.";
     }
 
-</script>
-<script src="./assets/js/testDropmenu.js"></script>
+    <!-- 드롭다운 메뉴, 댓글 테스트 자바스크립트 코드 -->
+    <script src="./assets/js/testDropmenu.js"></script>
+    <script src="./assets/js/testReviewChat.js"></script>
+    <script src="./assets/js/testUpdateChat.js"></script>
 </body>
 </html>
