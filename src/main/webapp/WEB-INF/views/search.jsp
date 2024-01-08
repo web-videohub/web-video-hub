@@ -20,12 +20,8 @@
         }
 
         @keyframes spin {
-            0% {
-                transform: rotate(0deg);
-            }
-            100% {
-                transform: rotate(360deg);
-            }
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
     </style>
 </head>
@@ -55,9 +51,9 @@
             </li>
             <hr>
             <c:if test="${sessionScope.login != null}">
-            <li class="nav-item">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                         <span class="lnr lnr-user"></span>
@@ -78,13 +74,13 @@
                 </li>
             </c:if>
             <c:if test="${sessionScope.login == null}">
-                    <div class="left-login-btn">
-                        <p>로그인하면 동영상에 좋아요를 표시하고 댓글을 달거나 구독할 수 있습니다.</p>
-                        <a class="login" href="/login">
-                            <span class="lnr lnr-user"></span>
-                            로그인
-                        </a>
-                    </div>
+                <div class="left-login-btn">
+                    <p>로그인하면 동영상에 좋아요를 표시하고 댓글을 달거나 구독할 수 있습니다.</p>
+                    <a class="login" href="/login">
+                        <span class="lnr lnr-user"></span>
+                        로그인
+                    </a>
+                </div>
             </c:if>
         </ul>
     </div>
@@ -118,12 +114,13 @@
                     </a>
                 </li>
             </c:if>
+
         </ul>
     </div>
 </div>
 <div class="mainContainer">
     <div class="subContainer">
-        <jsp:include page="include/filter.jsp"/>
+<%--        <jsp:include page="include/filter.jsp"/>--%>
 
         <div class="videoListDiv">
 
@@ -143,6 +140,7 @@
     const handleIntersection = (entries, observer) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
+                console.log("Intersection observed!");
                 loadData(selectedValue);
             }
         });
@@ -186,7 +184,7 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/loadMoreVideos?pageNumber=\${pageNumber}&pageSize=12&type=` + type);
+                const response = await fetch(`/loadSearch?pageNumber=\${pageNumber}&pageSize=12&type=` + type + `&keyword=${keyword}`);
                 const newVideos = await response.json();
                 console.log(newVideos);
 
@@ -208,7 +206,7 @@
                         });
 
                         newItem.addEventListener('click', e => {
-                            if (!e.target) return;
+                            if(!e.target) return;
                             console.log(e.target.className);
                             if (e.target.id === 'videoImg' || e.target.className === 'title') {
                                 window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
@@ -233,12 +231,14 @@
                 loading = false;
                 loader.style.visibility = "hidden";
             }
-        }, 500);
+        }, 1000);
     };
     const loader = document.getElementById('loader');
     const videoListDiv = document.querySelector('.videoListDiv');
     let loading = false;
     let pageNumber = 1;
+
+
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -257,6 +257,7 @@
             loadData(selectedValue);
             observer.observe(loader);
 
+            console.log(selectedValue);
             if (selectedRadioButton) {
                 selectedRadioButton.parentNode.style.background = '';
                 selectedRadioButton.parentNode.style.color = '';
@@ -281,6 +282,7 @@
     let isClick = side1;
 
     function checkWidth() {
+        console.log(pageWidth);
         if (pageWidth >= 1200) {
             if (isClick === side1) {
                 $leftDiv2.style.display = 'none';
@@ -288,7 +290,7 @@
                 $headerBtn2.style.display = 'flex';
                 $headerBtn.style.display = 'none';
             }
-            if (isClick === side2) {
+            if (isClick === side2){
                 $leftDiv2.style.display = 'flex';
                 $leftDiv.style.display = 'none';
                 $headerBtn2.style.display = 'flex';
@@ -296,26 +298,27 @@
             }
 
 
-        } else if (pageWidth > 640) {
+        }
+        else if (pageWidth > 640) {
             $leftDiv.style.display = 'none';
             $leftDiv2.style.display = 'flex';
             $headerBtn2.style.display = 'none';
             $headerBtn.style.display = 'flex';
-        } else if (pageWidth <= 640) {
+        }
+        else if (pageWidth <= 640){
             $leftDiv2.style.display = 'none';
             $leftDiv.style.display = 'none';
             $headerBtn2.style.display = 'none';
             $headerBtn.style.display = 'flex';
         }
     }
-
     $headerBtn2.addEventListener('click', e => {
 
         if (isClick === side1) {
             $leftDiv2.style.display = 'flex';
             $leftDiv.style.display = 'none';
             isClick = side2;
-        } else if (isClick === side2) {
+        } else if (isClick === side2){
             $leftDiv.style.display = 'flex';
             $leftDiv2.style.display = 'none';
             isClick = side1;
@@ -329,7 +332,7 @@
         checkWidth();
     };
 
-    window.addEventListener('resize', function () {
+    window.addEventListener('resize', function() {
         pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         checkWidth();
     });
@@ -339,6 +342,7 @@
     (() => {
         $all.click();
     })();
+
 
 
 </script>

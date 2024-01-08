@@ -4,9 +4,9 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="/assets/css/index.css">
+    <link rel="stylesheet" href="/assets/css/subs.css">
     <link rel="stylesheet" href="/assets/css/filter.css">
-    <title>VideoHub</title>
+    <title>구독채널 최신영상</title>
 
     <style>
         .loader {
@@ -40,14 +40,13 @@
 <div class="leftDiv index-left">
     <div class="offcanvas-body index-side">
         <ul class="navbar-nav flex-grow-1 pe-3">
-
-            <li class="nav-item home">
+            <li class="nav-item">
                 <a class="nav-link active" aria-current="page" href="/">
                     <span class="lnr lnr-home"></span>
                     홈
                 </a>
             </li>
-            <li class="nav-item">
+            <li class="nav-item home">
                 <a class="nav-link" href="/subs">
                     <span class="lnr lnr-book"></span>
                     구독
@@ -55,9 +54,9 @@
             </li>
             <hr>
             <c:if test="${sessionScope.login != null}">
-            <li class="nav-item">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
-            </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
                         <span class="lnr lnr-user"></span>
@@ -78,13 +77,13 @@
                 </li>
             </c:if>
             <c:if test="${sessionScope.login == null}">
-                    <div class="left-login-btn">
-                        <p>로그인하면 동영상에 좋아요를 표시하고 댓글을 달거나 구독할 수 있습니다.</p>
-                        <a class="login" href="/login">
-                            <span class="lnr lnr-user"></span>
-                            로그인
-                        </a>
-                    </div>
+                <div class="left-login-btn">
+                    <p>로그인하면 동영상에 좋아요를 표시하고 댓글을 달거나 구독할 수 있습니다.</p>
+                    <a class="login" href="/login">
+                        <span class="lnr lnr-user"></span>
+                        로그인
+                    </a>
+                </div>
             </c:if>
         </ul>
     </div>
@@ -92,13 +91,13 @@
 <div class="leftDiv2 index-left2">
     <div class="offcanvas-body index-side2">
         <ul class="navbar-nav flex-grow-1 pe-3">
-            <li class="nav-item2 home">
+            <li class="nav-item2">
                 <a class="nav-link active" aria-current="page" href="/">
                     <span class="lnr lnr-home"></span><br>
                     <span class="sideText">홈</span>
                 </a>
             </li>
-            <li class="nav-item2">
+            <li class="nav-item2 home">
                 <a class="nav-link" href="/subs">
                     <span class="lnr lnr-book"></span><br>
                     <span class="sideText">구독</span>
@@ -121,16 +120,30 @@
         </ul>
     </div>
 </div>
-<div class="mainContainer">
-    <div class="subContainer">
-        <jsp:include page="include/filter.jsp"/>
+<c:if test="${sessionScope.login != null}">
+    <div class="mainContainer">
+        <div class="subContainer">
+            <div class="subDiv">
+                <span class="subTitle">최신순</span>
+            </div>
+                <%-- 서버에 업로드된 영상들이 연속적으로 나타날 div --%>
+            <div class="videoListDiv">
 
-        <div class="videoListDiv">
-
+            </div>
+            <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
         </div>
-        <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
     </div>
-</div>
+</c:if>
+<c:if test="${sessionScope.login == null}">
+    <div class="nonLogin">
+        <h2>새로운 동영상을 놓치지 마세요.</h2>
+        <span>즐겨찾는 Video hub 채널의 업데이트를 확인하려면 로그인하세요.</span>
+        <a class="login" href="/login">
+            <span class="lnr lnr-user"></span>
+            로그인
+        </a>
+    </div>
+</c:if>
 <script>
 
     const options = {
@@ -179,6 +192,7 @@
     }
 
     const loadData = async (type) => {
+        console.log('loadData function called');
         if (loading) return;
 
         loading = true;
@@ -186,26 +200,19 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/loadMoreVideos?pageNumber=\${pageNumber}&pageSize=12&type=` + type);
+                const response = await fetch(`/loadMoreVideosSub?pageNumber=\${pageNumber}&pageSize=12&type=` + type + `&account=${sessionScope.login.userAccount}`);
                 const newVideos = await response.json();
-                console.log(newVideos);
 
                 if (newVideos.length > 0) {
                     newVideos.forEach(video => {
                         const newItem = document.createElement('div');
                         newItem.className = 'videoDiv';
                         newItem.setAttribute('data-videoId', `\${video.videoId}`);
-
-                        newItem.innerHTML = `<a class="video1" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
-                            `<div class="profileContainer"><div class="profile"><img class="profileImg" src="/local\${video.userProfileImage}" alt="profile image" data-uploader="\${video.videoUploadUser}"/></div>` +
+                        newItem.innerHTML = `<a class="video" href="#"><img id="videoImg" src="/local\${video.thumbnailUrl}" alt="thumbnail" data-videoId="\${video.videoId}"/></a>` +
+                            `<div class="profileContainer"><div class="profile"><img class="profile" src="/local\${video.userProfileImage}" alt="profile image"  data-uploader="\${video.videoUploadUser}"/></div>` +
                             `<div class="videoInfoDiv"><a class="titleA" href="#"><span class="title" data-videoId="\${video.videoId}">\${video.videoTitle}</span></a>` +
                             `<span class="uploader" data-uploader="\${video.videoUploadUser}">\${video.userDisplayName}</span><span class="viewcount">조회수 \${video.videoViewCount}회ㆍ\${formatTimeAgo(video.videoUploadDate)}</span></div></div>`;
                         videoListDiv.appendChild(newItem);
-
-                        const $a = newItem.querySelector('.video1');
-                        $a.addEventListener('click', e => {
-                            e.preventDefault();
-                        });
 
                         newItem.addEventListener('click', e => {
                             if (!e.target) return;
@@ -213,12 +220,10 @@
                             if (e.target.id === 'videoImg' || e.target.className === 'title') {
                                 window.location.href = "/showmv?videoId=" + e.target.dataset.videoid;
                             }
-                            if (e.target.className === 'profileImg' || e.target.className === 'uploader') {
+                            if (e.target.className === 'profile' || e.target.className === 'uploader') {
                                 window.location.href = "/userPage?channelName=" + e.target.dataset.uploader;
                             }
                         });
-
-
                     });
 
                     pageNumber++;
@@ -226,6 +231,7 @@
 
                 } else {
                     observer.unobserve(loader);
+                    console.log('Observer unobserved');
                 }
             } catch (error) {
                 console.error('Error fetching data:', error);
@@ -257,6 +263,7 @@
             loadData(selectedValue);
             observer.observe(loader);
 
+            console.log(selectedValue);
             if (selectedRadioButton) {
                 selectedRadioButton.parentNode.style.background = '';
                 selectedRadioButton.parentNode.style.color = '';
@@ -281,6 +288,7 @@
     let isClick = side1;
 
     function checkWidth() {
+        console.log(pageWidth);
         if (pageWidth >= 1200) {
             if (isClick === side1) {
                 $leftDiv2.style.display = 'none';
@@ -333,14 +341,6 @@
         pageWidth = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth;
         checkWidth();
     });
-
-    const $all = document.getElementById('all');
-
-    (() => {
-        $all.click();
-    })();
-
-
 </script>
 </body>
 </html>

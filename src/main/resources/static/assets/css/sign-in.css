@@ -1,0 +1,212 @@
+/* 구글 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+body {
+    height: 100vh;
+    background-image: url("../img/winterBG.jpeg");
+    background-size: cover;
+    background-repeat: no-repeat;
+    /*background: radial-gradient(ellipse at bottom, #FFFFFF 0%, #090a0f 100%);
+    */
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+
+    overflow: hidden;
+
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+
+}
+a {
+    text-decoration-line: none;
+    font-size: 17px;
+    color: #0080FF
+}
+.mainDiv {
+    margin: 100px auto;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: row;
+    width: 550px;
+    height: 700px;
+    max-height: 600px;
+    min-height: 600px;
+    /*
+    background-color: #496d8c;
+     */
+    background-color: aliceblue;
+    border: 4px solid #fdba51;
+    border-radius: 30px;
+    /*
+    background-image: linear-gradient(#323640, #4e5463),
+    linear-gradient(to right, #2a8c68 0%, #04bf68 100%);
+     */
+    background-origin: border-box;
+    background-clip: content-box, border-box;
+    position: relative;
+    animation: fadeInDown 1.5s;
+}
+.loginForm {
+    display: flex;
+    margin: 0 auto 20px;
+    flex-direction: column;
+    width: 60vh;
+    justify-content: center;
+    align-content: center;
+}
+
+.inputDiv {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+}
+.inputDiv input {
+    width: 400px;
+    height: 40px;
+    background-color: #d3d0cc;
+    border-radius: 10px;
+    color: black;
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 10px;
+}
+.inputDiv input:hover {
+    transition: 0.2s ease-out;
+    filter: drop-shadow(0 0 10px #8e8f8c);
+}
+.inputDiv input:not(:hover) {
+    transition: 0.2s ease-out;
+}
+#inputDiv1 {
+    margin-bottom: 10px;
+}
+#loginBtn {
+    width: 400px;
+    height: 50px;
+    background-color: #2a8c68;
+    border-radius: 10px;
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: bold;
+    margin: 0 auto;
+}
+#loginBtn:hover {
+    transition: 0.2s ease-out;
+    background-color: #1e6249;
+    cursor: pointer;
+}
+#loginBtn:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
+.regiDiv {
+    width: 400px;
+    font-weight: bold;
+    color: black;
+    font-size: 17px;
+    margin: 20px auto 0;
+}
+.mainTitle {
+    color: aliceblue;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: -80px;
+    text-align: center;
+    margin-bottom: 0;
+    padding-top: 30px;
+}
+.mainTitle h1 {
+    margin-bottom: 5px;
+}
+.mainTitle h4 {
+    margin-top: 0;
+    font-size: 25px;
+    text-align: center;
+    color: black;
+}
+#santa {
+    align-content: center;
+    width: 200px;
+    height: 200px;
+    position: absolute;
+    top: -60px;
+    right: -70px;
+}
+.inputText {
+    color: #000000;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+.enterDiv {
+    width: 400px;
+    margin: 20px auto 20px;
+    font-size: 17px;
+    font-weight: bold;
+}
+a:hover {
+    transition: 0.2s ease-out;
+    text-decoration: 1px #0080FF underline;
+}
+a:not(:hover) {
+    transition: 0.2s ease-out;
+}
+.redStar {
+    font-size: 17px;
+    font-weight: bold;
+    color: red;
+}
+.newsDiv {
+    width: 400px;
+    height: 100%;
+    background-color: #637ad3;
+    border-radius: 25px;
+
+    text-align: center;
+}
+
+
+
+
+
+/* 키프레임 애니메이션 */
+@keyframes fadeInDown {
+    0% {
+        opacity: 0;
+        /*transform: translate3d(0, -10%, 0);*/
+    }
+    to {
+        opacity: 1;
+        /*transform: translateZ(0);*/
+    }
+}
+
+
+/*눈내리기*/
+#snowfall {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+}
+
+.snowflake {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background-color: #fff;
+    border-radius: 50%;
+    animation: snowfall linear infinite;
+    filter: drop-shadow(0 0 10px white);
+}
+
+@keyframes snowfall {
+    to {
+        transform: translateY(100vh);
+    }
+}

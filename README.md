@@ -1,4 +1,4 @@
-# VIDEO HUB
+<h1 align="center">Video Hub</h1>
 
 ## 🖥️ 프로젝트 소개
 

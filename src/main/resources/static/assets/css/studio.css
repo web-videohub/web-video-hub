@@ -1,0 +1,316 @@
+
+/* 구글 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+html {
+    width: 100%;
+    height: 100%;
+}
+header {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
+body {
+    width: 100%;
+    height: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
+.studioDiv {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+    justify-content: left;
+    align-content: center;
+    flex-direction: row;
+}
+.leftDiv {
+    width: 200px;
+    height: 100%;
+
+    position: fixed;
+    top: 70px;
+    z-index: 100;
+    padding-left: 10px;
+    padding-top: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+
+    border-right: 1px solid #969ba1;
+}
+.mainContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    /*justify-content: center;*/
+    /*align-content: center;*/
+    padding-left: 180px;
+    padding-top: 80px;
+    /*background: #8e8f8c;*/
+
+    flex-direction: column;
+}
+.mainContainer a {
+    width: 200px;
+    height: 40px;
+    background: #5eb2ff;
+    font-size: 30px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+}
+
+.home {
+    background: #dedede;
+}
+.nav-item:hover {
+    background: #ececec;
+}
+.nav-item:active {
+    background: #cccccc !important;
+}
+
+.mini {
+    width: 60px;
+    height: 30px;
+    margin-right: -5px;
+    margin-left: -2px;
+}
+
+.top {
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+
+/* 동영상 목록 스타일*/
+table {
+    width: 80%;
+    text-align: center;
+    border: 1px solid #000;
+    border-spacing: 1px;
+    font-family: 'Cairo', sans-serif;
+    margin: auto;
+}
+
+table td {
+    padding: 10px;
+    background-color: #eee;
+    border: 1px solid black;
+}
+
+table th {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+img {
+    width: 200px;
+    height: 112px;
+    object-fit: revert;
+}
+
+.video-th {
+    width: 220px;
+}
+
+
+.tablefoot {
+    padding: 0;
+    border-bottom: 3px solid #009688;
+}
+
+.loader {
+    border: 8px solid #f3f3f3;
+    border-top: 8px solid #3498db;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+    margin: 50px auto;
+    padding: 30px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+
+/* 버튼 스타일 */
+.btn-hover {
+    width: 200px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+    cursor: pointer;
+    margin: 20px;
+    height: 55px;
+    text-align:center;
+    border: none;
+    background-size: 300% 100%;
+
+    border-radius: 50px;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:hover {
+    background-position: 100% 0;
+    moz-transition: all .4s ease-in-out;
+    -o-transition: all .4s ease-in-out;
+    -webkit-transition: all .4s ease-in-out;
+    transition: all .4s ease-in-out;
+}
+
+.btn-hover:focus {
+    outline: none;
+}
+
+.btn-hover.color-9 {
+    background-image: linear-gradient(to right, #25aae1, #4481eb, #04befe, #3f86ed);
+    box-shadow: 0 4px 15px 0 rgba(65, 132, 234, 0.75);
+}
+
+.btn-hover.color-8 {
+    background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+    box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
+
+.index-side,
+.index-side2 {
+    height: 100%;
+    display: flex;
+    justify-content: start !important;
+    align-content: center;
+    flex-direction: column;
+}
+.index-side ul,
+.index-side2 ul {
+    height: 100%;
+    display: flex;
+    justify-content: start !important;
+    align-content: center;
+    flex-direction: column;
+}
+
+.home {
+    background: #dedede;
+}
+.nav-item:hover,
+.nav-item2:hover {
+    transition: 0.2s ease-out;
+    background: #ececec;
+}
+.nav-item:not(:hover),
+.nav-item2:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
+.nav-item:active,
+.nav-item2:active {
+    transition: 0.2s ease-out;
+    background: #cccccc !important;
+}
+.nav-item:not(:active),
+.nav-item2:not(:active) {
+    transition: 0.2s ease-out;
+}
+
+.nav-item2 {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.nav-item2 .lnr {
+    font-weight: bold;
+    font-size: 30px;
+}
+.nav-item2 .sideText {
+    font-weight: normal;
+    font-size: 14px;
+}
+.index-left2 {
+    width: 150px;
+    height: 100%;
+    display: none;
+
+    position: fixed;
+    top: 70px;
+    z-index: 100;
+
+    padding-top: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
+@media (max-width: 640px) {
+    .index-left2,
+    .index-side2 {
+        display: none;
+    }
+    .mainContainer {
+        padding-left: 0 !important;
+    }
+}
+
+.offcanvas-body {
+    padding-left: 10px !important;
+}
+
+input[type="checkbox"] {
+    width: 20px;
+    height: 20px;
+}
+
+/* 체크된 상태의 스타일 */
+input[type="checkbox"]:checked {
+    /* 체크된 상태일 때의 스타일 지정 */
+}
+
+.video-table {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
+.allsel {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    text-align: center;
+    flex-direction: column;
+    border-right: 0;
+}
+.allsel input {
+    margin: 0 auto;
+}
+
+/*#deleteBtn {*/
+/*    display: none;*/
+/*}*/
+
+#headerBtn2 {
+    display: none;
+}
+
+.emptyLoad {
+    text-align: center;
+    width: 500px;
+    margin: 0 auto;
+    font-family: 'Noto Sans KR', sans-serif;
+
+    font-size: 30px;
+}

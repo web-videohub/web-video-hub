@@ -1,0 +1,398 @@
+
+/* 구글 폰트 */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+header {
+    width: 100%;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
+body {
+    width: 100%;
+    /*height: 100vh;*/
+    /*height: 2000px;*/
+    overflow-x: hidden;
+
+    display: flex;
+    flex-direction: column;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
+.titleA {
+    text-decoration: none;
+    color: black;
+    padding: 0;
+    margin: 0;
+}
+.leftDiv {
+    width: 200px;
+    height: 100%;
+
+    position: fixed;
+    top: 70px;
+    z-index: 100;
+
+    padding-top: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+    display: none;
+}
+.index-left2 {
+    width: 150px;
+    height: 100%;
+
+    position: fixed;
+    top: 70px;
+    z-index: 100;
+
+    padding-top: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+    font-weight: bold;
+}
+@media (max-width: 640px) {
+    .index-left2,
+    .index-side2 {
+        display: none;
+    }
+    .mainContainer {
+        padding-left: 0 !important;
+    }
+    .videoListDiv {
+        padding-left: 80px !important;
+    }
+    .filterDiv {
+        left: 0 !important;
+    }
+}
+.channelContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: left;
+    align-content: center;
+    flex-direction: column;
+    padding-left: 250px;
+    padding-top: 150px;
+    /*margin-left:200px;*/
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.subContainer {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+}
+
+.videoListDiv {
+    width: 100%;
+    height: 100%;
+    background: #ffffff;
+    padding-top: 180px;
+    padding-left: 100px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+.videoDiv {
+    width: 370px;
+    height: 320px;
+    background-color: #f1f1f1;
+    font-family: 'Noto Sans KR', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+
+    /*width: calc(33.33% - 20px);  여백을 고려하여 3개의 열로 정렬되도록 설정 */
+    margin-bottom: 20px; /* 각 videoDiv 간의 여백 설정 */
+    box-sizing: border-box; /* 여백이 포함된 크기로 계산되도록 설정 */
+    border-radius: 10px;
+    margin-right: 20px;
+
+    position: relative;
+}
+.videoDiv:hover {
+    /*filter: drop-shadow(0 5px 10px #8e8f8c);*/
+    filter: drop-shadow(0.8rem 0.8rem 10px #8e8f8c);
+}
+.videoDiv .title:hover {
+    color: #020101;
+}
+
+.chVideo {
+    width: 100%;
+    height: 70%;
+    border-radius: 20px;
+    margin: 0 auto;
+}
+
+.chVideo img{
+    width: 100%;
+    height: 100% ;
+    object-fit: revert;
+}
+.profile {
+    width: 50px;
+    height: 50px;
+    background-color: #1e6249;
+    border-radius: 30px;
+    overflow: hidden;
+}
+
+.profile img {
+    width: 50px;
+    height: 50px;
+}
+
+.profileContainer {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+
+    position: absolute;
+    bottom: 0;
+}
+.videoInfoDiv {
+    display: flex;
+    justify-content: left;
+    flex-direction: column;
+    padding-left: 20px;
+}
+.title{
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+    padding: 0;
+}
+.uploader, .viewcount{
+    font-size: 15px;
+    color: #5c5d5c;
+}
+
+.offcanvas-body {
+    padding-left: 10px !important;
+}
+.index-side,
+.index-side2 {
+    height: 100%;
+    display: flex;
+    justify-content: start !important;
+    align-content: center;
+    flex-direction: column;
+}
+.index-side ul,
+.index-side2 ul {
+    height: 100%;
+    display: flex;
+    justify-content: start !important;
+    align-content: center;
+    flex-direction: column;
+}
+
+.home {
+    background: #dedede;
+}
+.nav-item:hover,
+.nav-item2:hover {
+    background: #ececec;
+}
+.nav-item:active,
+.nav-item2:active {
+    background: #cccccc !important;
+}
+
+.nav-item2 {
+    width: 70px;
+    height: 70px;
+    border-radius: 10px;
+    padding: 15px;
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    text-align: center;
+    margin-bottom: 20px;
+}
+.nav-item2 .lnr {
+    font-weight: bold;
+    font-size: 30px;
+}
+.nav-item2 .sideText {
+    font-weight: normal;
+    font-size: 14px;
+}
+
+.mini {
+    width: 60px;
+    height: 30px;
+    margin-right: -5px;
+    margin-left: -2px;
+}
+
+#headerBtn2 {
+    display: none;
+}
+
+.pimg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: #5eb2ff;
+    object-fit: cover;
+}
+.profileBox {
+    display: flex;
+    justify-content: left !important;
+    align-content: center;
+    flex-direction: row;
+    margin-bottom: 50px;
+}
+.channelProfile {
+    display: flex;
+    justify-content: left;
+    align-content: center;
+    flex-direction: column;
+    font-family: 'Noto Sans KR', sans-serif;
+
+    padding-left: 50px;
+    margin-bottom: 100px;
+}
+.channelName {
+    font-size: 30px;
+    font-weight: bold;
+}
+.subscribe_B {
+    width: 80px;
+    height: 40px;
+    background: black;
+    color: white;
+    border-radius: 30px;
+    border: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.studioBtn {
+    width: 170px;
+    height: 40px;
+    background: black;
+    color: white;
+    border-radius: 30px;
+    border: 0;
+    font-family: 'Noto Sans KR', sans-serif;
+    text-decoration: none;
+    text-align: center;
+    padding-top: 6px;
+}
+.chBtn:hover {
+    transition: 0.2s ease-out;
+    background: #444444;
+}
+.chBtn:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
+
+hr {
+    width: 90%;
+}
+
+.channelVideoList {
+    width: 370px;
+    height: 320px;
+    background: #f1f1f1;
+
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    flex-direction: column;
+
+    margin-bottom: 15px;
+    border-radius: 20px;
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.channelVideoList:hover {
+    transition: 0.2s ease-out;
+    filter: drop-shadow(0.3rem 0.3rem 10px #8e8f8c);
+}
+.channelVideoList:not(:hover) {
+    transition: 0.2s ease-out;
+}
+
+
+#chImg {
+    border-radius: 20px;
+    min-width: 370px;
+    max-width: 370px;
+    min-height: 224px;
+    max-height: 224px;
+}
+#chImg:hover {
+    transition: 0.2s ease-out;
+    border-radius: 0;
+}
+#chImg:not(:hover) {
+    transition: 0.2s ease-out;
+}
+.channelVideo {
+    display: flex;
+    justify-content: left;
+    align-content: center;
+    flex-direction: column;
+
+    margin-top: 0;
+}
+.miniTitle {
+    text-decoration: none;
+    color: black;
+    font-size: 18px;
+    margin-top: 10px;
+    font-weight: bold;
+}
+.miniTitle:hover {
+    transition: 0.2s ease-out;
+    text-decoration: underline;
+}
+.miniTitle:not(:hover) {
+    transition: 0.2s ease-out;
+}
+.chViewcount {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 14px;
+    margin-top: 10px;
+}
+
+.chVideoDiv {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+
+    padding-left: 70px;
+    margin-top: 30px;
+}
+.channelEmail {
+    font-family: 'Noto Sans KR', sans-serif;
+    font-size: 17px;
+    margin-bottom: 5px;
+}
+.channelAccount {
+    font-family: 'Noto Sans KR', sans-serif;
+}
+.chContainer {
+    width: 100%;
+    height: 100%;
+    padding-left: 40px;
+    padding-top: 10px;
+    display: flex;
+    justify-content: left;
+    align-content: center;
+}
+
+#headerBtn2 {
+    display: none;
+}
+.index-left2 {
+    display: none;
+}
+

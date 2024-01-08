@@ -1,0 +1,32 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.teamrocket.videohub.repository.EmotionMapper">
+
+    <insert id="save">
+        INSERT INTO tbl_emotion_check
+        (user_account, video_id, video_like, video_hate)
+        VALUES
+        (#{userAccount}, #{videoId}, #{videoLike}, #{videoHate})
+    </insert>
+
+    <select id="findOne" resultType="emotion">
+        SELECT
+        user_account, video_id, video_like, video_hate
+        FROM tbl_emotion_check
+        WHERE user_account = #{userAccount} AND video_id = #{videoId}
+    </select>
+
+    <update id="modify">
+        UPDATE tbl_emotion_check
+        SET video_like = #{videoLike}, video_hate = #{videoHate}
+        WHERE user_account = #{userAccount} AND video_id = #{videoId}
+    </update>
+
+    <delete id="delete">
+        DELETE FROM tbl_emotion_check
+        WHERE video_id = #{videoId} AND user_account = #{account}
+    </delete>
+
+</mapper>
