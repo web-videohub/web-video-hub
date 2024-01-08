@@ -207,7 +207,10 @@
                 loading = false;
                 $loader.style.visibility = "hidden";
             }
-        }, 1000)
+        }, 5
+
+
+        00)
     }
 
     let loading = false;

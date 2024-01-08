@@ -139,7 +139,7 @@
                                 </span>
                             </a>
                             <span class="chViewcount">
-                                    조회수 ${v.videoViewCount}회ㆍ${v.videoUploadDate}
+                                    조회수 ${v.videoViewCount}회ㆍ<span>${v.videoUploadDate}</span>
                             </span>
                         </div>
                     </div>
@@ -154,6 +154,14 @@
     console.log(userAccount);
     console.log(receiverAccount);
     const $subBtn = document.querySelector('.subscribe_B');
+
+    let $datediv = document.querySelectorAll('.channelVideoList');
+    $datediv.forEach(function (div) {
+        let date = div.querySelector('.chViewcount span');
+        let timestampString = date.textContent;
+        let timestamp = new Date(timestampString).getTime();
+        date.textContent = formatTimeAgo(timestamp);
+    });
 
     // 서버에 실시간으로 비동기통신을 해서 JSON을 받아오는 함수
     function fetchGetSub() {

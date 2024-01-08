@@ -212,7 +212,7 @@
                 loading = false;
                 loader.style.visibility = "hidden";
             }
-        }, 1000);
+        }, 500);
     };
     const loader = document.getElementById('loader');
     const videoListDiv = document.querySelector('.videoListDiv');

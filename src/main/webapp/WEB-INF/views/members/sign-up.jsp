@@ -82,11 +82,10 @@
 
     function setThumbnail(event) {
         let reader = new FileReader();
-
         reader.onload = function (event) {
             let img = document.createElement("img");
             img.setAttribute("src", event.target.result);
-
+            console.log(event.target.result);
             const $uploadBox = document.querySelector("div#uploadBox");
 
             while ($uploadBox.firstChild) {
@@ -97,7 +96,6 @@
             checkResultList[0] = true;
             console.log(checkResultList);
         };
-
         reader.readAsDataURL(event.target.files[0]);
     }
 
@@ -141,7 +139,6 @@
                             $idChk.innerHTML = '';
                             checkResultList[1] = true;
                             console.log(checkResultList);
-
                         }
                     });
             }
@@ -274,6 +271,7 @@
             snowfallContainer.appendChild(snowflake);
         }
     });
+
 </script>
 </body>
 </html>
