@@ -178,7 +178,6 @@ public class AppController {
         log.info("이거에용: {}", videos);
         model.addAttribute("user", user);
         model.addAttribute("vList", videos);
-
-        return "/userPage";
+        return "userPage";
     }
 }
