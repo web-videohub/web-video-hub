@@ -64,17 +64,19 @@
                     </div>
                 </div>
                 <div class="box3">
-                    <form id="messageForm" name="messageForm">
-                        <div class="form-group">
-                            <div class="input-group clearfix">
-                                <div class="bbox1">
-                                    <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>
-                                    <p>${sessionScope.login.userDisplayName}<</p>
-                                </div>
-                            </div>
-                            <div class="bbox1_1">
-                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
-
+<%--                    <form id="messageForm" name="messageForm">--%>
+<%--                        <div class="form-group">--%>
+<%--                            <div class="input-group clearfix">--%>
+<%--                                <div class="bbox1">--%>
+<%--                                    <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG"/>--%>
+<%--                                    <p>${sessionScope.login.userDisplayName}<</p>--%>
+<%--                                </div>--%>
+<%--                            </div>--%>
+<%--                            <div class="bbox1_1">--%>
+<%--                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>--%>
+<%--                            </div>--%>
+<%--                        </div>--%>
+<%--                    </form>--%>
                 <div class="video_info_bbox">
                     <p>업로드 일자: ${v.videoUploadDate}</p>
                     <p>조회수: $${v.videoViewCount}</p>
@@ -107,18 +109,18 @@
         </div>
         <div class="box2">
             <ul class="video_list_Algorithm">
-                <li>
-                    <a href="#">
-                        <div class="video_sumnail">
-                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
-                        </div>
-                        <div class="video_subinfo">
-                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
-                            <p class="bbox_text_sub">Test_user</p>
-                            <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
-                        </div>
-                    </a>
-                </li>
+<%--                <li>--%>
+<%--                    <a href="#">--%>
+<%--                        <div class="video_sumnail">--%>
+<%--                            <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">--%>
+<%--                        </div>--%>
+<%--                        <div class="video_subinfo">--%>
+<%--                            <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>--%>
+<%--                            <p class="bbox_text_sub">Test_user</p>--%>
+<%--                            <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>--%>
+<%--                        </div>--%>
+<%--                    </a>--%>
+<%--                </li>--%>
             </ul>
         </div>
     </div>
@@ -132,12 +134,16 @@
     const replyURL = '/api/v1/replies'; // 댓글과 관련된 기능을 수행하는 링크
     const emotionURL = '/api/v1/emotion'; // 이모션 링크
     const subscribeURL = '/api/v1/subscribe'; // 구독 여부 링크
+    const $subBtn = document.querySelector('.subscribe_B');
     const urlParams = new URLSearchParams(window.location.search);
     const videoId = urlParams.get('videoId'); //URL의 동영상 번호를 가져와서 저장
-    const currentAccount = '${login.userAccount}'; // 로그인한 사람
+    const currentAccount = '${sessionScope.login.userAccount}'; // 로그인한 사람
+    const receiverAccount = '${v.uploadUser}'; // 동영상 업로더 어카운트명
     const auth = '${login.userAuth}'; //로그인한 사람 권한
     const loader = document.getElementById('loader');
     const replyListDiv = document.querySelector('.chat_list');
+    const videoListDiv = document.querySelector('.video_list_Algorithm');
+    const type = '${v.videoCategory}';
     let loading = false;
     let pageNumber = 1;
     let nowPageNumber = pageNumber;
@@ -160,6 +166,32 @@
 
     const observer = new IntersectionObserver(handleIntersection, options);
 
+    function formatTimeAgo(timestamp) {
+        const currentTime = new Date();
+        const targetTime = new Date(timestamp);
+        const timeDifference = currentTime - targetTime;
+
+        const minutes = Math.floor(timeDifference / (1000 * 60));
+        const hours = Math.floor(minutes / 60);
+        const days = Math.floor(hours / 24);
+        const months = Math.floor(days / 30);
+        const years = Math.floor(days / 365);
+
+        if (years > 0) {
+            return `\${years}년 전`;
+        } else if (months > 0) {
+            return `\${months}개월 전`;
+        } else if (days > 0) {
+            return `\${days}일 전`;
+        } else if (hours > 0) {
+            return `\${hours}시간 전`;
+        } else if (minutes > 0) {
+            return `\${minutes}분 전`;
+        } else {
+            return '방금 전';
+        }
+    }
+
     document.addEventListener("DOMContentLoaded", function () {
         observer.observe(loader);
     });
@@ -173,10 +205,12 @@
 
         setTimeout(async () => {
             try {
-                const response = await fetch(`/api/v1/replies/\${videoId}?pageNumber=\${pageNumber}&pageSize=12`);
-                const newReply = await response.json();
+                const responseReply = await fetch(`/api/v1/replies/\${videoId}?pageNumber=\${pageNumber}&pageSize=12`);
+                const responseVideo = await fetch(`/loadMoreVideosDetail?pageNumber=\${pageNumber}&pageSize=12&type=` + type);
+                const newReply = await responseReply.json();
+                const newVideo = await responseVideo.json();
 
-                if (newReply.length > 0) {
+                if (newReply.length > 0 || newVideo.length > 0) {
                     newReply.forEach(reply => {
                         const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
                         console.log("reply : " + rno);
@@ -185,10 +219,10 @@
                         newItem.className = 'replyDiv';
                         newItem.setAttribute('reply-id', `\${rno}`);
                         newItem.innerHTML = `<div class="chat_list_profile">
-                                    <a href="#"><img src="${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
+                                    <a href="/userPage?channelName=\${account}"><img src="\${profile ? '/local' + profile : '/assets/img/profile.jpeg'}" height="45" width="45" alt="profile image"></a>
                                 </div>
                                 <div class="chat_list_profile_name">
-                                    <a href="#"><p>\${accountUserName}</p></a>
+                                    <a href="/userPage?channelName=\${account}"><p>\${accountUserName}</p></a>
                                 </div>
                                 <div class="chat_list_chat_text" id="chat-text-\${rno}">
                                     <p>\${text}</p>
@@ -223,6 +257,28 @@
 
                         replyListDiv.appendChild(newItem);
                     });
+                    newVideo
+                        .filter(video => video.videoId.toString() !== videoId) // 현재 보고있는 동영상은 추천동영상에서 예외처리
+                        .forEach(video => {
+                            console.log("video.videoId type : " + typeof(video.videoId));
+                            console.log("videoId type : " + typeof(videoId));
+                            if(video.videoId === videoId)
+                                return;
+                            const newItem = document.createElement('li');
+
+                            newItem.innerHTML = `<a href="showmv?videoId=\${video.videoId}">
+                        <div class="video_sumnail">
+                            <img src="/local\${video.thumbnailUrl}" alt="thumbnail"/>
+                        </div>
+                        <div class="video_subinfo">
+                            <p class="bbox_text">\${video.videoTitle}</p>
+                            <p class="bbox_text_sub">\${video.videoUploadUser}</p>
+                            <p class="bbox_text_sub">조회수 \${video.videoViewCount} · 업로드 : \${formatTimeAgo(video.videoUploadDate)}</p>
+                        </div>
+                    </a>`;
+
+                            videoListDiv.appendChild(newItem);
+                        });
 
                     pageNumber++;
 
@@ -239,15 +295,6 @@
             }
         }, 1000);
     };
-
-    /*
-        로그인한 유저 정보들 (나중에 이 주석 꼭 지울것!)
-                login.userAccount : 유저 아이디
-                login.userDisplayName : 유저닉네임
-                login.userEmail : 유저이메일
-                login.userAuth : 유저 권한
-                login.userProfile : 유저 프사
-     */
 
     function addComment() {
         const $addBtn = document.getElementById('addReply');
@@ -295,13 +342,12 @@
 
                     document.getElementById('message').value = '';
                     loading = false;
-                    loader.style.visibility = "hidden";
                     nowPageNumber = pageNumber;
                     pageNumber = 1;
                     fetchGetReplies(responseData);
                     for (i = 2; i<nowPageNumber; i++) {
                         pageNumber = i;
-                        loadData();
+                        observer.observe(loader);
                     }
                 });
         }
@@ -394,14 +440,18 @@
                 }
             })
             .then(responseResult => {
-                loading = false;
-                loader.style.visibility = "hidden";
-                nowPageNumber = pageNumber;
-                pageNumber = 1;
-                fetchGetReplies(responseResult);
-                for (i = 2; i<=nowPageNumber; i++) {
-                    pageNumber = i;
-                    loadData();
+
+                if (responseResult.length === 0)
+                    document.querySelector('.chat_list').innerHTML = '';
+                else {
+                    loading = false;
+                    nowPageNumber = pageNumber;
+                    pageNumber = 1;
+                    fetchGetReplies(responseResult);
+                    for (i = 2; i <= nowPageNumber; i++) {
+                        pageNumber = i;
+                        observer.observe(loader);
+                    }
                 }
             });
     }
@@ -458,13 +508,12 @@
             })
             .then(result => {
                 loading = false;
-                loader.style.visibility = "hidden";
                 nowPageNumber = pageNumber;
                 pageNumber = 1;
                 fetchGetReplies(result);
                 for (i = 2; i<nowPageNumber; i++) {
                     pageNumber = i;
-                    loadData();
+                    observer.observe(loader);
                 }
             });
     }
@@ -475,39 +524,156 @@
             .then(res => res.json())
             .then(replyList => {
                 console.log(replyList);
+                if(replyList.length === 0) {
+
+                }
                 renderReplies(replyList);
             })
         ;
     }
 
     // 서버에서 실시간으로 비동기통신을 해서 구독여부 JSON을 받아오는 함수
-    function fetchGetSubscribe() {
-        fetch(`\${SubscribeURL}/\${login.userAccount}/\${v.videoUploadUser}`)
+    function fetchGetSub() {
+        fetch(subscribeURL + `/${sessionScope.login.userAccount}/${v.uploadUser}`)
             .then(res => res.json())
-            .then(replyData => {
-                console.log("가져온 구독정보 : " + replyData);
-                renderSubscribes(replyData);
+            .then(flag => {
+                if (flag) {
+                    $subBtn.classList.add('chBtn2');
+                    $subBtn.style.display = 'block';
+                    $subBtn.style.width = '110px';
+                    $subBtn.textContent = '구독취소';
+                    $subBtn.style.background = '#EBEBEB';
+                    $subBtn.style.color = 'black';
+                    $subBtn.removeEventListener('click', makeSub);
+                    $subBtn.addEventListener('click', e => {
+                        fetchDeleteSub();
+                    });
+                } else {
+                    $subBtn.classList.add('chBtn');
+                    $subBtn.style.display = 'block';
+                    $subBtn.style.width = '80px';
+                    $subBtn.textContent = '구독';
+                    $subBtn.style.background = 'black';
+                    $subBtn.style.color = 'white';
+                    $subBtn.removeEventListener('click', fetchDeleteSub);
+                    $subBtn.addEventListener('click', e => {
+                        makeSub();
+                    })
+                }
+
+            })
+        ;
+    }
+
+    function fetchDeleteSub() {
+        const requestInfo = {
+            method: 'DELETE',
+            headers: {
+                'Content-Type': 'application/json',
+            }
+        };
+        fetch(subscribeURL + `/${sessionScope.login.userAccount}/${v.uploadUser}`, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    $subBtn.classList.add('chBtn');
+                    $subBtn.classList.remove('chBtn2');
+                    $subBtn.style.width = '80px';
+                    $subBtn.textContent = '구독';
+                    $subBtn.style.background = 'black';
+                    $subBtn.style.color = 'white';
+                    $subBtn.removeEventListener('click', fetchDeleteSub);
+                    $subBtn.addEventListener('click', e => {
+                        makeSub();
+                    })
+                    return res.json();
+                } else {
+                    alert('구독취소 실패!');
+                    return res.text();
+                }
             })
     }
 
-    function renderSubscribes(bool) {
-        if (bool === true) {
-            console.log("구독중");
-        } else if (bool === true) {
-            console.log("구독안되있슴");
-        } else {
-            console.log("뭐가온거임? 리턴된 값 : ", bool);
-        }
+
+    function makeSub() {
+        // 서버로 보낼 데이터
+        const payload = {
+            subSender: currentAccount,
+            subReceiver: receiverAccount
+        };
+
+        // GET방식을 제외한 요청의 정보 만들기
+        const requestInfo = {
+            method: 'POST',
+            headers: {
+                'content-type': 'application/json'
+            },
+            body: JSON.stringify(payload)
+        };
+        fetch(subscribeURL, requestInfo)
+            .then(res => {
+                if (res.status === 200) {
+                    $subBtn.classList.add('chBtn2');
+                    $subBtn.classList.remove('chBtn');
+                    $subBtn.style.width = '110px';
+                    $subBtn.textContent = '구독취소';
+                    $subBtn.style.background = '#EBEBEB';
+                    $subBtn.style.color = 'black';
+                    $subBtn.removeEventListener('click', makeSub);
+                    $subBtn.addEventListener('click', e => {
+                        fetchDeleteSub();
+                    });
+                    return res.json();
+                } else {
+                    return res.text();
+                }
+            })
+
     }
+
+    // function fetchGetEmotion() {
+    //     fetch(emotionURL + videoId)
+    //         .then(res => res.json())
+    //         .then(emotion => {
+    //             if (emotion === null) {
+    //             } else {
+    //                 if (emotion.videoLike === 1)
+    //                 $subBtn.classList.add('chBtn');
+    //                 $subBtn.style.display = 'block';
+    //                 $subBtn.style.width = '80px';
+    //                 $subBtn.textContent = '구독';
+    //                 $subBtn.style.background = 'black';
+    //                 $subBtn.style.color = 'white';
+    //                 $subBtn.removeEventListener('click', fetchDeleteSub);
+    //                 $subBtn.addEventListener('click', e => {
+    //                     makeEmotion();
+    //                 });
+    //             }
+    //         }
+    // );
+    // }
+
+    // function makeEmotion() {
+    //     // 서버로 보낼 데이터
+    //     const payload = {
+    //         userAccount: currentAccount,
+    //         videoId : videoId,
+    //         videoLike: 1,
+    //         videoHate: 0
+    //     };
 
     (() => {
         // 서버에서 댓글 불러오기
         // fetchGetReplies(videoId);
+
+        // 구독여부 확인하기
+        fetchGetSub();
 
         // 댓글 등록 이벤트 핸들러
         addComment();
     })();
 </script>
 <script src="./assets/js/testDropmenu.js"></script>
+    </div>
+</div>
 </body>
 </html>
