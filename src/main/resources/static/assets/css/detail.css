@@ -104,11 +104,11 @@ li {
     height: 45px;
 }
 
-/* video_review_btn_o .subscribe_B: 구독 버튼 */
+/* video_review_btn_o .chBtn: 구독 버튼 */
 .video_review_btn_o {
     float: left;
 }
-.video_user_bbox .subscribe_B {
+.chBtn {
     background-color: #000000;
     color: #FFFFFF;
     border-radius: 20px;
@@ -118,9 +118,19 @@ li {
     margin-left: 10px;
     float: left;
 }
-.video_user_bbox .subscribe_B:hover {
-    background-color: #272727;
-    color: #FFFFFF;
+.chBtn:hover, .chBtn-hover {
+    transition: 0.2s ease-out;
+    background: #444444;
+}
+.chBtn:not(:hover), .chBtn2:not(.chBtn-hover) {
+    transition: 0.2s ease-out;
+}
+.chBtn2:hover, .chBtn2-hover {
+    transition: 0.2s ease-out;
+    background: #444444;
+}
+.chBtn2:not(:hover), .chBtn2:not(.chBtn2-hover) {
+    transition: 0.2s ease-out;
 }
 
 /* video_review_btn_t .like_B, .hate_B, .share_B: 좋아요, 싫어요, 공유 버튼 */
