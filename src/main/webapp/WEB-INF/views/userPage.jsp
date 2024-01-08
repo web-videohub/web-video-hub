@@ -106,21 +106,21 @@
 
         </ul>
     </div>
-    <div class="channelContainer">
-        <div class="profileBox">
-            <img src="/local${user.channelProfile}" alt="profile image" class="pimg"/>
-            <div class="channelProfile">
-                <p class="channelName">${user.channelName}</p>
-<%--                <p class="channelName">김다빈</p>--%>
-                <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
-<%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
-                <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
-                    <button type="button" class="subscribe_B">구독</button>
-                </c:if>
-                <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
-                    <a href="/studio" class="studioBtn chBtn">스튜디오</a>
-                </c:if>
-            </div>
+</div>
+<div class="channelContainer">
+    <div class="profileBox">
+        <img src="/local${user.channelProfile}" alt="profile image" class="pimg"/>
+        <div class="channelProfile">
+            <p class="channelName">${user.channelName}</p>
+            <%--                <p class="channelName">김다빈</p>--%>
+            <p class="channelAccount">@${user.channelAccount} ＊ 구독자 ${user.subCount}명 ＊ 동영상 ${user.videoCount}개</p>
+            <%--                <p class="channelAccount">@kimdaveen ㆍ 구독자 0명 ㆍ 동영상 0개</p>--%>
+            <c:if test="${sessionScope.login.userAccount ne user.channelAccount}">
+                <button type="button" class="subscribe_B">구독</button>
+            </c:if>
+            <c:if test="${sessionScope.login.userAccount eq user.channelAccount}">
+                <a href="/studio" class="studioBtn chBtn">스튜디오</a>
+            </c:if>
         </div>
     </div>
     <span>채널 최신 동영상</span>
@@ -137,8 +137,8 @@
                                 <span class="chTitle" data-videoId="${v.videoId}">
                                         ${v.videoTitle}
                                 </span>
-                            </a>
-                            <span class="chViewcount">
+                        </a>
+                        <span class="chViewcount">
                                     조회수 ${v.videoViewCount}회ㆍ<span>${v.videoUploadDate}</span>
                             </span>
                     </div>
