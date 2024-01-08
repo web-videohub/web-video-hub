@@ -47,14 +47,18 @@
 <div class="container">
     <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
         <div class="box1">
-            <video src="/local${v.videoUrl}"
-                   controls width="auto" height="auto">
-            </video>
+            <div class="vvvv">
+                <video src="/local${v.videoUrl}"
+                       controls width="auto" height="auto">
+                </video>
+            </div>
             <!-- video_info, video_info_bbox는 box1 안에 위치 해 있어야 한다.-->
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>
                 <div class="video_user_bbox">
-                    <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}" alt="profile image" class="profileIMG" height="45" width="45"/></a>
+                    <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}"
+                                                                         alt="profile image" class="profileIMG"
+                                                                         height="45" width="45"/></a>
                     <div class="video_info_user_bbox">
                         <a href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
                         <p>구독자 ${v.uploadUserSubscribe}명</p>
@@ -63,7 +67,8 @@
                         <button type="button" class="subscribe_B">구독</button>
                     </div>
                     <div class="video_review_btn_t">
-                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}</button>
+                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}
+                        </button>
                         <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
                         <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                     </div>
@@ -79,11 +84,13 @@
                     <div class="form-group">
                         <div class="input-group clearfix">
                             <div class="bbox1">
-                                <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG" height="45" width="45"/>
+                                <img src="/local${sessionScope.login.userProfile}" alt="profile image"
+                                     class="profileIMG" height="45" width="45"/>
                                 <p>${sessionScope.login.userDisplayName}</p>
                             </div>
                             <div class="bbox1_1">
-                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
+                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off"
+                                          class="form-control"></textarea>
                             </div>
                         </div>
                         <div class="bbox2">
@@ -264,7 +271,7 @@
                     newVideo
                         .filter(video => video.videoId.toString() !== videoId) // 현재 보고있는 동영상은 추천동영상에서 예외처리
                         .forEach(video => {
-                            if(video.videoId === videoId)
+                            if (video.videoId === videoId)
                                 return;
                             const newItem = document.createElement('li');
 
@@ -524,7 +531,7 @@
             .then(res => res.json())
             .then(replyList => {
                 console.log(replyList);
-                if(replyList.length === 0) {
+                if (replyList.length === 0) {
 
                 }
                 renderReplies(replyList);
@@ -661,7 +668,7 @@
         // 서버로 보낼 데이터
         const payload = {
             userAccount: currentAccount,
-            videoId : videoId,
+            videoId: videoId,
             videoLike: videoLike,
             videoHate: videoHate
         };
@@ -717,7 +724,7 @@
             // 좋아요를 눌렀을 때 이벤트
             const payload = {
                 userAccount: currentAccount,
-                videoId : videoId,
+                videoId: videoId,
                 videoLike: videoLike,
                 videoHate: videoHate
             };
@@ -750,7 +757,7 @@
             // 싫어요를 눌렀을 때 이벤트
             const payload = {
                 userAccount: currentAccount,
-                videoId : videoId,
+                videoId: videoId,
                 videoLike: videoLike,
                 videoHate: videoHate
             };
@@ -783,7 +790,7 @@
     <%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
     const $replyTextarea = document.getElementById('message');
 
-    if(`${sessionScope.login == null}`) {
+    if (`${sessionScope.login == null}`) {
         $replyTextarea.disabled = true;
         $replyTextarea.placeholder = "로그인 후 댓글작성이 가능합니다.";
     }
@@ -793,11 +800,11 @@
         // fetchGetReplies(videoId);
 
         // 구독여부 확인하기
-        if(currentAccount)
+        if (currentAccount)
             fetchGetSub();
 
         // 좋아요 / 싫어요 상태 불러오기
-        if(currentAccount)
+        if (currentAccount)
             fetchGetEmotion();
 
         // 댓글 등록 이벤트 핸들러
