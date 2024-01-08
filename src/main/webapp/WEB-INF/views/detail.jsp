@@ -8,7 +8,7 @@
     <%--    <title>영상 화면</title>--%>
     <title>${video.videoTitle}</title>
 
-    <link rel="stylesheet" href="/assets/css/detail.css">
+    <link rel="stylesheet" href="/assets/css/detail.css?after">
 
     <%--    icon    --%>
     <link rel="stylesheet" href="https://cdn.linearicons.com/free/1.0.0/icon-font.min.css">
@@ -46,6 +46,7 @@
             <video src="/local${v.videoUrl}"
                    controls width="auto" height="auto">
             </video>
+            <!-- video_info, video_info_bbox는 box1 안에 위치 해 있어야 한다.-->
             <div class="video_info">
                 <h1>${v.videoTitle}</h1>
                 <div class="video_user_bbox">
@@ -63,7 +64,6 @@
                         <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
                     </div>
                 </div>
-
                 <div class="video_info_bbox">
                     <p>업로드 일자: ${v.uploadDate}</p>
                     <p>조회수: ${v.videoViewCount}</p>
@@ -78,14 +78,15 @@
                                 <img src="/local${sessionScope.login.userProfile}" alt="profile image" class="profileIMG" height="45" width="45"/>
                                 <p>${sessionScope.login.userDisplayName}</p>
                             </div>
+                            <div class="bbox1_1">
+                                <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
+                            </div>
                         </div>
-                        <div class="bbox1_1">
-                            <textarea id="message" placeholder="댓글 추가..." autocomplete="off" class="form-control"></textarea>
+                        <div class="bbox2">
+                            <button type="button" class="review_B" id="addReply">댓글</button>
                         </div>
                     </div>
-                    <div class="bbox2">
-                        <button type="button" class="review_B" id="addReply">댓글</button>
-                    </div>
+
                 </form>
             </div>
             <div id="replyData">
@@ -96,6 +97,7 @@
         </div>
     <div class="box2">
         <ul class="video_list_Algorithm">
+            <!-- 추천 영상 리스트가 생성되는 부분이오니 어떠한 첨가도 금함.-->
         </ul>
     </div>
 </div>
@@ -214,7 +216,8 @@
                                             </div>
                                         </td>
                                         <td>
-                                            <div class="review_btns_two">`;
+                                            <div class="review_btns_two">
+                                                `;
 
                         if (auth === 'ADMIN' || currentAccount === account) {
                             newItem.innerHTML += `<button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
@@ -365,7 +368,8 @@
                     </div>
                 </td>
                 <td>
-                    <div class="review_btns_two"> `;
+                    <div class="review_btns_two">
+                        `;
                 if(auth === 'ADMIN' || currentAccount === account) {
                     tag += `
                         <button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>

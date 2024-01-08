@@ -81,6 +81,12 @@ li {
     margin-right: 10px;
 }
 
+.video_user_bbox a img {
+    float: left;
+    text-decoration-line: none;
+    color: #000000;
+}
+
 .profile {
     display: flex;
     flex-direction: row;
@@ -245,6 +251,7 @@ li {
     background-color: #FFFFFF;
     padding-left: 0px;
     width: 100%;
+    margin-top: 40px;
 }
 .chat_list li {
     margin-top: 20px;
@@ -355,9 +362,8 @@ li {
 /* 댓글 전송 버튼 div */
 .bbox2 {
     float: right;
-    margin-right: 30px;
     position: relative;
-    top: -40px;
+    top: -15px;
 }
 
 /* 댓글 전송 버튼 */
@@ -452,3 +458,18 @@ li {
     background-color: #000;
 }
 
+/* 새로 추가할 CSS */
+.replyDiv {
+    width: 100%;
+    height: auto;
+    margin-top: 30px;
+}
+
+.video_subinfo {
+    margin-bottom: 30px;
+}
+
+.video_sumnail img{
+    width: 168px;
+    height: 94px;
+}
