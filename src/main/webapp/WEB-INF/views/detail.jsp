@@ -48,7 +48,7 @@
     <div class="container_group clearfix"> <!-- clearfix 클래스 추가 -->
         <div class="box1">
             <video src="/local${v.videoUrl}"
-                   controls width="auto" height="auto">
+                   controls width="100%" height="70%">
             </video>
             <!-- video_info, video_info_bbox는 box1 안에 위치 해 있어야 한다.-->
             <div class="video_info">
