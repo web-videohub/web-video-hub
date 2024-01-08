@@ -102,7 +102,7 @@
                         <hr>
                         <li><a class="dropdown-item" href="/userPage?channelName=${sessionScope.login.userAccount}">내 채널 보기</a></li>
                         <li><a class="dropdown-item" href="/setting">설정</a></li>
-                        <li><a class="dropdown-item" href="#">로그아웃</a></li>
+                        <li><a class="dropdown-item" href="/log-out">로그아웃</a></li>
                     </ul>
                 </div>
             </c:if>
@@ -117,6 +117,6 @@
         let $searchInput = document.querySelector('.searchInput');
         $searchBtn.addEventListener('click', e=> {
             console.log($searchInput.value);
-        })
+        });
     </script>
 </body>

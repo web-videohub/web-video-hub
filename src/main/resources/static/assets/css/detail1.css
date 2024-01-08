@@ -1,0 +1,39 @@
+#headerBtn2 {
+    display: none;
+}
+
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.videoInfoContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    width: 80%;
+}
+
+.videoDiv {
+
+}
+
+.videoContainer {
+
+}
+
+.video-box {
+
+}
+
+.video-box video {
+
+}
+
+.mainContainer .recommendVideo {
+    height: 100%;
+    background-color: #000;
+}

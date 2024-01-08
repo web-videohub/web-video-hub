@@ -3,6 +3,7 @@ package com.teamrocket.videohub.controller;
 import com.teamrocket.videohub.dto.response.UserInfoResponseDTO;
 import com.teamrocket.videohub.dto.response.VideoDetailResponseDTO;
 import com.teamrocket.videohub.entity.Video;
+import com.teamrocket.videohub.repository.VideoMapper;
 import com.teamrocket.videohub.services.MemberService;
 import com.teamrocket.videohub.services.VideoService;
 import lombok.AllArgsConstructor;
@@ -24,6 +25,7 @@ import java.util.List;
 public class AppController {
 
     private final VideoService videoService;
+    private final VideoMapper videoMapper;
     private final MemberService memberService;
 
     @GetMapping("/")
@@ -37,15 +39,14 @@ public class AppController {
       //  log.error("videos : {}", videos);
         return "index";
     }
-
-    @GetMapping("/loadMoreVideosSub")
+    @GetMapping("/loadMoreVideos")
     @ResponseBody
-    public ResponseEntity<List<Video>> loadMoreVideosSub(
+    public ResponseEntity<List<Video>> loadMoreVideos(
             @RequestParam(defaultValue = "1") int pageNumber,
             @RequestParam(defaultValue = "12") int pageSize,
-            String type, String account
+            String type
     ) {
-        List<Video> videos = videoService.getVideosSub(pageSize, pageNumber, type, account);
+        List<Video> videos = videoService.getVideos(pageSize, pageNumber, type);
         log.warn("구독한 채널의 영상들 : {}", videos);
         return ResponseEntity.ok(videos);
     }
@@ -64,7 +65,26 @@ public class AppController {
         return ResponseEntity.ok(videos);
     }
 
+    @GetMapping("/loadMyVideoInfo")
+    @ResponseBody
+    public ResponseEntity<List<Video>> loadMyVideoInfo(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize,
+            String type,
+            String account
+    ) {
+        List<Video> mine = videoService.findMine(pageSize, pageNumber, type, account);
+        log.info("mine : {}", mine);
 
+        return ResponseEntity.ok(mine);
+    }
+
+    @DeleteMapping("/delete-checked-video")
+    public ResponseEntity<?> deleteVideos(@RequestBody List<Integer> videoIds) {
+        log.info("요청 옴?");
+        videoMapper.deleteVideos(videoIds);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping("/showmv")
     public String showmv(Model model, int videoId) {
@@ -80,21 +100,25 @@ public class AppController {
     }
 
     @GetMapping("/search")
-    public String search(String keyword, Model model,
-                         @RequestParam(defaultValue = "1") int pageNumber,
-                         @RequestParam(defaultValue = "16") int pageSize,
-                         HttpSession session) {
+    public String search(String keyword, Model model) {
         log.info("/search Page: GET! {}", keyword);
-        List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, keyword);
-
-        log.error("videos : {}", videos);
-        model.addAttribute("vList", videos);
-        log.info("이거보세ㅐㅇ쇼!!!  :" + videos.toString());
         model.addAttribute("keyword", keyword);
-
-        log.error("vList : {}", videos);
-
+        if (keyword.isEmpty()) {
+            return "/index";
+        }
         return "/search";
+    }
+
+    @GetMapping("/loadSearch")
+    @ResponseBody
+    public ResponseEntity<List<Video>> loadMoreVideosSearch(
+            @RequestParam(defaultValue = "1") int pageNumber,
+            @RequestParam(defaultValue = "12") int pageSize,
+            String type, String keyword
+    ) {
+        List<Video> videos = videoService.getVideoSearch(pageSize, pageNumber, type, keyword);
+        log.info("검색된 영상들: {}", videos);
+        return ResponseEntity.ok(videos);
     }
 
     @RequestMapping("/setting")

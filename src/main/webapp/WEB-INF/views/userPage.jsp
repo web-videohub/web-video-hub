@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/assets/css/userPage.css">
-    <title>${channelName}님의 페이지</title>
+    <title>${user.channelName}님의 채널</title>
 </head>
 <body>
 <%-- css 모음 --%>
@@ -252,17 +252,6 @@
                 }
             })
     }
-
-    // const $CancelBtn = document.getElementById('cancel');
-    // $CancelBtn.addEventListener('click', e => {
-    //
-    // });
-    // // 구독을 이미 한 사람이라면..
-    // $subBtn.style.width = '110px';
-    // $subBtn.textContent = '구독취소';
-    // $subBtn.setAttribute("id", "cancel");
-    // // 구독을 안 한 사람이라면..
-
 
 
 

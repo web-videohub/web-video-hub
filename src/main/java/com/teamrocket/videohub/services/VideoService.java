@@ -41,9 +41,14 @@ public class VideoService {
         return videoMapper.findOne(videoId);
     }
 
-    public List<Video> getVideoSearch(int pageSize, int pageNumber, String keyword) {
+    public List<Video> getVideoSearch(int pageSize, int pageNumber, String type, String keyword) {
         int offset = (pageNumber - 1) * pageSize;
-        return videoMapper.findSearch(pageSize, offset, keyword);
+        return videoMapper.findSearch(pageSize, offset, type, keyword);
+    }
+
+    public List<Video> findMine(int pageSize, int pageNumber, String type, String account) {
+        int offset = (pageNumber - 1) * pageSize;
+        return videoMapper.findMyVideo(pageSize, offset, type, account);
     }
 
     public List<Video> getChannelVideos(int pageSize, int pageNumber, String type, String channelName) {

@@ -51,6 +51,13 @@
         <if test="type == 'email'">
             WHERE user_email = #{keyword}
         </if>
+        <if test="type =='displayName'">
+            WHERE user_display_name = #{keyword}
+<!--            AND user_display_name = user_display_name-->
+        </if>
+        <if test="type == 'currentName'">
+            WHERE user_display_name = user_display_name
+        </if>
     </select>
 
     <select id="isConsistent" resultType="boolean">
@@ -59,6 +66,13 @@
         WHERE user_account = #{account} AND user_email = #{email}
     </select>
 
+
+    <update id="modifyPassword">
+        update tbl_member
+        set user_password = #{password}
+        where user_account = #{account}
+    </update>
+      
     <update id="upSubCount">
         UPDATE tbl_member
         SET user_subscribe = user_subscribe + 1
@@ -69,5 +83,11 @@
         UPDATE tbl_member
         SET user_subscribe = user_subscribe - 1
         WHERE user_account = #{account}
+    </update>
+
+    <update id="updateNickname">
+        update tbl_member
+        set user_display_name = #{nickname}
+        where user_account = #{account}
     </update>
 </mapper>

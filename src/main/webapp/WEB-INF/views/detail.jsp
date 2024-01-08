@@ -27,8 +27,12 @@
         }
 
         @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
         }
     </style>
 
@@ -89,9 +93,21 @@
 
                 </form>
             </div>
-            <div id="replyData">
-                <ul class="chat_list">
-                    <%-- 이 부분은 li가 생성되는 부분이므로 어떠한 첨가도 금함.--%>
+            <div class="box2">
+                <ul class="video_list_Algorithm">
+                    <li>
+                        <a href="#">
+                            <!-- 여기에 img를 대체할 수 있는 데이터 값을 넣어주세요! -->
+                            <div class="video_sumnail">
+                                <img src="https://i.ytimg.com/vi/1xaPoq9ovyI/hqdefault.jpg?sqp=-oaymwEbCKgBEF5IVfKriqkDDggBFQAAiEIYAXABwAEG&amp;rs=AOn4CLAW3tl-dautPg_SczhQwLbRix2YFw">
+                            </div>
+                            <div class="video_subinfo">
+                                <p class="bbox_text">[테스트용 제목] 알고보니 지구멸망이 24시간 남았다?</p>
+                                <p class="bbox_text_sub">Test_user</p>
+                                <p class="bbox_text_sub">조회수 ? · 업로드 : ?</p>
+                            </div>
+                        </a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -104,6 +120,7 @@
 </div>
 
 <div id="loader" class="loader" style="text-align: center; visibility: hidden"></div>
+
 
 <!-- 드롭다운 메뉴, 댓글 테스트, 무한 스크롤 자바스크립트 코드 -->
 <script>
@@ -342,7 +359,7 @@
                     nowPageNumber = pageNumber;
                     pageNumber = 1;
                     fetchGetReplies(responseData);
-                    for (i = 2; i<nowPageNumber; i++) {
+                    for (i = 2; i < nowPageNumber; i++) {
                         pageNumber = i;
                         observer.observe(loader);
                     }
@@ -354,8 +371,8 @@
 
         let tag = '';
 
-        if(replyList !== null && replyList.length > 0) {
-            for(let reply of replyList) {
+        if (replyList !== null && replyList.length > 0) {
+            for (let reply of replyList) {
 
                 const {rno, text, regDate, videoId, account, accountUserName, profile} = reply
 
@@ -389,7 +406,7 @@
                 </td>
                 <td>
                     <div class="review_btns_two"> `;
-                if(auth === 'ADMIN' || currentAccount === account) {
+                if (auth === 'ADMIN' || currentAccount === account) {
                     tag += `
                         <button type="button" onclick="toggleDropdown(this)" class="dropbox_bb" data-comment-id="\${rno}">...</button>
                         <div id="myDropdown-\${rno}" class="dropdown-content">
@@ -421,7 +438,7 @@
         // console.log("rno = " + rno);
 
 
-        if(!confirm('댓글을 삭제하시겠습니까?')) return;
+        if (!confirm('댓글을 삭제하시겠습니까?')) return;
 
         const requestInfo = {
             method: 'DELETE'
@@ -437,7 +454,6 @@
                 }
             })
             .then(responseResult => {
-
                 if (responseResult.length === 0)
                     document.querySelector('.chat_list').innerHTML = '';
                 else {
@@ -488,7 +504,7 @@
         const requestInfo = {
             method: 'PUT',
             headers: {
-                'content-type' : 'application/json'
+                'content-type': 'application/json'
             },
             body: JSON.stringify(payload)
         };
@@ -508,7 +524,7 @@
                 nowPageNumber = pageNumber;
                 pageNumber = 1;
                 fetchGetReplies(result);
-                for (i = 2; i<nowPageNumber; i++) {
+                for (i = 2; i < nowPageNumber; i++) {
                     pageNumber = i;
                     observer.observe(loader);
                 }
@@ -793,6 +809,19 @@
         addComment();
     })();
 </script>
-<script src="./assets/js/testDropmenu.js"></script>
+
+<%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
+<script>
+    const $replyTextarea = document.getElementById('message');
+
+    if(`${sessionScope.login == null}`) {
+        $replyTextarea.disabled = true;
+        $replyTextarea.placeholder = "로그인 후 댓글작성이 가능합니다.";
+    }
+
+    <!-- 드롭다운 메뉴, 댓글 테스트 자바스크립트 코드 -->
+    <script src="./assets/js/testDropmenu.js"></script>
+    <script src="./assets/js/testReviewChat.js"></script>
+    <script src="./assets/js/testUpdateChat.js"></script>
 </body>
 </html>

@@ -17,7 +17,7 @@ import javax.servlet.http.HttpSession;
 import static com.teamrocket.videohub.services.LoginResult.*;
 import static com.teamrocket.videohub.utils.LoginUtils.LOGIN_KEY;
 
-@Service
+@Service 
 @Slf4j
 @RequiredArgsConstructor
 public class MemberService {
@@ -84,6 +84,10 @@ public class MemberService {
         return memberMapper.isConsistent(account, email);
     }
 
+    public boolean modifyPassword(String account, String newPassword) {
+        return memberMapper.modifyPassword(account, encoder.encode(newPassword));
+    }
+
     public UserInfoResponseDTO getChannelInfo(String channelName) {
         Member member = memberMapper.findName(channelName);
         Member video = memberMapper.countVideo(channelName);
@@ -104,4 +108,9 @@ public class MemberService {
         return dto;
 //        return memberMapper.findMember();
     }
+
+    public boolean updateNickname(String account, String nickname) {
+        return memberMapper.updateNickname(account, nickname);
+    }
+
 }
