@@ -59,7 +59,7 @@
 
                     <div class="rightContainer">
                         <a href="/userPage?channelName=${v.uploadUser}"><img src="/local${v.uploadUserProfileImage}"
-                                                                             alt="profile image" class="profileIMG"
+                                                                             alt="profile image" class="profileIMG profileIMGg"
                                                                              height="45" width="45"/></a>
                         <div class="video_info_user_bbox">
                             <a class="detailName" href="/userPage?channelName=${v.uploadUser}">${v.uploadUserDisplayName}</a>
@@ -72,7 +72,7 @@
                         </c:if>
                     </div>
                     <div class="video_review_btn_t">
-                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up"></span>${v.videoLike}
+                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up videoThumb"></span>${v.videoLike}
                         </button>
                         <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
                         <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
@@ -89,9 +89,14 @@
                     <div class="form-group">
                         <div class="input-group clearfix">
                             <div class="bbox1">
-                                <img src="/local${sessionScope.login.userProfile}" alt="profile image"
-                                     class="profileIMG" height="45" width="45"/>
-                                <p>${sessionScope.login.userDisplayName}</p>
+                                <c:if test="${sessionScope.login != null}">
+                                    <img src="/local${sessionScope.login.userProfile}" alt="profile image"
+                                         class="profileIMG profileIMGg" height="45" width="45"/>
+                                </c:if>
+                                <c:if test="${sessionScope.login == null}">
+                                    <img src="/assets/img/profile.jpeg" alt="profile image"
+                                         class="profileIMG profileIMGg" height="45" width="45"/>
+                                </c:if>
                             </div>
                             <div class="bbox1_1">
                                 <textarea id="message" placeholder="로그인 후 댓글작성이 가능합니다." autocomplete="off"
@@ -286,12 +291,12 @@
 
                             newItem.innerHTML = `<a href="showmv?videoId=\${video.videoId}">
                         <div class="video_sumnail">
-                            <img src="/local\${video.thumbnailUrl}" alt="thumbnail" style="float: left; width: 168px; height: 94px;"/>
+                            <img src="/local\${video.thumbnailUrl}" alt="thumbnail" style="float: left; width: 168px; height: 94px; border-radius: 10px"/>
                         </div>
                         <div class="video_subinfo">
                             <p class="bbox_text">\${video.videoTitle}</p>
-                            <p class="bbox_text_sub">\${video.videoUploadUser}</p>
-                            <p class="bbox_text_sub">조회수 \${video.videoViewCount} · 업로드 : \${formatTimeAgo(video.uploadDate)}</p>
+                            <p class="bbox_text_sub">\${video.userDisplayName}</p>
+                            <p class="bbox_text_sub">조회수 \${video.videoViewCount}회 · \${formatTimeAgo(video.uploadDate)}</p>
                         </div>
                     </a>`;
 

@@ -50,28 +50,38 @@
                 </a>
             </li>
             <hr>
-            <li class="nav-item">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                    <span class="lnr lnr-user"></span>
-                    내 채널
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/studio">
-                    <img class="mini" src="/assets/img/miniHub.png" alt="">
-                    스튜디오
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/setting">
-                    <span class="lnr lnr-cog"></span>
-                    설정
-                </a>
-            </li>
-
+            <c:if test="${sessionScope.login != null}">
+                <li class="nav-item">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">나 ></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                        <span class="lnr lnr-user"></span>
+                        내 채널
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/studio">
+                        <img class="mini" src="/assets/img/miniHub.png" alt="">
+                        스튜디오
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="/setting">
+                        <span class="lnr lnr-cog"></span>
+                        설정
+                    </a>
+                </li>
+            </c:if>
+            <c:if test="${sessionScope.login == null}">
+                <div class="left-login-btn">
+                    <p>로그인하면 동영상에 좋아요를 표시하고 댓글을 달거나 구독할 수 있습니다.</p>
+                    <a class="login" href="/login">
+                        <span class="lnr lnr-user"></span>
+                        로그인
+                    </a>
+                </div>
+            </c:if>
         </ul>
     </div>
 </div>
@@ -90,18 +100,20 @@
                     <span class="sideText">구독</span>
                 </a>
             </li>
-            <li class="nav-item2">
-                <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
-                    <span class="lnr lnr-user"></span><br>
-                    <span class="sideText">나</span>
-                </a>
-            </li>
-            <li class="nav-item2">
-                <a class="nav-link" href="/setting">
-                    <span class="lnr lnr-cog"></span><br>
-                    <span class="sideText">설정</span>
-                </a>
-            </li>
+            <c:if test="${sessionScope.login != null}">
+                <li class="nav-item2">
+                    <a class="nav-link" href="/userPage?channelName=${sessionScope.login.userAccount}">
+                        <span class="lnr lnr-user"></span><br>
+                        <span class="sideText">나</span>
+                    </a>
+                </li>
+                <li class="nav-item2">
+                    <a class="nav-link" href="/setting">
+                        <span class="lnr lnr-cog"></span><br>
+                        <span class="sideText">설정</span>
+                    </a>
+                </li>
+            </c:if>
 
         </ul>
     </div>

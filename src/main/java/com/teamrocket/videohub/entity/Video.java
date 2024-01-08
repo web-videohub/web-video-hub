@@ -63,6 +63,7 @@ public class Video {
         this.videoUrl = rs.getString("video_url");
         this.userProfileImage = rs.getString("user_profile_image");
         this.replyCount = rs.getInt("reply_count");
+        this.userDisplayName = rs.getString("user_display_name");
     }
 
     private void timeFormat() {

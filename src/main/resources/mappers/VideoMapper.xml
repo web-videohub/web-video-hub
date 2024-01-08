@@ -32,7 +32,8 @@
         V.video_id, V.video_upload_date, V.video_upload_user,
         V.video_title, V.video_content, V.video_like,
         V.video_category, V.video_view_count, V.video_url,
-        M.user_display_name, M.user_profile_image, M.user_subscribe
+        M.user_display_name, M.user_profile_image, M.user_subscribe,
+        m.user_subscribe
         FROM tbl_video V
         JOIN tbl_member M
         ON V.video_upload_user = M.user_account
@@ -113,7 +114,8 @@
 
     <select id="findMyVideo" resultType="com.teamrocket.videohub.entity.Video">
         select v.video_title, v.video_view_count, v.video_upload_date,
-        v.thumbnail_url, v.video_id, count(r.reply_no) as reply_count
+        v.thumbnail_url, v.video_id, count(r.reply_no) as reply_count,
+        v.video_like, v.video_hate
         from tbl_video v
         left join tbl_reply r
         on v.video_id = r.video_id
@@ -168,7 +170,7 @@
         SELECT
         v.video_title, v.video_upload_user,
         v.video_view_count, v.video_upload_date,
-        m.user_profile_image, v.thumbnail_url, v.video_id
+        m.user_profile_image, v.thumbnail_url, v.video_id, m.user_display_name
         FROM tbl_video v
         JOIN tbl_member m ON v.video_upload_user = m.user_account
         ORDER BY
