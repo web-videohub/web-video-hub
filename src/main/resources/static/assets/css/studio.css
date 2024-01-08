@@ -300,3 +300,7 @@ input[type="checkbox"]:checked {
 #deleteBtn {
     display: none;
 }
+
+#headerBtn2 {
+    display: none;
+}
