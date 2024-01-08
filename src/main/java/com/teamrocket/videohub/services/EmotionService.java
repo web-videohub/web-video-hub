@@ -44,30 +44,38 @@ public class EmotionService {
             throw new SQLException("이모션 저장 실패!");
         }
 
-        if (dto.getVideoLike() == 1)
+        if (dto.getVideoLike() == 1) {
             videoMapper.upLikeCount(dto.getVideoId());
-        else if (dto.getVideoHate() == 1)
+            log.info("좋아요 수 증가");
+        }
+        else if (dto.getVideoHate() == 1) {
             videoMapper.upHateCount(dto.getVideoId());
+            log.info("싫어요 수 증가");
+        }
     }
 
     public void modify(EmotionPostRequestDTO dto) throws Exception{
         Emotion emotion = emotionMapper.findOne(dto.getVideoId(), dto.getAccount());
 
         emotionMapper.modify(dto.getVideoId(), dto.getAccount(), dto.getVideoLike(), dto.getVideoHate());
-        if (emotion.getVideoLike() == 1)
+        if (emotion.getVideoLike() == 1) {
             videoMapper.downLikeCount(emotion.getVideoId());
-        else if (emotion.getVideoHate() == 1)
+            videoMapper.upHateCount(emotion.getVideoId());
+        }
+        else if (emotion.getVideoHate() == 1) {
             videoMapper.downHateCount(dto.getVideoId());
+            videoMapper.upLikeCount(emotion.getVideoId());
+        }
     }
 
-    public boolean delete(int videoId, String userAccount) {
+    public boolean delete(int videoId, String account) {
 
-        Emotion emotion = emotionMapper.findOne(videoId, userAccount);
+        Emotion emotion = emotionMapper.findOne(videoId, account);
         if (emotion.getVideoLike() == 1)
             videoMapper.downLikeCount(emotion.getVideoId());
         else if(emotion.getVideoHate() == 1)
             videoMapper.downHateCount(emotion.getVideoId());
 
-        return emotionMapper.delete(videoId, userAccount);
+        return emotionMapper.delete(videoId, account);
     }
 }

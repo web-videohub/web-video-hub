@@ -25,8 +25,8 @@
     </update>
 
     <delete id="delete">
-        DELETE tbl_emotion_check
-        WHERE video_id = #{videoId} AND user_account = #{userAccount}
+        DELETE FROM tbl_emotion_check
+        WHERE video_id = #{videoId} AND user_account = #{account}
     </delete>
 
 </mapper>

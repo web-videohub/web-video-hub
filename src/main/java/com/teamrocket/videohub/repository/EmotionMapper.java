@@ -11,5 +11,5 @@ public interface EmotionMapper {
 
     boolean modify(int videoId, String userAccount, int videoLike, int videoHate);
 
-    boolean delete(int videoId, String userAccount);
+    boolean delete(int videoId, String account);
 }
