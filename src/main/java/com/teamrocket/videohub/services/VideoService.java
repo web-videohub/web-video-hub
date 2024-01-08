@@ -27,7 +27,9 @@ public class VideoService {
 
     public List<Video> getVideos(int pageSize, int pageNumber, String type) {
         int offset = (pageNumber - 1) * pageSize;
-        return videoMapper.findAll(pageSize, offset, type);
+        List<Video> videos = videoMapper.findAll(pageSize, offset, type);
+
+        return lengthLimit(videos);
     }
 
     public Video getVideo(int videoId) {
@@ -47,22 +49,46 @@ public class VideoService {
 
     public List<Video> getVideoSearch(int pageSize, int pageNumber, String type, String keyword) {
         int offset = (pageNumber - 1) * pageSize;
-        return videoMapper.findSearch(pageSize, offset, type, keyword);
+        List<Video> videos = videoMapper.findSearch(pageSize, offset, type, keyword);
+
+        return lengthLimit(videos);
     }
 
     public List<Video> findMine(int pageSize, int pageNumber, String type, String account, String keyword) {
         int offset = (pageNumber - 1) * pageSize;
-        return videoMapper.findMyVideo(pageSize, offset, type, account, keyword);
+        List<Video> videos = videoMapper.findMyVideo(pageSize, offset, type, account, keyword);
+
+        return videos;
     }
 
     public List<Video> getChannelVideos(int pageSize, int pageNumber, String type, String channelName) {
         int offset = (pageNumber - 1) * pageSize;
-        return videoMapper.findAllCh(pageSize, offset, type, channelName);
+        List<Video> videos = videoMapper.findAllCh(pageSize, offset, type, channelName);
+        return lengthLimit(videos);
     }
 
     public List<Video> getVideosSub(int pageSize, int pageNumber, String type, String account) {
         int offset = (pageNumber - 1) * pageSize;
-        return videoMapper.findAllSub(pageSize, offset, type, account);
+        List<Video> videos = videoMapper.findAllSub(pageSize, offset, type, account);
+        return lengthLimit(videos);
+    }
+
+    public List<Video> lengthLimit(List<Video> videos) {
+        videos.forEach(video -> {
+            if (video.getVideoTitle().length() > 15) {
+                String title = video.getVideoTitle();
+                title = title.substring(0, 14);
+                title += "...";
+                video.setVideoTitle(title);
+            }
+            if (video.getUserDisplayName().length() > 10) {
+                String name = video.getUserDisplayName();
+                name = name.substring(0, 9);
+                name += "...";
+                video.setUserDisplayName(name);
+            }
+        });
+        return videos;
     }
 }
 
