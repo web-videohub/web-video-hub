@@ -719,7 +719,7 @@
     }
 
     // 좋아요 / 싫어요 만들기 요청 보내기
-    function makeEmotion(videoLike, videoHate) {
+    async function makeEmotion(videoLike, videoHate) {
         // 서버로 보낼 데이터
         const payload = {
             account: currentAccount,
@@ -736,37 +736,66 @@
             },
             body: JSON.stringify(payload)
         };
-        fetch(emotionURL, requestInfo)
-            .then(res => {
-                if (res.status === 200) {
-                    // 좋아요 / 싫어요 상태 변경(누른걸로)
-                    if(videoLike === 1) {
-                        $likeBtn.classList.add('emotionOn')
-                        document.querySelector('.lnr-thumbs-up').style.color = 'rgb(235,235,235)';
-                        $likeBtn.style.color = 'rgb(235,235,235)';
-                        $likeBtn.style.background = 'black';
-                        $hateBtn.classList.remove('emotionOn')
-                        document.querySelector('.lnr-thumbs-down').style.color = 'black';
-                        $hateBtn.style.color = 'black';
-                        $hateBtn.style.background = 'rgb(235,235,235)';
 
+        const response = await fetch(emotionURL, requestInfo)
+        const emotion = await response.json();
 
+        if(emotion.account != null) {
+            if (videoLike === 1) {
+                $likeBtn.classList.add('emotionOn')
+                document.querySelector('.lnr-thumbs-up').style.color = 'rgb(235,235,235)';
+                $likeBtn.style.color = 'rgb(235,235,235)';
+                $likeBtn.style.background = 'black';
+                $hateBtn.classList.remove('emotionOn')
+                document.querySelector('.lnr-thumbs-down').style.color = 'black';
+                $hateBtn.style.color = 'black';
+                $hateBtn.style.background = 'rgb(235,235,235)';
+                $likeBtn.firstChild.textContent = emotion.likeCount;
+            } else if (videoHate === 1) {
+                $likeBtn.classList.remove('emotionOn')
+                document.querySelector('.lnr-thumbs-up').style.color = 'black';
+                $likeBtn.style.color = 'black';
+                $likeBtn.style.background = 'rgb(235,235,235)';
+                $hateBtn.classList.add('emotionOn')
+                document.querySelector('.lnr-thumbs-down').style.color = 'rgb(235,235,235)';
+                $hateBtn.style.color = 'rgb(235,235,235)';
+                $hateBtn.style.background = 'black';
+            } else {
+                alert('좋아요/ 싫어요 상태 변경(추가) 실패!');
+                console.log("실패함 븅신ㅋ");
+            }
 
-                    } else {
-                        $likeBtn.classList.remove('emotionOn')
-                        document.querySelector('.lnr-thumbs-up').style.color = 'black';
-                        $likeBtn.style.color = 'black';
-                        $likeBtn.style.background = 'rgb(235,235,235)';
-                        $hateBtn.classList.add('emotionOn')
-                        document.querySelector('.lnr-thumbs-down').style.color = 'rgb(235,235,235)';
-                        $hateBtn.style.color = 'rgb(235,235,235)';
-                        $hateBtn.style.background = 'black';
-                    }
-                    return res.json();
-                } else {
-                    return res.text();
-                }
-            })
+            // fetch(emotionURL, requestInfo)
+            //     .then(res => {
+            //         if (res.status === 200) {
+            //             // 좋아요 / 싫어요 상태 변경(누른걸로)
+            //             if(videoLike === 1) {
+            //                 $likeBtn.classList.add('emotionOn')
+            //                 document.querySelector('.lnr-thumbs-up').style.color = 'rgb(235,235,235)';
+            //                 $likeBtn.style.color = 'rgb(235,235,235)';
+            //                 $likeBtn.style.background = 'black';
+            //                 $hateBtn.classList.remove('emotionOn')
+            //                 document.querySelector('.lnr-thumbs-down').style.color = 'black';
+            //                 $hateBtn.style.color = 'black';
+            //                 $hateBtn.style.background = 'rgb(235,235,235)';
+            //
+            //
+            //
+            //             } else {
+            //                 $likeBtn.classList.remove('emotionOn')
+            //                 document.querySelector('.lnr-thumbs-up').style.color = 'black';
+            //                 $likeBtn.style.color = 'black';
+            //                 $likeBtn.style.background = 'rgb(235,235,235)';
+            //                 $hateBtn.classList.add('emotionOn')
+            //                 document.querySelector('.lnr-thumbs-down').style.color = 'rgb(235,235,235)';
+            //                 $hateBtn.style.color = 'rgb(235,235,235)';
+            //                 $hateBtn.style.background = 'black';
+            //             }
+            //             return res.json();
+            //         } else {
+            //             return res.text();
+            //         }
+        }
 
     }
 
@@ -795,32 +824,13 @@
             alert('좋아요/ 싫어요 상태 변경(삭제) 실패!');
             console.log("실패함 븅신ㅋ");
         }
-        <%--fetch(emotionURL + `/${v.videoId}/${sessionScope.login.userAccount}/${v.videoLike}`, requestInfo)--%>
-        <%--    .then(res => {--%>
-        <%--        if (res.status === 200) {--%>
-        <%--            console.log(${likeCount});--%>
-        <%--            // 좋아요 / 싫어요 상태 초기화--%>
-        //             $likeBtn.classList.remove('emotionOn');
-        //             $likeBtn.style.color = 'black';
-        //             $likeBtn.style.background = 'rgb(235,235,235)';
-        //             $hateBtn.classList.remove('emotionOn');
-        //             $hateBtn.style.color = 'black';
-        //             $hateBtn.style.background = 'rgb(235,235,235)';
-        //             document.querySelector('.lnr-thumbs-up').style.color = 'black';
-        //             document.querySelector('.lnr-thumbs-down').style.color = 'black';
-        <%--            return res.json();--%>
-        <%--        } else {--%>
-        //             alert('좋아요/ 싫어요 상태 변경(삭제) 실패!');
-        <%--            return res.text();--%>
-        <%--        }--%>
-        <%--    })--%>
     }
 
     // 좋아요 / 싫어요 수정
-    function fetchModifyEmotionLike(videoLike, videoHate) {
+    async function fetchModifyEmotionLike(videoLike, videoHate) {
         const payload = {
             account: currentAccount,
-            videoId : videoId,
+            videoId: videoId,
             videoLike: videoLike,
             videoHate: videoHate
         };
@@ -834,76 +844,91 @@
             body: JSON.stringify(payload)
         };
 
+        const response = await fetch(emotionURL, requestInfo)
+        const emotion = await response.json();
 
+        console.log(emotion);
 
-        fetch(emotionURL, requestInfo)
-            .then(res => {
-                if (res.status === 200) {
-                    // console.log(likeCoun);
-                    // 상태 변경 처리
-                    if(videoLike === 1) {
-                        $likeBtn.classList.add('emotionOn')
-                        $likeBtn.style.color = 'rgb(235,235,235)';
-                        $likeBtn.style.background = 'black';
-                        document.querySelector('.lnr-thumbs-up').style.color = 'rgb(235,235,235)';
-                        $hateBtn.classList.remove('emotionOn')
-                        document.querySelector('.lnr-thumbs-down').style.color = 'black';
-                        $hateBtn.style.color = 'black';
-                        $hateBtn.style.background = 'rgb(235,235,235)';
-
-
-                    } else {
-                        $likeBtn.classList.remove('emotionOn')
-                        $likeBtn.style.color = 'black';
-                        $likeBtn.style.background = 'rgb(235,235,235)';
-                        document.querySelector('.lnr-thumbs-up').style.color = 'black';
-                        $hateBtn.classList.add('emotionOn')
-                        document.querySelector('.lnr-thumbs-down').style.color = 'rgb(235,235,235)';
-                        $hateBtn.style.color = 'rgb(235,235,235)';
-                        $hateBtn.style.background = 'black';
-                    }
-                    return res.json();
-                } else {
-                    alert('상태 수정 실패');
-                    return;
-                }
-            })
-            .then(result => {
-                renderReplies(result);
-            });
-    }
-
-    <%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
-
-    function checkLogin() {
-        const $replyTextarea = document.getElementById('message');
-
-        if (currentAccount !== "") {
-            $replyTextarea.disabled = false;
-            $replyTextarea.placeholder = "댓글 추가...";
+        if (emotion.userAccount != null) {
+            if (videoLike === 1) {
+                $likeBtn.classList.add('emotionOn')
+                $likeBtn.style.color = 'rgb(235,235,235)';
+                $likeBtn.style.background = 'black';
+                document.querySelector('.lnr-thumbs-up').style.color = 'rgb(235,235,235)';
+                $hateBtn.classList.remove('emotionOn')
+                document.querySelector('.lnr-thumbs-down').style.color = 'black';
+                $hateBtn.style.color = 'black';
+                $hateBtn.style.background = 'rgb(235,235,235)';
+                $likeBtn.firstChild.textContent = emotion.likeCount + 1;
+            } else if (videoLike) {
+                $likeBtn.classList.remove('emotionOn')
+                $likeBtn.style.color = 'black';
+                $likeBtn.style.background = 'rgb(235,235,235)';
+                document.querySelector('.lnr-thumbs-up').style.color = 'black';
+                $hateBtn.classList.add('emotionOn')
+                document.querySelector('.lnr-thumbs-down').style.color = 'rgb(235,235,235)';
+                $hateBtn.style.color = 'rgb(235,235,235)';
+                $hateBtn.style.background = 'black';
+                $likeBtn.firstChild.textContent = emotion.likeCount - 1;
+            } else {
+                alert('상태 수정 실패');
+                return;
+            }
         }
 
-    }
+        //     fetch(emotionURL, requestInfo)
+        //         .then(res => {
+        //             if (res.status === 200) {
+        //                 // console.log(likeCount);
+        //                 // 상태 변경 처리
+        //                 if(videoLike === 1) {
+        //
+        //
+        //
+        //                 } else {
+        //
+        //                 }
+        //                 return res.json();
+        //             } else {
+        //
+        //             }
+        //         })
+        //         .then(result => {
+        //             renderReplies(result);
+        //         });
+        }
+
+        <%-- 로그인 여부의 따른 댓글 textarea이벤트부여 --%>
+
+        function checkLogin() {
+            const $replyTextarea = document.getElementById('message');
+
+            if (currentAccount !== "") {
+                $replyTextarea.disabled = false;
+                $replyTextarea.placeholder = "댓글 추가...";
+            }
+
+        }
 
 
-    (() => {
-        // 로그인 여부에 따라 댓글창 활성화하기
-        checkLogin();
+        (() => {
+            // 로그인 여부에 따라 댓글창 활성화하기
+            checkLogin();
 
-        // 서버에서 댓글 불러오기
-        // fetchGetReplies(videoId);
+            // 서버에서 댓글 불러오기
+            // fetchGetReplies(videoId);
 
-        // 구독여부 확인하기
-        if (currentAccount)
-            fetchGetSub();
+            // 구독여부 확인하기
+            if (currentAccount)
+                fetchGetSub();
 
-        // 좋아요 / 싫어요 상태 불러오기
-        if (currentAccount)
-            fetchGetEmotion();
+            // 좋아요 / 싫어요 상태 불러오기
+            if (currentAccount)
+                fetchGetEmotion();
 
-        // 댓글 등록 이벤트 핸들러
-        addComment();
-    })();
+            // 댓글 등록 이벤트 핸들러
+            addComment();
+        })();
 
 
 </script>
