@@ -620,3 +620,20 @@ li {
     margin-top: 10px;
     margin-left: 45px;
 }
+
+.lnr-thumbs-up {
+    display: flex;
+    justify-content: space-between;
+}
+
+.chat_list a {
+    overflow: hidden;
+    width: 45px;
+    height: 45px;
+}
+
+.chat_list a img {
+    object-fit: cover;
+    border: 1px black solid;
+    border-radius: 50%;
+}

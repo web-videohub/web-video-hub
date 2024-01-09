@@ -396,7 +396,7 @@
                 // 새로운 댓글을 생성하고 <ul class="chat_list">에 추가
                 tag += `
         <div class="chat_list_profile"> `;
-                tag += (profile ? `<a href="#"><img src="/local\${profile}" height="45" width="45" alt="profile image"></a>`
+                tag += (profile ? `<a href="#" class="replyAtag"><img src="/local\${profile}" height="45" width="45" alt="profile image"></a>`
                     : `<a href="#"><img src="/assets/img/profile.jpeg" height="45" width="45" alt="anonymous"></a>`);
                 tag += ` </div>
         <div class="chat_list_profile_name">
