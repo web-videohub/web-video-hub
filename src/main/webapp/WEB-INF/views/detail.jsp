@@ -668,7 +668,7 @@
         if(e.target.classList.contains('like_B') || e.target.classList.contains('lnr-thumbs-up')) {
             if(e.target.classList.contains('emotionOn') || e.target.parentNode.classList.contains('emotionOn')) {
                 // DB에 좋아요가 눌러져 있는 상태인데 눌렀으므로 삭제한다.
-                fetchDeleteEmotion();
+                fetchDeleteEmotion("likeBtn");
             } else if($hateBtn.classList.contains('emotionOn')) {
                 // DB에 싫어요가 눌러져 있는 상태인데 좋아요를 눌렀으므로 수정한다.
                 fetchModifyEmotionLike(1, 0);
@@ -679,7 +679,7 @@
         } else { // 싫어요를 누른 상태
             if(e.target.classList.contains('emotionOn') || e.target.parentNode.classList.contains('emotionOn')) {
                 // DB에 싫어요가 눌러져 있는 상태인데 눌렀으므로 삭제한다.
-                fetchDeleteEmotion();
+                fetchDeleteEmotion("hateBtn");
             } else if($likeBtn.classList.contains('emotionOn')) {
                 // DB에 좋아요가 눌러져 있는 상태인데 싫어요를 눌렀으므로 수정한다.
                 fetchModifyEmotionLike(0, 1);
@@ -764,43 +764,12 @@
                 alert('좋아요/ 싫어요 상태 변경(추가) 실패!');
                 console.log("실패함 븅신ㅋ");
             }
-
-            // fetch(emotionURL, requestInfo)
-            //     .then(res => {
-            //         if (res.status === 200) {
-            //             // 좋아요 / 싫어요 상태 변경(누른걸로)
-            //             if(videoLike === 1) {
-            //                 $likeBtn.classList.add('emotionOn')
-            //                 document.querySelector('.lnr-thumbs-up').style.color = 'rgb(235,235,235)';
-            //                 $likeBtn.style.color = 'rgb(235,235,235)';
-            //                 $likeBtn.style.background = 'black';
-            //                 $hateBtn.classList.remove('emotionOn')
-            //                 document.querySelector('.lnr-thumbs-down').style.color = 'black';
-            //                 $hateBtn.style.color = 'black';
-            //                 $hateBtn.style.background = 'rgb(235,235,235)';
-            //
-            //
-            //
-            //             } else {
-            //                 $likeBtn.classList.remove('emotionOn')
-            //                 document.querySelector('.lnr-thumbs-up').style.color = 'black';
-            //                 $likeBtn.style.color = 'black';
-            //                 $likeBtn.style.background = 'rgb(235,235,235)';
-            //                 $hateBtn.classList.add('emotionOn')
-            //                 document.querySelector('.lnr-thumbs-down').style.color = 'rgb(235,235,235)';
-            //                 $hateBtn.style.color = 'rgb(235,235,235)';
-            //                 $hateBtn.style.background = 'black';
-            //             }
-            //             return res.json();
-            //         } else {
-            //             return res.text();
-            //         }
         }
 
     }
 
     // 좋아요/ 싫어요 삭제
-    async function fetchDeleteEmotion() {
+    async function fetchDeleteEmotion(clickBtn) {
         const requestInfo = {
             method: 'DELETE'
         };
@@ -818,7 +787,8 @@
             document.querySelector('.lnr-thumbs-up').style.color = 'black';
             document.querySelector('.lnr-thumbs-down').style.color = 'black';
 
-            $likeBtn.firstChild.textContent = emotion.likeCount - 1;
+            if(clickBtn === "likeBtn")
+                $likeBtn.firstChild.textContent = emotion.likeCount - 1;
 
         } else {
             alert('좋아요/ 싫어요 상태 변경(삭제) 실패!');
@@ -859,8 +829,8 @@
                 document.querySelector('.lnr-thumbs-down').style.color = 'black';
                 $hateBtn.style.color = 'black';
                 $hateBtn.style.background = 'rgb(235,235,235)';
-                $likeBtn.firstChild.textContent = emotion.likeCount + 1;
-            } else if (videoLike) {
+                $likeBtn.firstChild.textContent = emotion.likeCount;
+            } else if (videoLike === 0) {
                 $likeBtn.classList.remove('emotionOn')
                 $likeBtn.style.color = 'black';
                 $likeBtn.style.background = 'rgb(235,235,235)';
@@ -869,7 +839,7 @@
                 document.querySelector('.lnr-thumbs-down').style.color = 'rgb(235,235,235)';
                 $hateBtn.style.color = 'rgb(235,235,235)';
                 $hateBtn.style.background = 'black';
-                $likeBtn.firstChild.textContent = emotion.likeCount - 1;
+                $likeBtn.firstChild.textContent = emotion.likeCount;
             } else {
                 alert('상태 수정 실패');
                 return;
