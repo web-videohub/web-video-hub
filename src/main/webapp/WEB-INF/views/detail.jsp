@@ -819,8 +819,8 @@
 
         console.log(emotion);
 
-        if (emotion.userAccount != null) {
-            if (videoLike === 1) {
+        if (emotion.account != null) {
+            if (videoLike === 1) { // 싫어요가 눌린 상태에서 좋아요를 누름
                 $likeBtn.classList.add('emotionOn')
                 $likeBtn.style.color = 'rgb(235,235,235)';
                 $likeBtn.style.background = 'black';
@@ -830,7 +830,7 @@
                 $hateBtn.style.color = 'black';
                 $hateBtn.style.background = 'rgb(235,235,235)';
                 $likeBtn.firstChild.textContent = emotion.likeCount;
-            } else if (videoLike === 0) {
+            } else if (videoHate === 1) { // 좋아요가 눌린 상태에서 싫어요를 누름
                 $likeBtn.classList.remove('emotionOn')
                 $likeBtn.style.color = 'black';
                 $likeBtn.style.background = 'rgb(235,235,235)';
