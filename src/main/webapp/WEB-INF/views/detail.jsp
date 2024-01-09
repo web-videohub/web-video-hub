@@ -72,7 +72,7 @@
                         </c:if>
                     </div>
                     <div class="video_review_btn_t">
-                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up videoThumb"></span>${v.videoLike}
+                        <button type="button" class="like_B"><span class="lnr lnr-thumbs-up videoThumb"></span>
                         </button>
                         <button type="button" class="hate_B"><span class="lnr lnr-thumbs-down"></span></button>
                         <button type="button" class="share_B"><span class="lnr lnr-exit-up"></span></button>
@@ -196,6 +196,11 @@
         $likeBtn.addEventListener('click', EmotionClickEvent);
         $hateBtn.addEventListener('click', EmotionClickEvent);
     });
+
+    (function (){
+        const $likeSpan = document.querySelector('.videoThumb');
+        $likeSpan.innerHTML = ${v.videoLike};
+    })();
 
     const loadData = async () => {
         console.log('loadData function called');
@@ -744,6 +749,9 @@
                         document.querySelector('.lnr-thumbs-down').style.color = 'black';
                         $hateBtn.style.color = 'black';
                         $hateBtn.style.background = 'rgb(235,235,235)';
+
+
+
                     } else {
                         $likeBtn.classList.remove('emotionOn')
                         document.querySelector('.lnr-thumbs-up').style.color = 'black';
@@ -763,28 +771,49 @@
     }
 
     // 좋아요/ 싫어요 삭제
-    function fetchDeleteEmotion() {
+    async function fetchDeleteEmotion() {
         const requestInfo = {
             method: 'DELETE'
         };
-        fetch(emotionURL + `/${v.videoId}/${sessionScope.login.userAccount}`, requestInfo)
-            .then(res => {
-                if (res.status === 200) {
-                    // 좋아요 / 싫어요 상태 초기화
-                    $likeBtn.classList.remove('emotionOn');
-                    $likeBtn.style.color = 'black';
-                    $likeBtn.style.background = 'rgb(235,235,235)';
-                    $hateBtn.classList.remove('emotionOn');
-                    $hateBtn.style.color = 'black';
-                    $hateBtn.style.background = 'rgb(235,235,235)';
-                    document.querySelector('.lnr-thumbs-up').style.color = 'black';
-                    document.querySelector('.lnr-thumbs-down').style.color = 'black';
-                    return res.json();
-                } else {
-                    alert('좋아요/ 싫어요 상태 변경(삭제) 실패!');
-                    return res.text();
-                }
-            })
+        const response = await fetch(emotionURL + `/${v.videoId}/${sessionScope.login.userAccount}/${v.videoLike}`, requestInfo)
+        const emotion = await response.json();
+        console.log(emotion);
+
+        if(emotion.userAccount != null) {
+            $likeBtn.classList.remove('emotionOn');
+            $likeBtn.style.color = 'black';
+            $likeBtn.style.background = 'rgb(235,235,235)';
+            $hateBtn.classList.remove('emotionOn');
+            $hateBtn.style.color = 'black';
+            $hateBtn.style.background = 'rgb(235,235,235)';
+            document.querySelector('.lnr-thumbs-up').style.color = 'black';
+            document.querySelector('.lnr-thumbs-down').style.color = 'black';
+
+            $likeBtn.firstChild.textContent = emotion.likeCount - 1;
+
+        } else {
+            alert('좋아요/ 싫어요 상태 변경(삭제) 실패!');
+            console.log("실패함 븅신ㅋ");
+        }
+        <%--fetch(emotionURL + `/${v.videoId}/${sessionScope.login.userAccount}/${v.videoLike}`, requestInfo)--%>
+        <%--    .then(res => {--%>
+        <%--        if (res.status === 200) {--%>
+        <%--            console.log(${likeCount});--%>
+        <%--            // 좋아요 / 싫어요 상태 초기화--%>
+        //             $likeBtn.classList.remove('emotionOn');
+        //             $likeBtn.style.color = 'black';
+        //             $likeBtn.style.background = 'rgb(235,235,235)';
+        //             $hateBtn.classList.remove('emotionOn');
+        //             $hateBtn.style.color = 'black';
+        //             $hateBtn.style.background = 'rgb(235,235,235)';
+        //             document.querySelector('.lnr-thumbs-up').style.color = 'black';
+        //             document.querySelector('.lnr-thumbs-down').style.color = 'black';
+        <%--            return res.json();--%>
+        <%--        } else {--%>
+        //             alert('좋아요/ 싫어요 상태 변경(삭제) 실패!');
+        <%--            return res.text();--%>
+        <%--        }--%>
+        <%--    })--%>
     }
 
     // 좋아요 / 싫어요 수정
@@ -805,9 +834,12 @@
             body: JSON.stringify(payload)
         };
 
+
+
         fetch(emotionURL, requestInfo)
             .then(res => {
                 if (res.status === 200) {
+                    // console.log(likeCoun);
                     // 상태 변경 처리
                     if(videoLike === 1) {
                         $likeBtn.classList.add('emotionOn')
@@ -818,6 +850,8 @@
                         document.querySelector('.lnr-thumbs-down').style.color = 'black';
                         $hateBtn.style.color = 'black';
                         $hateBtn.style.background = 'rgb(235,235,235)';
+
+
                     } else {
                         $likeBtn.classList.remove('emotionOn')
                         $likeBtn.style.color = 'black';
@@ -870,6 +904,8 @@
         // 댓글 등록 이벤트 핸들러
         addComment();
     })();
+
+
 </script>
 
 <!-- 드롭다운 메뉴, 댓글 테스트 자바스크립트 코드 -->

@@ -2,7 +2,9 @@ package com.teamrocket.videohub.api;
 
 import com.teamrocket.videohub.dto.request.EmotionPostRequestDTO;
 import com.teamrocket.videohub.entity.Emotion;
+import com.teamrocket.videohub.entity.Video;
 import com.teamrocket.videohub.services.EmotionService;
+import com.teamrocket.videohub.services.VideoService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +12,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.sql.SQLException;
 import java.util.Objects;
@@ -20,6 +23,7 @@ import java.util.Objects;
 @RequestMapping("/api/v1/emotion")
 public class EmotionApiController {
     private final EmotionService emotionService;
+    private final VideoService videoService;
 
     // 좋아요, 싫어요 상태 조회 요청
     @GetMapping("/{videoId}")
@@ -59,6 +63,8 @@ public class EmotionApiController {
 
         try {
             emotionService.saveEmotion(dto); // emotion 정보를 집어넣는 부분
+            Video video = videoService.getVideo(dto.getVideoId());
+            dto.setLikeCount(video.getVideoLike());
             return ResponseEntity.ok().body(dto);
         } catch (SQLException e) {
             log.warn("500 status code response!! caused by : {}", e.getMessage());
@@ -67,9 +73,9 @@ public class EmotionApiController {
     }
 
     // 좋아요, 싫어요 삭제 요청 처리
-    @DeleteMapping("/{videoId}/{account}")
+    @DeleteMapping("/{videoId}/{account}/{likeCount}")
     public ResponseEntity<?> deleteEmote(@PathVariable int videoId,
-            @PathVariable String account) {
+                                         @PathVariable String account, @PathVariable int likeCount, HttpServletResponse response) {
         if (videoId == 0 || account == null) {
             return ResponseEntity
                     .badRequest()
@@ -80,11 +86,16 @@ public class EmotionApiController {
         log.info("/api/v1/replies/{}/{} : DELETE", videoId, account);
 
         try {
+            Emotion emotion = emotionService.getEmotion(videoId, account);
+            log.error("emotion : {}", emotion);
+            log.error("like count : {}", emotion.getLikeCount());
+
+            //emotion.setLikeCount();
             boolean flag = emotionService.delete(videoId, account);
 
             return ResponseEntity
                     .ok()
-                    .body(flag)
+                    .body(emotion)
                     ;
         } catch (Exception e) {
             return ResponseEntity
@@ -110,6 +121,8 @@ public class EmotionApiController {
 
         try {
             emotionService.modify(dto);
+            Video video = videoService.getVideo(dto.getVideoId());
+            dto.setLikeCount(video.getVideoLike());
             return ResponseEntity.ok().body(dto);
         } catch (Exception e) {
             log.warn("internal server error! caused by : {}", e.getMessage());

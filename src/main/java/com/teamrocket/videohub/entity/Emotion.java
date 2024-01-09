@@ -17,4 +17,7 @@ public class Emotion {
     private int videoId;
     private int videoLike;
     private int videoHate;
+
+    private int likeCount;
+    private int hateCount;
 }

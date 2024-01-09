@@ -13,9 +13,11 @@
 
     <select id="findOne" resultType="emotion">
         SELECT
-        user_account, video_id, video_like, video_hate
-        FROM tbl_emotion_check
-        WHERE user_account = #{userAccount} AND video_id = #{videoId}
+        e.user_account, e.video_id, e.video_like, e.video_hate, v.video_like as like_count
+        FROM tbl_emotion_check e
+        inner join tbl_video v
+        on e.video_id = v.video_id
+        WHERE e.user_account = #{userAccount} AND e.video_id = #{videoId}
     </select>
 
     <update id="modify">

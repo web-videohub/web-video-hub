@@ -2,7 +2,7 @@ package com.teamrocket.videohub.dto.request;
 
 import lombok.*;
 
-@Getter @ToString
+@Getter @ToString @Setter
 @EqualsAndHashCode
 @NoArgsConstructor
 @AllArgsConstructor
@@ -12,4 +12,6 @@ public class EmotionPostRequestDTO {
     private int videoId;
     private int videoLike;
     private int videoHate;
+
+    private int likeCount;
 }
